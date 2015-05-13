@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/user_bg"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="120dip"
+        android:paddingLeft="20dp" 
+        android:paddingRight="20dp" 
+        android:paddingTop="10dp"
+        android:background="@drawable/person_bg"
+        >
+        <com.lc.slidingmenu.view.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/profile_image"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:src="@drawable/wwj_748"
+            app:border_color="#FFffffff"
+            app:border_width="1dp" />
+
+        <TextView
+            android:id="@+id/user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="28.0dip"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/profile_image"
+            android:gravity="center_vertical"
+            android:paddingLeft="15.0dip"
+            android:text="公务专车"
+            android:textColor="@color/white"
+            android:textSize="18.0sp" />
+            <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+          
+            android:gravity="center_vertical"
+            android:src="@drawable/arrows_1"
+             />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+    <TextView
+        android:id="@+id/tvToday"
+        android:layout_width="match_parent"
+        android:layout_height="50.0dip"
+        android:clickable="true"
+        android:drawablePadding="15.0dip"
+        android:gravity="center_vertical"
+        android:paddingLeft="20.0dip"
+        android:paddingRight="10.0dip"
+        android:text="对公结算(余额)"
+        android:textColor="@color/text_color"
+        android:drawableLeft="@drawable/person_1"
+        android:textSize="16.0sp" />
+     
+      <ImageView
+            android:id="@+id/account_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dip"
+            android:gravity="center_vertical"
+            android:src="@drawable/arrows_2"
+             />
+       <TextView
+        android:id="@+id/account"
+        android:layout_width="wrap_content"
+        android:layout_height="50.0dip"
+        android:gravity="center_vertical"
+        android:layout_marginRight="20.0dip"
+        android:text="@string/account"
+        android:textColor="@color/text_green"
+        android:layout_toLeftOf="@+id/account_arrow"
+        android:textSize="16.0sp" />
+     </RelativeLayout>
+     <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dip"
+        android:layout_marginLeft="20.0dip"
+        android:background="@color/user_divider1" />
+     <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dip"
+        android:layout_marginLeft="20.0dip"
+        android:background="@color/user_divider2" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+    <TextView
+         android:id="@+id/tvLastlist"
+        android:layout_width="match_parent"
+        android:layout_height="50.0dip"
+        android:clickable="true"
+        android:drawablePadding="15.0dip"
+        android:gravity="center_vertical"
+        android:paddingLeft="20.0dip"
+        android:paddingRight="10.0dip"
+        android:text="公务卡(信用卡)"
+        android:drawableLeft="@drawable/person_2"
+        android:textColor="@color/text_color"
+        android:textSize="16.0sp" />
+     <ImageView
+         android:id="@+id/card_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dip"
+            android:gravity="center_vertical"
+            android:src="@drawable/arrows_2"
+             />
+     <TextView
+        android:id="@+id/card_connect"
+        android:layout_width="wrap_content"
+        android:layout_height="50.0dip"
+        android:gravity="center_vertical"
+        android:layout_marginRight="20.0dip"
+        android:text="未关联"
+        android:textColor="@color/text_green"
+        android:layout_toLeftOf="@+id/card_arrow"
+        android:textSize="16.0sp" />
+     </RelativeLayout>
+     <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dip"
+        android:layout_marginLeft="20.0dip"
+        android:background="@color/user_divider1" />
+     <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dip"
+        android:layout_marginLeft="20.0dip"
+        android:background="@color/user_divider2" />
+     <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+    <TextView
+         android:id="@+id/tvDiscussMeeting"
+        android:layout_width="match_parent"
+        android:layout_height="50.0dip"
+        android:clickable="true"
+        android:drawablePadding="15.0dip"
+        android:gravity="center_vertical"
+        android:paddingLeft="20.0dip"
+        android:paddingRight="10.0dip"
+        android:text="优惠券"
+        android:drawableLeft="@drawable/person_3"
+        android:textColor="@color/text_color"
+        android:textSize="16.0sp" />
+     <TextView
+        android:id="@+id/card_connect"
+        android:layout_width="wrap_content"
+        android:layout_height="50.0dip"
+        android:gravity="center_vertical"
+        android:layout_marginRight="55.0dip"
+        android:text="@string/discount"
+        android:textColor="@color/text_green"
+        android:layout_alignParentRight="true"
+        android:textSize="16.0sp" />
+     </RelativeLayout>
+     <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dip"
+        android:layout_marginLeft="20.0dip"
+        android:background="@color/user_divider1" />
+     <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dip"
+        android:layout_marginLeft="20.0dip"
+        android:background="@color/user_divider2" />
+     <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+    <TextView
+         android:id="@+id/tvMyFavorites"
+        android:layout_width="match_parent"
+        android:layout_height="50.0dip"
+        android:clickable="true"
+        android:drawablePadding="15.0dip"
+        android:gravity="center_vertical"
+        android:paddingLeft="20.0dip"
+        android:paddingRight="10.0dip"
+        android:text="行程"
+        android:drawableLeft="@drawable/person_4"
+        android:textColor="@color/text_color"
+        android:textSize="16.0sp" />
+     <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dip"
+            android:gravity="center_vertical"
+            android:src="@drawable/arrows_2"
+             />
+     </RelativeLayout>
+     <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dip"
+        android:layout_marginLeft="20.0dip"
+        android:background="@color/user_divider1" />
+     <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dip"
+        android:layout_marginLeft="20.0dip"
+        android:background="@color/user_divider2" />
+     <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+    <TextView
+        android:id="@+id/tvMyComments"
+        android:layout_width="match_parent"
+        android:layout_height="50.0dip"
+        android:clickable="true"
+        android:drawablePadding="15.0dip"
+        android:gravity="center_vertical"
+        android:paddingLeft="20.0dip"
+        android:paddingRight="10.0dip"
+        android:text="发票"
+        android:drawableLeft="@drawable/person_5"
+        android:textColor="@color/text_color"
+        android:textSize="16.0sp" />
+     <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dip"
+            android:gravity="center_vertical"
+            android:src="@drawable/arrows_2"
+             />
+</RelativeLayout>
+     <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dip"
+        android:layout_marginLeft="20.0dip"
+        android:background="@color/user_divider1" />
+     <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dip"
+        android:layout_marginLeft="20.0dip"
+        android:background="@color/user_divider2" />
+      <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+    <TextView
+         android:id="@+id/tvMySettings"
+        android:layout_width="match_parent"
+        android:layout_height="50.0dip"
+        android:clickable="true"
+        android:drawablePadding="15.0dip"
+        android:gravity="center_vertical"
+        android:paddingLeft="20.0dip"
+        android:paddingRight="10.0dip"
+        android:text="地址"
+        android:textColor="@color/text_color"
+        android:drawableLeft="@drawable/person_6"
+        android:textSize="16.0sp" />
+    <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dip"
+            android:gravity="center_vertical"
+            android:src="@drawable/arrows_2"
+             />
+</RelativeLayout>
+     <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dip"
+        android:layout_marginLeft="20.0dip"
+        android:background="@color/user_divider1" />
+     <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dip"
+        android:layout_marginLeft="20.0dip"
+        android:background="@color/user_divider2" />
+      <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+	 <TextView
+        android:id="@+id/tvInvite"
+        android:layout_width="match_parent"
+        android:layout_height="50.0dip"
+        android:clickable="true"
+        android:drawablePadding="15.0dip"
+        android:gravity="center_vertical"
+        android:paddingLeft="20.0dip"
+        android:paddingRight="10.0dip"
+        android:text="邀请好友"
+        android:textColor="@color/text_color"
+        android:drawableLeft="@drawable/person_7"
+        android:textSize="16.0sp" />
+	  <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dip"
+            android:gravity="center_vertical"
+            android:src="@drawable/arrows_2"
+             />
+</RelativeLayout>
+     <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dip"
+        android:layout_marginLeft="20.0dip"
+        android:background="@color/user_divider1" />
+     <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dip"
+        android:layout_marginLeft="20.0dip"
+        android:background="@color/user_divider2" />
+      <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+     <TextView
+        android:id="@+id/tvShare"
+        android:layout_width="match_parent"
+        android:layout_height="50.0dip"
+        android:clickable="true"
+        android:drawablePadding="15.0dip"
+        android:gravity="center_vertical"
+        android:paddingLeft="20.0dip"
+        android:paddingRight="10.0dip"
+        android:text="分享"
+        android:textColor="@color/text_color"
+        android:drawableLeft="@drawable/person_8"
+        android:textSize="16.0sp" />
+      <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dip"
+            android:gravity="center_vertical"
+            android:src="@drawable/arrows_2"
+             />
+</RelativeLayout>
+     <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dip"
+        android:layout_marginLeft="20.0dip"
+        android:background="@color/user_divider1" />
+     <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dip"
+        android:layout_marginLeft="20.0dip"
+        android:background="@color/user_divider2" />
+     <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+     <TextView
+        android:id="@+id/tvMore"
+        android:layout_width="match_parent"
+        android:layout_height="50.0dip"
+        android:clickable="true"
+        android:drawablePadding="15.0dip"
+        android:gravity="center_vertical"
+        android:paddingLeft="20.0dip"
+        android:paddingRight="10.0dip"
+        android:text="更多"
+        android:textColor="@color/text_color"
+        android:drawableLeft="@drawable/person_9"
+        android:textSize="16.0sp" />
+      <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dip"
+            android:gravity="center_vertical"
+            android:src="@drawable/arrows_2"
+             />
+</RelativeLayout>
+     <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dip"
+        android:layout_marginLeft="20.0dip"
+        android:background="@color/user_divider1" />
+     <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dip"
+        android:layout_marginLeft="20.0dip"
+        android:background="@color/user_divider2" />
+</LinearLayout>
