@@ -1,16 +1,97 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/home_bg"
     android:orientation="vertical" >
 
     <include layout="@layout/main_head" />
 
-    <FrameLayout
-        android:id="@+id/content_frame"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" >
-     
-       </FrameLayout>
+    <ImageView
+         android:layout_width="match_parent"
+         android:layout_height="150dip"
+         android:background="@drawable/home_ad"
+        />
        
-
+   <RelativeLayout
+     
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+    >
+     <RelativeLayout
+      android:id="@+id/rl1"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_centerInParent="true"
+     >
+      <ImageView
+         android:id="@+id/plane"
+         android:layout_width="150dip"
+         android:layout_height="150dip"
+         android:background="@drawable/home_plane_selector"
+         android:layout_margin="5dip"
+      />
+      <ImageView
+         android:id="@+id/city"
+         android:layout_width="150dip"
+         android:layout_height="150dip"
+         android:background="@drawable/home_city_selector"
+         android:layout_toRightOf="@+id/plane"
+         android:layout_margin="5dip"
+      />
+       <ImageView
+         android:id="@+id/office"
+         android:layout_width="150dip"
+         android:layout_height="150dip"
+         android:background="@drawable/home_office_selector"
+         android:layout_below="@+id/plane"
+         android:layout_marginLeft="5dip"
+         android:layout_marginRight="5dip"
+         android:layout_marginTop="5dip"
+      />
+        <ImageView
+         android:id="@+id/urgency"
+         android:layout_width="150dip"
+         android:layout_height="150dip"
+         android:background="@drawable/home_urgency_selector"
+         android:layout_toRightOf="@+id/plane"
+         android:layout_below="@+id/plane"
+         android:layout_marginLeft="5dip"
+         android:layout_marginRight="5dip"
+         android:layout_marginTop="5dip"
+      />
+        </RelativeLayout>
+        <RelativeLayout
+	      android:id="@+id/rl2"
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:layout_centerHorizontal="true"
+	      android:layout_below="@+id/rl1"	   
+	     >
+          <ImageView
+	         android:id="@+id/ivshadow"
+	         android:layout_width="150dip"
+	         android:layout_height="150dip"
+	         android:background="@drawable/home_shadow_left"
+	         android:layout_marginLeft="5dip"
+             android:layout_marginRight="5dip"
+         
+	      />
+	      <ImageView
+	         android:id="@+id/ivshadow2"
+	         android:layout_width="150dip"
+	         android:layout_height="150dip"
+	         android:background="@drawable/home_shadow_right"
+	         android:layout_toRightOf="@+id/ivshadow"
+	         android:layout_marginLeft="5dip"
+             android:layout_marginRight="5dip"
+	      />
+        </RelativeLayout>
+       <ImageView
+         android:id="@+id/intercity"
+         android:layout_width="170dip"
+         android:layout_height="170dip"
+         android:layout_centerInParent="true"
+         android:background="@drawable/home_intercity_selector"
+      />
+    </RelativeLayout>
 </LinearLayout>

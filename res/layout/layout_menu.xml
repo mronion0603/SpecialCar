@@ -20,8 +20,8 @@
             android:layout_height="60dp"
             android:layout_centerVertical="true"
             android:gravity="center_vertical"
-            android:src="@drawable/wwj_748"
-            app:border_color="#FFffffff"
+            android:src="@drawable/person_user"
+            app:border_color="@color/text_green"
             app:border_width="1dp" />
 
         <TextView
