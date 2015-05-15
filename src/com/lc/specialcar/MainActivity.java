@@ -4,11 +4,13 @@ package com.lc.specialcar;
 
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
+import com.lc.intercity.InterCityHomeActivity;
 import com.lc.slidingmenu.fragment.LeftFragment;
 import com.lc.slidingmenu.fragment.RightFragment;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -21,7 +23,7 @@ public class MainActivity extends SlidingFragmentActivity implements OnClickList
 	private RelativeLayout rlslidemenu;
 	private Fragment mContent;
 	private TextView topTextView;
-	private ImageView ivOffice,ivPlane,ivInterCity,ivUrgency,ivCity;
+	private ImageView ivOffice,ivPlane,ivInterCity,ivUrgency,ivCity, ivRight;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
@@ -31,9 +33,12 @@ public class MainActivity extends SlidingFragmentActivity implements OnClickList
 		initSlidingMenu(savedInstanceState);
 
 		rlslidemenu = (RelativeLayout) findViewById(R.id.rlslidemenu);
+		rlslidemenu.setVisibility(View.VISIBLE);
 		rlslidemenu.setOnClickListener(this);
 		topTextView = (TextView) findViewById(R.id.topTv);
-	
+		ivRight = (ImageView) findViewById(R.id.topButton2);
+		ivRight.setVisibility(View.VISIBLE);
+		ivRight.setOnClickListener(this);
 		ivOffice = (ImageView) findViewById(R.id.office);
 		ivOffice.setOnClickListener(this);
 		ivPlane = (ImageView) findViewById(R.id.plane);
@@ -130,6 +135,12 @@ public class MainActivity extends SlidingFragmentActivity implements OnClickList
 		case R.id.rlslidemenu:
 			toggle();
 			break;
+		case R.id.intercity:
+			Intent intent = new Intent();
+			intent.setClass(MainActivity.this, InterCityHomeActivity.class);
+			startActivity(intent);
+			break;
+			
 		default:
 			break;
 		}

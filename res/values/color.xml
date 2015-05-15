@@ -7,5 +7,5 @@
     <color name="user_divider2">#e2e2e2</color>
     <color name="text_color">#808080</color>
     <color name="text_green">#29b43d</color>
-    
+    <color name="bg_color">#eeeeee</color>
 </resources>
