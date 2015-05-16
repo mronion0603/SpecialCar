@@ -7,7 +7,7 @@
     android:id="@+id/rlslidemenu"
     android:layout_width="50dip"
     android:layout_height="50dip"
-    android:visibility="gone"
+
      >
     <ImageView
         android:id="@+id/topButton"
@@ -16,7 +16,16 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="10dp"
         android:src="@drawable/home_title_user" 
-        
+        android:visibility="gone"
+        />
+     <ImageView
+        android:id="@+id/ArrowHead"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:src="@drawable/arrow_head" 
+        android:visibility="gone"
         />
     </RelativeLayout>
     <TextView

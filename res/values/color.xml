@@ -2,10 +2,16 @@
 <resources>
     <color name="light_blue">#5CACEE</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="black">#333333</color>
     <color name="user_bg">#C5C5C5</color>
     <color name="user_divider1">#989898</color>
     <color name="user_divider2">#e2e2e2</color>
     <color name="text_color">#808080</color>
     <color name="text_green">#29b43d</color>
     <color name="bg_color">#eeeeee</color>
+    <color name="text_brown">#e0aa35</color> 
+    <color name="text_gray">#cccccc</color>
+    <color name="title_gray">#f2f2f2</color>
+    <color name="instructionbg">#FEFBEF</color>
+    <color name="user_divider3">#d9d9d9</color>
 </resources>

@@ -25,6 +25,15 @@
         <activity
             android:name="com.lc.intercity.InterCityHomeActivity"
             android:label="@string/app_name" />
+        <activity
+            android:name="com.lc.intercity.CarpoolActivity"
+            android:label="@string/app_name" />
+        <activity
+            android:name="com.lc.intercity.CharteredCarActivity"
+            android:label="@string/app_name" />
+         <activity
+            android:name="com.lc.intercity.SearchCarpoolActivity"
+            android:label="@string/app_name" />
     </application>
 
 </manifest>

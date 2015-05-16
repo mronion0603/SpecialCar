@@ -23,7 +23,7 @@ public class MainActivity extends SlidingFragmentActivity implements OnClickList
 	private RelativeLayout rlslidemenu;
 	private Fragment mContent;
 	private TextView topTextView;
-	private ImageView ivOffice,ivPlane,ivInterCity,ivUrgency,ivCity, ivRight;
+	private ImageView ivOffice,ivPlane,ivInterCity,ivUrgency,ivCity, ivRight,ivleft;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
@@ -33,8 +33,9 @@ public class MainActivity extends SlidingFragmentActivity implements OnClickList
 		initSlidingMenu(savedInstanceState);
 
 		rlslidemenu = (RelativeLayout) findViewById(R.id.rlslidemenu);
-		rlslidemenu.setVisibility(View.VISIBLE);
 		rlslidemenu.setOnClickListener(this);
+		ivleft = (ImageView) findViewById(R.id.topButton);
+		ivleft.setVisibility(View.VISIBLE);
 		topTextView = (TextView) findViewById(R.id.topTv);
 		ivRight = (ImageView) findViewById(R.id.topButton2);
 		ivRight.setVisibility(View.VISIBLE);

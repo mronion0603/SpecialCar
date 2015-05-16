@@ -1,0 +1,60 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_color"
+    android:orientation="vertical" >
+
+    <include layout="@layout/main_head" />
+	    <RelativeLayout 
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content" 
+	    android:paddingTop="10dip"
+	    android:paddingBottom="10dip"
+	    android:id="@+id/usecardate"
+	    android:background="@color/title_gray"
+	    >
+	    <ImageView
+	      android:id="@+id/fromto"
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:layout_centerInParent="true"
+	      android:background="@drawable/city_appointment_arrow"  
+	    />
+	    <TextView
+	      android:id="@+id/from"
+	      android:layout_toLeftOf="@+id/fromto"
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:layout_marginRight="20dip"
+	      android:textSize="18sp"
+	      android:textColor="@color/black"
+	      android:layout_centerVertical="true"
+	      android:text="武汉"
+	    />
+	    
+	     <TextView
+	      android:id="@+id/to"
+	      android:layout_toRightOf="@+id/fromto"
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:layout_marginLeft="20dip"
+	      android:textSize="18sp"
+	      android:textColor="@color/black"
+	      android:layout_centerVertical="true"
+	      android:text="天门"
+	    />
+	    </RelativeLayout>    
+	    <ImageView
+	      android:layout_width="fill_parent"
+	      android:layout_height="1dip"
+	      android:background="@color/user_divider3"
+	    />
+         <ListView
+        android:id="@+id/listview"
+        android:layout_width = "fill_parent"
+        android:layout_height = "wrap_content"
+        
+        />
+	   
+</LinearLayout>

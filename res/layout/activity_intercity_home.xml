@@ -45,9 +45,9 @@
 	      android:layout_toLeftOf="@+id/arrow1"
 	      android:layout_width="wrap_content"
 	      android:layout_height="wrap_content"
-	      android:layout_marginLeft="20dip"
+	      android:layout_marginRight="10dip"
 	      android:textSize="16sp"
-	      android:textColor="@color/text_green"
+	      android:textColor="@color/text_brown"
 	      android:layout_centerVertical="true"
 	      android:text="武汉市"
 	      />
@@ -55,7 +55,7 @@
 	     <ImageView
 	      android:layout_width="fill_parent"
 	      android:layout_height="1dip"
-	      android:background="@color/bg_color"
+	      android:background="@color/user_divider3"
 	    />
 	    <RelativeLayout 
 	    android:layout_width="fill_parent"
@@ -96,9 +96,9 @@
 	      android:layout_toLeftOf="@+id/arrow2"
 	      android:layout_width="wrap_content"
 	      android:layout_height="wrap_content"
-	      android:layout_marginLeft="20dip"
+	      android:layout_marginRight="10dip"
 	      android:textSize="16sp"
-	      android:textColor="@color/bg_color"
+	      android:textColor="@color/text_gray"
 	      android:layout_centerVertical="true"
 	      android:text="输入目的地所在城市"
 	      />
@@ -147,9 +147,9 @@
 	      android:layout_toLeftOf="@+id/arrow2"
 	      android:layout_width="wrap_content"
 	      android:layout_height="wrap_content"
-	      android:layout_marginLeft="20dip"
+	      android:layout_marginRight="10dip"
 	      android:textSize="16sp"
-	      android:textColor="@color/text_green"
+	      android:textColor="@color/text_brown"
 	      android:layout_centerVertical="true"
 	      android:text="2015-5-15 今天"
 	      />
@@ -160,6 +160,7 @@
 	      android:background="@color/bg_color"
 	    />
 	    <RadioGroup  
+	    android:id="@+id/radioGroup"
         android:gravity="center"  
         android:orientation="horizontal"    
         android:layout_width="fill_parent"     
@@ -198,6 +199,7 @@
 	    android:layout_height="fill_parent" 
 	    >
           <ImageView
+          android:id="@+id/Search"
 	      android:layout_width="fill_parent"
 	      android:layout_height="50dip"
 	      android:layout_margin="10dip"
