@@ -64,13 +64,13 @@ public class SearchCarpoolActivity extends Activity implements OnClickListener {
 		listview.setDividerHeight(0);
 		listview.setAdapter(listItemAdapter);
 		
-		
 		listview.setOnItemClickListener(new OnItemClickListener(){
-
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
-				
+				Intent intent = new Intent();
+				intent.setClass(getApplication(), CarpoolActivity.class);
+				startActivity(intent);
 			}
 			
 		});
@@ -84,7 +84,7 @@ public class SearchCarpoolActivity extends Activity implements OnClickListener {
 			 map.put("PickUpArea", "中南商圈");
 			 map.put("GetOffArea", "天门客运站");
 			 map.put("CurNum","1");
-			 map.put("TotalNum", "5");
+			 map.put("TotalNum", "7");
 			 map.put("CarIcon", "2");		
 			 listItem.add(map);
 		}

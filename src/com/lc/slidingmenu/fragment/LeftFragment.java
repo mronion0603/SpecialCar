@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 import com.lc.specialcar.MainActivity;
 import com.lc.specialcar.R;
@@ -45,7 +46,7 @@ public class LeftFragment extends Fragment implements OnClickListener{
 	
 	
 	public void findViews(View view) {
-		todayView = view.findViewById(R.id.tvToday);
+		todayView = view.findViewById(R.id.officeaccount);
 		lastListView = view.findViewById(R.id.tvLastlist);
 		discussView = view.findViewById(R.id.tvDiscussMeeting);
 		favoritesView = view.findViewById(R.id.tvMyFavorites);
@@ -75,7 +76,7 @@ public class LeftFragment extends Fragment implements OnClickListener{
 		Fragment newContent = null;
 		String title = null;
 		switch (v.getId()) {
-		case R.id.tvToday: // 今日
+		case R.id.officeaccount: // 今日
 			newContent = new TodayFragment();
 			title = getString(R.string.today);
 			break;

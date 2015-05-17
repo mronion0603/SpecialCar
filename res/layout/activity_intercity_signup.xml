@@ -1,0 +1,28 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_color"
+    android:orientation="vertical" >
+
+    <include layout="@layout/main_head" />
+
+    
+	<ImageView
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:layout_gravity="center"
+	      android:layout_marginTop="50dip"
+	      android:background="@drawable/request_success"  
+	/>
+	     <TextView
+	      
+	      android:layout_width="match_parent"
+	      android:layout_height="wrap_content"
+	      android:textSize="18sp"
+	      android:layout_marginTop="15dip"
+	      android:textColor="@color/black"
+	      android:gravity="center"
+	      android:text="报名成功，请耐心等待司机联系!"
+	    />
+	   
+</LinearLayout>

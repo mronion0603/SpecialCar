@@ -4,6 +4,7 @@ package com.lc.specialcar;
 
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
+import com.lc.innercity.InnerCityHomeActivity;
 import com.lc.intercity.InterCityHomeActivity;
 import com.lc.slidingmenu.fragment.LeftFragment;
 import com.lc.slidingmenu.fragment.RightFragment;
@@ -53,18 +54,6 @@ public class MainActivity extends SlidingFragmentActivity implements OnClickList
 		
 	}
 
-	@Override
-	protected void onResume() {
-		super.onResume();
-
-	}
-
-	@Override
-	protected void onPause() {
-		super.onPause();
-
-	}
-
 	/**
 	 * 初始化侧边栏
 	 */
@@ -111,7 +100,7 @@ public class MainActivity extends SlidingFragmentActivity implements OnClickList
 	protected void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
 		// getSupportFragmentManager().putFragment(outState, "mContent",
-		// mContent);
+		 //mContent);
 		final FragmentTransaction ft = getSupportFragmentManager()
 				.beginTransaction();
 		ft.add(mContent, "mContent");
@@ -141,7 +130,11 @@ public class MainActivity extends SlidingFragmentActivity implements OnClickList
 			intent.setClass(MainActivity.this, InterCityHomeActivity.class);
 			startActivity(intent);
 			break;
-			
+		case R.id.city:
+			Intent intent2 = new Intent();
+			intent2.setClass(MainActivity.this, InnerCityHomeActivity.class);
+			startActivity(intent2);
+			break;
 		default:
 			break;
 		}

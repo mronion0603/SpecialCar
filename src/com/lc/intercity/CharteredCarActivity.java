@@ -1,8 +1,10 @@
 package com.lc.intercity;
 
+import com.lc.setting.ButtonEffect;
 import com.lc.specialcar.R;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -35,6 +37,7 @@ public class CharteredCarActivity extends Activity implements OnClickListener {
 		tvTitle.setText("包车");
 		ivSearch = (Button) findViewById(R.id.Search);
 		ivSearch.setOnClickListener(this);
+		ButtonEffect.setButtonStateChangeListener(ivSearch);
 		rls = (RelativeLayout) findViewById(R.id.rlslidemenu);
 		rls.setOnClickListener(this);
 		ivleft = (ImageView) findViewById(R.id.ArrowHead);
@@ -48,7 +51,12 @@ public class CharteredCarActivity extends Activity implements OnClickListener {
 		case R.id.rlslidemenu:
 			finish();
 			break;
-			
+		case R.id.Search:
+			Intent intent = new Intent();
+			intent.putExtra("title", "包车");
+			intent.setClass(getApplication(), SignUpActivity.class);
+			startActivity(intent);
+			break;
 		default:
 			break;
 		}

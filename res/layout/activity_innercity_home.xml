@@ -1,0 +1,73 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_color"
+    android:orientation="vertical" >
+
+    <include layout="@layout/main_head" />
+        <RelativeLayout 
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content" 
+	    android:paddingTop="10dip"
+	    android:paddingBottom="10dip"
+	    android:id="@+id/usecardate"
+	    android:background="@color/white"
+	    android:alpha="0.7"
+	    >
+	    <ImageView
+	      android:id="@+id/date"
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:layout_marginLeft="10dip"
+	      android:background="@drawable/city_register_site2"  
+	    />
+	     <TextView
+	      android:layout_toRightOf="@+id/date"
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:layout_marginLeft="20dip"
+	      android:textSize="18sp"
+	      android:textColor="@color/black"
+	      android:layout_centerVertical="true"
+	      android:text="武汉植物园"
+	    />
+	     <ImageView
+	      android:id="@+id/star"
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:layout_marginRight="20dip"
+	      android:background="@drawable/star2"
+	      android:layout_alignParentRight="true"
+	      android:layout_centerVertical="true"
+	     />
+	    </RelativeLayout>  
+	     <ImageView
+	      android:layout_width="fill_parent"
+	      android:layout_height="1dip"
+	      android:background="@color/text_green"
+	    /> 
+        <RelativeLayout 
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent" 
+	    >
+	    <com.baidu.mapapi.map.MapView  
+	    android:id="@+id/bmapView"  
+	    android:layout_width="fill_parent"  
+	    android:layout_height="fill_parent"  
+	    android:clickable="true" />
+
+        <Button
+          android:id="@+id/Search"
+	      android:layout_width="fill_parent"
+	      android:layout_height="50dip"
+	      android:layout_marginLeft="10dip"
+	      android:layout_marginRight="10dip"
+	      android:layout_centerHorizontal="true"
+	      android:layout_alignParentBottom="true"
+	      android:layout_marginBottom="50dip"
+	      android:background="@drawable/btn2"
+	      android:text="我要预约"
+	      android:textColor="@color/white"
+	      />
+        </RelativeLayout>
+</LinearLayout>

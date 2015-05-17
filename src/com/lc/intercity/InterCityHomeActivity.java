@@ -1,5 +1,6 @@
 package com.lc.intercity;
 
+import com.lc.setting.ButtonEffect;
 import com.lc.specialcar.MainActivity;
 import com.lc.specialcar.R;
 
@@ -39,6 +40,7 @@ public class InterCityHomeActivity extends Activity implements OnClickListener {
 		tvTitle.setText("城际合约");
 		ivSearch = (ImageView) findViewById(R.id.Search);
 		ivSearch.setOnClickListener(this);
+		ButtonEffect.setButtonStateChangeListener(ivSearch);
 		rls = (RelativeLayout) findViewById(R.id.rlslidemenu);
 		rls.setOnClickListener(this);
 		ivleft = (ImageView) findViewById(R.id.ArrowHead);
@@ -73,7 +75,7 @@ public class InterCityHomeActivity extends Activity implements OnClickListener {
 				startActivity(intent);
               }else{
             	Intent intent = new Intent();
-  				intent.setClass(InterCityHomeActivity.this, CharteredCarActivity.class);
+  				intent.setClass(InterCityHomeActivity.this, SearchCharteredCarActivity.class);
   				startActivity(intent);
               }
 			break;

@@ -172,7 +172,7 @@
             android:layout_height="wrap_content"  
             android:text="拼车"   
             android:textSize="17.0sp"     
-            android:textColor="@android:color/black"    
+            android:textColor="@drawable/textcolor_selector"    
             android:gravity="center"   
             android:layout_weight="1"  
             android:checked="true"  
@@ -185,10 +185,11 @@
             android:layout_height="wrap_content"  
             android:text="包车"  
             android:textSize="17.0sp"  
-            android:textColor="@android:color/black"    
+           
             android:gravity="center"  
             android:layout_weight="1"  
             android:button="@null"  
+            android:textColor="@drawable/textcolor_selector"    
             android:background="@drawable/radio"  
             />    
         
