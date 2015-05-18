@@ -64,8 +64,14 @@
         <activity
             android:name="com.lc.intercity.SignUpActivity"
             android:label="@string/app_name" />
-         <activity
+        <activity
             android:name="com.lc.innercity.InnerCityHomeActivity"
+            android:label="@string/app_name" />
+        <activity
+            android:name="com.lc.innercity.BillingRuleActivity"
+            android:label="@string/app_name" />
+        <activity
+            android:name="com.lc.innercity.CarInfoActivity"
             android:label="@string/app_name" />
     </application>
 

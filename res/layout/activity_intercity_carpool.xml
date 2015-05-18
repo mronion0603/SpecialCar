@@ -205,7 +205,7 @@
             android:background="@color/white"
             />
         </RelativeLayout>
-            <ImageView
+         <ImageView
 	      android:layout_width="fill_parent"
 	      android:layout_height="1dip"
 	      android:background="@color/user_divider3"

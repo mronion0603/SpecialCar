@@ -11,20 +11,35 @@ import com.lc.slidingmenu.fragment.RightFragment;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-public class MainActivity extends SlidingFragmentActivity implements OnClickListener {
+public class MainActivity extends SlidingFragmentActivity implements OnClickListener, OnPageChangeListener {
 	private RelativeLayout rlslidemenu;
 	private Fragment mContent;
 	private TextView topTextView;
 	private ImageView ivOffice,ivPlane,ivInterCity,ivUrgency,ivCity, ivRight,ivleft;
+	//ViewPager
+	private ViewPager viewPager;
+    // װ����ImageView����
+	private ImageView[] tips;
+	// װImageView����
+	private ImageView[] mImageViews;
+	//ͼƬ��Դid
+	private int[] imgIdArray ;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
@@ -32,7 +47,11 @@ public class MainActivity extends SlidingFragmentActivity implements OnClickList
 		setContentView(R.layout.activity_main);
 
 		initSlidingMenu(savedInstanceState);
+        init();
+		initViewPager();
+	}
 
+	void init(){
 		rlslidemenu = (RelativeLayout) findViewById(R.id.rlslidemenu);
 		rlslidemenu.setOnClickListener(this);
 		ivleft = (ImageView) findViewById(R.id.topButton);
@@ -52,8 +71,48 @@ public class MainActivity extends SlidingFragmentActivity implements OnClickList
 		ivCity = (ImageView) findViewById(R.id.city);
 		ivCity.setOnClickListener(this);
 		
+		
 	}
-
+	void initViewPager(){
+		ViewGroup group = (ViewGroup)findViewById(R.id.viewGroup);
+		viewPager = (ViewPager) findViewById(R.id.adv_pager);
+		
+		//����ͼƬ��ԴID
+		imgIdArray = new int[]{R.drawable.home_ad, R.drawable.home_ad, R.drawable.home_ad, R.drawable.home_ad,
+				R.drawable.home_ad,R.drawable.home_ad};
+			
+		//�������뵽ViewGroup��
+		tips = new ImageView[imgIdArray.length];
+		for(int i=0; i<tips.length; i++){
+			ImageView imageView = new ImageView(this);
+			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(10,10);
+			lp.leftMargin=15;
+	    	imageView.setLayoutParams(lp);
+	    	tips[i] = imageView;
+	    	if(i == 0){
+	    		tips[i].setBackgroundResource(R.drawable.page_indicator_focused);
+	    	}else{
+	    		tips[i].setBackgroundResource(R.drawable.page_indicator_unfocused);
+	    	}
+	    	
+	    	 group.addView(imageView);
+		}
+		
+		//��ͼƬװ�ص�������
+		mImageViews = new ImageView[imgIdArray.length];
+		for(int i=0; i<mImageViews.length; i++){
+			ImageView imageView = new ImageView(this);
+			mImageViews[i] = imageView;
+			imageView.setBackgroundResource(imgIdArray[i]);
+		}
+		
+		//����Adapter
+		viewPager.setAdapter(new MyAdapter());
+		//���ü�������Ҫ�����õ��ı���
+		viewPager.setOnPageChangeListener(this);
+		//����ViewPager��Ĭ����, ����Ϊ���ȵ�100���������ӿ�ʼ�������󻬶�
+		viewPager.setCurrentItem((mImageViews.length) * 100);
+	}
 	/**
 	 * 初始化侧边栏
 	 */
@@ -139,5 +198,100 @@ public class MainActivity extends SlidingFragmentActivity implements OnClickList
 			break;
 		}
 	}
+	 @Override
+	    protected void onResume() {
+	        super.onResume();
+	        //activity���������Ӻ󣬷���һ��message��������viewPager�е�ͼƬ�л�����һ��
+	        mHandler.sendEmptyMessageDelayed(1, 5000);
+	    }
 
+	    @Override
+	    protected void onStop() {
+	        super.onStop();
+	        //ֹͣviewPager��ͼƬ���Զ��л�
+	        mHandler.removeMessages(1);
+	    }
+	    
+	    @Override
+	    protected void onPause() {
+	        super.onPause();
+	        mHandler.removeMessages(1);
+	    }
+		/**
+		 * 
+		 */
+		public class MyAdapter extends PagerAdapter{
+
+			@Override
+			public int getCount() {
+				return Integer.MAX_VALUE;
+			}
+
+			@Override
+			public boolean isViewFromObject(View arg0, Object arg1) {
+				return arg0 == arg1;
+			}
+
+			@Override
+			public void destroyItem(View container, int position, Object object) {
+				((ViewPager)container).removeView(mImageViews[position % mImageViews.length]);
+				
+			}
+
+			/**
+			 * ����ͼƬ��ȥ���õ�ǰ��position ���� ͼƬ���鳤��ȡ�����ǹؼ�
+			 */
+			@Override
+			public Object instantiateItem(View container, int position) {
+				((ViewPager)container).addView(mImageViews[position % mImageViews.length], 0);
+				return mImageViews[position % mImageViews.length];
+			}
+			
+			
+			
+		}
+
+		@Override
+		public void onPageScrollStateChanged(int arg0) {
+			
+		}
+
+		@Override
+		public void onPageScrolled(int arg0, float arg1, int arg2) {
+			
+		}
+
+		@Override
+		public void onPageSelected(int arg0) {
+			setImageBackground(arg0 % mImageViews.length);
+		}
+		
+		/**
+		 * ����ѡ�е�tip�ı���
+		 * @param selectItems
+		 */
+		private void setImageBackground(int selectItems){
+			for(int i=0; i<tips.length; i++){
+				if(i == selectItems){
+					tips[i].setBackgroundResource(R.drawable.page_indicator_focused);
+				}else{
+					tips[i].setBackgroundResource(R.drawable.page_indicator_unfocused);
+				}
+			}
+		}
+		
+		private Handler mHandler = new Handler() {
+	        public void handleMessage(android.os.Message msg) {
+	            switch(msg.what) {
+	            case 1:
+	                int totalcount = viewPager.getChildCount();//autoChangeViewPager.getChildCount();
+	                int currentItem = viewPager.getCurrentItem();
+	                int toItem = currentItem + 1 == totalcount ? 0 : currentItem + 1;
+	                //Log.i(TAG, "totalcount: " + totalcount + "   currentItem: " + currentItem + "   toItem: " + toItem);
+	                viewPager.setCurrentItem(toItem, true);
+	                //ÿ�����ӷ���һ��message�������л�viewPager�е�ͼƬ
+	                this.sendEmptyMessageDelayed(1, 5000);
+	            }
+	        }
+	    };
 }

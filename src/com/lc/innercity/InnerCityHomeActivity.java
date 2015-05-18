@@ -1,16 +1,12 @@
 package com.lc.innercity;
 
-
-
-
-
-import com.baidu.lbsapi.BMapManager;
 import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.MapView;
 import com.lc.setting.ButtonEffect;
 import com.lc.specialcar.R;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -21,11 +17,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 
-
-
 public class InnerCityHomeActivity extends Activity implements OnClickListener {
 	
-    TextView tvTitle;
+    TextView tvTitle,righttext;
     ImageView ivleft;
     Button ivSearch;
     private RelativeLayout rls;
@@ -45,6 +39,10 @@ public class InnerCityHomeActivity extends Activity implements OnClickListener {
 	public void init(){
 		tvTitle = (TextView) findViewById(R.id.topTv);
 		tvTitle.setText("市内预约");
+		righttext = (TextView) findViewById(R.id.righttext);
+		righttext.setVisibility(View.VISIBLE);
+		righttext.setText("计费规则");
+		righttext.setOnClickListener(this);
 		ivSearch = (Button) findViewById(R.id.Search);
 		ivSearch.setOnClickListener(this);
 		ButtonEffect.setButtonStateChangeListener(ivSearch);
@@ -63,12 +61,15 @@ public class InnerCityHomeActivity extends Activity implements OnClickListener {
 		case R.id.rlslidemenu:
 			finish();
 			break;
-			
+		case R.id.righttext:
+			Intent intent = new Intent();
+			intent.setClass(InnerCityHomeActivity.this,BillingRuleActivity.class);
+			startActivity(intent);
+			break;
 		case R.id.Search:
-				//Intent intent = new Intent();
-				//intent.setClass(InnerCityHomeActivity.this, SearchCarpoolActivity.class);
-				//startActivity(intent);
-             
+			Intent intent2 = new Intent();
+			intent2.setClass(InnerCityHomeActivity.this,CarInfoActivity.class);
+			startActivity(intent2);
 			break;
 			
 		default:

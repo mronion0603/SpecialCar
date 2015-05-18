@@ -54,7 +54,7 @@
     <TextView
         android:id="@+id/tvToday"
         android:layout_width="match_parent"
-        android:layout_height="50.0dip"
+        android:layout_height="45.0dip"
         android:drawablePadding="15.0dip"
         android:gravity="center_vertical"
         android:paddingLeft="20.0dip"
@@ -77,7 +77,7 @@
        <TextView
         android:id="@+id/account"
         android:layout_width="wrap_content"
-        android:layout_height="50.0dip"
+        android:layout_height="45.0dip"
         android:gravity="center_vertical"
         android:layout_marginRight="20.0dip"
         android:text="@string/account"
@@ -102,7 +102,7 @@
     <TextView
          android:id="@+id/tvLastlist"
         android:layout_width="match_parent"
-        android:layout_height="50.0dip"
+        android:layout_height="45.0dip"
         android:clickable="true"
         android:drawablePadding="15.0dip"
         android:gravity="center_vertical"
@@ -125,7 +125,7 @@
      <TextView
         android:id="@+id/card_connect"
         android:layout_width="wrap_content"
-        android:layout_height="50.0dip"
+        android:layout_height="45.0dip"
         android:gravity="center_vertical"
         android:layout_marginRight="20.0dip"
         android:text="未关联"
@@ -150,7 +150,7 @@
     <TextView
          android:id="@+id/tvDiscussMeeting"
         android:layout_width="match_parent"
-        android:layout_height="50.0dip"
+        android:layout_height="45.0dip"
         android:clickable="true"
         android:drawablePadding="15.0dip"
         android:gravity="center_vertical"
@@ -163,7 +163,7 @@
      <TextView
         android:id="@+id/card_connect"
         android:layout_width="wrap_content"
-        android:layout_height="50.0dip"
+        android:layout_height="45.0dip"
         android:gravity="center_vertical"
         android:layout_marginRight="55.0dip"
         android:text="@string/discount"
@@ -188,7 +188,7 @@
     <TextView
          android:id="@+id/tvMyFavorites"
         android:layout_width="match_parent"
-        android:layout_height="50.0dip"
+        android:layout_height="45.0dip"
         android:clickable="true"
         android:drawablePadding="15.0dip"
         android:gravity="center_vertical"
@@ -225,13 +225,50 @@
     <TextView
         android:id="@+id/tvMyComments"
         android:layout_width="match_parent"
-        android:layout_height="50.0dip"
+        android:layout_height="45.0dip"
         android:clickable="true"
         android:drawablePadding="15.0dip"
         android:gravity="center_vertical"
         android:paddingLeft="20.0dip"
         android:paddingRight="10.0dip"
         android:text="发票"
+        android:drawableLeft="@drawable/person_10"
+        android:textColor="@color/text_color"
+        android:textSize="16.0sp" />
+     <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dip"
+            android:gravity="center_vertical"
+            android:src="@drawable/arrows_2"
+             />
+</RelativeLayout>
+ <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dip"
+        android:layout_marginLeft="20.0dip"
+        android:background="@color/user_divider1" />
+     <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dip"
+        android:layout_marginLeft="20.0dip"
+        android:background="@color/user_divider2" />
+     <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+    <TextView
+        android:id="@+id/tvMyComments2"
+        android:layout_width="match_parent"
+        android:layout_height="45.0dip"
+        android:clickable="true"
+        android:drawablePadding="15.0dip"
+        android:gravity="center_vertical"
+        android:paddingLeft="20.0dip"
+        android:paddingRight="10.0dip"
+        android:text="消息"
         android:drawableLeft="@drawable/person_5"
         android:textColor="@color/text_color"
         android:textSize="16.0sp" />
@@ -262,7 +299,7 @@
     <TextView
          android:id="@+id/tvMySettings"
         android:layout_width="match_parent"
-        android:layout_height="50.0dip"
+        android:layout_height="45.0dip"
         android:clickable="true"
         android:drawablePadding="15.0dip"
         android:gravity="center_vertical"
@@ -299,7 +336,7 @@
 	 <TextView
         android:id="@+id/tvInvite"
         android:layout_width="match_parent"
-        android:layout_height="50.0dip"
+        android:layout_height="45.0dip"
         android:clickable="true"
         android:drawablePadding="15.0dip"
         android:gravity="center_vertical"
@@ -336,7 +373,7 @@
      <TextView
         android:id="@+id/tvShare"
         android:layout_width="match_parent"
-        android:layout_height="50.0dip"
+        android:layout_height="45.0dip"
         android:clickable="true"
         android:drawablePadding="15.0dip"
         android:gravity="center_vertical"
@@ -373,7 +410,7 @@
      <TextView
         android:id="@+id/tvMore"
         android:layout_width="match_parent"
-        android:layout_height="50.0dip"
+        android:layout_height="45.0dip"
         android:clickable="true"
         android:drawablePadding="15.0dip"
         android:gravity="center_vertical"

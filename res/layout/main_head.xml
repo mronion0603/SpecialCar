@@ -7,8 +7,7 @@
     android:id="@+id/rlslidemenu"
     android:layout_width="50dip"
     android:layout_height="50dip"
-
-     >
+    >
     <ImageView
         android:id="@+id/topButton"
         android:layout_width="wrap_content"
@@ -46,6 +45,29 @@
         android:layout_alignParentRight="true"
         android:layout_marginRight="10dp"
         android:src="@drawable/home_title_order"
+        android:visibility="gone"
+       />
+       <TextView
+        android:id="@+id/righttext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        android:visibility="gone"
+       />
+       <TextView
+        android:id="@+id/righttext2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:drawableRight="@drawable/arrow_down"
+        android:layout_marginRight="10dp"
+        android:textColor="@color/white"
+        android:textSize="15sp"
         android:visibility="gone"
        />
 </RelativeLayout>
