@@ -73,6 +73,15 @@
         <activity
             android:name="com.lc.innercity.CarInfoActivity"
             android:label="@string/app_name" />
+        <activity
+            android:name="com.lc.innercity.SendDealActivity"
+            android:label="@string/app_name" />
+        <activity
+            android:name="com.lc.innercity.DriverDistributeActivity"
+            android:label="@string/app_name" />
+        <activity
+            android:name="com.lc.innercity.CancelOrderActivity"
+            android:label="@string/app_name" />
     </application>
 
 </manifest>

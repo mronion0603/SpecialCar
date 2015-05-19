@@ -36,7 +36,7 @@ public class CarInfoActivity extends Activity implements OnClickListener {
     ImageView ivleft;
     Button ivSearch;
     private RelativeLayout rls;
-    private ImageView imAddress;
+    private ImageView imAddress,getoffAddress;
 	private PopupWindow contactWindow; 
 	private View view; 
 	private View originview; 
@@ -88,6 +88,8 @@ public class CarInfoActivity extends Activity implements OnClickListener {
         
 		imAddress = (ImageView) findViewById(R.id.star);
 		imAddress.setOnClickListener(this);
+		getoffAddress = (ImageView) findViewById(R.id.star3);
+		getoffAddress.setOnClickListener(this);
 	}
 	@Override
 	public void onClick(View v) {
@@ -103,10 +105,14 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 			break;
 		case R.id.star:
 			selectAddressWindow(originview);
-            
+			break;
+		case R.id.star3:
+			selectAddressWindow(originview);
 			break;
 		case R.id.Search:
-				
+			Intent intent2 = new Intent();
+			intent2.setClass(CarInfoActivity.this,SendDealActivity.class);
+			startActivity(intent2);
              
 			break;
 			

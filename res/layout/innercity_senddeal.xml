@@ -1,0 +1,40 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_color"
+    android:orientation="vertical" >
+
+    <include layout="@layout/main_head" />
+        <RelativeLayout 
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent" 
+	    >
+	    <com.baidu.mapapi.map.MapView  
+	    android:id="@+id/bmapView"  
+	    android:layout_width="fill_parent"  
+	    android:layout_height="fill_parent"  
+	    android:clickable="true" />
+       <RelativeLayout 
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content" 
+	       android:layout_centerInParent="true"
+	    >
+         <ImageView
+          android:id="@+id/sendbg"
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:layout_centerInParent="true"
+	      android:background="@drawable/order_wait_wait"
+	     />
+         <TextView
+          android:id="@+id/Wait"
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:textSize="24sp"
+	      android:layout_centerInParent="true"
+	      android:text="120s"
+	      android:textColor="@color/white"
+	     />
+         </RelativeLayout>
+    </RelativeLayout>
+</LinearLayout>
