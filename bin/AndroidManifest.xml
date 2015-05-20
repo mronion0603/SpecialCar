@@ -82,6 +82,12 @@
         <activity
             android:name="com.lc.innercity.CancelOrderActivity"
             android:label="@string/app_name" />
+        <activity
+            android:name="com.lc.innercity.CarDemandActivity"
+            android:label="@string/app_name" />
+        <activity
+            android:name="com.lc.innercity.SelectCarActivity"
+            android:label="@string/app_name" />
     </application>
 
 </manifest>

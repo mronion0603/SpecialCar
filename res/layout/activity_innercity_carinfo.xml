@@ -79,6 +79,7 @@
 	      android:layout_centerVertical="true"
 	    />
 	     <TextView
+	      android:id="@+id/txdate"
 	      android:layout_toRightOf="@+id/date"
 	      android:layout_width="wrap_content"
 	      android:layout_height="wrap_content"
@@ -224,12 +225,12 @@
 	      android:layout_height="1dip"
 	      android:background="@color/user_divider3"
 	    />
-	     <RelativeLayout 
+	    <RelativeLayout 
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content" 
 	    android:paddingTop="10dip"
 	    android:paddingBottom="10dip"
-	    android:id="@+id/moresafty4"
+	    android:id="@+id/usecar"
 	    android:background="@color/white"
 	    >
 	    <ImageView
@@ -281,7 +282,7 @@
 	    android:layout_height="wrap_content" 
 	    android:paddingTop="10dip"
 	    android:paddingBottom="10dip"
-	    android:id="@+id/moresafty5"
+	    android:id="@+id/selectcar"
 	    android:background="@color/white"
 	    >
 	    <ImageView

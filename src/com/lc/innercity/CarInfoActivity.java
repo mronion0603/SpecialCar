@@ -8,18 +8,22 @@ import com.lc.setting.ButtonEffect;
 import com.lc.specialcar.R;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.PopupWindow;
@@ -30,12 +34,13 @@ import android.widget.PopupWindow.OnDismissListener;
 
 
 
+
 public class CarInfoActivity extends Activity implements OnClickListener {
 	
-    TextView tvTitle,righttext,feeRule;
+    TextView tvTitle,righttext,feeRule,txdate;
     ImageView ivleft;
     Button ivSearch;
-    private RelativeLayout rls;
+    private RelativeLayout rls,rlusecar,rlselectcar,rldate;
     private ImageView imAddress,getoffAddress;
 	private PopupWindow contactWindow; 
 	private View view; 
@@ -43,7 +48,8 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 	GroupAdapter groupAdapter;
 	private List<Integer> groups;
 	private List<String> groups1;
-	private ListView lv_group,lv_group1; 
+	private ListView lv_group1; 
+    private int year, monthOfYear, dayOfMonth;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
@@ -68,6 +74,33 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 		ButtonEffect.setButtonStateChangeListener(ivSearch);
 		rls = (RelativeLayout) findViewById(R.id.rlslidemenu);
 		rls.setOnClickListener(this);
+		rlusecar = (RelativeLayout) findViewById(R.id.usecar);
+		rlusecar.setOnClickListener(this);
+		rlselectcar = (RelativeLayout) findViewById(R.id.selectcar);
+		rlselectcar.setOnClickListener(this);
+		rldate = (RelativeLayout) findViewById(R.id.usecardate);
+		rldate.setOnClickListener(this);
+		rldate.setOnTouchListener(new OnTouchListener(){
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				 if (event.getAction() == MotionEvent.ACTION_DOWN) { 
+					 DatePickerDialog datePickerDialog = new DatePickerDialog(CarInfoActivity.this, new DatePickerDialog.OnDateSetListener() {
+		                    @Override
+		                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+		                    	//lasttimeET.setText( year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+		                    }
+		                }, year, monthOfYear, dayOfMonth);
+		                
+		                datePickerDialog.show();
+			      } 	
+			     
+					 
+			        return true; 
+			}
+	    	
+	    }); 
+		txdate = (TextView) findViewById(R.id.txdate);
+		
 		ivleft = (ImageView) findViewById(R.id.ArrowHead);
 		ivleft.setVisibility(View.VISIBLE);
 		feeRule=(TextView)findViewById(R.id.FeeRule);
@@ -113,9 +146,17 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 			Intent intent2 = new Intent();
 			intent2.setClass(CarInfoActivity.this,SendDealActivity.class);
 			startActivity(intent2);
-             
 			break;
-			
+		case R.id.usecar:
+			Intent intent3 = new Intent();
+			intent3.setClass(CarInfoActivity.this,CarDemandActivity.class);
+			startActivity(intent3);
+			break;
+		case R.id.selectcar:
+			Intent intent4 = new Intent();
+			intent4.setClass(CarInfoActivity.this,SelectCarActivity.class);
+			startActivity(intent4);
+			break;
 		default:
 			break;
 		}
