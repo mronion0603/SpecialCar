@@ -1,22 +1,35 @@
 package com.lc.innercity;
 
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
+
+import kankan.wheel.widget.WheelView;
+import kankan.wheel.widget.adapters.AbstractWheelTextAdapter;
+import kankan.wheel.widget.adapters.NumericWheelAdapter;
+
 
 import com.lc.setting.ButtonEffect;
 import com.lc.specialcar.R;
 
 import android.app.Activity;
-import android.app.DatePickerDialog;
+import android.app.AlertDialog;
+import android.app.Dialog; 
+import android.content.DialogInterface; 
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.text.Html;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
@@ -28,9 +41,11 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.PopupWindow.OnDismissListener;
+import android.widget.TimePicker;
 
 
 
@@ -42,8 +57,8 @@ public class CarInfoActivity extends Activity implements OnClickListener {
     Button ivSearch;
     private RelativeLayout rls,rlusecar,rlselectcar,rldate;
     private ImageView imAddress,getoffAddress;
-	private PopupWindow contactWindow; 
-	private View view; 
+	private PopupWindow contactWindow,timeWindow; 
+	private View view,timeview; 
 	private View originview; 
 	GroupAdapter groupAdapter;
 	private List<Integer> groups;
@@ -84,20 +99,15 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				 if (event.getAction() == MotionEvent.ACTION_DOWN) { 
-					 DatePickerDialog datePickerDialog = new DatePickerDialog(CarInfoActivity.this, new DatePickerDialog.OnDateSetListener() {
-		                    @Override
-		                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-		                    	//lasttimeET.setText( year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
-		                    }
-		                }, year, monthOfYear, dayOfMonth);
-		                
-		                datePickerDialog.show();
-			      } 	
-			     
-					 
-			        return true; 
+					    selectTimeWindow(originview);
+					    //Intent intent2 = new Intent();
+						//intent2.setClass(CarInfoActivity.this,Time2Activity.class);
+						//startActivity(intent2);
+			     } 
+			               
+			     return true; 
 			}
-	    	
+	       
 	    }); 
 		txdate = (TextView) findViewById(R.id.txdate);
 		
@@ -216,4 +226,120 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 	            }  
 	        });  
 	    }  
+	 
+	 public void selectTimeWindow(View parent) {  
+		  
+	        if (timeWindow == null) {  
+	            LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);  
+	  
+	            timeview = layoutInflater.inflate(R.layout.time2_layout, null);  
+	    		final WheelView hours = (WheelView) timeview.findViewById(R.id.hour);
+	    		NumericWheelAdapter hourAdapter = new NumericWheelAdapter(this, 0, 23);
+	    		hourAdapter.setItemResource(R.layout.wheel_text_item);
+	    		hourAdapter.setItemTextResource(R.id.text);
+	    		hours.setViewAdapter(hourAdapter);
+
+	    		final WheelView mins = (WheelView) timeview.findViewById(R.id.mins);
+	    		NumericWheelAdapter minAdapter = new NumericWheelAdapter(this, 0, 59, "%02d");
+	    		minAdapter.setItemResource(R.layout.wheel_text_item);
+	    		minAdapter.setItemTextResource(R.id.text);
+	    		mins.setViewAdapter(minAdapter);
+	    		mins.setCyclic(true);
+
+	    		
+
+	    		// set current time
+	    		Calendar calendar = Calendar.getInstance(Locale.US);
+	    		hours.setCurrentItem(calendar.get(Calendar.HOUR));
+	    		mins.setCurrentItem(calendar.get(Calendar.MINUTE));
+	    		//ampm.setCurrentItem(calendar.get(Calendar.AM_PM));
+
+	    		final WheelView day = (WheelView) timeview.findViewById(R.id.day);
+	    		day.setViewAdapter(new DayArrayAdapter(this, calendar));
+	            
+	            
+	            // 创建一个PopuWidow对象  
+	            WindowManager windowManager = (WindowManager) getSystemService(Context.WINDOW_SERVICE);  
+	            int width = windowManager.getDefaultDisplay().getWidth() ;
+	            int height = windowManager.getDefaultDisplay().getHeight();
+	            timeWindow = new PopupWindow(timeview, width, height);  
+	        }  
+	  
+	        // 使其聚集  
+	        timeWindow.setFocusable(true);  
+	        // 设置允许在外点击消失  
+	        timeWindow.setOutsideTouchable(true);  
+	  
+	        // 这个是为了点击“返回Back”也能使其消失，并且并不会影响你的背景  
+	        timeWindow.setBackgroundDrawable(new BitmapDrawable());  
+	        WindowManager windowManager = (WindowManager) getSystemService(Context.WINDOW_SERVICE);  
+	        // 显示的位置为:屏幕的宽度的一半-PopupWindow的高度的一半  
+	        //int xPos = windowManager.getDefaultDisplay().getWidth() / 2  
+	        //        - contactWindow.getWidth() / 2;  
+
+	        timeWindow.showAsDropDown(parent, 0, 0);  
+	       
+	        
+	    }  
+	 
+	 /**
+		 * Day adapter
+		 *
+		 */
+		private class DayArrayAdapter extends AbstractWheelTextAdapter {
+			// Count of days to be shown
+			private final int daysCount = 7;
+
+			// Calendar
+			Calendar calendar;
+
+			/**
+			 * Constructor
+			 */
+			protected DayArrayAdapter(Context context, Calendar calendar) {
+				super(context, R.layout.time2_day, NO_RESOURCE);
+				this.calendar = calendar;
+
+				setItemTextResource(R.id.time2_monthday);
+			}
+
+			@Override
+			public View getItem(int index, View cachedView, ViewGroup parent) {
+				int day =  index;
+				Calendar newCalendar = (Calendar) calendar.clone();
+				newCalendar.roll(Calendar.DAY_OF_YEAR, day);
+
+				View view = super.getItem(index, cachedView, parent);
+				TextView weekday = (TextView) view.findViewById(R.id.time2_weekday);
+				if (day == 0) {
+					weekday.setText("");
+				} else {
+					DateFormat format = new SimpleDateFormat("EEE");
+					weekday.setText(format.format(newCalendar.getTime()));
+				}
+
+				TextView monthday = (TextView) view.findViewById(R.id.time2_monthday);
+				if (day == 0) {
+					monthday.setText("今天");
+					monthday.setTextColor(0xFF29b43d);
+					//monthday.setTextColor(0xFF0000F0);
+				} else {
+					DateFormat format = new SimpleDateFormat("MMM d");
+					monthday.setText(format.format(newCalendar.getTime()));
+					monthday.setTextColor(0xFF111111);
+				}
+
+				return view;
+			}
+
+			@Override
+			public int getItemsCount() {
+				return daysCount + 1;
+			}
+
+			@Override
+			protected CharSequence getItemText(int index) {
+				return "";
+			}
+		}
 }
