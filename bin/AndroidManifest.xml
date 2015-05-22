@@ -89,7 +89,13 @@
             android:name="com.lc.innercity.SelectCarActivity"
             android:label="@string/app_name" />
         <activity
-            android:name="com.lc.innercity.Time2Activity"
+            android:name="com.lc.innercity.ModifyNameActivity"
+            android:label="@string/app_name" />
+        <activity
+            android:name="com.lc.innercity.AddressActivity"
+            android:label="@string/app_name" />
+        <activity
+            android:name="com.lc.official.OfficialHomeActivity"
             android:label="@string/app_name" />
     </application>
 

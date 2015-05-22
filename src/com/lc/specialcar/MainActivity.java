@@ -6,6 +6,7 @@ import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 import com.lc.innercity.InnerCityHomeActivity;
 import com.lc.intercity.InterCityHomeActivity;
+import com.lc.official.OfficialHomeActivity;
 import com.lc.slidingmenu.fragment.LeftFragment;
 import com.lc.slidingmenu.fragment.RightFragment;
 
@@ -193,6 +194,12 @@ public class MainActivity extends SlidingFragmentActivity implements OnClickList
 			Intent intent2 = new Intent();
 			intent2.setClass(MainActivity.this, InnerCityHomeActivity.class);
 			startActivity(intent2);
+			break;
+			
+		case R.id.office:
+			Intent intent3 = new Intent();
+			intent3.setClass(MainActivity.this, OfficialHomeActivity.class);
+			startActivity(intent3);
 			break;
 		default:
 			break;

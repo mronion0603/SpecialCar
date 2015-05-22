@@ -16,7 +16,7 @@
 	    android:layout_height="wrap_content" 
 	    android:paddingTop="10dip"
 	    android:paddingBottom="10dip"
-	    android:id="@+id/moresafty"
+	    android:id="@+id/rlmodifyname"
 	    android:background="@color/white"
 	    >
 	    <ImageView
@@ -129,7 +129,7 @@
 	    android:layout_height="wrap_content" 
 	    android:paddingTop="10dip"
 	    android:paddingBottom="10dip"
-	    android:id="@+id/usecardate2"
+	    android:id="@+id/startaddress"
 	    android:background="@color/white"
 	    >
 	    <ImageView
@@ -170,7 +170,7 @@
 	    android:layout_height="wrap_content" 
 	    android:paddingTop="10dip"
 	    android:paddingBottom="10dip"
-	    android:id="@+id/usecardate3"
+	    android:id="@+id/getoffaddress"
 	    android:background="@color/white"
 	    >
 	    <ImageView

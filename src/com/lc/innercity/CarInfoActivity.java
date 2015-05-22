@@ -12,7 +12,6 @@ import kankan.wheel.widget.WheelView;
 import kankan.wheel.widget.adapters.AbstractWheelTextAdapter;
 import kankan.wheel.widget.adapters.NumericWheelAdapter;
 
-
 import com.lc.setting.ButtonEffect;
 import com.lc.specialcar.R;
 
@@ -55,7 +54,7 @@ public class CarInfoActivity extends Activity implements OnClickListener {
     TextView tvTitle,righttext,feeRule,txdate;
     ImageView ivleft;
     Button ivSearch;
-    private RelativeLayout rls,rlusecar,rlselectcar,rldate;
+    private RelativeLayout rls,rlusecar,rlselectcar,rldate,rlmodifyname,rlstartaddress,rlgetoffaddress;
     private ImageView imAddress,getoffAddress;
 	private PopupWindow contactWindow,timeWindow; 
 	private View view,timeview; 
@@ -64,7 +63,7 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 	private List<Integer> groups;
 	private List<String> groups1;
 	private ListView lv_group1; 
-    private int year, monthOfYear, dayOfMonth;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
@@ -93,18 +92,20 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 		rlusecar.setOnClickListener(this);
 		rlselectcar = (RelativeLayout) findViewById(R.id.selectcar);
 		rlselectcar.setOnClickListener(this);
+		rlmodifyname = (RelativeLayout) findViewById(R.id.rlmodifyname);
+		rlmodifyname.setOnClickListener(this);
+		rlstartaddress= (RelativeLayout) findViewById(R.id.startaddress);
+		rlstartaddress.setOnClickListener(this);
+		rlgetoffaddress= (RelativeLayout) findViewById(R.id.getoffaddress);
+		rlgetoffaddress.setOnClickListener(this);
 		rldate = (RelativeLayout) findViewById(R.id.usecardate);
 		rldate.setOnClickListener(this);
 		rldate.setOnTouchListener(new OnTouchListener(){
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				 if (event.getAction() == MotionEvent.ACTION_DOWN) { 
-					    selectTimeWindow(originview);
-					    //Intent intent2 = new Intent();
-						//intent2.setClass(CarInfoActivity.this,Time2Activity.class);
-						//startActivity(intent2);
-			     } 
-			               
+					    selectTimeWindow(originview);			   
+			     }         
 			     return true; 
 			}
 	       
@@ -166,6 +167,21 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 			Intent intent4 = new Intent();
 			intent4.setClass(CarInfoActivity.this,SelectCarActivity.class);
 			startActivity(intent4);
+			break;
+		case R.id.rlmodifyname:
+			Intent intent5 = new Intent();
+			intent5.setClass(CarInfoActivity.this,ModifyNameActivity.class);
+			startActivity(intent5);
+			break;
+		case R.id.startaddress:
+			Intent intent6 = new Intent();
+			intent6.setClass(CarInfoActivity.this,AddressActivity.class);
+			startActivity(intent6);
+			break;
+		case R.id.getoffaddress:
+			Intent intent7 = new Intent();
+			intent7.setClass(CarInfoActivity.this,AddressActivity.class);
+			startActivity(intent7);
 			break;
 		default:
 			break;
@@ -257,7 +273,25 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 	    		final WheelView day = (WheelView) timeview.findViewById(R.id.day);
 	    		day.setViewAdapter(new DayArrayAdapter(this, calendar));
 	            
-	            
+	    		Button confirm  = (Button) timeview.findViewById(R.id.comfirm);
+	    		confirm.setOnClickListener(new OnClickListener(){
+					@Override
+					public void onClick(View v) {
+						if (timeWindow != null) {  
+							timeWindow.dismiss();  
+		                }  
+					}	
+	    		});
+	    		Button cancel  = (Button) timeview.findViewById(R.id.canceltime);
+	    		cancel.setOnClickListener(new OnClickListener(){
+					@Override
+					public void onClick(View v) {
+						if (timeWindow != null) {  
+							timeWindow.dismiss();  
+		                }  
+					}	
+	    		});
+	    		
 	            // 创建一个PopuWidow对象  
 	            WindowManager windowManager = (WindowManager) getSystemService(Context.WINDOW_SERVICE);  
 	            int width = windowManager.getDefaultDisplay().getWidth() ;
