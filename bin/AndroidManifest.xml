@@ -97,6 +97,15 @@
         <activity
             android:name="com.lc.official.OfficialHomeActivity"
             android:label="@string/app_name" />
+        <activity
+            android:name="com.lc.official.SelectCarPersonActivity"
+            android:label="@string/app_name" />
+        <activity
+            android:name="com.lc.official.SelectCarGroupActivity"
+            android:label="@string/app_name" />
+         <activity
+            android:name="com.lc.urgent.UrgentHomeActivity"
+            android:label="@string/app_name" />
     </application>
 
 </manifest>

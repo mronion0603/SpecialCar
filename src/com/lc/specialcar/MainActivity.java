@@ -9,6 +9,7 @@ import com.lc.intercity.InterCityHomeActivity;
 import com.lc.official.OfficialHomeActivity;
 import com.lc.slidingmenu.fragment.LeftFragment;
 import com.lc.slidingmenu.fragment.RightFragment;
+import com.lc.urgent.UrgentHomeActivity;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -200,6 +201,11 @@ public class MainActivity extends SlidingFragmentActivity implements OnClickList
 			Intent intent3 = new Intent();
 			intent3.setClass(MainActivity.this, OfficialHomeActivity.class);
 			startActivity(intent3);
+			break;
+		case R.id.urgency:{
+			Intent intent4 = new Intent();
+			intent4.setClass(MainActivity.this, UrgentHomeActivity.class);
+			startActivity(intent4);}
 			break;
 		default:
 			break;

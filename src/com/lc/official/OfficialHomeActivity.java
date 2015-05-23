@@ -19,6 +19,9 @@ import com.lc.innercity.GroupAdapter;
 import com.lc.innercity.ModifyNameActivity;
 import com.lc.innercity.SelectCarActivity;
 import com.lc.innercity.SendDealActivity;
+import com.lc.intercity.InterCityHomeActivity;
+import com.lc.intercity.SearchCarpoolActivity;
+import com.lc.intercity.SearchCharteredCarActivity;
 import com.lc.setting.ButtonEffect;
 import com.lc.specialcar.R;
 
@@ -46,11 +49,14 @@ import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.PopupWindow;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.PopupWindow.OnDismissListener;
+import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TimePicker;
 
 
@@ -70,7 +76,7 @@ public class OfficialHomeActivity extends Activity implements OnClickListener {
 	private List<Integer> groups;
 	private List<String> groups1;
 	private ListView lv_group1; 
-
+	RadioGroup group;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
@@ -124,7 +130,16 @@ public class OfficialHomeActivity extends Activity implements OnClickListener {
         
 		imAddress = (ImageView) findViewById(R.id.star);
 		imAddress.setOnClickListener(this);
-		
+		group = (RadioGroup)this.findViewById(R.id.radioGroup);
+        //绑定一个匿名监听器
+         group.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+            
+            @Override
+             public void onCheckedChanged(RadioGroup arg0, int arg1) {
+                //获取变更后的选中项的ID
+              
+             }
+        });
 	}
 	@Override
 	public void onClick(View v) {
@@ -144,10 +159,22 @@ public class OfficialHomeActivity extends Activity implements OnClickListener {
 		case R.id.star:
 			selectAddressWindow(originview);
 			break;
+		
 		case R.id.Search:
-			Intent intent2 = new Intent();
-			intent2.setClass(OfficialHomeActivity.this,SendDealActivity.class);
-			startActivity(intent2);
+			  int radioButtonId = group.getCheckedRadioButtonId();
+            //根据ID获取RadioButton的实例
+            RadioButton rb = (RadioButton)OfficialHomeActivity.this.findViewById(radioButtonId);
+            //更新文本内容，以符合选中项
+            if(rb.getText().equals("个人包车")){
+				Intent intent2 = new Intent();
+				intent2.setClass(OfficialHomeActivity.this, SelectCarPersonActivity.class);
+				startActivity(intent2);
+            }else{
+          	    Intent intent2 = new Intent();
+				intent2.setClass(OfficialHomeActivity.this, SelectCarGroupActivity.class);
+				startActivity(intent2);
+            }
+
 			break;
 		case R.id.usecar:
 			Intent intent3 = new Intent();

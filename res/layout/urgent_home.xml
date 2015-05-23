@@ -1,0 +1,115 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_color"
+    android:orientation="vertical" >
+
+    <include layout="@layout/main_head" />
+        <RelativeLayout 
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content" 
+	    android:paddingTop="10dip"
+	    android:paddingBottom="10dip"
+	    android:id="@+id/usecardate"
+	    android:layout_gravity="center"
+	    android:layout_marginTop="30dip"
+
+	    >
+	    <ImageView
+	      android:id="@+id/date"
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:layout_marginLeft="10dip"
+	      android:background="@drawable/phone"  
+	    />
+	     <TextView
+	      android:layout_toRightOf="@+id/date"
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:layout_marginLeft="20dip"
+	      android:textSize="18sp"
+	      android:textColor="@color/black"
+	      android:layout_centerVertical="true"
+	      android:text="武汉应急专线1"
+	    />
+	     
+	    </RelativeLayout>  
+	      <RelativeLayout 
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content" 
+	    android:paddingTop="10dip"
+	    android:paddingBottom="10dip"
+	    android:id="@+id/usecardate2"
+	    android:layout_gravity="center"
+	    android:layout_marginTop="30dip"
+
+	    >
+	    <ImageView
+	      android:id="@+id/date2"
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:layout_marginLeft="10dip"
+	      android:background="@drawable/phone"  
+	    />
+	     <TextView
+	      android:layout_toRightOf="@+id/date2"
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:layout_marginLeft="20dip"
+	      android:textSize="18sp"
+	      android:textColor="@color/black"
+	      android:layout_centerVertical="true"
+	      android:text="武汉应急专线2"
+	    />
+	     
+	    </RelativeLayout>  
+        <RelativeLayout 
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content" 
+	    android:paddingTop="10dip"
+	    android:paddingBottom="10dip"
+	    android:id="@+id/usecardate3"
+	    android:layout_gravity="center"
+	    android:layout_marginTop="30dip"
+
+	    >
+	    <ImageView
+	      android:id="@+id/date3"
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:layout_marginLeft="10dip"
+	      android:background="@drawable/phone"  
+	    />
+	     <TextView
+	      android:layout_toRightOf="@+id/date3"
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:layout_marginLeft="20dip"
+	      android:textSize="18sp"
+	      android:textColor="@color/black"
+	      android:layout_centerVertical="true"
+	      android:text="武汉应急专线3"
+	    />
+	     
+	    </RelativeLayout>  
+	      <TextView
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:textSize="18sp"
+	      android:textColor="@color/black"
+	      android:layout_gravity="center"
+	      android:text="服务申明"
+	      android:layout_marginTop="40dip"
+	    />
+	       <TextView
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:textSize="16sp"
+	      android:textColor="@color/black2"
+	      android:layout_gravity="center"
+	      android:layout_marginLeft="20dip"
+	      android:layout_marginRight="20dip"
+	      android:text="  这是应急专车服务相关规则这是应急专车服务相关规则这是应急专车服务相关规则这是应急专车服务相关规则这是应急专车服务相关规则这是应急专车服务相关规则这是应急专车服务相关规则这是应急专车服务相关规则"
+	     
+	    />
+</LinearLayout>
