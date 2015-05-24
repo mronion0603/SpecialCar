@@ -1,6 +1,7 @@
 package com.lc.slidingmenu.fragment;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -11,12 +12,15 @@ import android.widget.RelativeLayout;
 
 import com.lc.specialcar.MainActivity;
 import com.lc.specialcar.R;
+import com.lc.user.LoginActivity;
+import com.lc.user.RegisterActivity;
 /**
  * @date 2014/11/14
  * @author wuwenjie
  * @description 侧边栏菜单
  */
 public class LeftFragment extends Fragment implements OnClickListener{
+	private View userinfo;
 	private View todayView;
 	private View lastListView;
 	private View discussView;
@@ -46,6 +50,7 @@ public class LeftFragment extends Fragment implements OnClickListener{
 	
 	
 	public void findViews(View view) {
+		userinfo = view.findViewById(R.id.personbg);
 		todayView = view.findViewById(R.id.officeaccount);
 		lastListView = view.findViewById(R.id.tvLastlist);
 		discussView = view.findViewById(R.id.tvDiscussMeeting);
@@ -53,6 +58,7 @@ public class LeftFragment extends Fragment implements OnClickListener{
 		commentsView = view.findViewById(R.id.tvMyComments);
 		settingsView = view.findViewById(R.id.tvMySettings);
 		
+		userinfo.setOnClickListener(this);
 		todayView.setOnClickListener(this);
 		lastListView.setOnClickListener(this);
 		discussView.setOnClickListener(this);
@@ -76,6 +82,12 @@ public class LeftFragment extends Fragment implements OnClickListener{
 		Fragment newContent = null;
 		String title = null;
 		switch (v.getId()) {
+		case R.id.personbg: // 今日
+			//newContent = new TodayFragment();
+			Intent intent = new Intent();
+			intent.setClass(this.getActivity().getApplicationContext(), LoginActivity.class);
+			startActivity(intent);
+			break;
 		case R.id.officeaccount: // 今日
 			newContent = new TodayFragment();
 			title = getString(R.string.today);

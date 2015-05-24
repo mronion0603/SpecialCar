@@ -6,6 +6,7 @@
     android:orientation="vertical" >
 
     <RelativeLayout
+        android:id="@+id/personbg"
         android:layout_width="match_parent"
         android:layout_height="120dip"
         android:paddingLeft="20dp" 
