@@ -13,6 +13,14 @@ import java.util.ArrayList;
 
 
 
+
+
+
+
+
+
+import java.util.List;
+
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
@@ -37,6 +45,13 @@ import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.map.MyLocationConfiguration.LocationMode;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.model.LatLngBounds;
+import com.baidu.mapapi.search.core.PoiInfo;
+import com.baidu.mapapi.search.core.SearchResult;
+import com.baidu.mapapi.search.geocode.GeoCodeResult;
+import com.baidu.mapapi.search.geocode.GeoCoder;
+import com.baidu.mapapi.search.geocode.OnGetGeoCoderResultListener;
+import com.baidu.mapapi.search.geocode.ReverseGeoCodeOption;
+import com.baidu.mapapi.search.geocode.ReverseGeoCodeResult;
 import com.lc.setting.ButtonEffect;
 import com.lc.specialcar.R;
 
@@ -58,6 +73,7 @@ import android.widget.Toast;
 public class AddressActivity extends Activity implements OnClickListener {
 	
     TextView tvTitle,righttext;
+    TextView curaddress;
     ImageView ivleft;
     ImageView ivcenter;
     private RelativeLayout rls;
@@ -70,6 +86,13 @@ public class AddressActivity extends Activity implements OnClickListener {
  	private LocationMode mCurrentMode;
  	BitmapDescriptor mCurrentMarker;
  	boolean isFirstLoc = true;// 是否首次定位
+    // 地理编码  
+    GeoCoder mGeoCoder = null;
+    // 位置列表  
+ 
+    
+    List<PoiInfo> mInfoList;  
+    PoiInfo mCurentInfo;  
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
@@ -89,6 +112,8 @@ public class AddressActivity extends Activity implements OnClickListener {
 		righttext.setVisibility(View.VISIBLE);
 		righttext.setText("保存");
 		righttext.setOnClickListener(this);
+		curaddress = (TextView) findViewById(R.id.curaddress);
+		
 		
 		rls = (RelativeLayout) findViewById(R.id.rlslidemenu);
 		rls.setOnClickListener(this);
@@ -112,6 +137,11 @@ public class AddressActivity extends Activity implements OnClickListener {
 		mLocClient.start();
 		
 		mBaiduMap.setOnMapStatusChangeListener(touchListener);
+		// 初始化POI信息列表  
+        mInfoList = new ArrayList<PoiInfo>();  
+		 // 地理编码  
+        mGeoCoder = GeoCoder.newInstance();  
+        mGeoCoder.setOnGetGeoCodeResultListener(GeoListener);  
 		
 	}
 	// 地图触摸事件监听器  
@@ -125,7 +155,13 @@ public class AddressActivity extends Activity implements OnClickListener {
 		public void onMapStatusChangeFinish(MapStatus arg0) {
 			// TODO Auto-generated method stub
 			 Point point =  mBaiduMap.getMapStatus().targetScreen;
-		     LatLng llInfo = mBaiduMap.getProjection().fromScreenLocation(point);  
+		     LatLng centerLL = mBaiduMap.getProjection().fromScreenLocation(point);  
+		     
+		     // 发起反地理编码检索  
+             mGeoCoder.reverseGeoCode((new ReverseGeoCodeOption())  
+                     .location(centerLL));  
+             
+             //mLoadBar.setVisibility(View.VISIBLE);  
 		}
 
 		@Override
@@ -134,6 +170,43 @@ public class AddressActivity extends Activity implements OnClickListener {
 			
 		}  
     };  
+    
+ // 地理编码监听器  
+    OnGetGeoCoderResultListener GeoListener = new OnGetGeoCoderResultListener() {  
+        public void onGetGeoCodeResult(GeoCodeResult result) {  
+            if (result == null || result.error != SearchResult.ERRORNO.NO_ERROR) {  
+                // 没有检索到结果  
+            }  
+            // 获取地理编码结果  
+        }  
+  
+        @Override  
+        public void onGetReverseGeoCodeResult(ReverseGeoCodeResult result) {  
+            if (result == null || result.error != SearchResult.ERRORNO.NO_ERROR) {  
+                // 没有找到检索结果  
+            }  
+            // 获取反向地理编码结果  
+            else {  
+                // 当前位置信息  
+                mCurentInfo = new PoiInfo();  
+                mCurentInfo.address = result.getAddress();  
+                mCurentInfo.location = result.getLocation();  
+                mCurentInfo.name = "[位置]";  
+                mInfoList.clear();  
+                mInfoList.add(mCurentInfo);  
+  
+                // 将周边信息加入表  
+                if (result.getPoiList() != null) {  
+                    mInfoList.addAll(result.getPoiList());  
+                }  
+                // 通知适配数据已改变  
+                //mAdapter.notifyDataSetChanged();  
+                //mLoadBar.setVisibility(View.GONE);  
+                curaddress.setText(mInfoList.get(0).address);
+            }  
+        }  
+    };  
+    
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
