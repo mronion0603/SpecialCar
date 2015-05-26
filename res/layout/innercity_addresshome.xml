@@ -32,6 +32,7 @@
 	      android:layout_centerVertical="true"
 	      android:text="武汉植物园"
 	    />
+	     
 	     <ImageView
 	      android:id="@+id/star"
 	      android:layout_width="wrap_content"
@@ -41,16 +42,19 @@
 	      android:layout_alignParentRight="true"
 	      android:layout_centerVertical="true"
 	     />
-	    </RelativeLayout>  
-	     <ImageView
+	    </RelativeLayout> 
+	    <ImageView
 	      android:layout_width="fill_parent"
 	      android:layout_height="1dip"
 	      android:background="@color/text_green"
 	    /> 
-        <RelativeLayout 
+	    <RelativeLayout 
 	    android:layout_width="fill_parent"
 	    android:layout_height="fill_parent" 
 	    >
+	    
+	     
+        
 	    <com.baidu.mapapi.map.MapView  
 	    android:id="@+id/bmapView"  
 	    android:layout_width="fill_parent"  
@@ -64,6 +68,14 @@
 	      android:background="@drawable/order_wait_site2"
 	      android:layout_centerInParent="true"
 	      android:layout_marginBottom="50dip"
+	     /> 
+	      <ListView
+	      android:id="@+id/place_list"
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:layout_marginLeft="20dip"
+	      android:layout_marginRight="20dip"
+	      
 	     /> 
         </RelativeLayout>
 </LinearLayout>

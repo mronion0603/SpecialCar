@@ -3,22 +3,6 @@ package com.lc.innercity;
 
 
 import java.util.ArrayList;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import java.util.List;
 
 import com.baidu.location.BDLocation;
@@ -61,10 +45,15 @@ import android.graphics.Point;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -89,10 +78,11 @@ public class AddressActivity extends Activity implements OnClickListener {
     // 地理编码  
     GeoCoder mGeoCoder = null;
     // 位置列表  
- 
-    
+    PlaceListAdapter mAdapter; 
+    ListView mListView;  
     List<PoiInfo> mInfoList;  
     PoiInfo mCurentInfo;  
+    ImageView mSelectImg;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
@@ -143,7 +133,69 @@ public class AddressActivity extends Activity implements OnClickListener {
         mGeoCoder = GeoCoder.newInstance();  
         mGeoCoder.setOnGetGeoCodeResultListener(GeoListener);  
 		
+        // 周边位置列表  
+        mListView = (ListView) findViewById(R.id.place_list);  
+        //mLoadBar = (ProgressBar) findViewById(R.id.place_progressBar);  
+        mListView.setOnItemClickListener(itemClickListener);  
+        mAdapter = new PlaceListAdapter(getLayoutInflater(), mInfoList);  
+        setListViewHeightBasedOnChildren(mListView);
+        mListView.setAdapter(mAdapter);  
+        mListView.setVisibility(View.GONE);
+        mSelectImg = new ImageView(this);  
 	}
+	/**
+     * 动态设置ListView的高度
+     * @param listView
+     */
+    public static void setListViewHeightBasedOnChildren(ListView listView) { 
+        if(listView == null) return;
+
+        ListAdapter listAdapter = listView.getAdapter(); 
+        if (listAdapter == null) { 
+            // pre-condition 
+            return; 
+        } 
+
+        int totalHeight = 0; 
+        for (int i = 0; i < listAdapter.getCount(); i++) { 
+            View listItem = listAdapter.getView(i, null, listView); 
+            listItem.measure(0, 0); 
+            totalHeight += listItem.getMeasuredHeight(); 
+        } 
+
+        ViewGroup.LayoutParams params = listView.getLayoutParams(); 
+        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1)); 
+        listView.setLayoutParams(params); 
+    }
+    
+	// listView选项点击事件监听器  
+    OnItemClickListener itemClickListener = new OnItemClickListener() {  
+  
+        @Override  
+        public void onItemClick(AdapterView<?> parent, View view, int position,  
+                long id) {  
+            // TODO Auto-generated method stub  
+  
+            // 通知是适配器第position个item被选择了  
+            mAdapter.setNotifyTip(position);  
+  
+            mBaiduMap.clear();  
+            PoiInfo info = (PoiInfo) mAdapter.getItem(position);  
+            LatLng la = info.location;  
+  
+            // 动画跳转  
+            MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(la);  
+            mBaiduMap.animateMapStatus(u);  
+  
+            // 选中项打勾  
+            mSelectImg.setBackgroundResource(R.drawable.rectangle_bg);  
+            mSelectImg = (ImageView) view.findViewById(R.id.place_select);  
+            mSelectImg.setBackgroundResource(R.drawable.check);  
+              
+        }  
+  
+    };  
+    
 	// 地图触摸事件监听器  
 	OnMapStatusChangeListener touchListener = new OnMapStatusChangeListener() {  
 		@Override
@@ -156,12 +208,12 @@ public class AddressActivity extends Activity implements OnClickListener {
 			// TODO Auto-generated method stub
 			 Point point =  mBaiduMap.getMapStatus().targetScreen;
 		     LatLng centerLL = mBaiduMap.getProjection().fromScreenLocation(point);  
-		     
 		     // 发起反地理编码检索  
              mGeoCoder.reverseGeoCode((new ReverseGeoCodeOption())  
                      .location(centerLL));  
              
              //mLoadBar.setVisibility(View.VISIBLE);  
+            
 		}
 
 		@Override
@@ -200,9 +252,13 @@ public class AddressActivity extends Activity implements OnClickListener {
                     mInfoList.addAll(result.getPoiList());  
                 }  
                 // 通知适配数据已改变  
-                //mAdapter.notifyDataSetChanged();  
+                mAdapter.notifyDataSetChanged();  
                 //mLoadBar.setVisibility(View.GONE);  
-                curaddress.setText(mInfoList.get(0).address);
+                if(result.getPoiList() != null){
+                   curaddress.setText(mInfoList.get(0).address);
+                }else{
+                   curaddress.setText("获取地址失败");
+                }
             }  
         }  
     };  
