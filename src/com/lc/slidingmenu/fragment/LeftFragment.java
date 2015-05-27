@@ -12,6 +12,7 @@ import android.widget.RelativeLayout;
 
 import com.lc.specialcar.MainActivity;
 import com.lc.specialcar.R;
+import com.lc.user.ItineraryActivity;
 import com.lc.user.LoginActivity;
 import com.lc.user.RegisterActivity;
 /**
@@ -24,7 +25,7 @@ public class LeftFragment extends Fragment implements OnClickListener{
 	private View todayView;
 	private View lastListView;
 	private View discussView;
-	private View favoritesView;
+	private View itineraryView;
 	private View commentsView;
 	private View settingsView;
 	
@@ -54,7 +55,7 @@ public class LeftFragment extends Fragment implements OnClickListener{
 		todayView = view.findViewById(R.id.officeaccount);
 		lastListView = view.findViewById(R.id.tvLastlist);
 		discussView = view.findViewById(R.id.tvDiscussMeeting);
-		favoritesView = view.findViewById(R.id.tvMyFavorites);
+		itineraryView = view.findViewById(R.id.Itinerary);
 		commentsView = view.findViewById(R.id.tvMyComments);
 		settingsView = view.findViewById(R.id.tvMySettings);
 		
@@ -62,7 +63,7 @@ public class LeftFragment extends Fragment implements OnClickListener{
 		todayView.setOnClickListener(this);
 		lastListView.setOnClickListener(this);
 		discussView.setOnClickListener(this);
-		favoritesView.setOnClickListener(this);
+		itineraryView.setOnClickListener(this);
 		commentsView.setOnClickListener(this);
 		settingsView.setOnClickListener(this);
 	}
@@ -83,10 +84,12 @@ public class LeftFragment extends Fragment implements OnClickListener{
 		String title = null;
 		switch (v.getId()) {
 		case R.id.personbg: // 今日
+		{
 			//newContent = new TodayFragment();
 			Intent intent = new Intent();
 			intent.setClass(this.getActivity().getApplicationContext(), LoginActivity.class);
 			startActivity(intent);
+		}
 			break;
 		case R.id.officeaccount: // 今日
 			newContent = new TodayFragment();
@@ -100,9 +103,14 @@ public class LeftFragment extends Fragment implements OnClickListener{
 			newContent = new DiscussFragment();
 			title = getString(R.string.discussMeetting);
 			break;
-		case R.id.tvMyFavorites: // 我的收藏
-			newContent = new MyFavoritesFragment();
-			title = getString(R.string.myFavorities);
+		case R.id.Itinerary: 
+		{// 行程
+			Intent intent = new Intent();
+			intent.setClass(this.getActivity().getApplicationContext(), ItineraryActivity.class);
+			startActivity(intent);
+			//newContent = new MyFavoritesFragment();
+			//title = getString(R.string.myFavorities);
+		}
 			break;
 		case R.id.tvMyComments: // 我的评论
 			newContent = new MyCommentsFragment();

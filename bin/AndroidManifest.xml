@@ -112,6 +112,12 @@
         <activity
             android:name="com.lc.user.LoginActivity"
             android:label="@string/app_name" />
+        <activity
+            android:name="com.lc.innercity.TypeAddressActivity"
+            android:label="@string/app_name" />
+        <activity
+            android:name="com.lc.user.ItineraryActivity"
+            android:label="@string/app_name" />
     </application>
 
 </manifest>

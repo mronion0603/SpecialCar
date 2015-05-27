@@ -37,7 +37,7 @@ public class InterCityHomeActivity extends Activity implements OnClickListener {
 
 	public void init(){
 		tvTitle = (TextView) findViewById(R.id.topTv);
-		tvTitle.setText("城际合约");
+		tvTitle.setText("城际用车");
 		ivSearch = (ImageView) findViewById(R.id.Search);
 		ivSearch.setOnClickListener(this);
 		ButtonEffect.setButtonStateChangeListener(ivSearch);

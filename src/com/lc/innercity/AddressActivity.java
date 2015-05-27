@@ -31,6 +31,7 @@ import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.model.LatLngBounds;
 import com.baidu.mapapi.search.core.PoiInfo;
 import com.baidu.mapapi.search.core.SearchResult;
+import com.baidu.mapapi.search.geocode.GeoCodeOption;
 import com.baidu.mapapi.search.geocode.GeoCodeResult;
 import com.baidu.mapapi.search.geocode.GeoCoder;
 import com.baidu.mapapi.search.geocode.OnGetGeoCoderResultListener;
@@ -43,24 +44,23 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
+
+
 
 
 public class AddressActivity extends Activity implements OnClickListener {
-	
+	public static final int REQUSET = 1;
     TextView tvTitle,righttext;
     TextView curaddress;
     ImageView ivleft;
@@ -97,14 +97,13 @@ public class AddressActivity extends Activity implements OnClickListener {
 
 	public void init(){
 		tvTitle = (TextView) findViewById(R.id.topTv);
-		tvTitle.setText("市内预约");
+		tvTitle.setText("选择地址");
 		righttext = (TextView) findViewById(R.id.righttext);
 		righttext.setVisibility(View.VISIBLE);
 		righttext.setText("保存");
 		righttext.setOnClickListener(this);
 		curaddress = (TextView) findViewById(R.id.curaddress);
-		
-		
+		curaddress.setOnClickListener(this);
 		rls = (RelativeLayout) findViewById(R.id.rlslidemenu);
 		rls.setOnClickListener(this);
 		ivleft = (ImageView) findViewById(R.id.ArrowHead);
@@ -143,6 +142,34 @@ public class AddressActivity extends Activity implements OnClickListener {
         mListView.setVisibility(View.GONE);
         mSelectImg = new ImageView(this);  
 	}
+	
+	@Override  
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {  
+        super.onActivityResult(requestCode, resultCode, data);  
+        if (requestCode == AddressActivity.REQUSET && resultCode == RESULT_OK) {
+        	//carListItem.clear();
+        	//getMyCarNet.getCarFromServer(); 
+        	 // System.out.println("开始");
+        	  String address ="";
+        	  double lat,lng;
+        	  Bundle extras = data.getExtras();
+              if(extras != null){
+            	  address = extras.getString("address");
+            	  lat= extras.getDouble("latitude");
+            	  lng= extras.getDouble("longitude");
+            	  //System.out.println(address);
+            	  curaddress.setText(address);
+            	  
+            	  LatLng ll = new LatLng(lat, lng);
+				  MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(ll);
+				  mBaiduMap.animateMapStatus(u);
+					
+              }
+
+        }  
+      
+    }  
+	
 	/**
      * 动态设置ListView的高度
      * @param listView
@@ -273,8 +300,11 @@ public class AddressActivity extends Activity implements OnClickListener {
 		case R.id.righttext:
 			finish();
 			break;
-		
-			
+		case R.id.curaddress:
+			Intent intent = new Intent();
+			intent.setClass(AddressActivity.this, TypeAddressActivity.class);	
+			startActivityForResult(intent, REQUSET);  
+			break;	
 		default:
 			break;
 		}

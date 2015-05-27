@@ -2,7 +2,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_color"
-    android:orientation="vertical" >
+    android:orientation="vertical" 
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    >
 
     <include layout="@layout/main_head" />
         <RelativeLayout 
@@ -29,8 +32,10 @@
 	      android:layout_marginLeft="20dip"
 	      android:textSize="18sp"
 	      android:textColor="@color/black"
+	      android:background="@color/white"
 	      android:layout_centerVertical="true"
-	      android:text="武汉植物园"
+	      android:text="地址获取中..."
+	    
 	    />
 	     
 	     <ImageView

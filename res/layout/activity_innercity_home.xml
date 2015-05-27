@@ -2,7 +2,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_color"
-    android:orientation="vertical" >
+    android:orientation="vertical" 
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    >
 
     <include layout="@layout/main_head" />
         <RelativeLayout 
@@ -22,15 +25,19 @@
 	      android:background="@drawable/city_register_site2"  
 	    />
 	     <TextView
+	      android:id="@+id/curaddress"
 	      android:layout_toRightOf="@+id/date"
 	      android:layout_width="wrap_content"
 	      android:layout_height="wrap_content"
 	      android:layout_marginLeft="20dip"
 	      android:textSize="18sp"
 	      android:textColor="@color/black"
+	      android:background="@color/white"
 	      android:layout_centerVertical="true"
-	      android:text="武汉植物园"
+	      android:text="地址获取中..."
+	    
 	    />
+	     
 	     <ImageView
 	      android:id="@+id/star"
 	      android:layout_width="wrap_content"
@@ -40,22 +47,34 @@
 	      android:layout_alignParentRight="true"
 	      android:layout_centerVertical="true"
 	     />
-	    </RelativeLayout>  
-	     <ImageView
+	    </RelativeLayout> 
+	    <ImageView
 	      android:layout_width="fill_parent"
 	      android:layout_height="1dip"
 	      android:background="@color/text_green"
 	    /> 
-        <RelativeLayout 
+	    <RelativeLayout 
 	    android:layout_width="fill_parent"
 	    android:layout_height="fill_parent" 
 	    >
+	    
+	     
+        
 	    <com.baidu.mapapi.map.MapView  
 	    android:id="@+id/bmapView"  
 	    android:layout_width="fill_parent"  
 	    android:layout_height="fill_parent"  
 	    android:clickable="true" />
 
+         <ImageView
+          android:id="@+id/ivpoint"
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:background="@drawable/order_wait_site2"
+	      android:layout_centerInParent="true"
+	      android:layout_marginBottom="50dip"
+	     /> 
+	     
         <Button
           android:id="@+id/Search"
 	      android:layout_width="fill_parent"
@@ -69,5 +88,13 @@
 	      android:text="我要预约"
 	      android:textColor="@color/white"
 	      />
+	      <ListView
+	      android:id="@+id/place_list"
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:layout_marginLeft="20dip"
+	      android:layout_marginRight="20dip"
+	      
+	     /> 
         </RelativeLayout>
 </LinearLayout>
