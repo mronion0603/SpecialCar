@@ -2,8 +2,6 @@ package com.lc.user;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import com.lc.setting.ButtonEffect;
 import com.lc.specialcar.R;
 
 import android.app.Activity;
@@ -12,11 +10,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import android.widget.AdapterView.OnItemClickListener;
 
 
 public class ItineraryActivity extends Activity implements OnClickListener {
@@ -52,6 +52,16 @@ public class ItineraryActivity extends Activity implements OnClickListener {
 		listview.setDividerHeight(20);
 		
 		listview.setAdapter(listItemAdapter);
+		listview.setOnItemClickListener(new OnItemClickListener(){
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				Intent intent = new Intent();
+				intent.setClass(getApplication(), ItineraryDetailActivity.class);
+				startActivity(intent);
+			}
+			
+		});
 	}
 	void getData(){
 		for(int i=0;i<5;i++){

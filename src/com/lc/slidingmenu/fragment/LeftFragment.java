@@ -14,6 +14,8 @@ import com.lc.specialcar.MainActivity;
 import com.lc.specialcar.R;
 import com.lc.user.ItineraryActivity;
 import com.lc.user.LoginActivity;
+import com.lc.user.MessageActivity;
+import com.lc.user.ReceiptActivity;
 import com.lc.user.RegisterActivity;
 /**
  * @date 2014/11/14
@@ -26,9 +28,9 @@ public class LeftFragment extends Fragment implements OnClickListener{
 	private View lastListView;
 	private View discussView;
 	private View itineraryView;
-	private View commentsView;
+	private View receiptView;
 	private View settingsView;
-	
+	private View messageView;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -56,16 +58,18 @@ public class LeftFragment extends Fragment implements OnClickListener{
 		lastListView = view.findViewById(R.id.tvLastlist);
 		discussView = view.findViewById(R.id.tvDiscussMeeting);
 		itineraryView = view.findViewById(R.id.Itinerary);
-		commentsView = view.findViewById(R.id.tvMyComments);
+		receiptView = view.findViewById(R.id.Receipt);
 		settingsView = view.findViewById(R.id.tvMySettings);
+		messageView = view.findViewById(R.id.Message);
 		
 		userinfo.setOnClickListener(this);
 		todayView.setOnClickListener(this);
 		lastListView.setOnClickListener(this);
 		discussView.setOnClickListener(this);
 		itineraryView.setOnClickListener(this);
-		commentsView.setOnClickListener(this);
+		receiptView.setOnClickListener(this);
 		settingsView.setOnClickListener(this);
+		messageView.setOnClickListener(this);
 	}
 	
 	@Override
@@ -85,7 +89,7 @@ public class LeftFragment extends Fragment implements OnClickListener{
 		switch (v.getId()) {
 		case R.id.personbg: // 今日
 		{
-			//newContent = new TodayFragment();
+			
 			Intent intent = new Intent();
 			intent.setClass(this.getActivity().getApplicationContext(), LoginActivity.class);
 			startActivity(intent);
@@ -108,14 +112,21 @@ public class LeftFragment extends Fragment implements OnClickListener{
 			Intent intent = new Intent();
 			intent.setClass(this.getActivity().getApplicationContext(), ItineraryActivity.class);
 			startActivity(intent);
-			//newContent = new MyFavoritesFragment();
-			//title = getString(R.string.myFavorities);
+			
 		}
 			break;
-		case R.id.tvMyComments: // 我的评论
-			newContent = new MyCommentsFragment();
-			title = getString(R.string.myComments);
-			break;
+		case R.id.Receipt: // 发票
+		{
+			Intent intent = new Intent();
+			intent.setClass(this.getActivity().getApplicationContext(), ReceiptActivity.class);
+			startActivity(intent);
+		}	break;
+		case R.id.Message: // 消息
+		{
+			Intent intent = new Intent();
+			intent.setClass(this.getActivity().getApplicationContext(), MessageActivity.class);
+			startActivity(intent);
+		}	break;
 		case R.id.tvMySettings: // 设置
 			newContent = new MySettingsFragment();
 			title = getString(R.string.settings);

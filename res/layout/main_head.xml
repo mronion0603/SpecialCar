@@ -47,6 +47,16 @@
         android:src="@drawable/home_title_order"
         android:visibility="gone"
        />
+        <ImageView
+        android:id="@+id/topButton3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:src="@drawable/person_invoice"
+        android:visibility="gone"
+       />
        <TextView
         android:id="@+id/righttext"
         android:layout_width="wrap_content"

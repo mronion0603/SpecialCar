@@ -17,24 +17,16 @@ import com.lc.innercity.BillingRuleActivity;
 import com.lc.innercity.CarDemandActivity;
 import com.lc.innercity.GroupAdapter;
 import com.lc.innercity.ModifyNameActivity;
-import com.lc.innercity.SelectCarActivity;
-import com.lc.innercity.SendDealActivity;
-import com.lc.intercity.InterCityHomeActivity;
-import com.lc.intercity.SearchCarpoolActivity;
-import com.lc.intercity.SearchCharteredCarActivity;
+
 import com.lc.setting.ButtonEffect;
 import com.lc.specialcar.R;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Dialog; 
-import android.content.DialogInterface; 
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-import android.text.Html;
-import android.text.InputType;
+
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -45,7 +37,7 @@ import android.view.View.OnTouchListener;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.DatePicker;
+
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.PopupWindow;

@@ -16,5 +16,24 @@
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
-
+    <style name="foodRatingBar" parent="@android:style/Widget.RatingBar">  
+        <item name="android:progressDrawable">@drawable/food_rating_bar_full</item>  
+       
+    </style>  
+    <style name="main_tab_bottom">
+    <item name="android:textSize">18sp</item>
+    <item name="android:textColor">@drawable/textcolor_selector2</item>
+    <item name="android:ellipsize">marquee</item>
+    <item name="android:gravity">center_horizontal</item>
+    
+    <item name="android:background">@drawable/home_btn_bg</item>
+    <item name="android:paddingTop">5dip</item>
+    <item name="android:paddingBottom">15dip</item>
+    <item name="android:layout_width">fill_parent</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:button">@null</item>
+    <item name="android:singleLine">true</item>
+    <item name="android:drawablePadding">2dip</item>
+    <item name="android:layout_weight">1.0</item>
+    </style>
 </resources>
