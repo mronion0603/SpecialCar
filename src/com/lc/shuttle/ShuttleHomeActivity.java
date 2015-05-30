@@ -1,13 +1,11 @@
 package com.lc.shuttle;
 
 
-import com.lc.official.SelectCarGroupActivity;
-import com.lc.official.SelectCarPersonActivity;
+
 import com.lc.specialcar.R;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -60,15 +58,10 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
 	              .setContent(iCatalog));
 	     
 	       tabhost.setCurrentTab(0);  
-	 
+	       
+	      // mainTab.check(R.id.radio_button0); 
 		}
-		@Override
-		public boolean onCreateOptionsMenu(Menu menu) {
-			// Inflate the menu; this adds items to the action bar if it is present.
-			getMenuInflater().inflate(R.menu.main, menu); 
-	        return false;     
 		
-		}
 
 		@Override
 		public void onClick(View v) {

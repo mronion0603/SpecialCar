@@ -14,7 +14,7 @@
             android:id="@android:id/tabs"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.0"
+      
             android:visibility="gone"/>
         
         <RadioGroup
@@ -26,22 +26,23 @@
             android:gravity="bottom"
             android:layout_gravity="top">
             <RadioButton 
-                android:layout_marginTop="0.0dip"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
                 android:text="接机"
-             
                 android:id="@+id/radio_button0"
+                android:checked="true"
                 style="@style/main_tab_bottom"/>
              <ImageView 
-             
                 android:layout_height="30dip"
                 android:layout_width="1dip"
                 android:background="@color/up_divider"
                 android:layout_marginBottom="10dip"
                />
             <RadioButton 
-                android:layout_marginTop="0.0dip"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
                 android:text="送机"
-               
+                android:checked="false"
                 android:id="@+id/radio_button1"
                 style="@style/main_tab_bottom"/>
             
@@ -49,7 +50,7 @@
           <FrameLayout 
             android:id="@android:id/tabcontent"
             android:layout_width="fill_parent"
-            android:layout_height="0.0dip"
-            android:layout_weight="1.0"/>
+            android:layout_height="fill_parent"
+           />
     </LinearLayout>
 </TabHost>

@@ -10,10 +10,12 @@ import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptor;
+import com.baidu.mapapi.map.BitmapDescriptorFactory;
 import com.baidu.mapapi.map.MapStatus;
 import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
+import com.baidu.mapapi.map.Marker;
 import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.map.BaiduMap.OnMapStatusChangeListener;
 import com.baidu.mapapi.map.MyLocationConfiguration.LocationMode;
@@ -73,6 +75,9 @@ public class InnerCityHomeActivity extends Activity implements OnClickListener {
     List<PoiInfo> mInfoList;  
     PoiInfo mCurentInfo;  
     ImageView mSelectImg;
+    private Marker mMarkerA;
+    BitmapDescriptor bdA = BitmapDescriptorFactory
+			.fromResource(R.drawable.car1);
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
@@ -355,6 +360,7 @@ public class InnerCityHomeActivity extends Activity implements OnClickListener {
 							location.getLongitude());
 					MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(ll);
 					mBaiduMap.animateMapStatus(u);
+					
 					//initOverlay();
 				}
 			}
