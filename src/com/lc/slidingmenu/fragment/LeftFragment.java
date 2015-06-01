@@ -8,15 +8,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 
 import com.lc.specialcar.MainActivity;
 import com.lc.specialcar.R;
+import com.lc.user.AddressManageActivity;
 import com.lc.user.ItineraryActivity;
 import com.lc.user.LoginActivity;
 import com.lc.user.MessageActivity;
 import com.lc.user.ReceiptActivity;
-import com.lc.user.RegisterActivity;
+
 /**
  * @date 2014/11/14
  * @author wuwenjie
@@ -29,7 +29,7 @@ public class LeftFragment extends Fragment implements OnClickListener{
 	private View discussView;
 	private View itineraryView;
 	private View receiptView;
-	private View settingsView;
+	private View addressView;
 	private View messageView;
 	
 	@Override
@@ -59,7 +59,7 @@ public class LeftFragment extends Fragment implements OnClickListener{
 		discussView = view.findViewById(R.id.tvDiscussMeeting);
 		itineraryView = view.findViewById(R.id.Itinerary);
 		receiptView = view.findViewById(R.id.Receipt);
-		settingsView = view.findViewById(R.id.tvMySettings);
+		addressView = view.findViewById(R.id.AddressManage);
 		messageView = view.findViewById(R.id.Message);
 		
 		userinfo.setOnClickListener(this);
@@ -68,7 +68,7 @@ public class LeftFragment extends Fragment implements OnClickListener{
 		discussView.setOnClickListener(this);
 		itineraryView.setOnClickListener(this);
 		receiptView.setOnClickListener(this);
-		settingsView.setOnClickListener(this);
+		addressView.setOnClickListener(this);
 		messageView.setOnClickListener(this);
 	}
 	
@@ -127,10 +127,12 @@ public class LeftFragment extends Fragment implements OnClickListener{
 			intent.setClass(this.getActivity().getApplicationContext(), MessageActivity.class);
 			startActivity(intent);
 		}	break;
-		case R.id.tvMySettings: // 设置
-			newContent = new MySettingsFragment();
-			title = getString(R.string.settings);
-			break;
+		case R.id.AddressManage: // 设置
+		{	
+			Intent intent = new Intent();
+			intent.setClass(this.getActivity().getApplicationContext(), AddressManageActivity.class);
+			startActivity(intent);
+		}	break;
 		default:
 			break;
 		}

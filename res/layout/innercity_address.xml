@@ -51,7 +51,7 @@
 	     
 	     />
           <ImageView
-              android:layout_marginTop="10dip"
+          android:layout_marginTop="10dip"
           android:id="@+id/divider2"
           android:layout_below="@+id/tv"
 	      android:layout_width="fill_parent"

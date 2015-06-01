@@ -16,7 +16,9 @@ import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.Marker;
+import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.MyLocationData;
+import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.map.BaiduMap.OnMapStatusChangeListener;
 import com.baidu.mapapi.map.MyLocationConfiguration.LocationMode;
 import com.baidu.mapapi.model.LatLng;
@@ -76,8 +78,7 @@ public class InnerCityHomeActivity extends Activity implements OnClickListener {
     PoiInfo mCurentInfo;  
     ImageView mSelectImg;
     private Marker mMarkerA;
-    BitmapDescriptor bdA = BitmapDescriptorFactory
-			.fromResource(R.drawable.car1);
+  
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
@@ -360,7 +361,24 @@ public class InnerCityHomeActivity extends Activity implements OnClickListener {
 							location.getLongitude());
 					MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(ll);
 					mBaiduMap.animateMapStatus(u);
-					
+					LatLng  llA = new LatLng(location.getLatitude()+0.01, location.getLongitude()+0.01);
+					  BitmapDescriptor bdA = BitmapDescriptorFactory
+								.fromResource(R.drawable.car1);
+					OverlayOptions ooA = new MarkerOptions().position(llA).icon(bdA)
+								.zIndex(9).draggable(true);
+					mBaiduMap.addOverlay(ooA);
+					LatLng  llB = new LatLng(location.getLatitude()-0.03, location.getLongitude()+0.024);
+					OverlayOptions ooB = new MarkerOptions().position(llB).icon(bdA)
+								.zIndex(9).draggable(true);
+					mBaiduMap.addOverlay(ooB);
+					LatLng  llC = new LatLng(location.getLatitude()+0.023, location.getLongitude()+0.016);
+					OverlayOptions ooC = new MarkerOptions().position(llC).icon(bdA)
+								.zIndex(9).draggable(true);
+					mBaiduMap.addOverlay(ooC);
+					LatLng  llD = new LatLng(location.getLatitude()-0.033, location.getLongitude()-0.036);
+					OverlayOptions ooD = new MarkerOptions().position(llD).icon(bdA)
+								.zIndex(9).draggable(true);
+					mBaiduMap.addOverlay(ooD);
 					//initOverlay();
 				}
 			}
