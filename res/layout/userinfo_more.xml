@@ -1,0 +1,191 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_color"
+    android:orientation="vertical" >
+
+    <include layout="@layout/main_head" />
+
+    <RelativeLayout 
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content" 
+
+	    android:paddingTop="10dip"
+	    android:paddingBottom="10dip"
+	    android:id="@+id/moresafty"
+	    android:background="@color/white"
+	    >
+	    
+	     <TextView
+	     android:id="@+id/moresaftyim"
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:layout_marginLeft="20dip"
+	      android:textSize="18sp"
+	      android:textColor="@color/black"
+	      android:layout_centerVertical="true"
+	      android:text="常见问题"
+	    />
+	     <ImageView
+	      android:id="@+id/arrow1"
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:layout_marginRight="20dip"
+	      android:background="@drawable/arrows_2"
+	      android:layout_alignParentRight="true"
+	      android:layout_centerVertical="true"
+	     />
+	     
+	    </RelativeLayout>
+	     <ImageView
+	      android:layout_width="fill_parent"
+	      android:layout_height="1dip"
+	      android:background="@color/user_divider3"
+	    />
+	    <RelativeLayout 
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content" 
+	    android:paddingTop="10dip"
+	    android:paddingBottom="10dip"
+	    android:id="@+id/morenotify"
+	    android:background="@color/white"
+	    >
+	   
+	     <TextView
+	      android:id="@+id/morenotifyim"
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:layout_marginLeft="20dip"
+	      android:textSize="18sp"
+	      android:textColor="@color/black"
+	      android:layout_centerVertical="true"
+	      android:text="用户协议"
+	    />
+	     <ImageView
+	      android:id="@+id/arrow2"
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:layout_marginRight="20dip"
+	      android:background="@drawable/arrows_2"
+	      android:layout_alignParentRight="true"
+	      android:layout_centerVertical="true"
+	     />
+	     
+	     
+	    </RelativeLayout>    
+        <ImageView
+	      android:layout_width="fill_parent"
+	      android:layout_height="1dip"
+	      android:background="@color/user_divider3"
+	    />
+	    <RelativeLayout 
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content" 
+	    android:paddingTop="10dip"
+	    android:paddingBottom="10dip"
+	    android:id="@+id/usecardate"
+	    android:background="@color/white"
+	    >
+	   
+	     <TextView
+	      android:id="@+id/date"
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:layout_marginLeft="20dip"
+	      android:textSize="18sp"
+	      android:textColor="@color/black"
+	      android:layout_centerVertical="true"
+	      android:text="关于我们"
+	    />
+	     <ImageView
+	      android:id="@+id/arrow2"
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:layout_marginRight="20dip"
+	      android:background="@drawable/arrows_2"
+	      android:layout_alignParentRight="true"
+	      android:layout_centerVertical="true"
+	     />
+	     
+	    
+	    </RelativeLayout>    
+	      <ImageView
+	      android:layout_width="fill_parent"
+	      android:layout_height="1dip"
+	      android:background="@color/user_divider3"
+	    />
+	    <RelativeLayout 
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content" 
+	    android:paddingTop="10dip"
+	    android:paddingBottom="10dip"
+	    android:id="@+id/usecardate"
+	    android:background="@color/white"
+	    >
+	   
+	     <TextView
+	      android:id="@+id/date"
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:layout_marginLeft="20dip"
+	      android:textSize="18sp"
+	      android:textColor="@color/black"
+	      android:layout_centerVertical="true"
+	      android:text="意见反馈"
+	    />
+	     <ImageView
+	      android:id="@+id/arrow2"
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:layout_marginRight="20dip"
+	      android:background="@drawable/arrows_2"
+	      android:layout_alignParentRight="true"
+	      android:layout_centerVertical="true"
+	     />
+	     
+	    
+	    </RelativeLayout>   
+	   
+    
+	    <RelativeLayout 
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent" 
+	    >
+	     <RelativeLayout 
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content" 
+	    android:layout_centerInParent="true"
+	    >
+	      <ImageView
+          android:id="@+id/icon"
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:layout_margin="10dip"
+	      android:layout_centerHorizontal="true"
+	      android:background="@drawable/more_code"
+	      />
+	      <TextView
+          android:layout_below="@+id/icon"
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:layout_margin="10dip"
+          android:layout_centerHorizontal="true"
+	      android:text="扫描二维码，关注春泰官方微信"
+	      android:textColor="@color/black2"
+	      />
+	      </RelativeLayout>
+          <Button
+          android:id="@+id/Search"
+	      android:layout_width="fill_parent"
+	      android:layout_height="50dip"
+	      android:layout_marginLeft="10dip"
+	      android:layout_marginRight="10dip"
+	      android:layout_marginBottom="30dip"
+	      android:layout_alignParentBottom="true"
+	      android:background="@drawable/hover"
+	      android:text="退出登录"
+	      android:textColor="@color/black2"
+	      
+	      />
+        </RelativeLayout>
+</LinearLayout>

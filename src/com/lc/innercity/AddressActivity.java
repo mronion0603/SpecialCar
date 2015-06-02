@@ -115,7 +115,22 @@ public class AddressActivity extends Activity implements OnClickListener {
         mBaiduMap = mMapView.getMap();
 		// 开启定位图层
 		mBaiduMap.setMyLocationEnabled(true);
+		
+		 LatLng cenpt = new LatLng(30.511876,114.405751); 
+	        //定义地图状态
+	        MapStatus mMapStatus = new MapStatus.Builder()
+	        .target(cenpt)
+	        .zoom(18)
+	        .build();
+	        //定义MapStatusUpdate对象，以便描述地图状态将要发生的变化
+
+
+	        MapStatusUpdate mMapStatusUpdate = MapStatusUpdateFactory.newMapStatus(mMapStatus);
+	        //改变地图状态
+	        mBaiduMap.setMapStatus(mMapStatusUpdate);
+	        
 		// 定位初始化
+	        
 		mLocClient = new LocationClient(this);
 		mLocClient.registerLocationListener(myListener);
 		LocationClientOption option = new LocationClientOption();

@@ -15,7 +15,10 @@ import com.lc.user.AddressManageActivity;
 import com.lc.user.ItineraryActivity;
 import com.lc.user.LoginActivity;
 import com.lc.user.MessageActivity;
+import com.lc.user.ModifyInfoActivity;
+import com.lc.user.MoreActivity;
 import com.lc.user.ReceiptActivity;
+import com.lc.user.ShareActivity;
 
 /**
  * @date 2014/11/14
@@ -31,7 +34,8 @@ public class LeftFragment extends Fragment implements OnClickListener{
 	private View receiptView;
 	private View addressView;
 	private View messageView;
-	
+	private View shareView;
+	private View moreView;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -61,6 +65,8 @@ public class LeftFragment extends Fragment implements OnClickListener{
 		receiptView = view.findViewById(R.id.Receipt);
 		addressView = view.findViewById(R.id.AddressManage);
 		messageView = view.findViewById(R.id.Message);
+		shareView = view.findViewById(R.id.tvShare);
+		moreView = view.findViewById(R.id.tvMore);
 		
 		userinfo.setOnClickListener(this);
 		todayView.setOnClickListener(this);
@@ -70,6 +76,8 @@ public class LeftFragment extends Fragment implements OnClickListener{
 		receiptView.setOnClickListener(this);
 		addressView.setOnClickListener(this);
 		messageView.setOnClickListener(this);
+		shareView.setOnClickListener(this);
+		moreView.setOnClickListener(this);
 	}
 	
 	@Override
@@ -88,10 +96,9 @@ public class LeftFragment extends Fragment implements OnClickListener{
 		String title = null;
 		switch (v.getId()) {
 		case R.id.personbg: // 今日
-		{
-			
+		{	
 			Intent intent = new Intent();
-			intent.setClass(this.getActivity().getApplicationContext(), LoginActivity.class);
+			intent.setClass(this.getActivity().getApplicationContext(), ModifyInfoActivity.class);
 			startActivity(intent);
 		}
 			break;
@@ -131,6 +138,18 @@ public class LeftFragment extends Fragment implements OnClickListener{
 		{	
 			Intent intent = new Intent();
 			intent.setClass(this.getActivity().getApplicationContext(), AddressManageActivity.class);
+			startActivity(intent);
+		}	break;
+		case R.id.tvShare: // 分享
+		{	
+			Intent intent = new Intent();
+			intent.setClass(this.getActivity().getApplicationContext(), ShareActivity.class);
+			startActivity(intent);
+		}	break;
+		case R.id.tvMore: // 分享
+		{	
+			Intent intent = new Intent();
+			intent.setClass(this.getActivity().getApplicationContext(), MoreActivity.class);
 			startActivity(intent);
 		}	break;
 		default:
