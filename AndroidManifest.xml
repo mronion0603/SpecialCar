@@ -143,6 +143,24 @@
             android:name="com.lc.user.ModifyInfoActivity"
             android:label="@string/app_name" />
         <activity
+            android:name="com.lc.user.BalanceActivity"
+            android:label="@string/app_name" />
+        <activity
+            android:name="com.lc.user.BalanceDetailActivity"
+            android:label="@string/app_name" />
+        <activity
+            android:name="com.lc.user.ChargeActivity"
+            android:label="@string/app_name" />
+        <activity
+            android:name="com.lc.user.ChargeOnlineActivity"
+            android:label="@string/app_name" />
+        <activity
+            android:name="com.lc.user.ChargeCardActivity"
+            android:label="@string/app_name" />
+        <activity
+            android:name="com.lc.user.ChargeSuccessActivity"
+            android:label="@string/app_name" />
+        <activity
             android:name="com.lc.shuttle.ShuttleHomeActivity"
             android:label="@string/app_name" />
         <activity

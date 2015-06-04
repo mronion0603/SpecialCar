@@ -216,7 +216,7 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 	            int height = windowManager.getDefaultDisplay().getHeight();
 	            contactWindow = new PopupWindow(view, width, height);  
 	        }  
-	  
+	        contactWindow.setAnimationStyle(R.style.dialog_animation);//设置动画样式
 	        // 使其聚集  
 	        contactWindow.setFocusable(true);  
 	        // 设置允许在外点击消失  

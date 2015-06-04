@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import com.lc.specialcar.MainActivity;
 import com.lc.specialcar.R;
 import com.lc.user.AddressManageActivity;
+import com.lc.user.BalanceActivity;
 import com.lc.user.ItineraryActivity;
 import com.lc.user.LoginActivity;
 import com.lc.user.MessageActivity;
@@ -27,7 +28,7 @@ import com.lc.user.ShareActivity;
  */
 public class LeftFragment extends Fragment implements OnClickListener{
 	private View userinfo;
-	private View todayView;
+	private View balanceView;
 	private View lastListView;
 	private View discussView;
 	private View itineraryView;
@@ -58,7 +59,7 @@ public class LeftFragment extends Fragment implements OnClickListener{
 	
 	public void findViews(View view) {
 		userinfo = view.findViewById(R.id.personbg);
-		todayView = view.findViewById(R.id.officeaccount);
+		balanceView = view.findViewById(R.id.officeaccount);
 		lastListView = view.findViewById(R.id.tvLastlist);
 		discussView = view.findViewById(R.id.tvDiscussMeeting);
 		itineraryView = view.findViewById(R.id.Itinerary);
@@ -69,7 +70,7 @@ public class LeftFragment extends Fragment implements OnClickListener{
 		moreView = view.findViewById(R.id.tvMore);
 		
 		userinfo.setOnClickListener(this);
-		todayView.setOnClickListener(this);
+		balanceView.setOnClickListener(this);
 		lastListView.setOnClickListener(this);
 		discussView.setOnClickListener(this);
 		itineraryView.setOnClickListener(this);
@@ -102,10 +103,11 @@ public class LeftFragment extends Fragment implements OnClickListener{
 			startActivity(intent);
 		}
 			break;
-		case R.id.officeaccount: // 今日
-			newContent = new TodayFragment();
-			title = getString(R.string.today);
-			break;
+		case R.id.officeaccount: {	
+			Intent intent = new Intent();
+			intent.setClass(this.getActivity().getApplicationContext(), BalanceActivity.class);
+			startActivity(intent);
+		}break;
 		case R.id.tvLastlist:// 往期列表
 			newContent = new LastListFragment();
 			title = getString(R.string.lastList);

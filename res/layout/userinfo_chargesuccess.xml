@@ -1,0 +1,30 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+
+   <include layout="@layout/main_head" />
+     <ImageView
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:background="@drawable/person_recharge_success"
+	      android:layout_marginTop="50dip"
+	      android:layout_gravity="center"
+	      android:gravity="center"
+	    />
+      <TextView
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:layout_marginTop="10dip"
+	      android:layout_gravity="center"
+	      android:gravity="center"
+	      android:text="恭喜您！充值成功！"
+	      android:textSize="18sp"
+	      android:textColor="@color/text_brown"
+	    />
+	   
+	     
+	    
+       
+</LinearLayout>
