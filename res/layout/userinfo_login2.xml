@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/empty_cart_view"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" 
+    android:orientation="vertical"
+    android:background="@drawable/register_bg">
+ 
+    <com.lc.slidingmenu.view.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/profile_image"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center"
+            android:gravity="center_vertical"
+            android:src="@drawable/register_car"
+            app:border_color="@color/text_green"
+            app:border_width="1dp" 
+            android:layout_marginBottom="50dip"
+            android:layout_marginTop="40dip"
+            />
+    
+          
+           <EditText
+            android:id="@+id/PhoneNumber"
+            android:hint="输入手机号"
+            android:layout_width="fill_parent"
+            android:layout_height="50dip"
+            android:layout_marginRight="20dip"
+            android:layout_marginLeft="20dip"
+            android:inputType="phone"
+            android:textSize="18sp"
+            android:paddingLeft="10dip"
+            android:background="@drawable/rectangle"
+            />
+  
+    <LinearLayout
+    android:layout_width="fill_parent"
+    android:layout_height="50dip"
+    android:layout_marginTop="20dip"
+    android:orientation="horizontal"
+    >
+            <EditText
+            android:id="@+id/inputCode"
+            android:hint="输入密码"
+            android:layout_width="fill_parent"
+            android:layout_height="50dip"
+            android:layout_marginRight="20dip"
+            android:layout_marginLeft="20dip"
+            android:inputType="phone"
+            android:textSize="18sp"
+            android:paddingLeft="10dip"
+            android:background="@drawable/rectangleleft"
+          
+            />
+          
+    </LinearLayout>
+    <Button 
+        android:id="@+id/NextStep"
+        android:layout_width="fill_parent"
+        android:layout_height="50dip"
+        android:background="@drawable/btn2"
+        android:text="登录"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:layout_marginTop="20dip"
+        android:layout_marginLeft="20dip"
+        android:layout_marginRight="20dip"
+        />
+    <Button 
+        android:id="@+id/back"
+        android:layout_width="fill_parent"
+        android:layout_height="50dip"
+        android:background="@drawable/rectangle_green"
+        android:text="普通通道"
+        android:textColor="@color/black2"
+        android:textSize="18sp"
+        android:layout_marginTop="20dip"
+        android:layout_marginLeft="20dip"
+        android:layout_marginRight="20dip"
+        />
+</LinearLayout>

@@ -2,18 +2,21 @@ package com.lc.slidingmenu.fragment;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.lc.specialcar.MainActivity;
 import com.lc.specialcar.R;
 import com.lc.user.AddressManageActivity;
 import com.lc.user.BalanceActivity;
 import com.lc.user.ItineraryActivity;
+import com.lc.user.Login2Activity;
 import com.lc.user.LoginActivity;
 import com.lc.user.MessageActivity;
 import com.lc.user.ModifyInfoActivity;
@@ -37,6 +40,7 @@ public class LeftFragment extends Fragment implements OnClickListener{
 	private View messageView;
 	private View shareView;
 	private View moreView;
+	private TextView card;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -49,7 +53,7 @@ public class LeftFragment extends Fragment implements OnClickListener{
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
+		Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.layout_menu, null);
 		findViews(view);
 		
@@ -79,6 +83,20 @@ public class LeftFragment extends Fragment implements OnClickListener{
 		messageView.setOnClickListener(this);
 		shareView.setOnClickListener(this);
 		moreView.setOnClickListener(this);
+		
+		card = (TextView)view.findViewById(R.id.tvCard);
+		 SharedPreferences sharedata3;    //记录是否接收推送
+         if(this.getActivity().getSharedPreferences("userinfo", 0)!=null){
+  		   sharedata3 = this.getActivity().getSharedPreferences("userinfo", 0); 
+  		   if(sharedata3.getString("usertype",null)!=null){
+  		     String data = sharedata3.getString("usertype", null);
+  		     if(data.equals("1")){
+  		    	card.setText("公务卡");
+  		     }else{
+  		    	card.setText("信用卡");
+  		     }
+  		   }
+  		}
 	}
 	
 	@Override
@@ -96,10 +114,11 @@ public class LeftFragment extends Fragment implements OnClickListener{
 		Fragment newContent = null;
 		String title = null;
 		switch (v.getId()) {
-		case R.id.personbg: // 今日
+		case R.id.personbg: //
 		{	
 			Intent intent = new Intent();
 			intent.setClass(this.getActivity().getApplicationContext(), ModifyInfoActivity.class);
+			//intent.setClass(this.getActivity().getApplicationContext(), ChooseUserActivity.class);
 			startActivity(intent);
 		}
 			break;
@@ -109,19 +128,18 @@ public class LeftFragment extends Fragment implements OnClickListener{
 			startActivity(intent);
 		}break;
 		case R.id.tvLastlist:// 往期列表
-			newContent = new LastListFragment();
-			title = getString(R.string.lastList);
+			//newContent = new LastListFragment();
+			//title = getString(R.string.lastList);
 			break;
 		case R.id.tvDiscussMeeting: // 讨论集会
-			newContent = new DiscussFragment();
-			title = getString(R.string.discussMeetting);
+			//newContent = new DiscussFragment();
+			//title = getString(R.string.discussMeetting);
 			break;
 		case R.id.Itinerary: 
-		{// 行程
+		{   // 行程
 			Intent intent = new Intent();
 			intent.setClass(this.getActivity().getApplicationContext(), ItineraryActivity.class);
 			startActivity(intent);
-			
 		}
 			break;
 		case R.id.Receipt: // 发票

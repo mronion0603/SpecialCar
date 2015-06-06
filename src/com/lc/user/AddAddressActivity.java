@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 
+import com.baidu.mapapi.model.LatLng;
 import com.lc.innercity.AddressActivity;
 import com.lc.innercity.GroupAdapter;
 import com.lc.innercity.TypeAddressActivity;
@@ -15,19 +16,21 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.AdapterView.OnItemClickListener;
 
 
 
 
 public class AddAddressActivity extends Activity implements OnClickListener {
-	 TextView tvTitle,righttext;
-	 ImageView ivleft;
+	TextView tvTitle,righttext;
+	ImageView ivleft;
 	 
-	 private RelativeLayout rls;
+	private RelativeLayout rls;
 	ListView lv;
 	GroupAdapter groupAdapter;
 	private List<Integer> groups;
@@ -66,7 +69,22 @@ public class AddAddressActivity extends Activity implements OnClickListener {
        
         groupAdapter = new GroupAdapter(this, groups1,groups);  
         lv.setAdapter(groupAdapter);
+        lv.setOnItemClickListener(itemClickListener);  
 	}
+	// listView选项点击事件监听器  
+    OnItemClickListener itemClickListener = new OnItemClickListener() {  
+  
+        @Override  
+        public void onItemClick(AdapterView<?> parent, View view, int position,  
+                long id) {  
+            // TODO Auto-generated method stub  
+            Intent intent = new Intent();
+            intent.setClass(AddAddressActivity.this, AddressActivity.class);
+            startActivity(intent);
+        }  
+  
+    };  
+    
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub

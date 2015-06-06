@@ -80,7 +80,7 @@ public class AddressManageActivity extends Activity implements OnClickListener {
 			break;
 		case R.id.righttext:
 			Intent intent3 = new Intent();
-			intent3.setClass(AddressManageActivity.this,AddAddressActivity.class);
+			intent3.setClass(AddressManageActivity.this,AddressActivity.class);
 			startActivity(intent3);
 			break;
 		default:

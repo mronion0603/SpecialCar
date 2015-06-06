@@ -97,42 +97,32 @@ public class SelectCarGroupActivity extends Activity implements OnClickListener 
 			Intent intent2 = new Intent();
 			intent2.setClass(SelectCarGroupActivity.this,SendDealActivity.class);
 			startActivity(intent2);
-			
 			break;
 		case R.id.select1:
 			if(flag1){
-				
+				flag1=false;
+				ivselect1.setVisibility(View.GONE);
 			}else{
-				ivselect1.setVisibility(View.VISIBLE);
-				ivselect2.setVisibility(View.GONE);
-				ivselect3.setVisibility(View.GONE);
+				ivselect1.setVisibility(View.VISIBLE);				
 				flag1=true;
-				flag2=false;
-				flag3=false;
 			}
 			break;
 		case R.id.select2:
 			if(flag2){
-				
+				flag2=false;
+				ivselect2.setVisibility(View.GONE);
 			}else{
 				ivselect2.setVisibility(View.VISIBLE);
-				ivselect3.setVisibility(View.GONE);
-				ivselect1.setVisibility(View.GONE);
-				flag2=true;
-				flag3=false;
-				flag1=false;
+				flag2=true;	
 			}
 			break;
 		case R.id.select3:
 			if(flag3){
-				
+				flag3=false;
+				ivselect3.setVisibility(View.GONE);
 			}else{
 				ivselect3.setVisibility(View.VISIBLE);
-				ivselect1.setVisibility(View.GONE);
-				ivselect2.setVisibility(View.GONE);
-				flag3=true;
-				flag1=false;
-				flag2=false;
+				flag3=true;	
 			}
 			break;
 		case R.id.plus:{

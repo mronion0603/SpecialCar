@@ -11,6 +11,7 @@ import com.lc.intercity.InterCityHomeActivity;
 import com.lc.intercity.SearchCarpoolActivity;
 import com.lc.intercity.SearchCharteredCarActivity;
 import com.lc.setting.ButtonEffect;
+import com.lc.specialcar.ChooseUserActivity;
 import com.lc.specialcar.R;
 
 import android.app.Activity;
@@ -66,7 +67,10 @@ public class MoreActivity extends Activity implements OnClickListener {
 			break;
 			
 		case R.id.Search:
-			 
+			finish();
+			Intent intent = new Intent();
+			intent.setClass(getApplicationContext(), ChooseUserActivity.class);
+			startActivity(intent);
 			break;
 			
 		default:

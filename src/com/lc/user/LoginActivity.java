@@ -7,7 +7,9 @@ import java.util.TimerTask;
 
 
 
+
 import com.lc.setting.CommonUtil;
+import com.lc.specialcar.MainActivity;
 import com.lc.specialcar.R;
 
 import android.app.Activity;
@@ -29,8 +31,8 @@ import android.widget.Toast;
 
 public class LoginActivity extends Activity {
 
-	private TextView title;
-	private ImageView backbt;
+	//private TextView title;
+	private Button backbt;
 	private Button nextStep,getCode;
 	private EditText phoneET,codeET;
 	private String phoneNum="";
@@ -39,12 +41,12 @@ public class LoginActivity extends Activity {
 	private Timer timer = new Timer(); 
 	private int recLen=30;
 	private boolean startTimer = false;
-	 private RelativeLayout rls;
+	// private RelativeLayout rls;
 	@Override  
     protected void onCreate(Bundle savedInstanceState) {  
         super.onCreate(savedInstanceState);  
         requestWindowFeature(Window.FEATURE_NO_TITLE);  
-        setContentView(R.layout.userinfo_register);
+        setContentView(R.layout.userinfo_login);
        
         init();
       
@@ -53,18 +55,16 @@ public class LoginActivity extends Activity {
 	public void init(){
 		phoneET = (EditText)findViewById(R.id.PhoneNumber);
 		codeET = (EditText)findViewById(R.id.inputCode);
-		title = (TextView)findViewById(R.id.topTv);
-		title.setText("登录");
-		rls = (RelativeLayout) findViewById(R.id.rlslidemenu);
-		rls.setOnClickListener(new OnClickListener(){
+		
+		backbt = (Button)findViewById(R.id.back);
+		backbt.setVisibility(View.VISIBLE);
+		backbt.setOnClickListener(new OnClickListener(){
 			@Override
-			public void onClick(View v) {
-				finish();	
+			public void onClick(View v) {			
+
+				finish();
 			}
 		});
-		backbt = (ImageView)findViewById(R.id.ArrowHead);
-		backbt.setVisibility(View.VISIBLE);
-		
 		getCode = (Button)findViewById(R.id.getCode);
 		getCode.setOnClickListener(new OnClickListener(){
 			@Override
@@ -89,8 +89,10 @@ public class LoginActivity extends Activity {
 		nextStep.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v) {			
-
-				finish();
+				Intent intent = new Intent();
+				intent.setClass(getApplication(), MainActivity.class);
+				startActivity(intent);
+				//finish();
 			}
 		});
 		

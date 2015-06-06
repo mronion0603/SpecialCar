@@ -38,7 +38,7 @@
         android:name="com.baidu.lbsapi.API_KEY"  
         android:value="30Yu1EcU0PQDquViGx5x2ipg" /> 
         <activity
-            android:name="com.lc.specialcar.MainActivity"
+            android:name="com.lc.specialcar.ChooseUserActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -159,6 +159,12 @@
             android:label="@string/app_name" />
         <activity
             android:name="com.lc.user.ChargeSuccessActivity"
+            android:label="@string/app_name" />
+        <activity
+            android:name="com.lc.user.Login2Activity"
+            android:label="@string/app_name" />
+        <activity
+            android:name="com.lc.specialcar.MainActivity"
             android:label="@string/app_name" />
         <activity
             android:name="com.lc.shuttle.ShuttleHomeActivity"
