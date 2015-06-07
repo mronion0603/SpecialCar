@@ -42,6 +42,7 @@
 	      android:layout_centerVertical="true"
 	     />
 	      <TextView
+	      android:id="@+id/tvstartactivity"
 	      android:layout_toLeftOf="@+id/arrow1"
 	      android:layout_width="wrap_content"
 	      android:layout_height="wrap_content"
@@ -74,6 +75,7 @@
 	    />
 	     <TextView
 	      android:layout_toRightOf="@+id/morenotifyim"
+	      
 	      android:layout_width="wrap_content"
 	      android:layout_height="wrap_content"
 	      android:layout_marginLeft="20dip"
@@ -93,6 +95,7 @@
 	     />
 	     
 	     <TextView
+	      android:id="@+id/tvendaddress"
 	      android:layout_toLeftOf="@+id/arrow2"
 	      android:layout_width="wrap_content"
 	      android:layout_height="wrap_content"

@@ -1,0 +1,52 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_color"
+    android:orientation="vertical" >
+    <include layout="@layout/main_head" />
+        <RelativeLayout 
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content" 
+	    android:paddingTop="10dip"
+	    android:paddingBottom="10dip"
+	    android:id="@+id/usecardate"
+	    android:background="@color/white"
+	    >
+	    <ImageView
+	      android:id="@+id/date"
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:layout_marginLeft="10dip"
+	      android:background="@drawable/city_register_site2"  
+	    />
+	     <EditText
+	      android:id="@+id/etAddress"
+	      android:layout_toRightOf="@+id/date"
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:layout_marginLeft="20dip"
+	      android:textSize="18sp"
+	      android:textColor="@color/black"
+	      android:background="@color/white"
+	      android:layout_centerVertical="true"
+	      android:hint="请输入城市"
+	    />
+	     
+	    </RelativeLayout>  
+	     <ImageView
+	      android:layout_width="fill_parent"
+	      android:layout_height="1dip"
+	      android:background="@color/text_green"
+	    /> 
+        <RelativeLayout 
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent" 
+	    >
+        <ListView
+	      android:id="@+id/place_list"
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	     
+	     /> 
+        </RelativeLayout>
+</LinearLayout>

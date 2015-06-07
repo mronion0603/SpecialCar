@@ -1,5 +1,10 @@
 package com.lc.intercity;
 
+import com.baidu.mapapi.map.MapStatusUpdate;
+import com.baidu.mapapi.map.MapStatusUpdateFactory;
+import com.baidu.mapapi.model.LatLng;
+import com.lc.innercity.AddressActivity;
+import com.lc.innercity.TypeAddressActivity;
 import com.lc.setting.ButtonEffect;
 import com.lc.specialcar.MainActivity;
 import com.lc.specialcar.R;
@@ -21,10 +26,13 @@ import android.widget.TextView;
 
 
 public class InterCityHomeActivity extends Activity implements OnClickListener {
-	
-    TextView tvTitle;
+	public static final int REQUSET = 1;
+	public static final int REQUSET2 = 2;
+    TextView tvTitle,tvstartaddress,tvendaddress;
     ImageView ivSearch,ivleft;
     private RelativeLayout rls;
+    private RelativeLayout endaddress,startaddress;
+   
     RadioGroup group;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -36,6 +44,8 @@ public class InterCityHomeActivity extends Activity implements OnClickListener {
 	}
 
 	public void init(){
+		tvstartaddress = (TextView) findViewById(R.id.tvstartactivity);
+		tvendaddress = (TextView) findViewById(R.id.tvendaddress);
 		tvTitle = (TextView) findViewById(R.id.topTv);
 		tvTitle.setText("城际用车");
 		ivSearch = (ImageView) findViewById(R.id.Search);
@@ -43,6 +53,10 @@ public class InterCityHomeActivity extends Activity implements OnClickListener {
 		ButtonEffect.setButtonStateChangeListener(ivSearch);
 		rls = (RelativeLayout) findViewById(R.id.rlslidemenu);
 		rls.setOnClickListener(this);
+		endaddress = (RelativeLayout) findViewById(R.id.morenotify);
+		endaddress.setOnClickListener(this);
+		startaddress = (RelativeLayout) findViewById(R.id.moresafty);
+		startaddress.setOnClickListener(this);
 		ivleft = (ImageView) findViewById(R.id.ArrowHead);
 		ivleft.setVisibility(View.VISIBLE);
 		group = (RadioGroup)this.findViewById(R.id.radioGroup);
@@ -63,7 +77,17 @@ public class InterCityHomeActivity extends Activity implements OnClickListener {
 		case R.id.rlslidemenu:
 			finish();
 			break;
-			
+		case R.id.moresafty:  //出发地
+		{	Intent intent = new Intent();
+			intent.setClass(InterCityHomeActivity.this, TypeCityActivity.class);	
+			startActivityForResult(intent, REQUSET);  
+		}	break;
+		case R.id.morenotify: //目的地
+		{	Intent intent = new Intent();
+		    intent.setClass(InterCityHomeActivity.this, TypeCityActivity.class);	
+		    startActivityForResult(intent, REQUSET2);  
+	    }
+			break;
 		case R.id.Search:
 			  int radioButtonId = group.getCheckedRadioButtonId();
               //根据ID获取RadioButton的实例
@@ -84,6 +108,29 @@ public class InterCityHomeActivity extends Activity implements OnClickListener {
 			break;
 		}
 	}
+	@Override  
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {  
+        super.onActivityResult(requestCode, resultCode, data);  
+        if (requestCode == InterCityHomeActivity.REQUSET && resultCode == RESULT_OK) {
+        	  String address ="";
+      
+        	  Bundle extras = data.getExtras();
+              if(extras != null){
+            	  address = extras.getString("city");
+            	  tvstartaddress.setText(address);
+              }
 
+        }  
+        if (requestCode == InterCityHomeActivity.REQUSET2 && resultCode == RESULT_OK) {
+        	  String address ="";
+      
+        	  Bundle extras = data.getExtras();
+              if(extras != null){
+            	  address = extras.getString("city");
+            	  tvendaddress.setText(address);
+              }
+
+        }  
+    }  
 	
 }
