@@ -1,5 +1,7 @@
 package com.lc.intercity;
 
+import com.lc.innercity.CarInfoActivity;
+import com.lc.innercity.ModifyNameActivity;
 import com.lc.setting.ButtonEffect;
 import com.lc.specialcar.R;
 
@@ -18,11 +20,11 @@ import android.widget.TextView;
 
 
 public class CharteredCarActivity extends Activity implements OnClickListener {
-	
-    TextView tvTitle;
+	public static final int REQUSET_NAMEPHONE = 1;
+    TextView tvTitle,tvname,tvphone;
     Button ivSearch;
     ImageView ivleft;
-    private RelativeLayout rls;
+    private RelativeLayout rls,modify;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
@@ -33,6 +35,8 @@ public class CharteredCarActivity extends Activity implements OnClickListener {
 	}
 
 	public void init(){
+		tvname = (TextView) findViewById(R.id.Name);
+		tvphone = (TextView) findViewById(R.id.Phone);
 		tvTitle = (TextView) findViewById(R.id.topTv);
 		tvTitle.setText("包车");
 		ivSearch = (Button) findViewById(R.id.Search);
@@ -40,6 +44,8 @@ public class CharteredCarActivity extends Activity implements OnClickListener {
 		ButtonEffect.setButtonStateChangeListener(ivSearch);
 		rls = (RelativeLayout) findViewById(R.id.rlslidemenu);
 		rls.setOnClickListener(this);
+		modify = (RelativeLayout) findViewById(R.id.modify);
+		modify.setOnClickListener(this);
 		ivleft = (ImageView) findViewById(R.id.ArrowHead);
 		ivleft.setVisibility(View.VISIBLE);
 	}
@@ -47,7 +53,11 @@ public class CharteredCarActivity extends Activity implements OnClickListener {
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
-		
+		case R.id.modify:
+			Intent intent5 = new Intent();
+			intent5.setClass(CharteredCarActivity.this,ModifyNameActivity.class);
+			startActivityForResult(intent5, REQUSET_NAMEPHONE);  
+			break;
 		case R.id.rlslidemenu:
 			finish();
 			break;
@@ -62,5 +72,23 @@ public class CharteredCarActivity extends Activity implements OnClickListener {
 		}
 	}
 
-	
+	//重写的结果返回方法  
+    @Override  
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {  
+        super.onActivityResult(requestCode, resultCode, data);  
+        if (requestCode == REQUSET_NAMEPHONE && resultCode == RESULT_OK) {
+        	String name ="";
+        	String phone ="";
+        	  Bundle extras = data.getExtras();
+              if(extras != null){
+            	  name = extras.getString("name");
+            	  phone = extras.getString("phone");
+            	  tvphone.setText(phone);
+            	  tvname.setText(name);
+
+              }
+           
+        
+        }  
+    }  
 }

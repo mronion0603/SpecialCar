@@ -40,14 +40,14 @@
 	    />
 	     
 	      <TextView
-	      android:id="@+id/arrow1"
+	      android:id="@+id/name"
 	      android:layout_width="wrap_content"
 	      android:layout_height="wrap_content"
 	      android:layout_marginRight="10dip"
 	      android:textSize="16sp"
 	      android:textColor="@color/black"
 	      android:layout_centerVertical="true"
-	       android:layout_alignParentRight="true"
+	      android:layout_alignParentRight="true"
 	      android:text="小花"
 	      />
 	    </RelativeLayout>
@@ -73,6 +73,7 @@
 	        android:layout_centerVertical="true"
 	    />
 	     <TextView
+	         
 	      android:layout_toRightOf="@+id/morenotifyim"
 	      android:layout_width="wrap_content"
 	      android:layout_height="wrap_content"
@@ -85,7 +86,7 @@
 	     
 	     
 	    <TextView
-	      android:id="@+id/arrow2"
+	      android:id="@+id/phone"
 	      android:layout_width="wrap_content"
 	      android:layout_height="wrap_content"
 	      android:layout_marginRight="10dip"
@@ -131,7 +132,7 @@
 	      android:textSize="18sp"
 	      android:textColor="@color/black"
 	      android:layout_centerVertical="true"
-	      android:text="宝丰路天骄国际"
+	      android:text="通讯录"
 	    />
 	     <ImageView
 	      android:id="@+id/star"

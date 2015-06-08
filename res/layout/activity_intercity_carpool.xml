@@ -12,7 +12,7 @@
 	    android:layout_marginTop="10dip"
 	    android:paddingTop="10dip"
 	    android:paddingBottom="10dip"
-	    android:id="@+id/moresafty"
+	    	    android:id="@+id/modify"
 	    android:background="@color/white"
 	    >
 	    <ImageView
@@ -23,6 +23,7 @@
 	      android:background="@drawable/city_register_user2"  
 	    />
 	     <TextView
+	          android:id="@+id/Name"
 	      android:layout_toRightOf="@+id/moresaftyim"
 	      android:layout_width="wrap_content"
 	      android:layout_height="wrap_content"
@@ -42,6 +43,7 @@
 	      android:layout_centerVertical="true"
 	     />
 	      <TextView
+	           android:id="@+id/Phone"
 	      android:layout_toLeftOf="@+id/arrow1"
 	      android:layout_width="wrap_content"
 	      android:layout_height="wrap_content"

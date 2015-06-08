@@ -12,6 +12,9 @@ import kankan.wheel.widget.WheelView;
 import kankan.wheel.widget.adapters.AbstractWheelTextAdapter;
 import kankan.wheel.widget.adapters.NumericWheelAdapter;
 
+import com.baidu.mapapi.map.MapStatusUpdate;
+import com.baidu.mapapi.map.MapStatusUpdateFactory;
+import com.baidu.mapapi.model.LatLng;
 import com.lc.setting.ButtonEffect;
 import com.lc.specialcar.R;
 
@@ -21,7 +24,9 @@ import android.app.Dialog;
 import android.content.DialogInterface; 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.InputType;
@@ -50,8 +55,8 @@ import android.widget.TimePicker;
 
 
 public class CarInfoActivity extends Activity implements OnClickListener {
-	
-    TextView tvTitle,righttext,feeRule,txdate;
+	public static final int REQUSET_NAMEPHONE = 1;
+    TextView tvTitle,righttext,feeRule,txdate,tvname,tvphone;
     ImageView ivleft;
     Button ivSearch;
     private RelativeLayout rls,rlusecar,rlselectcar,rldate,rlmodifyname,rlstartaddress,rlgetoffaddress;
@@ -63,7 +68,7 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 	private List<Integer> groups;
 	private List<String> groups1;
 	private ListView lv_group1; 
-
+    
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
@@ -111,7 +116,8 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 	       
 	    }); 
 		txdate = (TextView) findViewById(R.id.txdate);
-		
+		tvname = (TextView) findViewById(R.id.Name);
+		tvphone = (TextView) findViewById(R.id.Phone);
 		ivleft = (ImageView) findViewById(R.id.ArrowHead);
 		ivleft.setVisibility(View.VISIBLE);
 		feeRule=(TextView)findViewById(R.id.FeeRule);
@@ -171,7 +177,7 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 		case R.id.rlmodifyname:
 			Intent intent5 = new Intent();
 			intent5.setClass(CarInfoActivity.this,ModifyNameActivity.class);
-			startActivity(intent5);
+			startActivityForResult(intent5, REQUSET_NAMEPHONE);  
 			break;
 		case R.id.startaddress:
 			Intent intent6 = new Intent();
@@ -376,4 +382,24 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 				return "";
 			}
 		}
+		
+		//重写的结果返回方法  
+	    @Override  
+	    protected void onActivityResult(int requestCode, int resultCode, Intent data) {  
+	        super.onActivityResult(requestCode, resultCode, data);  
+	        if (requestCode == REQUSET_NAMEPHONE && resultCode == RESULT_OK) {
+	        	String name ="";
+	        	String phone ="";
+	        	  Bundle extras = data.getExtras();
+	              if(extras != null){
+	            	  name = extras.getString("name");
+	            	  phone = extras.getString("phone");
+	            	  tvphone.setText(phone);
+	            	  tvname.setText(name);
+
+	              }
+	           
+	        
+	        }  
+	    }  
 }

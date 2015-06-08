@@ -1,21 +1,32 @@
 package com.lc.intercity;
 
-import com.baidu.mapapi.map.MapStatusUpdate;
-import com.baidu.mapapi.map.MapStatusUpdateFactory;
-import com.baidu.mapapi.model.LatLng;
-import com.lc.innercity.AddressActivity;
-import com.lc.innercity.TypeAddressActivity;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
+
+import kankan.wheel.widget.WheelView;
+import kankan.wheel.widget.adapters.AbstractWheelTextAdapter;
+import kankan.wheel.widget.adapters.NumericWheelAdapter;
+
 import com.lc.setting.ButtonEffect;
-import com.lc.specialcar.MainActivity;
 import com.lc.specialcar.R;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
@@ -32,15 +43,15 @@ public class InterCityHomeActivity extends Activity implements OnClickListener {
     ImageView ivSearch,ivleft;
     private RelativeLayout rls;
     private RelativeLayout endaddress,startaddress;
-   
+    private PopupWindow timeWindow; 
     RadioGroup group;
+	private View timeview; 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_intercity_home);
 		init();
-		
 	}
 
 	public void init(){
@@ -133,4 +144,133 @@ public class InterCityHomeActivity extends Activity implements OnClickListener {
         }  
     }  
 	
+	 public void selectTimeWindow(View parent) {  
+		  
+	        if (timeWindow == null) {  
+	            LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);  
+	  
+	            timeview = layoutInflater.inflate(R.layout.time2_layout, null);  
+	    		final WheelView hours = (WheelView) timeview.findViewById(R.id.hour);
+	    		NumericWheelAdapter hourAdapter = new NumericWheelAdapter(this, 0, 23);
+	    		hourAdapter.setItemResource(R.layout.wheel_text_item);
+	    		hourAdapter.setItemTextResource(R.id.text);
+	    		hours.setViewAdapter(hourAdapter);
+
+	    		final WheelView mins = (WheelView) timeview.findViewById(R.id.mins);
+	    		NumericWheelAdapter minAdapter = new NumericWheelAdapter(this, 0, 59, "%02d");
+	    		minAdapter.setItemResource(R.layout.wheel_text_item);
+	    		minAdapter.setItemTextResource(R.id.text);
+	    		mins.setViewAdapter(minAdapter);
+	    		mins.setCyclic(true);
+
+	    		
+
+	    		// set current time
+	    		Calendar calendar = Calendar.getInstance(Locale.US);
+	    		hours.setCurrentItem(calendar.get(Calendar.HOUR));
+	    		mins.setCurrentItem(calendar.get(Calendar.MINUTE));
+	    		//ampm.setCurrentItem(calendar.get(Calendar.AM_PM));
+
+	    		final WheelView day = (WheelView) timeview.findViewById(R.id.day);
+	    		day.setViewAdapter(new DayArrayAdapter(this, calendar));
+	            
+	    		Button confirm  = (Button) timeview.findViewById(R.id.comfirm);
+	    		confirm.setOnClickListener(new OnClickListener(){
+					@Override
+					public void onClick(View v) {
+						if (timeWindow != null) {  
+							timeWindow.dismiss();  
+		                }  
+					}	
+	    		});
+	    		Button cancel  = (Button) timeview.findViewById(R.id.canceltime);
+	    		cancel.setOnClickListener(new OnClickListener(){
+					@Override
+					public void onClick(View v) {
+						if (timeWindow != null) {  
+							timeWindow.dismiss();  
+		                }  
+					}	
+	    		});
+	    		
+	            // 创建一个PopuWidow对象  
+	            WindowManager windowManager = (WindowManager) getSystemService(Context.WINDOW_SERVICE);  
+	            int width = windowManager.getDefaultDisplay().getWidth() ;
+	            int height = windowManager.getDefaultDisplay().getHeight();
+	            timeWindow = new PopupWindow(timeview, width, height);  
+	        }  
+	  
+	        // 使其聚集  
+	        timeWindow.setFocusable(true);  
+	        // 设置允许在外点击消失  
+	        timeWindow.setOutsideTouchable(true);  
+	  
+	        // 这个是为了点击“返回Back”也能使其消失，并且并不会影响你的背景  
+	        timeWindow.setBackgroundDrawable(new BitmapDrawable());  
+	        WindowManager windowManager = (WindowManager) getSystemService(Context.WINDOW_SERVICE);  
+	        // 显示的位置为:屏幕的宽度的一半-PopupWindow的高度的一半  
+	        //int xPos = windowManager.getDefaultDisplay().getWidth() / 2  
+	        //        - contactWindow.getWidth() / 2;  
+	        timeWindow.showAsDropDown(parent, 0, 0);         
+	    }  
+	 /**
+		 * Day adapter
+		 *
+		 */
+		private class DayArrayAdapter extends AbstractWheelTextAdapter {
+			// Count of days to be shown
+			private final int daysCount = 7;
+
+			// Calendar
+			Calendar calendar;
+
+			/**
+			 * Constructor
+			 */
+			protected DayArrayAdapter(Context context, Calendar calendar) {
+				super(context, R.layout.time2_day, NO_RESOURCE);
+				this.calendar = calendar;
+
+				setItemTextResource(R.id.time2_monthday);
+			}
+
+			@Override
+			public View getItem(int index, View cachedView, ViewGroup parent) {
+				int day =  index;
+				Calendar newCalendar = (Calendar) calendar.clone();
+				newCalendar.roll(Calendar.DAY_OF_YEAR, day);
+
+				View view = super.getItem(index, cachedView, parent);
+				TextView weekday = (TextView) view.findViewById(R.id.time2_weekday);
+				if (day == 0) {
+					weekday.setText("");
+				} else {
+					DateFormat format = new SimpleDateFormat("EEE");
+					weekday.setText(format.format(newCalendar.getTime()));
+				}
+
+				TextView monthday = (TextView) view.findViewById(R.id.time2_monthday);
+				if (day == 0) {
+					monthday.setText("今天");
+					monthday.setTextColor(0xFF29b43d);
+					//monthday.setTextColor(0xFF0000F0);
+				} else {
+					DateFormat format = new SimpleDateFormat("MMM d");
+					monthday.setText(format.format(newCalendar.getTime()));
+					monthday.setTextColor(0xFF111111);
+				}
+
+				return view;
+			}
+
+			@Override
+			public int getItemsCount() {
+				return daysCount + 1;
+			}
+
+			@Override
+			protected CharSequence getItemText(int index) {
+				return "";
+			}
+		}
 }
