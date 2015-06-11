@@ -18,8 +18,9 @@ import com.baidu.mapapi.search.geocode.OnGetGeoCoderResultListener;
 import com.baidu.mapapi.search.geocode.ReverseGeoCodeOption;
 import com.baidu.mapapi.search.geocode.ReverseGeoCodeResult;
 import com.lc.innercity.PlaceListAdapter;
-import com.lc.setting.ButtonEffect;
 import com.lc.specialcar.R;
+import com.lc.utils.ButtonEffect;
+import com.lc.utils.ExitApplication;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -63,6 +64,7 @@ public class TypeCityActivity extends Activity implements OnClickListener {
 	}
 
 	public void init(){
+		ExitApplication.getInstance().addActivity(this);
 		etaddress = (EditText) findViewById(R.id.etAddress);
 		tvTitle = (TextView) findViewById(R.id.topTv);
 		tvTitle.setText("输入地址");

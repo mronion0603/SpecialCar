@@ -10,8 +10,9 @@ import kankan.wheel.widget.WheelView;
 import kankan.wheel.widget.adapters.AbstractWheelTextAdapter;
 import kankan.wheel.widget.adapters.NumericWheelAdapter;
 
-import com.lc.setting.ButtonEffect;
 import com.lc.specialcar.R;
+import com.lc.utils.ButtonEffect;
+import com.lc.utils.ExitApplication;
 
 import android.app.Activity;
 import android.content.Context;
@@ -42,10 +43,11 @@ public class InterCityHomeActivity extends Activity implements OnClickListener {
     TextView tvTitle,tvstartaddress,tvendaddress;
     ImageView ivSearch,ivleft;
     private RelativeLayout rls;
-    private RelativeLayout endaddress,startaddress;
+    private RelativeLayout endaddress,startaddress,choosedate;
     private PopupWindow timeWindow; 
     RadioGroup group;
 	private View timeview; 
+	private View originview; 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
@@ -55,6 +57,9 @@ public class InterCityHomeActivity extends Activity implements OnClickListener {
 	}
 
 	public void init(){
+		ExitApplication.getInstance().addActivity(this);
+		LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);  
+		originview = layoutInflater.inflate(R.layout.activity_innercity_carinfo, null);  
 		tvstartaddress = (TextView) findViewById(R.id.tvstartactivity);
 		tvendaddress = (TextView) findViewById(R.id.tvendaddress);
 		tvTitle = (TextView) findViewById(R.id.topTv);
@@ -64,6 +69,8 @@ public class InterCityHomeActivity extends Activity implements OnClickListener {
 		ButtonEffect.setButtonStateChangeListener(ivSearch);
 		rls = (RelativeLayout) findViewById(R.id.rlslidemenu);
 		rls.setOnClickListener(this);
+		choosedate = (RelativeLayout) findViewById(R.id.usecardate);
+		choosedate.setOnClickListener(this);
 		endaddress = (RelativeLayout) findViewById(R.id.morenotify);
 		endaddress.setOnClickListener(this);
 		startaddress = (RelativeLayout) findViewById(R.id.moresafty);
@@ -87,6 +94,9 @@ public class InterCityHomeActivity extends Activity implements OnClickListener {
 		switch (v.getId()) {
 		case R.id.rlslidemenu:
 			finish();
+			break;
+		case R.id.usecardate:
+			selectTimeWindow(originview);
 			break;
 		case R.id.moresafty:  //出发地
 		{	Intent intent = new Intent();
@@ -273,4 +283,6 @@ public class InterCityHomeActivity extends Activity implements OnClickListener {
 				return "";
 			}
 		}
+		
+		
 }

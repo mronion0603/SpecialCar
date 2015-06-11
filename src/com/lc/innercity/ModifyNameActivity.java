@@ -2,8 +2,9 @@ package com.lc.innercity;
 
 import com.lc.intercity.InterCityHomeActivity;
 import com.lc.intercity.TypeCityActivity;
-import com.lc.setting.ButtonEffect;
 import com.lc.specialcar.R;
+import com.lc.utils.ButtonEffect;
+import com.lc.utils.ExitApplication;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -17,6 +18,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -26,8 +28,8 @@ import android.widget.TextView;
 
 public class ModifyNameActivity extends Activity implements OnClickListener {
 	
-    TextView tvTitle,tvname,tvphone,tvright;
-
+    TextView tvTitle,tvright;
+    EditText tvname,tvphone;
     ImageView ivleft;
     private RelativeLayout rls,modifyuser;
     String getname="";
@@ -41,10 +43,11 @@ public class ModifyNameActivity extends Activity implements OnClickListener {
 	}
 
 	public void init(){
+		ExitApplication.getInstance().addActivity(this);
 		tvTitle = (TextView) findViewById(R.id.topTv);
 		tvTitle.setText("更换乘车人");
-		tvname = (TextView) findViewById(R.id.name);
-		tvphone = (TextView) findViewById(R.id.phone);
+		tvname = (EditText) findViewById(R.id.name);
+		tvphone = (EditText) findViewById(R.id.phone);
 		modifyuser = (RelativeLayout) findViewById(R.id.usecardate);
 		modifyuser.setOnClickListener(this);
 		tvright = (TextView) findViewById(R.id.righttext);

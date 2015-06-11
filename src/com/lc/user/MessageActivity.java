@@ -2,7 +2,9 @@ package com.lc.user;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
 import com.lc.specialcar.R;
+import com.lc.utils.ExitApplication;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -33,10 +35,10 @@ public class MessageActivity extends Activity implements OnClickListener {
 
 		setContentView(R.layout.userinfo_message);
 		init();
-		
 	}
 
 	public void init(){
+		ExitApplication.getInstance().addActivity(this);
 		tvTitle = (TextView) findViewById(R.id.topTv);
 		tvTitle.setText("消息首页");
 

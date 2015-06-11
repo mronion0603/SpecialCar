@@ -19,7 +19,6 @@ import com.lc.innercity.GroupAdapter;
 import com.lc.innercity.ModifyNameActivity;
 import com.lc.official.SelectCarGroupActivity;
 import com.lc.official.SelectCarPersonActivity;
-import com.lc.setting.ButtonEffect;
 import com.lc.shuttle.GetActivity;
 import com.lc.shuttle.SendActivity;
 import com.lc.specialcar.R;
@@ -57,7 +56,11 @@ import android.widget.TimePicker;
 
 
 
+
+
 import com.lc.specialcar.R;
+import com.lc.utils.ButtonEffect;
+import com.lc.utils.ExitApplication;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -86,7 +89,7 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
 			super.onCreate(savedInstanceState);
 			requestWindowFeature(Window.FEATURE_NO_TITLE);
 	        setContentView(R.layout.userinfo_charge);
-	      
+	        ExitApplication.getInstance().addActivity(this);
 	        mainTab=(RadioGroup)findViewById(R.id.main_tab);
 	        mainTab.setOnCheckedChangeListener(this);
 	        tvTitle = (TextView) findViewById(R.id.topTv);

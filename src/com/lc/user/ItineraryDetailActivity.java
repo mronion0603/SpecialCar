@@ -2,6 +2,7 @@ package com.lc.user;
 
 
 import com.lc.specialcar.R;
+import com.lc.utils.ExitApplication;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -33,6 +34,7 @@ public class ItineraryDetailActivity extends Activity implements OnClickListener
 	}
 
 	public void init(){
+		ExitApplication.getInstance().addActivity(this);
 		tvTitle = (TextView) findViewById(R.id.topTv);
 		tvTitle.setText("行程明细");
 

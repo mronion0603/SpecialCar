@@ -17,16 +17,15 @@ import com.lc.innercity.BillingRuleActivity;
 import com.lc.innercity.CarDemandActivity;
 import com.lc.innercity.GroupAdapter;
 import com.lc.innercity.ModifyNameActivity;
-
-import com.lc.setting.ButtonEffect;
 import com.lc.specialcar.R;
+import com.lc.utils.ButtonEffect;
+import com.lc.utils.ExitApplication;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -37,7 +36,6 @@ import android.view.View.OnTouchListener;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.Button;
-
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.PopupWindow;
@@ -55,8 +53,8 @@ import android.widget.TimePicker;
 
 
 public class OfficialHomeActivity extends Activity implements OnClickListener {
-	
-    TextView tvTitle,righttext,feeRule,txdate;
+	public static final int REQUSET_NAMEPHONE = 1;
+    TextView tvTitle,righttext,feeRule,txdate,tvname,tvphone;;
     ImageView ivleft;
     Button ivSearch;
     private RelativeLayout rls,rlusecar,rldate,rlmodifyname,rlstartaddress,rltimelong;
@@ -80,12 +78,15 @@ public class OfficialHomeActivity extends Activity implements OnClickListener {
 	}
 
 	public void init(){
+		ExitApplication.getInstance().addActivity(this);
+		tvname = (TextView) findViewById(R.id.Name);
+		tvphone = (TextView) findViewById(R.id.Phone);
 		LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);  
 		originview = layoutInflater.inflate(R.layout.activity_innercity_carinfo, null);  
 		tvTitle = (TextView) findViewById(R.id.topTv);
 		tvTitle.setText("公务包车");
 		righttext = (TextView) findViewById(R.id.righttext);
-		righttext.setVisibility(View.VISIBLE);
+		//righttext.setVisibility(View.VISIBLE);
 		righttext.setText("计费规则");
 		righttext.setOnClickListener(this);
 		ivSearch = (Button) findViewById(R.id.Search);
@@ -112,20 +113,17 @@ public class OfficialHomeActivity extends Activity implements OnClickListener {
 			     }         
 			     return true; 
 			}
-	       
 	    }); 
 		txdate = (TextView) findViewById(R.id.txdate);
 		
 		ivleft = (ImageView) findViewById(R.id.ArrowHead);
 		ivleft.setVisibility(View.VISIBLE);
 		
-        
 		imAddress = (ImageView) findViewById(R.id.star);
 		imAddress.setOnClickListener(this);
 		group = (RadioGroup)this.findViewById(R.id.radioGroup);
         //绑定一个匿名监听器
-         group.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-            
+        group.setOnCheckedChangeListener(new OnCheckedChangeListener() {          
             @Override
              public void onCheckedChanged(RadioGroup arg0, int arg1) {
                 //获取变更后的选中项的ID
@@ -177,7 +175,7 @@ public class OfficialHomeActivity extends Activity implements OnClickListener {
 		case R.id.rlmodifyname:
 			Intent intent5 = new Intent();
 			intent5.setClass(OfficialHomeActivity.this,ModifyNameActivity.class);
-			startActivity(intent5);
+			startActivityForResult(intent5, REQUSET_NAMEPHONE);  
 			break;
 		case R.id.startaddress:
 			Intent intent6 = new Intent();
@@ -431,4 +429,21 @@ public class OfficialHomeActivity extends Activity implements OnClickListener {
 				return "";
 			}
 		}
+		
+		//重写的结果返回方法  
+	    @Override  
+	    protected void onActivityResult(int requestCode, int resultCode, Intent data) {  
+	        super.onActivityResult(requestCode, resultCode, data);  
+	        if (requestCode == REQUSET_NAMEPHONE && resultCode == RESULT_OK) {
+	        	String name ="";
+	        	String phone ="";
+	        	  Bundle extras = data.getExtras();
+	              if(extras != null){
+	            	  name = extras.getString("name");
+	            	  phone = extras.getString("phone");
+	            	  tvphone.setText(phone);
+	            	  tvname.setText(name);
+	              }
+	        }  
+	    }  
 }

@@ -1,8 +1,9 @@
 package com.lc.innercity;
 
 
-import com.lc.setting.ButtonEffect;
 import com.lc.specialcar.R;
+import com.lc.utils.ButtonEffect;
+import com.lc.utils.ExitApplication;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -29,6 +30,7 @@ public class CancelOrderActivity extends Activity implements OnClickListener {
 	}
 
 	public void init(){
+		ExitApplication.getInstance().addActivity(this);
 		tvTitle = (TextView) findViewById(R.id.topTv);
 		tvTitle.setText("取消订单");
 		righttext = (TextView) findViewById(R.id.righttext);

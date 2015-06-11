@@ -12,7 +12,7 @@
 	    android:layout_marginTop="10dip"
 	    android:paddingTop="10dip"
 	    android:paddingBottom="10dip"
-	    	    android:id="@+id/modify"
+	    android:id="@+id/modify"
 	    android:background="@color/white"
 	    >
 	    <ImageView
@@ -74,15 +74,18 @@
 	      android:layout_marginLeft="20dip"
 	      android:background="@drawable/city_register_people2"  
 	    />
-	     <TextView
+	     <EditText
+	      android:id="@+id/number"
 	      android:layout_toRightOf="@+id/morenotifyim"
-	      android:layout_width="wrap_content"
+	      android:layout_width="120dip"
 	      android:layout_height="wrap_content"
 	      android:layout_marginLeft="20dip"
 	      android:textSize="18sp"
-	      android:textColor="@color/text_gray"
+	      android:textColor="@color/black"
 	      android:layout_centerVertical="true"
-	      android:text="输入乘车人数"
+	      android:hint="输入乘车人数"
+	      android:inputType="number"
+	      android:background="@color/white"
 	    />
 	     
 	     
@@ -108,7 +111,7 @@
 	    android:layout_height="wrap_content" 
 	    android:paddingTop="10dip"
 	    android:paddingBottom="10dip"
-	    android:id="@+id/usecardate"
+	    android:id="@+id/usecaraddress"
 	    android:background="@color/white"
 	    >
 	    <ImageView
@@ -119,6 +122,7 @@
 	      android:background="@drawable/city_register_site2"  
 	    />
 	     <TextView
+	      android:id="@+id/address"
 	      android:layout_toRightOf="@+id/date"
 	      android:layout_width="wrap_content"
 	      android:layout_height="wrap_content"

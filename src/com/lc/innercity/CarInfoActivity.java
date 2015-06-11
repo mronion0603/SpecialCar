@@ -15,8 +15,9 @@ import kankan.wheel.widget.adapters.NumericWheelAdapter;
 import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.model.LatLng;
-import com.lc.setting.ButtonEffect;
 import com.lc.specialcar.R;
+import com.lc.utils.ButtonEffect;
+import com.lc.utils.ExitApplication;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -80,6 +81,7 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 	}
 
 	public void init(){
+		ExitApplication.getInstance().addActivity(this);
 		LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);  
 		originview = layoutInflater.inflate(R.layout.activity_innercity_carinfo, null);  
 		tvTitle = (TextView) findViewById(R.id.topTv);
@@ -222,7 +224,7 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 	            int height = windowManager.getDefaultDisplay().getHeight();
 	            contactWindow = new PopupWindow(view, width, height);  
 	        }  
-	        contactWindow.setAnimationStyle(R.style.dialog_animation);//设置动画样式
+	        //contactWindow.setAnimationStyle(R.style.mystyle);//设置动画样式
 	        // 使其聚集  
 	        contactWindow.setFocusable(true);  
 	        // 设置允许在外点击消失  
@@ -267,8 +269,6 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 	    		minAdapter.setItemTextResource(R.id.text);
 	    		mins.setViewAdapter(minAdapter);
 	    		mins.setCyclic(true);
-
-	    		
 
 	    		// set current time
 	    		Calendar calendar = Calendar.getInstance(Locale.US);

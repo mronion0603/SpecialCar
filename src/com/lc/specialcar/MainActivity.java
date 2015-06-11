@@ -11,6 +11,7 @@ import com.lc.shuttle.ShuttleHomeActivity;
 import com.lc.slidingmenu.fragment.LeftFragment;
 import com.lc.slidingmenu.fragment.RightFragment;
 import com.lc.urgent.UrgentHomeActivity;
+import com.lc.utils.ExitApplication;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -29,6 +30,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends SlidingFragmentActivity implements OnClickListener, OnPageChangeListener {
 	private RelativeLayout rlslidemenu;
@@ -43,6 +45,8 @@ public class MainActivity extends SlidingFragmentActivity implements OnClickList
 	private ImageView[] mImageViews;
 	//ͼƬ��Դid
 	private int[] imgIdArray ;
+	private long waitTime = 3000;  //退出按钮等待时间
+    private long touchTime = 0;    //退出按钮记录按下时间    
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
@@ -55,6 +59,7 @@ public class MainActivity extends SlidingFragmentActivity implements OnClickList
 	}
 
 	void init(){
+		ExitApplication.getInstance().addActivity(this);
 		rlslidemenu = (RelativeLayout) findViewById(R.id.rlslidemenu);
 		rlslidemenu.setOnClickListener(this);
 		ivleft = (ImageView) findViewById(R.id.topButton);
@@ -312,4 +317,15 @@ public class MainActivity extends SlidingFragmentActivity implements OnClickList
 	            }
 	        }
 	    };
+	    @Override  
+	    public void onBackPressed() {  
+	        long currentTime = System.currentTimeMillis();  
+	        if((currentTime-touchTime)>=waitTime) {  
+	            Toast.makeText(this, "再按一次退出", Toast.LENGTH_SHORT).show();  
+	            touchTime = currentTime;  
+	        }else {  
+	        	ExitApplication.getInstance().exit();
+	           // finish();  
+	        }  
+	    }  
 }

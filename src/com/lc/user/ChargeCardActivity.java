@@ -17,8 +17,9 @@ import com.lc.innercity.BillingRuleActivity;
 import com.lc.innercity.CarDemandActivity;
 import com.lc.innercity.GroupAdapter;
 import com.lc.innercity.ModifyNameActivity;
-import com.lc.setting.ButtonEffect;
 import com.lc.specialcar.R;
+import com.lc.utils.ButtonEffect;
+import com.lc.utils.ExitApplication;
 
 import android.app.Activity;
 import android.content.Context;
@@ -71,7 +72,7 @@ public class ChargeCardActivity extends Activity implements OnClickListener {
 	}
 
 	public void init(){
-
+		ExitApplication.getInstance().addActivity(this);
 	
 		ivSearch = (Button) findViewById(R.id.Search);
 		ivSearch.setOnClickListener(this);

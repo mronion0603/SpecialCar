@@ -1,6 +1,7 @@
 package com.lc.intercity;
 
 import com.lc.specialcar.R;
+import com.lc.utils.ExitApplication;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -30,6 +31,7 @@ public class SignUpActivity extends Activity implements OnClickListener {
 	}
 
 	public void init(){
+		ExitApplication.getInstance().addActivity(this);
 		String getTitle="";
 		Bundle extras = getIntent().getExtras();
         if(extras != null){

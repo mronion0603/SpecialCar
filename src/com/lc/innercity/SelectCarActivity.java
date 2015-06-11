@@ -1,8 +1,9 @@
 package com.lc.innercity;
 
 
-import com.lc.setting.ButtonEffect;
 import com.lc.specialcar.R;
+import com.lc.utils.ButtonEffect;
+import com.lc.utils.ExitApplication;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -34,6 +35,7 @@ public class SelectCarActivity extends Activity implements OnClickListener {
 	}
 
 	public void init(){
+		ExitApplication.getInstance().addActivity(this);
 		flag1 = true;
 		flag2 = false;
 		flag3 = false;

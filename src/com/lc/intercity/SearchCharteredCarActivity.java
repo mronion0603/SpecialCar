@@ -6,6 +6,7 @@ import java.util.HashMap;
 import cn.trinea.android.common.view.DropDownListView;
 
 import com.lc.specialcar.R;
+import com.lc.utils.ExitApplication;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -46,6 +47,7 @@ public class SearchCharteredCarActivity extends Activity implements OnClickListe
 	}
 
 	public void init(){
+		ExitApplication.getInstance().addActivity(this);
 		tvTitle = (TextView) findViewById(R.id.topTv);
 		tvTitle.setText("查询");
 		

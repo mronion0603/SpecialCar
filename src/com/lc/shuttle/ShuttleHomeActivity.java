@@ -3,6 +3,7 @@ package com.lc.shuttle;
 
 
 import com.lc.specialcar.R;
+import com.lc.utils.ExitApplication;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -31,7 +32,7 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
 			super.onCreate(savedInstanceState);
 			requestWindowFeature(Window.FEATURE_NO_TITLE);
 	        setContentView(R.layout.shuttle_home);
-	      
+	        ExitApplication.getInstance().addActivity(this);
 	        mainTab=(RadioGroup)findViewById(R.id.main_tab);
 	        mainTab.setOnCheckedChangeListener(this);
 	        tvTitle = (TextView) findViewById(R.id.topTv);

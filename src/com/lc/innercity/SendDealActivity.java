@@ -6,6 +6,7 @@ import java.util.TimerTask;
 import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.MapView;
 import com.lc.specialcar.R;
+import com.lc.utils.ExitApplication;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -44,6 +45,7 @@ public class SendDealActivity extends Activity implements OnClickListener {
 	}
 
 	public void init(){
+		ExitApplication.getInstance().addActivity(this);
 		tvTitle = (TextView) findViewById(R.id.topTv);
 		tvTitle.setText("正在派单");
 		righttext = (TextView) findViewById(R.id.righttext);

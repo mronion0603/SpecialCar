@@ -10,6 +10,7 @@ import com.lc.innercity.CarInfoActivity;
 import com.lc.innercity.GroupAdapter;
 import com.lc.innercity.TypeAddressActivity;
 import com.lc.specialcar.R;
+import com.lc.utils.ExitApplication;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -45,6 +46,7 @@ public class AddressManageActivity extends Activity implements OnClickListener {
        
 	}
 	void init(){
+		ExitApplication.getInstance().addActivity(this);
 		righttext = (TextView) findViewById(R.id.righttext);
 		righttext.setVisibility(View.VISIBLE);
 		righttext.setText("添加");

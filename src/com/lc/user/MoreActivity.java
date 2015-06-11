@@ -10,9 +10,10 @@ import com.lc.innercity.TypeAddressActivity;
 import com.lc.intercity.InterCityHomeActivity;
 import com.lc.intercity.SearchCarpoolActivity;
 import com.lc.intercity.SearchCharteredCarActivity;
-import com.lc.setting.ButtonEffect;
 import com.lc.specialcar.ChooseUserActivity;
 import com.lc.specialcar.R;
+import com.lc.utils.ButtonEffect;
+import com.lc.utils.ExitApplication;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -47,6 +48,7 @@ public class MoreActivity extends Activity implements OnClickListener {
 	}
 
 	public void init(){
+		ExitApplication.getInstance().addActivity(this);
 		tvTitle = (TextView) findViewById(R.id.topTv);
 		tvTitle.setText("更多");
 		ivSearch = (Button) findViewById(R.id.Search);

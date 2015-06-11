@@ -188,9 +188,10 @@
 	      android:layout_height="wrap_content"
 	      android:layout_marginLeft="20dip"
 	      android:background="@drawable/city_register_user2"  
-	            android:layout_centerVertical="true"
+	      android:layout_centerVertical="true"
 	    />
 	     <TextView
+	      android:id="@+id/Name"
 	      android:layout_toRightOf="@+id/moresaftyim"
 	      android:layout_width="wrap_content"
 	      android:layout_height="wrap_content"
@@ -210,6 +211,7 @@
 	      android:layout_centerVertical="true"
 	     />
 	      <TextView
+	      android:id="@+id/Phone" 
 	      android:layout_toLeftOf="@+id/arrow1"
 	      android:layout_width="wrap_content"
 	      android:layout_height="wrap_content"

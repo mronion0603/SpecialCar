@@ -1,4 +1,4 @@
-package com.lc.setting;
+package com.lc.utils;
 
 import java.io.File;
 import java.io.FileNotFoundException;

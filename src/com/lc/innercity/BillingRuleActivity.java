@@ -1,7 +1,8 @@
 package com.lc.innercity;
 
-import com.lc.setting.ButtonEffect;
 import com.lc.specialcar.R;
+import com.lc.utils.ButtonEffect;
+import com.lc.utils.ExitApplication;
 
 import android.app.Activity;
 import android.content.Context;
@@ -28,6 +29,12 @@ public class BillingRuleActivity extends Activity implements OnClickListener {
     private RelativeLayout rls;
     private int[] mImageResourceIds;
     private Gallery mGallery;
+    Button bttype;
+    TextView tv1,tv2,tv3;
+    String types[] = {"经济型","普通型","商务型"};
+    String tvs1[] = {"9元/起步价","10元/起步价","11元/起步价"};
+    String tvs2[] = {"1.6元/公里","1.7元/公里","1.8元/公里"};
+    String tvs3[] = {"0.27元/分钟","0.28元/分钟","0.29元/分钟"};
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
@@ -36,12 +43,14 @@ public class BillingRuleActivity extends Activity implements OnClickListener {
         //注意该方法要再setContentView方法之前实现  
 		setContentView(R.layout.activity_innercity_bill);
 		init();
-		
 	}
-
 	public void init(){
-		
-		mImageResourceIds = new int[]{R.drawable.temp1, R.drawable.temp2, R.drawable.temp5, R.drawable.temp2,
+		ExitApplication.getInstance().addActivity(this);
+		bttype= (Button) findViewById(R.id.Type);
+		tv1 = (TextView) findViewById(R.id.tv1);
+		tv2 = (TextView) findViewById(R.id.tv2);
+		tv3 = (TextView) findViewById(R.id.tv3);
+		mImageResourceIds = new int[]{R.drawable.temp1, R.drawable.temp2, R.drawable.temp5
 				};
 		tvTitle = (TextView) findViewById(R.id.topTv);
 		tvTitle.setText("费用明细");
@@ -69,6 +78,10 @@ public class BillingRuleActivity extends Activity implements OnClickListener {
 					int position, long id) {
 				// TODO Auto-generated method stub
 				ivCarbg.setBackgroundResource(mImageResourceIds[position]);
+				bttype.setText(types[position]);
+				tv1.setText(tvs1[position]);
+				tv2.setText(tvs2[position]);
+				tv3.setText(tvs3[position]);
 			}
 
 			@Override

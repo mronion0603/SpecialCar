@@ -1,4 +1,4 @@
-package com.lc.setting;
+package com.lc.utils;
 
 import android.annotation.TargetApi;
 import android.graphics.Color;

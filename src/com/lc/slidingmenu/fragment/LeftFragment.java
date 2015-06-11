@@ -2,7 +2,6 @@ package com.lc.slidingmenu.fragment;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -14,15 +13,15 @@ import android.widget.TextView;
 import com.lc.specialcar.MainActivity;
 import com.lc.specialcar.R;
 import com.lc.user.AddressManageActivity;
+import com.lc.user.AndroidShare;
 import com.lc.user.BalanceActivity;
 import com.lc.user.ItineraryActivity;
-import com.lc.user.Login2Activity;
-import com.lc.user.LoginActivity;
 import com.lc.user.MessageActivity;
 import com.lc.user.ModifyInfoActivity;
 import com.lc.user.MoreActivity;
 import com.lc.user.ReceiptActivity;
 import com.lc.user.ShareActivity;
+import com.lc.utils.MySharePreference;
 
 /**
  * @date 2014/11/14
@@ -41,6 +40,7 @@ public class LeftFragment extends Fragment implements OnClickListener{
 	private View shareView;
 	private View moreView;
 	private TextView card;
+	private View view;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -54,7 +54,7 @@ public class LeftFragment extends Fragment implements OnClickListener{
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 		Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.layout_menu, null);
+	    view = inflater.inflate(R.layout.layout_menu, null);
 		findViews(view);
 		
 		return view;
@@ -85,17 +85,10 @@ public class LeftFragment extends Fragment implements OnClickListener{
 		moreView.setOnClickListener(this);
 		
 		card = (TextView)view.findViewById(R.id.tvCard);
-		 SharedPreferences sharedata3;    //记录是否接收推送
-         if(this.getActivity().getSharedPreferences("userinfo", 0)!=null){
-  		   sharedata3 = this.getActivity().getSharedPreferences("userinfo", 0); 
-  		   if(sharedata3.getString("usertype",null)!=null){
-  		     String data = sharedata3.getString("usertype", null);
-  		     if(data.equals("1")){
-  		    	card.setText("公务卡");
-  		     }else{
-  		    	card.setText("信用卡");
-  		     }
-  		   }
+  		if(MySharePreference.getStringValue(getActivity(), MySharePreference.USER_TYPE).equals("1")){
+  		   card.setText("公务卡");
+  		}else{
+  		   card.setText("信用卡");
   		}
 	}
 	
@@ -162,9 +155,11 @@ public class LeftFragment extends Fragment implements OnClickListener{
 		}	break;
 		case R.id.tvShare: // 分享
 		{	
-			Intent intent = new Intent();
-			intent.setClass(this.getActivity().getApplicationContext(), ShareActivity.class);
-			startActivity(intent);
+			//Intent intent = new Intent();
+			//intent.setClass(this.getActivity().getApplicationContext(), ShareActivity.class);
+			//startActivity(intent);
+			AndroidShare as = new AndroidShare(view.getContext(),"很好用的专车app ---来自 春泰","");
+			as.show();
 		}	break;
 		case R.id.tvMore: // 分享
 		{	
@@ -175,7 +170,7 @@ public class LeftFragment extends Fragment implements OnClickListener{
 		default:
 			break;
 		}
-		if (newContent != null) {
+		if (newContent != null){
 			switchFragment(newContent, title);
 		}
 	}

@@ -1,9 +1,11 @@
 package com.lc.intercity;
 
+import com.lc.innercity.AddressActivity;
 import com.lc.innercity.CarInfoActivity;
 import com.lc.innercity.ModifyNameActivity;
-import com.lc.setting.ButtonEffect;
 import com.lc.specialcar.R;
+import com.lc.utils.ButtonEffect;
+import com.lc.utils.ExitApplication;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -24,7 +26,7 @@ public class CharteredCarActivity extends Activity implements OnClickListener {
     TextView tvTitle,tvname,tvphone;
     Button ivSearch;
     ImageView ivleft;
-    private RelativeLayout rls,modify;
+    private RelativeLayout rls,modify,chooseaddress;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
@@ -35,6 +37,7 @@ public class CharteredCarActivity extends Activity implements OnClickListener {
 	}
 
 	public void init(){
+		ExitApplication.getInstance().addActivity(this);
 		tvname = (TextView) findViewById(R.id.Name);
 		tvphone = (TextView) findViewById(R.id.Phone);
 		tvTitle = (TextView) findViewById(R.id.topTv);
@@ -44,6 +47,8 @@ public class CharteredCarActivity extends Activity implements OnClickListener {
 		ButtonEffect.setButtonStateChangeListener(ivSearch);
 		rls = (RelativeLayout) findViewById(R.id.rlslidemenu);
 		rls.setOnClickListener(this);
+		chooseaddress = (RelativeLayout) findViewById(R.id.usecaraddress);
+		chooseaddress.setOnClickListener(this);
 		modify = (RelativeLayout) findViewById(R.id.modify);
 		modify.setOnClickListener(this);
 		ivleft = (ImageView) findViewById(R.id.ArrowHead);
@@ -54,13 +59,18 @@ public class CharteredCarActivity extends Activity implements OnClickListener {
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
 		case R.id.modify:
-			Intent intent5 = new Intent();
+			{Intent intent5 = new Intent();
 			intent5.setClass(CharteredCarActivity.this,ModifyNameActivity.class);
 			startActivityForResult(intent5, REQUSET_NAMEPHONE);  
-			break;
+			}break;
 		case R.id.rlslidemenu:
 			finish();
 			break;
+		case R.id.usecaraddress:
+			{Intent intent5 = new Intent();
+			intent5.setClass(CharteredCarActivity.this,AddressActivity.class);
+			startActivityForResult(intent5, REQUSET_NAMEPHONE);
+			}break;
 		case R.id.Search:
 			Intent intent = new Intent();
 			intent.putExtra("title", "包车");

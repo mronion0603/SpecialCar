@@ -8,9 +8,12 @@ import java.util.TimerTask;
 
 
 
-import com.lc.setting.CommonUtil;
+
+
 import com.lc.specialcar.MainActivity;
 import com.lc.specialcar.R;
+import com.lc.utils.CommonUtil;
+import com.lc.utils.ExitApplication;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -53,6 +56,7 @@ public class LoginActivity extends Activity {
        
 	}
 	public void init(){
+		ExitApplication.getInstance().addActivity(this);
 		phoneET = (EditText)findViewById(R.id.PhoneNumber);
 		codeET = (EditText)findViewById(R.id.inputCode);
 		

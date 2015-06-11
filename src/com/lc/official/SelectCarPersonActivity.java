@@ -1,7 +1,9 @@
 package com.lc.official;
+import com.lc.innercity.BillingRuleActivity;
 import com.lc.innercity.SendDealActivity;
-import com.lc.setting.ButtonEffect;
 import com.lc.specialcar.R;
+import com.lc.utils.ButtonEffect;
+import com.lc.utils.ExitApplication;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -34,6 +36,7 @@ public class SelectCarPersonActivity extends Activity implements OnClickListener
 	}
 
 	public void init(){
+		ExitApplication.getInstance().addActivity(this);
 		flag1 = true;
 		flag2 = false;
 		flag3 = false;
@@ -41,7 +44,7 @@ public class SelectCarPersonActivity extends Activity implements OnClickListener
 		tvTitle = (TextView) findViewById(R.id.topTv);
 		tvTitle.setText("选择车型");
 		righttext = (TextView) findViewById(R.id.righttext);
-		//righttext.setVisibility(View.VISIBLE);
+		righttext.setVisibility(View.VISIBLE);
 		righttext.setText("费用说明");
 		righttext.setOnClickListener(this);
 		ivselect1 = (ImageView) findViewById(R.id.ivselect);
@@ -69,10 +72,10 @@ public class SelectCarPersonActivity extends Activity implements OnClickListener
 			finish();
 			break;
 		case R.id.righttext:
-			finish();
-			//Intent intent = new Intent();
-			//intent.setClass(CancelOrderActivity.this,BillingRuleActivity.class);
-			//startActivity(intent);
+			//finish();
+			Intent intent = new Intent();
+			intent.setClass(SelectCarPersonActivity.this,BillingRuleActivity.class);
+			startActivity(intent);
 			break;
 		case R.id.Search:
 			Intent intent2 = new Intent();
