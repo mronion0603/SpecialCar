@@ -3,8 +3,6 @@
     android:layout_height="match_parent"
     android:background="@color/bg_color"
     android:orientation="vertical" >
-
-   
      <ImageView
 	      android:layout_width="fill_parent"
 	      android:layout_height="1dip"
@@ -185,6 +183,7 @@
 	      android:layout_centerVertical="true" 
 	    />
 	     <TextView
+	      android:id="@+id/getoffAddress"
 	      android:layout_toRightOf="@+id/date2"
 	      android:layout_width="wrap_content"
 	      android:layout_height="wrap_content"
@@ -195,7 +194,7 @@
 	      android:text="请输入下车地点"
 	    />
 	     <ImageView
-	      android:id="@+id/star"
+	      android:id="@+id/Star"
 	      android:layout_width="wrap_content"
 	      android:layout_height="wrap_content"
 	      android:layout_marginRight="20dip"

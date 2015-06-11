@@ -3,9 +3,7 @@
     android:layout_height="match_parent"
     android:background="@color/bg_color"
     android:orientation="vertical" >
-
     <include layout="@layout/main_head" />
-
     <RelativeLayout 
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content" 
@@ -76,14 +74,15 @@
 	      android:background="@drawable/city_register_site2"  
 	    />
 	     <TextView
+	      android:id="@+id/caraddress"
 	      android:layout_toRightOf="@+id/date"
-	      android:layout_width="wrap_content"
+	      android:layout_width="250dip"
 	      android:layout_height="wrap_content"
 	      android:layout_marginLeft="20dip"
 	      android:textSize="18sp"
 	      android:textColor="@color/black"
 	      android:layout_centerVertical="true"
-	      android:text="宝丰路天骄国际"
+	      android:text="上车地"
 	    />
 	     <ImageView
 	      android:id="@+id/star"
@@ -95,17 +94,16 @@
 	      android:layout_centerVertical="true"
 	     />
 	     
-	    
 	    </RelativeLayout>    
 	     <ImageView
 	      android:layout_width="fill_parent"
 	      android:layout_height="1dip"
 	      android:background="@color/user_divider3"
 	     />
-           <ImageView
+          <ImageView
 	      android:layout_width="fill_parent"
 	      android:layout_height="1dip"
-	       android:layout_marginTop="20dip"
+	      android:layout_marginTop="20dip"
 	      android:background="@color/user_divider3"
 	     />
 	    <RelativeLayout 
@@ -116,7 +114,6 @@
            <EditText
             android:id="@+id/feedbackET"
             android:hint="其他要求"
-            
             android:layout_width="wrap_content"
             android:layout_height="180dip"
             android:gravity="top"
@@ -128,7 +125,7 @@
             android:background="@color/white"
             />
         </RelativeLayout>
-            <ImageView
+          <ImageView
 	      android:layout_width="fill_parent"
 	      android:layout_height="1dip"
 	      android:background="@color/user_divider3"

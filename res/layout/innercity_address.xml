@@ -1,35 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>  
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"  
     android:layout_width="fill_parent"  
-    android:layout_height="fill_parent"  
-
-     >  
-  
-  
-   
-   
-  <LinearLayout 
-     android:layout_width="fill_parent"  
-     android:layout_height="fill_parent"  
-     android:alpha="0.8"
-     android:orientation="vertical"  
-     android:background="@drawable/menu_list_selected"  >
-     
-     </LinearLayout>
+    android:layout_height="fill_parent" 
+    android:background="@drawable/menu_list_selected" 
+    >  
       <ListView  
         android:id="@+id/lvGroup"  
         android:layout_width="fill_parent"  
         android:layout_height="wrap_content"  
         android:background="@color/white"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="20dip"
        />
       <RelativeLayout  
+          android:layout_above="@+id/lvGroup"
           android:layout_width="fill_parent"
           android:layout_height="50dip" 
-          
           android:id="@+id/rl2"
-          android:layout_above="@+id/lvGroup"
           android:background="@color/white"
           >
           <ImageView
@@ -59,4 +45,5 @@
 	      android:background="@color/user_divider3"
 	     />
       </RelativeLayout>  
+     
 </RelativeLayout>  

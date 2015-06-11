@@ -316,9 +316,12 @@ public class AddressActivity extends Activity implements OnClickListener {
 			finish();
 			break;
 		case R.id.righttext:
-			
+		{   Intent intent = new Intent();
+	        String address =  curaddress.getText().toString();
+	        intent.putExtra("address", address);
+	        setResult(RESULT_OK, intent); 
 			finish();
-			break;
+		}	break;
 		case R.id.curaddress:
 			Intent intent = new Intent();
 			intent.setClass(AddressActivity.this, TypeAddressActivity.class);	

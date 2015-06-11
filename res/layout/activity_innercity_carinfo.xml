@@ -143,6 +143,7 @@
 	      android:layout_centerVertical="true" 
 	    />
 	     <TextView
+	      android:id="@+id/AddressStart"
 	      android:layout_toRightOf="@+id/date2"
 	      android:layout_width="wrap_content"
 	      android:layout_height="wrap_content"
@@ -203,6 +204,7 @@
 	      android:layout_centerVertical="true"
 	     />
 	     <TextView
+	      android:id="@+id/AddressEnd"
 	      android:layout_toLeftOf="@+id/star3"
 	      android:layout_width="wrap_content"
 	      android:layout_height="wrap_content"
