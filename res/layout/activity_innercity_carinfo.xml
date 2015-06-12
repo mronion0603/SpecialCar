@@ -81,7 +81,7 @@
 	      android:layout_centerVertical="true"
 	    />
 	     <TextView
-	      android:id="@+id/txdate"
+	     
 	      android:layout_toRightOf="@+id/date"
 	      android:layout_width="wrap_content"
 	      android:layout_height="wrap_content"
@@ -89,7 +89,7 @@
 	      android:textSize="18sp"
 	      android:textColor="@color/text_color"
 	      android:layout_centerVertical="true"
-	      android:text="2015-5-15 09:30"
+	      android:text="用车时间"
 	    />
 	     <ImageView
 	      android:id="@+id/arrow2"
@@ -102,6 +102,7 @@
 	     />
 	     
 	     <TextView
+	      android:id="@+id/tvDate"
 	      android:layout_toLeftOf="@+id/arrow2"
 	      android:layout_width="wrap_content"
 	      android:layout_height="wrap_content"
@@ -151,7 +152,7 @@
 	      android:textSize="18sp"
 	      android:textColor="@color/black"
 	      android:layout_centerVertical="true"
-	      android:text="宝丰路天骄国际"
+	      android:text="出发地"
 	    />
 	     <ImageView
 	      android:id="@+id/star"

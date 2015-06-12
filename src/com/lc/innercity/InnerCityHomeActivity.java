@@ -99,7 +99,7 @@ public class InnerCityHomeActivity extends Activity implements OnClickListener {
 		ButtonEffect.setButtonStateChangeListener(ivSearch);
 		
 		tvTitle = (TextView) findViewById(R.id.topTv);
-		tvTitle.setText("市内预约");
+		tvTitle.setText("市内约租");
 		righttext = (TextView) findViewById(R.id.righttext);
 		righttext.setVisibility(View.VISIBLE);
 		righttext.setText("计费规则");

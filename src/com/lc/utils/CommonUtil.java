@@ -8,9 +8,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.regex.Pattern;
-
+import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -21,13 +20,14 @@ public class CommonUtil {
 		return Pattern.compile("^(\\+86)?((13[0-9])|(15[^4,\\D])|(18[0-1,5-9]))\\d{8}$").matcher(paramString).matches();
 	}
 	
-	 public  static void saveBitmap(Bitmap bm,String picName) {
+	 @SuppressLint("SdCardPath")
+	public  static void saveBitmap(Bitmap bm,String picName) {
 		  //Log.e(TAG, "保存图片");
-		  File destDir = new File("/sdcard/carwash/");
+		  File destDir = new File("/sdcard/special/");
 		  if (!destDir.exists()) {
 		  destDir.mkdirs();
 		  }
-		  File f = new File("/sdcard/carwash/", picName);
+		  File f = new File("/sdcard/special/", picName);
 		  if (f.exists()) {
 		   f.delete();
 		  }
@@ -46,6 +46,7 @@ public class CommonUtil {
 		  }
 
 		 }
+	@SuppressLint("SimpleDateFormat")
 	public static  String dateminus(String datestr){
 		 DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		 Date    curDate    =   new    Date(System.currentTimeMillis());//获取当前时间 

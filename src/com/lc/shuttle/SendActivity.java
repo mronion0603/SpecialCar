@@ -9,27 +9,32 @@ import com.lc.popupwindow.TimePopupWindow;
 import com.lc.specialcar.R;
 import com.lc.utils.ButtonEffect;
 import com.lc.utils.ExitApplication;
+import com.lc.utils.Global;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
+import android.widget.AdapterView.OnItemClickListener;
 
 public class SendActivity extends Activity implements OnClickListener {
 	public static final int REQUSET_NAMEPHONE = 1;
-    TextView feeRule,txdate,tvname,tvphone;
- 
+	public static final int REQUSET_ADDRESS = 2;
+    TextView feeRule,txdate,tvname,tvphone,tvendaddress;
     Button ivSearch;
     private RelativeLayout rlusecar,rldate,rlmodifyname,rlstartaddress;
     private ImageView imAddress;
@@ -41,7 +46,6 @@ public class SendActivity extends Activity implements OnClickListener {
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
 		super.onCreate(savedInstanceState);
-		
 		setContentView(R.layout.shuttle_send);
 		init();
 		
@@ -53,7 +57,7 @@ public class SendActivity extends Activity implements OnClickListener {
 		originview = layoutInflater.inflate(R.layout.activity_innercity_carinfo, null);  
 		tvname = (TextView) findViewById(R.id.Name);
 		tvphone = (TextView) findViewById(R.id.Phone);
-		
+		tvendaddress = (TextView) findViewById(R.id.getoffaddress);
 		ivSearch = (Button) findViewById(R.id.Search);
 		ivSearch.setOnClickListener(this);
 		ButtonEffect.setButtonStateChangeListener(ivSearch);
@@ -72,7 +76,7 @@ public class SendActivity extends Activity implements OnClickListener {
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				 if (event.getAction() == MotionEvent.ACTION_DOWN) { 
-					 timepWindow = new TimePopupWindow(SendActivity.this);
+					 timepWindow = new TimePopupWindow(SendActivity.this,itemsOnClick);
 					 timepWindow.showAsDropDown(originview, 0, 0);		   
 			     }         
 			     return true; 
@@ -91,7 +95,7 @@ public class SendActivity extends Activity implements OnClickListener {
 		switch (v.getId()) {
 	
 		case R.id.Star:
-			menuWindow = new AddressPopupWindow(SendActivity.this);//实例化AddressPopupWindow
+			menuWindow = new AddressPopupWindow(SendActivity.this,itemOnClick);//实例化AddressPopupWindow
 			menuWindow.showAsDropDown(originview, 0, 0); //显示窗口
 			break;
 		
@@ -113,19 +117,68 @@ public class SendActivity extends Activity implements OnClickListener {
 		case R.id.startaddress:
 			Intent intent6 = new Intent();
 			intent6.setClass(SendActivity.this,AddressActivity.class);
-			startActivity(intent6);
+			startActivityForResult(intent6, REQUSET_ADDRESS); 
 			break;
 		
 		default:
 			break;
 		}
 	}
+	//为弹出窗口实现监听类
+    private OnItemClickListener  itemOnClick = new OnItemClickListener(){
+		@Override
+		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
+				String address = menuWindow.getItemStr(arg2);
+				Message message = Message.obtain();  
+			    message.obj = address;  
+				message.what = Global.ADDRESS_END_MESSAGE;  
+				mHandler.sendMessageDelayed(message, 50);
+				menuWindow.dismiss();   
+		}
+    };
+   
+	//为弹出窗口实现监听类
+    private OnClickListener  itemsOnClick = new OnClickListener(){
 
-		//重写的结果返回方法  
-	    @Override  
-	    protected void onActivityResult(int requestCode, int resultCode, Intent data) {  
-	        super.onActivityResult(requestCode, resultCode, data);  
-	        if (requestCode == REQUSET_NAMEPHONE && resultCode == RESULT_OK) {
+		public void onClick(View v) {
+			switch (v.getId()) {
+			case R.id.comfirm:
+				String time = timepWindow.getTime();
+				Message message = Message.obtain();  
+			    message.obj = time;  
+				message.what = Global.TIME_MESSAGE;  
+				mHandler.sendMessageDelayed(message, 50);
+				timepWindow.dismiss();   
+				break;
+			case R.id.canceltime:	
+				timepWindow.dismiss();   
+				break;
+			default:
+				break;
+			}	
+		}
+    };
+	@SuppressLint("HandlerLeak")
+	private Handler mHandler = new Handler() {
+        public void handleMessage(android.os.Message msg) {
+            switch(msg.what) {
+	            case Global.TIME_MESSAGE:{
+	            	String getdate = (String)msg.obj;
+	            	txdate.setText(getdate);
+	            break;
+                }
+	            case Global.ADDRESS_END_MESSAGE:{
+	            	String getaddress = (String)msg.obj;
+	            	tvendaddress.setText(getaddress);
+	            break;
+                }
+            }
+    }};
+	//重写的结果返回方法  
+	@Override  
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {  
+	   super.onActivityResult(requestCode, resultCode, data);  
+	   if (requestCode == REQUSET_NAMEPHONE && resultCode == RESULT_OK) {
 	        	String name ="";
 	        	String phone ="";
 	        	  Bundle extras = data.getExtras();
@@ -136,5 +189,13 @@ public class SendActivity extends Activity implements OnClickListener {
 	            	  tvname.setText(name);
 	              }
 	        }  
-	    }  
+	   if (requestCode == REQUSET_ADDRESS && resultCode == RESULT_OK) {
+     	  String address ="";
+     	  Bundle extras = data.getExtras();
+           if(extras != null){
+         	  address = extras.getString("address");
+         	  tvendaddress.setText(address);
+           }
+       }  
+	 }  
 }

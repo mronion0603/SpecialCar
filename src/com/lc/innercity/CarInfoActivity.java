@@ -5,10 +5,15 @@ import com.lc.popupwindow.TimePopupWindow;
 import com.lc.specialcar.R;
 import com.lc.utils.ButtonEffect;
 import com.lc.utils.ExitApplication;
+import com.lc.utils.Global;
+
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -16,16 +21,18 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.AdapterView.OnItemClickListener;
 
 public class CarInfoActivity extends Activity implements OnClickListener {
 	public static final int REQUSET_NAMEPHONE = 1;
 	public static final int REQUSET_ADDRESS = 2;
 	public static final int REQUSET_ADDRESS2 = 3;
-    TextView tvTitle,righttext,feeRule,txdate,tvname,tvphone,tvstartAddress,tvendAddress;
+    TextView tvTitle,righttext,feeRule,tvname,tvphone,tvstartAddress,tvendAddress,tvdate;
     ImageView ivleft;
     Button ivSearch;
     private RelativeLayout rls,rlusecar,rlselectcar,rldate,rlmodifyname,rlstartaddress,rlgetoffaddress;
@@ -75,14 +82,14 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				 if (event.getAction() == MotionEvent.ACTION_DOWN) { 
-					    //selectTimeWindow(originview);		
-					 timepWindow = new TimePopupWindow(CarInfoActivity.this);
+					 //selectTimeWindow(originview);		
+					 timepWindow = new TimePopupWindow(CarInfoActivity.this,itemsOnClick);
 					 timepWindow.showAsDropDown(originview, 0, 0); 
 			     }         
 			     return true; 
 			}
 	    }); 
-		txdate = (TextView) findViewById(R.id.txdate);
+		tvdate = (TextView) findViewById(R.id.tvDate);
 		tvname = (TextView) findViewById(R.id.Name);
 		tvphone = (TextView) findViewById(R.id.Phone);
 		ivleft = (ImageView) findViewById(R.id.ArrowHead);
@@ -107,6 +114,70 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 		getoffAddress = (ImageView) findViewById(R.id.star3);
 		getoffAddress.setOnClickListener(this);
 	}
+	//为弹出窗口实现监听类
+    private OnItemClickListener  itemOnClick = new OnItemClickListener(){
+		@Override
+		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
+				String address = menuWindow.getItemStr(arg2);
+				Message message = Message.obtain();  
+			    message.obj = address;  
+				message.what = Global.ADDRESS_MESSAGE;  
+				mHandler.sendMessageDelayed(message, 50);
+				menuWindow.dismiss();   
+		}
+    };
+    private OnItemClickListener  itemOnClick2 = new OnItemClickListener(){
+		@Override
+		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
+				String address = menuWindow.getItemStr(arg2);
+				Message message = Message.obtain();  
+			    message.obj = address;  
+				message.what = Global.ADDRESS_END_MESSAGE;  
+				mHandler.sendMessageDelayed(message, 50);
+				menuWindow.dismiss();   
+		}
+    };
+	//为弹出窗口实现监听类
+    private OnClickListener  itemsOnClick = new OnClickListener(){
+		public void onClick(View v) {
+			switch (v.getId()) {
+			case R.id.comfirm:
+				String time = timepWindow.getTime();
+				Message message = Message.obtain();  
+			    message.obj = time;  
+				message.what = Global.TIME_MESSAGE;  
+				mHandler.sendMessageDelayed(message, 50);
+				timepWindow.dismiss();   
+				break;
+			case R.id.canceltime:	
+				timepWindow.dismiss();   
+				break;
+			default:
+				break;
+			}	
+		}
+    };
+    @SuppressLint("HandlerLeak")
+	private Handler mHandler = new Handler() {
+        public void handleMessage(android.os.Message msg) {
+            switch(msg.what) {
+	            case Global.TIME_MESSAGE:{
+	            	String getdate = (String)msg.obj;
+	            	tvdate.setText(getdate);
+	            break;
+                }
+	            case Global.ADDRESS_MESSAGE:{
+	            	String getaddress = (String)msg.obj;
+	            	tvstartAddress.setText(getaddress);
+	            break;
+                }
+	            case Global.ADDRESS_END_MESSAGE:{
+	            	String getaddress = (String)msg.obj;
+	            	tvendAddress.setText(getaddress);
+	            break;
+                }
+            }
+    }};
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
@@ -120,11 +191,11 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 			startActivity(intent);
 			break;
 		case R.id.star:	
-		{	menuWindow = new AddressPopupWindow(CarInfoActivity.this);//实例化AddressPopupWindow
+		{	menuWindow = new AddressPopupWindow(CarInfoActivity.this,itemOnClick);//实例化AddressPopupWindow
 			menuWindow.showAsDropDown(originview, 0, 0); //显示窗口
 		}	break;
 		case R.id.star3:
-		{	menuWindow = new AddressPopupWindow(CarInfoActivity.this);//实例化AddressPopupWindow
+		{	menuWindow = new AddressPopupWindow(CarInfoActivity.this,itemOnClick2);//实例化AddressPopupWindow
 			menuWindow.showAsDropDown(originview, 0, 0); //显示窗口
 		}	break;
 		case R.id.Search:

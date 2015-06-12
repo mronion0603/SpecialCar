@@ -12,12 +12,12 @@ import com.lc.slidingmenu.fragment.LeftFragment;
 import com.lc.slidingmenu.fragment.RightFragment;
 import com.lc.urgent.UrgentHomeActivity;
 import com.lc.utils.ExitApplication;
-
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -25,7 +25,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -163,6 +162,7 @@ public class MainActivity extends SlidingFragmentActivity implements OnClickList
 
 	}
 
+	@SuppressLint("Recycle")
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
@@ -303,6 +303,7 @@ public class MainActivity extends SlidingFragmentActivity implements OnClickList
 			}
 		}
 		
+		@SuppressLint("HandlerLeak")
 		private Handler mHandler = new Handler() {
 	        public void handleMessage(android.os.Message msg) {
 	            switch(msg.what) {

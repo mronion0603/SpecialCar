@@ -1,25 +1,30 @@
 package com.lc.intercity;
 
 import com.lc.innercity.AddressActivity;
-import com.lc.innercity.CarInfoActivity;
 import com.lc.innercity.ModifyNameActivity;
 import com.lc.popupwindow.AddressPopupWindow;
 import com.lc.specialcar.R;
 import com.lc.utils.ButtonEffect;
 import com.lc.utils.ExitApplication;
+import com.lc.utils.Global;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.AdapterView.OnItemClickListener;
 
 
 
@@ -69,7 +74,7 @@ public class CharteredCarActivity extends Activity implements OnClickListener {
 		switch (v.getId()) {
 		case R.id.star:
 			//实例化AddressPopupWindow
-			menuWindow = new AddressPopupWindow(CharteredCarActivity.this);
+			menuWindow = new AddressPopupWindow(CharteredCarActivity.this,itemOnClick);
 			//显示窗口
 			menuWindow.showAsDropDown(originview, 0, 0); 
 			break;
@@ -96,7 +101,29 @@ public class CharteredCarActivity extends Activity implements OnClickListener {
 			break;
 		}
 	}
-
+	//为弹出窗口实现监听类
+    private OnItemClickListener  itemOnClick = new OnItemClickListener(){
+		@Override
+		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
+				String address = menuWindow.getItemStr(arg2);
+				Message message = Message.obtain();  
+			    message.obj = address;  
+				message.what = Global.ADDRESS_MESSAGE;  
+				mHandler.sendMessageDelayed(message, 50);
+				menuWindow.dismiss();   
+		}
+    };
+    @SuppressLint("HandlerLeak")
+   	private Handler mHandler = new Handler() {
+           public void handleMessage(android.os.Message msg) {
+               switch(msg.what) { 
+   	            case Global.ADDRESS_MESSAGE:{
+   	            	String getaddress = (String)msg.obj;
+   	            	chooseaddress.setText(getaddress);
+   	            break;
+                   }
+               }
+       }};
 	//重写的结果返回方法  
     @Override  
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {  
