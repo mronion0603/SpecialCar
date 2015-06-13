@@ -6,9 +6,11 @@ import android.content.SharedPreferences.Editor;
 
 public class MySharePreference {
 	 public static final String PREFERENCES_PUBLIC_NAME = "common";
-	 private static final String PREFERENCES_PERSONAL_NAME = "userinfo";
+	 public static final String PREFERENCES_PERSONAL_NAME = "userinfo";
 	 
 	 public static final String USER_TYPE = "usertype";
+	 public static final String PHONE = "phone";
+	 public static final String AUTHN = "authn";
 	 private static SharedPreferences getSharedPreferences(Context context,
 	            boolean isPersonal) {
 	        if (isPersonal) {

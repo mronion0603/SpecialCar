@@ -10,10 +10,20 @@ import java.util.TimerTask;
 
 
 
+
+
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import com.lc.net.LoginNet;
+import com.lc.net.LogincivilNet;
 import com.lc.specialcar.MainActivity;
 import com.lc.specialcar.R;
 import com.lc.utils.CommonUtil;
 import com.lc.utils.ExitApplication;
+import com.lc.utils.Global;
+import com.lc.utils.MySharePreference;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -39,8 +49,7 @@ public class Login2Activity extends Activity {
 	private Button nextStep;
 	private EditText phoneET,codeET;
 	private String phoneNum="";
-	private String getCodeStr="";
-	//private Handler reghandler;
+	LogincivilNet loginNet;
 	
 	// private RelativeLayout rls;
 	@Override  
@@ -54,6 +63,7 @@ public class Login2Activity extends Activity {
        
 	}
 	public void init(){
+		loginNet = new LogincivilNet();
 		ExitApplication.getInstance().addActivity(this);
 		phoneET = (EditText)findViewById(R.id.PhoneNumber);
 		codeET = (EditText)findViewById(R.id.inputCode);
@@ -71,20 +81,42 @@ public class Login2Activity extends Activity {
 		nextStep.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v) {			
-
-				Intent intent = new Intent();
-				intent.setClass(getApplication(), MainActivity.class);
-				startActivity(intent);
+				phoneNum=phoneET.getText().toString();
+				loginNet.setHandler(handler);
+				loginNet.setPhone(phoneNum);
+				loginNet.setDevice(Global.DEVICE);
+				loginNet.setPassword(codeET.getText().toString());
+				loginNet.getDataFromServer();
 			}
 		});
 		
 	}
 	
-
-    @Override
-	  protected void onDestroy() {
-	        super.onDestroy();
-	        
-	    }
+	public Handler handler= new Handler() {
+        public void handleMessage(android.os.Message msg) {
+            switch(msg.what) { 
+	            case Global.CIVILLOGIN:{
+	            	try {
+		            	 JSONObject jsonobj = new JSONObject((String)msg.obj);  
+		                 int result = jsonobj.getInt("ResultCode");
+		                 System.out.println((String)msg.obj);
+		            	 if(result==Global.SUCCESS){
+		            		String getauthn = jsonobj.getJSONObject("Data").getString("authn");
+		            		MySharePreference.editStringValue(getApplication(),MySharePreference.PHONE,phoneNum);
+		            		MySharePreference.editStringValue(getApplication(),MySharePreference.AUTHN,getauthn);
+		            		Intent intent = new Intent();
+		     				intent.setClass(getApplication(), MainActivity.class);
+		     				startActivity(intent);
+		    				finish();
+		                 }else{
+		                    Toast.makeText(Login2Activity.this, jsonobj.getString("Message"), Toast.LENGTH_LONG).show();
+		                 } 
+	            	} catch (JSONException e) {
+						e.printStackTrace();
+					}  
+	             break;
+                }
+            }
+    }};
 
 }

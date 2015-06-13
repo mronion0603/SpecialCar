@@ -121,7 +121,7 @@ public class CarpoolActivity extends Activity implements OnClickListener {
 	private Handler mHandler = new Handler() {
         public void handleMessage(android.os.Message msg) {
             switch(msg.what) { 
-	            case Global.ADDRESS_MESSAGE:{
+	            case Global.GETCODE:{
 	            	String getaddress = (String)msg.obj;
 	            	chooseaddress.setText(getaddress);
 	            break;
