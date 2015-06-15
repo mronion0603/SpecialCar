@@ -14,6 +14,7 @@ import com.lc.specialcar.ChooseUserActivity;
 import com.lc.specialcar.R;
 import com.lc.utils.ButtonEffect;
 import com.lc.utils.ExitApplication;
+import com.lc.utils.MySharePreference;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -69,12 +70,12 @@ public class MoreActivity extends Activity implements OnClickListener {
 			break;
 			
 		case R.id.Search:
+			MySharePreference.clearPersonal(getApplication());
 			finish();
 			Intent intent = new Intent();
 			intent.setClass(getApplicationContext(), ChooseUserActivity.class);
 			startActivity(intent);
 			break;
-			
 		default:
 			break;
 		}

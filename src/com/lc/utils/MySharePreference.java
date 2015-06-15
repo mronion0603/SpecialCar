@@ -11,6 +11,7 @@ public class MySharePreference {
 	 public static final String USER_TYPE = "usertype";
 	 public static final String PHONE = "phone";
 	 public static final String AUTHN = "authn";
+	 public static final String USERNAME = "username";
 	 private static SharedPreferences getSharedPreferences(Context context,
 	            boolean isPersonal) {
 	        if (isPersonal) {
@@ -40,5 +41,22 @@ public class MySharePreference {
 	 public static final String getStringValue(Context context, String key) {
 		    SharedPreferences pref = getSharedPreferences(context, true);
 	        return pref.getString(key, null);
+	    }
+	 
+	  public static void clearAll(Context context) {
+	        clearPersonal(context);
+	        SharedPreferences pref = getSharedPreferences(context, false);
+	        Editor editor = pref.edit();
+	        editor.clear();
+	        editor.commit();
+	        
+	    }
+
+	    public static void clearPersonal(Context context) {
+	        SharedPreferences pref = getSharedPreferences(context, true);
+	        Editor editor = pref.edit();
+	        editor.clear();
+	        editor.commit();
+	       
 	    }
 }

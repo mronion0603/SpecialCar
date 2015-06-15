@@ -82,4 +82,15 @@ class DayArrayAdapter extends AbstractWheelTextAdapter {
 	     }
 	     
 	}
+	
+	protected CharSequence getItemText2(int index) {
+		
+	    	 Calendar newCalendar = (Calendar) calendar.clone();
+	 		 newCalendar.roll(Calendar.DAY_OF_YEAR, index);
+	 		 DateFormat format = new SimpleDateFormat("EEE");
+			 DateFormat format2 = new SimpleDateFormat("yyyy-MM-dd");
+			 return  format2.format(newCalendar.getTime());
+	    
+	}
+
 }

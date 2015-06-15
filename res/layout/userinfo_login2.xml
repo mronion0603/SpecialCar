@@ -66,14 +66,15 @@
         android:layout_marginLeft="20dip"
         android:layout_marginRight="20dip"
         />
-    <Button 
+    <TextView 
         android:id="@+id/back"
         android:layout_width="fill_parent"
         android:layout_height="50dip"
-        android:background="@drawable/rectangle_green"
-        android:text="普通通道"
+        android:text="普通用户登录>>"
         android:textColor="@color/black2"
-        android:textSize="18sp"
+        android:textSize="16sp"
+        android:layout_gravity="center"
+        android:gravity="center"
         android:layout_marginTop="20dip"
         android:layout_marginLeft="20dip"
         android:layout_marginRight="20dip"

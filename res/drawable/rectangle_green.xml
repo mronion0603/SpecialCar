@@ -33,7 +33,7 @@
     
     <!-- 填充 -->
     <solid
-        android:color="@android:color/white"/><!-- 填充的颜色 -->
+        android:color="#00065e8d"/><!-- 填充的颜色 -->
     
     <stroke  
         android:width="1dip"  

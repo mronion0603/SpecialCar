@@ -24,13 +24,14 @@ import android.view.Window;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
 public class LoginActivity extends Activity {
 
 	//private TextView title;
-	private Button backbt;
+	private TextView backbt;
 	private Button nextStep,getCode;
 	private EditText phoneET,codeET;
 	private String phoneNum="";
@@ -57,8 +58,7 @@ public class LoginActivity extends Activity {
 		phoneET = (EditText)findViewById(R.id.PhoneNumber);
 		codeET = (EditText)findViewById(R.id.inputCode);
 		
-		backbt = (Button)findViewById(R.id.back);
-		backbt.setVisibility(View.VISIBLE);
+		backbt = (TextView)findViewById(R.id.back);
 		backbt.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v) {			
@@ -149,8 +149,10 @@ public class LoginActivity extends Activity {
 		                 System.out.println((String)msg.obj);
 		            	 if(result==Global.SUCCESS){
 		            		String getauthn = jsonobj.getJSONObject("Data").getString("authn");
+		            		//System.out.println("getauthn"+getauthn);
 		            		MySharePreference.editStringValue(getApplication(),MySharePreference.PHONE,phoneNum);
 		            		MySharePreference.editStringValue(getApplication(),MySharePreference.AUTHN,getauthn);
+		            		//System.out.println("getauthn2"+MySharePreference.getStringValue(getApplication(), MySharePreference.AUTHN));
 		            		Intent intent = new Intent();
 		     				intent.setClass(getApplication(), MainActivity.class);
 		     				startActivity(intent);

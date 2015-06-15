@@ -123,4 +123,7 @@ public class TimePopupWindow extends PopupWindow {
 		String date3 = minAdapter.getItemText(mins.getCurrentItem())+"";
 		return date+date2+date3;
 	}
+	public String getTimeUpload(){
+		return dayAdapter.getItemText2(day.getCurrentItem())+"";
+	}
 }

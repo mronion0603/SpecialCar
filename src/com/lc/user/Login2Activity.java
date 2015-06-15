@@ -45,7 +45,7 @@ import android.widget.Toast;
 public class Login2Activity extends Activity {
 
 	//private TextView title;
-	private Button backbt;
+	private TextView backbt;
 	private Button nextStep;
 	private EditText phoneET,codeET;
 	private String phoneNum="";
@@ -68,7 +68,7 @@ public class Login2Activity extends Activity {
 		phoneET = (EditText)findViewById(R.id.PhoneNumber);
 		codeET = (EditText)findViewById(R.id.inputCode);
 		
-		backbt = (Button)findViewById(R.id.back);
+		backbt = (TextView)findViewById(R.id.back);
 		backbt.setVisibility(View.VISIBLE);
 		backbt.setOnClickListener(new OnClickListener(){
 			@Override
@@ -99,7 +99,6 @@ public class Login2Activity extends Activity {
 	            	try {
 		            	 JSONObject jsonobj = new JSONObject((String)msg.obj);  
 		                 int result = jsonobj.getInt("ResultCode");
-		                 System.out.println((String)msg.obj);
 		            	 if(result==Global.SUCCESS){
 		            		String getauthn = jsonobj.getJSONObject("Data").getString("authn");
 		            		MySharePreference.editStringValue(getApplication(),MySharePreference.PHONE,phoneNum);

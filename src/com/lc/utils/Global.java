@@ -13,4 +13,7 @@ public class Global {
   public static final int GETCODE=200; //获取验证码 
   public static final int LOGIN=201; //登录 
   public static final int CIVILLOGIN=202; //登录 
+  public static final int CITY=203; //登录 
+  public static final int INTERCARPOOL=204; //登录 
+  public static final int ADDCARPOOL=205; //登录 
 }

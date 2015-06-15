@@ -1,12 +1,16 @@
 package com.lc.intercity;
 
+import org.json.JSONObject;
+
 import com.lc.innercity.AddressActivity;
 import com.lc.innercity.ModifyNameActivity;
+import com.lc.net.AddCarPoolNet;
 import com.lc.popupwindow.AddressPopupWindow;
 import com.lc.specialcar.R;
 import com.lc.utils.ButtonEffect;
 import com.lc.utils.ExitApplication;
 import com.lc.utils.Global;
+import com.lc.utils.MySharePreference;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -24,6 +28,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
 
@@ -38,6 +43,9 @@ public class CharteredCarActivity extends Activity implements OnClickListener {
     private RelativeLayout rls,modify;
     private View originview; 
     AddressPopupWindow menuWindow;    //自定义的弹出框类
+    String getorderNum="",pickUpArea="";
+    int curnum =0,totalnum=0;
+    AddCarPoolNet addCarPoolNet = new AddCarPoolNet();
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
@@ -47,6 +55,13 @@ public class CharteredCarActivity extends Activity implements OnClickListener {
 		
 	}
 	public void init(){
+		Bundle extras = getIntent().getExtras();
+	    if(extras != null){
+	       getorderNum = extras.getString("orderNum");
+	       curnum = Integer.parseInt(extras.getString("CurNum"));
+	       totalnum = Integer.parseInt(extras.getString("TotalNum"));
+	       pickUpArea = extras.getString("PickUpArea");
+	    }
 		ExitApplication.getInstance().addActivity(this);
 		LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);  
 		originview = layoutInflater.inflate(R.layout.activity_intercity_charteredcar, null); 
@@ -67,6 +82,13 @@ public class CharteredCarActivity extends Activity implements OnClickListener {
 		ivleft.setVisibility(View.VISIBLE);
 		star = (ImageView) findViewById(R.id.star);
 		star.setOnClickListener(this);
+		
+		String username = MySharePreference.getStringValue(getApplication(), MySharePreference.USERNAME);
+		if(username==null){
+			tvname.setText( MySharePreference.getStringValue(getApplication(), MySharePreference.PHONE));
+		}else{
+			tvname.setText(username);
+		}
 	}
 	@Override
 	public void onClick(View v) {
@@ -92,10 +114,17 @@ public class CharteredCarActivity extends Activity implements OnClickListener {
 			startActivityForResult(intent5, REQUSET_ADDRESS);
 			}break;
 		case R.id.Search:
-			Intent intent = new Intent();
-			intent.putExtra("title", "包车");
-			intent.setClass(getApplication(), SignUpActivity.class);
-			startActivity(intent);
+			addCarPoolNet.setHandler(mHandler);	
+			addCarPoolNet.setAuth(MySharePreference.getStringValue(getApplication(), MySharePreference.AUTHN));
+			addCarPoolNet.setDevice(Global.DEVICE);
+			addCarPoolNet.setCjridersum("1");
+			addCarPoolNet.setOrderNum(getorderNum);			
+			addCarPoolNet.setRiderName(tvname.getText().toString());
+			addCarPoolNet.setRiderPhone(MySharePreference.getStringValue(getApplication(), MySharePreference.PHONE));
+			addCarPoolNet.setServiceTypeId("5");
+			addCarPoolNet.getDataFromServer();
+			
+			
 			break;
 		default:
 			break;
@@ -122,8 +151,31 @@ public class CharteredCarActivity extends Activity implements OnClickListener {
    	            	chooseaddress.setText(getaddress);
    	            break;
                    }
+   	            case Global.ADDCARPOOL:{
+	            	try {
+						parseJSON((String)msg.obj);
+						
+					} catch (Exception e) {
+						
+						e.printStackTrace();
+					}      	
+	            break;
+             }
                }
        }};
+       private void parseJSON(String str)throws Exception{  
+       	JSONObject jsonobj = new JSONObject(str); 
+       	int result = jsonobj.getInt("ResultCode");
+      	    if(result==Global.SUCCESS){
+      	    	Intent intent = new Intent();
+    			intent.putExtra("title", "包车");
+    			intent.setClass(getApplication(), SignUpActivity.class);
+    			startActivity(intent);
+           }else{
+              Toast.makeText(CharteredCarActivity.this,jsonobj.getString("Message"), Toast.LENGTH_LONG).show();
+           } 
+       }
+       
 	//重写的结果返回方法  
     @Override  
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {  
@@ -143,7 +195,7 @@ public class CharteredCarActivity extends Activity implements OnClickListener {
         	  String address ="";
         	  Bundle extras = data.getExtras();
               if(extras != null){
-            	  address = extras.getString("name");
+            	  address = extras.getString("address");
             	  chooseaddress.setText(address);
               }
         }  

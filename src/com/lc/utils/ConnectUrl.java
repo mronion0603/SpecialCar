@@ -7,4 +7,7 @@ public class ConnectUrl {
  public static String getcodeurl = commonurl+"sendAuthCode";				 //手机号注册验证码
  public static String getloginurl = commonurl+"login";				 //手机号注册验证码
  public static String getlogincivilurl = commonurl+"civilLogin";				 //手机号注册验证码
+ public static String getcityurl = commonurl+"cities";				 //手机号注册验证码
+ public static String getintercarpoolurl = commonurl+"getcjOrder";				 //手机号注册验证码
+ public static String addintercarpoolurl = commonurl+"addOrder";	
 }

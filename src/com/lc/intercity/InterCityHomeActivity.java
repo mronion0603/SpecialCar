@@ -1,10 +1,14 @@
 package com.lc.intercity;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import com.lc.popupwindow.TimePopupWindow;
 import com.lc.specialcar.R;
 import com.lc.utils.ButtonEffect;
 import com.lc.utils.ExitApplication;
 import com.lc.utils.Global;
+import com.lc.utils.MySharePreference;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -22,6 +26,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class InterCityHomeActivity extends Activity implements OnClickListener {
@@ -34,6 +39,7 @@ public class InterCityHomeActivity extends Activity implements OnClickListener {
     RadioGroup group;
 	private View originview; 
 	TimePopupWindow timepWindow;
+	String requestdate="";
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
@@ -64,7 +70,14 @@ public class InterCityHomeActivity extends Activity implements OnClickListener {
 		startaddress.setOnClickListener(this);
 		ivleft = (ImageView) findViewById(R.id.ArrowHead);
 		ivleft.setVisibility(View.VISIBLE);
-		group = (RadioGroup)this.findViewById(R.id.radioGroup);    
+		group = (RadioGroup)this.findViewById(R.id.radioGroup);  
+		
+		SimpleDateFormat formatter =   new SimpleDateFormat("yyyy-MM-dd HH:mm"); 
+		SimpleDateFormat formatter2 =   new SimpleDateFormat("yyyy-MM-dd");  
+		Date curDate = new Date(System.currentTimeMillis());//获取当前时间       
+		String   str  = formatter.format(curDate);  
+		tvdate.setText(str);
+		requestdate = formatter2.format(curDate);
 	}
 	//为弹出窗口实现监听类
     private OnClickListener  itemsOnClick = new OnClickListener(){
@@ -73,6 +86,7 @@ public class InterCityHomeActivity extends Activity implements OnClickListener {
 			switch (v.getId()) {
 			case R.id.comfirm:
 				String time = timepWindow.getTime();
+				requestdate = timepWindow.getTimeUpload();
 				Message message = Message.obtain();  
 			    message.obj = time;  
 				message.what = Global.TIME_MESSAGE;  
@@ -126,13 +140,31 @@ public class InterCityHomeActivity extends Activity implements OnClickListener {
               //根据ID获取RadioButton的实例
               RadioButton rb = (RadioButton)InterCityHomeActivity.this.findViewById(radioButtonId);
               //更新文本内容，以符合选中项
+              String getstart = tvstartaddress.getText().toString();
+          	  String getend = tvendaddress.getText().toString();
               if(rb.getText().equals("拼车")){
-				Intent intent = new Intent();
+            	
+            	//String date = tvdate.getText().toString();
+            	//String authn = MySharePreference.getStringValue(getApplication(), MySharePreference.AUTHN);
+            	//System.out.println("getauthn3:"+MySharePreference.getStringValue(getApplication(), MySharePreference.AUTHN));
+            	if(getend.equals("输入目的地所在城市")||getend.length()<=0){
+					 Toast.makeText(InterCityHomeActivity.this, "请选择目的地城市", Toast.LENGTH_LONG).show();
+				}else{
+            	Intent intent = new Intent();
 				intent.setClass(InterCityHomeActivity.this, SearchCarpoolActivity.class);
+				intent.putExtra("device", Global.DEVICE);
+				intent.putExtra("startAddress", getstart);
+				intent.putExtra("endAddress", getend);
+				intent.putExtra("date", requestdate);
 				startActivity(intent);
+				}
               }else{
             	Intent intent = new Intent();
   				intent.setClass(InterCityHomeActivity.this, SearchCharteredCarActivity.class);
+  				intent.putExtra("device", Global.DEVICE);
+				intent.putExtra("startAddress", getstart);
+				intent.putExtra("endAddress", getend);
+				intent.putExtra("date", requestdate);
   				startActivity(intent);
               }
 			break;

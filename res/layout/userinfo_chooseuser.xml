@@ -4,7 +4,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" 
     android:orientation="vertical"
-    android:background="@color/white">
+    android:background="@drawable/cht_bg">
     
     <ImageView
       
@@ -13,48 +13,53 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center_vertical"
-            android:background="@drawable/register_logo"
-            android:layout_marginBottom="50dip"
-            android:layout_marginTop="150dip"
+            android:background="@drawable/chtlogo"
+            android:layout_marginTop="120dip"
+            android:layout_marginLeft="50dip"
+            android:layout_marginRight="50dip"
             />
-    
+    <TextView
+            android:id="@+id/tv1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="60dip"
+            android:layout_marginTop="10dip"
+            android:layout_marginLeft="50dip"
+            android:layout_marginRight="50dip"
+            android:text="高品质，差异化的公务商务出行"
+            android:textSize="18sp"
+            android:textColor="@color/black2"
+            />
           
-          
-  
     <LinearLayout
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="50dip"
-    android:orientation="horizontal"
+    android:orientation="vertical"
+    android:layout_marginLeft="40dip"
+    android:layout_marginRight="40dip"
     >
-            <Button 
+        <Button 
         android:id="@+id/Login1"
-        android:layout_width="0dip"
+        android:layout_width="fill_parent"
         android:layout_height="50dip"
         android:background="@drawable/rectangle_green"
-        android:text="公务员"
-        android:layout_weight="1"
+        android:text="公务用户"
         android:textColor="@color/black2"
         android:textSize="18sp"
         android:layout_marginTop="20dip"
-        android:layout_marginLeft="20dip"
-        android:layout_marginRight="20dip"
         />
-            <Button 
+        <Button 
         android:id="@+id/Login2"
-        android:layout_width="0dip"
+        android:layout_width="fill_parent"
         android:layout_height="50dip"
         android:background="@drawable/rectangle_green"
         android:text="普通用户"
-          android:layout_weight="1"
         android:textColor="@color/black2"
         android:textSize="18sp"
         android:layout_marginTop="20dip"
-        android:layout_marginLeft="20dip"
-        android:layout_marginRight="20dip"
-        />
-          
+        />  
     </LinearLayout>
-    
-   
 </LinearLayout>

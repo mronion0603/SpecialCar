@@ -2,12 +2,23 @@ package com.lc.intercity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import com.lc.net.GetCityNet;
+import com.lc.specialcar.MainActivity;
 import com.lc.specialcar.R;
+import com.lc.user.Login2Activity;
 import com.lc.utils.ExitApplication;
+import com.lc.utils.Global;
+import com.lc.utils.MySharePreference;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -18,6 +29,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
 
@@ -26,11 +38,12 @@ public class TypeCityActivity extends Activity implements OnClickListener {
     TextView tvTitle,righttext;
     EditText etaddress;
     ImageView ivleft;
-
+    GetCityNet getCityNet = new GetCityNet();
     private RelativeLayout rls;
     ArrayList<HashMap<String,Object>> listItem = new ArrayList<HashMap<String,Object>>();
     ListView mListView;  
     String citystr = "武汉";
+    SimpleAdapter listItemAdapter;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
@@ -61,7 +74,7 @@ public class TypeCityActivity extends Activity implements OnClickListener {
         //mLoadBar = (ProgressBar) findViewById(R.id.place_progressBar);  
         mListView.setOnItemClickListener(itemClickListener);  
         getData();
-        SimpleAdapter listItemAdapter = new SimpleAdapter(this,listItem,R.layout.intercity_city_listitem , 
+        listItemAdapter = new SimpleAdapter(this,listItem,R.layout.intercity_city_listitem , 
 				new String[]{"groupItem"},
 				new int[]{R.id.groupItem});
         mListView.setAdapter(listItemAdapter);  
@@ -87,22 +100,8 @@ public class TypeCityActivity extends Activity implements OnClickListener {
     };  
 	
     void getData(){
-		
-		     HashMap<String , Object> map = new HashMap<String , Object>();
-			 map.put("groupItem", "武汉市");
-			 HashMap<String , Object> map2 = new HashMap<String , Object>();
-			 map2.put("groupItem", "黄冈市");
-			 HashMap<String , Object> map3 = new HashMap<String , Object>();
-			 map3.put("groupItem", "天门市");
-			 HashMap<String , Object> map4 = new HashMap<String , Object>();
-			 map4.put("groupItem", "荆州市");
-			 HashMap<String , Object> map5 = new HashMap<String , Object>();
-			 map5.put("groupItem", "宜昌市");
-			 listItem.add(map);
-			 listItem.add(map2);
-			 listItem.add(map3);
-			 listItem.add(map4);
-			 listItem.add(map5);
+    	getCityNet.setHandler(mhandler);
+    	getCityNet.getDataFromServer();
 	}
        
 	@Override
@@ -127,6 +126,67 @@ public class TypeCityActivity extends Activity implements OnClickListener {
 		}
 	}
 	
-
-	   
+	public Handler mhandler= new Handler() {
+        public void handleMessage(android.os.Message msg) {
+            switch(msg.what) { 
+	            case Global.CITY:{
+	            		try {
+							parseJSON((String)msg.obj);
+							listItemAdapter.notifyDataSetChanged();
+						} catch (Exception e) {
+							
+							e.printStackTrace();
+						}      	
+	             break;
+                }
+            }
+    }};
+    private void parseJSON(String str)throws Exception{  
+    	JSONObject jsonobj = new JSONObject(str); 
+    	addData(str,"A");
+    	addData(str,"B");
+    	addData(str,"C");
+    	addData(str,"D");
+    	addData(str,"E");
+    	addData(str,"F");
+    	addData(str,"G");
+    	addData(str,"H");
+    	addData(str,"I");
+    	addData(str,"J");
+    	addData(str,"K");
+    	addData(str,"L");
+    	addData(str,"M");
+    	addData(str,"N");
+    	addData(str,"O");
+    	addData(str,"P");
+    	addData(str,"Q");
+    	addData(str,"R");
+    	addData(str,"S");
+    	addData(str,"T");
+    	addData(str,"U");
+    	addData(str,"V");
+    	addData(str,"W");
+    	addData(str,"X");
+    	addData(str,"Y");
+    	addData(str,"Z");
+    	/*
+        int result = jsonobj.getInt("ResultCode");
+   	    if(result==Global.SUCCESS){
+   		   //String getauthn = jsonobj.getJSONObject("Data").getString("authn");
+   		   Toast.makeText(TypeCityActivity.this, str, Toast.LENGTH_LONG).show();
+        }else{
+           Toast.makeText(TypeCityActivity.this,str, Toast.LENGTH_LONG).show();
+        } 
+        */
+    }
+    
+    void addData(String str,String key)throws Exception{
+        JSONObject jsonobj = new JSONObject(str); 
+        JSONArray jsonarray = jsonobj.getJSONArray(key);
+        for(int x=0;x<jsonarray.length();x++){
+        	 HashMap<String , Object> map = new HashMap<String , Object>();
+			 map.put("groupItem",jsonarray.get(x));
+			 listItem.add(map);
+        }
+    }
 }

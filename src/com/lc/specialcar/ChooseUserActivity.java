@@ -14,9 +14,12 @@ import android.view.View;
 import android.view.Window;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class ChooseUserActivity extends Activity {
 	private Button login1,login2;
+	private long waitTime = 3000;  //退出按钮等待时间
+    private long touchTime = 0;    //退出按钮记录按下时间    
 	@Override  
     protected void onCreate(Bundle savedInstanceState) {  
         super.onCreate(savedInstanceState);  
@@ -47,4 +50,15 @@ public class ChooseUserActivity extends Activity {
 			}
 		});
 	}
+	@Override  
+    public void onBackPressed() {  
+        long currentTime = System.currentTimeMillis();  
+        if((currentTime-touchTime)>=waitTime) {  
+            Toast.makeText(this, "再按一次退出", Toast.LENGTH_SHORT).show();  
+            touchTime = currentTime;  
+        }else {  
+        	ExitApplication.getInstance().exit();
+           // finish();  
+        }  
+    }  
 }
