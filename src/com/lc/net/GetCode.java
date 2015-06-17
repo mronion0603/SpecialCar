@@ -40,7 +40,7 @@ public class GetCode {
 	              public void run() {       
 	                while (isRunning) {
 					  try {
-						Thread.currentThread().sleep(10);
+						//Thread.currentThread().sleep(10);
 	         		    String strurl =ConnectUrl.getcodeurl;
 	                	URL url = null;
 	                	try{
@@ -78,7 +78,7 @@ public class GetCode {
 	                     msg.what = Global.GETCODE;
 	                     handler.sendMessage(msg); 	     
 	            	     isRunning = false;
-					 } catch (InterruptedException e1) {
+					 } catch (Exception e1) {
 								// TODO Auto-generated catch block
 								e1.printStackTrace();
 				     }

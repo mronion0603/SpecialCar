@@ -104,6 +104,7 @@
 	     />
 	     
 	     <TextView
+	      android:id="@+id/timelong"
 	      android:layout_toLeftOf="@+id/arrow3"
 	      android:layout_width="wrap_content"
 	      android:layout_height="wrap_content"

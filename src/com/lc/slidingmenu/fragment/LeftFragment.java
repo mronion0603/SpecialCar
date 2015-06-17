@@ -20,7 +20,6 @@ import com.lc.user.MessageActivity;
 import com.lc.user.ModifyInfoActivity;
 import com.lc.user.MoreActivity;
 import com.lc.user.ReceiptActivity;
-import com.lc.user.ShareActivity;
 import com.lc.utils.MySharePreference;
 
 /**

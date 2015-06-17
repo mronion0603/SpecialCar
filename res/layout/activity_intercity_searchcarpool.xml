@@ -50,11 +50,22 @@
 	      android:layout_height="1dip"
 	      android:background="@color/user_divider3"
 	    />
+	    <ProgressBar     
+	    android:id="@+id/progress"    
+	    style="?android:attr/progressBarStyleLarge"    
+	    android:layout_width="wrap_content"    
+	    android:layout_height="wrap_content"    
+	    android:max="100"     
+	    android:progress="50"     
+	    android:secondaryProgress="70"
+	    android:layout_marginTop="30dip"     
+	    android:layout_gravity="center"
+	    />  
          <ListView
-        android:id="@+id/listview"
+        android:id="@+id/carpoollistview"
         android:layout_width = "fill_parent"
         android:layout_height = "wrap_content"
-        
+        android:visibility="gone"
         />
-	   
+	    
 </LinearLayout>

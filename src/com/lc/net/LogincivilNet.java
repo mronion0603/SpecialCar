@@ -46,7 +46,7 @@ public class LogincivilNet {
 	              public void run() {       
 	                while (isRunning) {
 					  try {
-						Thread.currentThread().sleep(10);
+						//Thread.currentThread().sleep(10);
 	         		    String strurl =ConnectUrl.getlogincivilurl;
 	                	URL url = null;
 	                	try{
@@ -86,9 +86,8 @@ public class LogincivilNet {
 	                     msg.what = Global.CIVILLOGIN;
 	                     handler.sendMessage(msg); 	     
 	            	     isRunning = false;
-					 } catch (InterruptedException e1) {
-								// TODO Auto-generated catch block
-								e1.printStackTrace();
+					 } catch (Exception e1) {
+						 e1.printStackTrace();
 				     }
 	               }
 	            }

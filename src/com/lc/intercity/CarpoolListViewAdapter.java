@@ -1,23 +1,16 @@
 package com.lc.intercity;
-import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.List;
-
-
 import com.lc.specialcar.R;
-
-
 import android.content.Context;
-import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.ImageView.ScaleType;
+
 
 
 public class CarpoolListViewAdapter extends BaseAdapter {

@@ -1,7 +1,5 @@
 package com.lc.innercity;
 
-
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,34 +9,23 @@ import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.BaiduMap;
-import com.baidu.mapapi.map.BaiduMap.OnMapClickListener;
 import com.baidu.mapapi.map.BaiduMap.OnMapStatusChangeListener;
-import com.baidu.mapapi.map.BaiduMap.OnMarkerDragListener;
 import com.baidu.mapapi.map.BitmapDescriptor;
-import com.baidu.mapapi.map.BitmapDescriptorFactory;
-import com.baidu.mapapi.map.GroundOverlayOptions;
-import com.baidu.mapapi.map.MapPoi;
 import com.baidu.mapapi.map.MapStatus;
 import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
-import com.baidu.mapapi.map.Marker;
-import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.MyLocationData;
-import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.map.MyLocationConfiguration.LocationMode;
 import com.baidu.mapapi.model.LatLng;
-import com.baidu.mapapi.model.LatLngBounds;
 import com.baidu.mapapi.search.core.PoiInfo;
 import com.baidu.mapapi.search.core.SearchResult;
-import com.baidu.mapapi.search.geocode.GeoCodeOption;
 import com.baidu.mapapi.search.geocode.GeoCodeResult;
 import com.baidu.mapapi.search.geocode.GeoCoder;
 import com.baidu.mapapi.search.geocode.OnGetGeoCoderResultListener;
 import com.baidu.mapapi.search.geocode.ReverseGeoCodeOption;
 import com.baidu.mapapi.search.geocode.ReverseGeoCodeResult;
 import com.lc.specialcar.R;
-import com.lc.utils.ButtonEffect;
 import com.lc.utils.ExitApplication;
 
 import android.app.Activity;
@@ -56,10 +43,6 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-
-
-
 
 public class AddressActivity extends Activity implements OnClickListener {
 	public static final int REQUSET = 1;
@@ -94,7 +77,6 @@ public class AddressActivity extends Activity implements OnClickListener {
         SDKInitializer.initialize(getApplicationContext());  
 		setContentView(R.layout.innercity_addresshome);
 		init();
-		
 	}
 
 	public void init(){
@@ -119,14 +101,13 @@ public class AddressActivity extends Activity implements OnClickListener {
 		// 开启定位图层
 		mBaiduMap.setMyLocationEnabled(true);
 		
-		 LatLng cenpt = new LatLng(30.511876,114.405751); 
-	        //定义地图状态
-	        MapStatus mMapStatus = new MapStatus.Builder()
+		LatLng cenpt = new LatLng(30.511876,114.405751); 
+	    //定义地图状态
+	    MapStatus mMapStatus = new MapStatus.Builder()
 	        .target(cenpt)
 	        .zoom(18)
 	        .build();
 	        //定义MapStatusUpdate对象，以便描述地图状态将要发生的变化
-
 
 	        MapStatusUpdate mMapStatusUpdate = MapStatusUpdateFactory.newMapStatus(mMapStatus);
 	        //改变地图状态
@@ -180,12 +161,9 @@ public class AddressActivity extends Activity implements OnClickListener {
             	  
             	  LatLng ll = new LatLng(lat, lng);
 				  MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(ll);
-				  mBaiduMap.animateMapStatus(u);
-					
+				  mBaiduMap.animateMapStatus(u);	
               }
-
         }  
-      
     }  
 	
 	/**

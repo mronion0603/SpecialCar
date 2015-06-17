@@ -1,5 +1,19 @@
 package com.lc.innercity;
 
+import com.baidu.location.BDLocation;
+import com.baidu.location.BDLocationListener;
+import com.baidu.location.LocationClient;
+import com.baidu.location.LocationClientOption;
+import com.baidu.mapapi.SDKInitializer;
+import com.baidu.mapapi.map.BitmapDescriptor;
+import com.baidu.mapapi.model.LatLng;
+import com.baidu.mapapi.search.core.PoiInfo;
+import com.baidu.mapapi.search.core.SearchResult;
+import com.baidu.mapapi.search.geocode.GeoCodeResult;
+import com.baidu.mapapi.search.geocode.GeoCoder;
+import com.baidu.mapapi.search.geocode.OnGetGeoCoderResultListener;
+import com.baidu.mapapi.search.geocode.ReverseGeoCodeOption;
+import com.baidu.mapapi.search.geocode.ReverseGeoCodeResult;
 import com.lc.popupwindow.AddressPopupWindow;
 import com.lc.popupwindow.TimePopupWindow;
 import com.lc.specialcar.R;
@@ -16,10 +30,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.text.Html;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnTouchListener;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -41,15 +53,39 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 	GroupAdapter groupAdapter;
     AddressPopupWindow menuWindow;	//自定义的弹出框类
     TimePopupWindow timepWindow;
-	@Override
+    // 定位相关
+  	LocationClient mLocClient;
+  	public MyLocationListenner myListener = new MyLocationListenner();
+  	BitmapDescriptor mCurrentMarker;
+  	boolean isFirstLoc = true;// 是否首次定位
+    GeoCoder mGeoCoder = null; 	 // 地理编码  
+    PoiInfo mCurentInfo;    // 当前位置信息
+	
+    @Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_innercity_carinfo);
+		//在使用SDK各组件之前初始化context信息，传入ApplicationContext  
+        //注意该方法要再setContentView方法之前实现  
+        SDKInitializer.initialize(getApplicationContext());  
 		init();
 	}
 
 	public void init(){
+		// 定位初始化
+		mLocClient = new LocationClient(this);
+		mLocClient.registerLocationListener(myListener);
+		LocationClientOption option = new LocationClientOption();
+		option.setOpenGps(true);// 打开gps
+		option.setCoorType("bd09ll"); // 设置坐标类型
+		option.setScanSpan(1000);
+		mLocClient.setLocOption(option);
+		mLocClient.start();
+		// 地理编码
+		mGeoCoder = GeoCoder.newInstance();
+		mGeoCoder.setOnGetGeoCodeResultListener(GeoListener);
+		
 		ExitApplication.getInstance().addActivity(this);
 		LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);  
 		originview = layoutInflater.inflate(R.layout.activity_innercity_carinfo, null);  
@@ -78,17 +114,6 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 		rlgetoffaddress.setOnClickListener(this);
 		rldate = (RelativeLayout) findViewById(R.id.usecardate);
 		rldate.setOnClickListener(this);
-		rldate.setOnTouchListener(new OnTouchListener(){
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-				 if (event.getAction() == MotionEvent.ACTION_DOWN) { 
-					 //selectTimeWindow(originview);		
-					 timepWindow = new TimePopupWindow(CarInfoActivity.this,itemsOnClick);
-					 timepWindow.showAsDropDown(originview, 0, 0); 
-			     }         
-			     return true; 
-			}
-	    }); 
 		tvdate = (TextView) findViewById(R.id.tvDate);
 		tvname = (TextView) findViewById(R.id.Name);
 		tvphone = (TextView) findViewById(R.id.Phone);
@@ -101,7 +126,6 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 		String ruleStr4 = "元/公里+";
 		String ruleStr5 = "0.24";
 		String ruleStr6 = "元/分钟";
-		
 		String newMessageInfo = "<font color='black'><b>" + ruleStr1+ "</b></font>"
 		                       +"<font color='gray'><b>" + ruleStr2+ "</b></font>"
 		                       +"<font color='black'><b>" + ruleStr3+ "</b></font>"
@@ -190,12 +214,16 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 			intent.setClass(CarInfoActivity.this,BillingRuleActivity.class);
 			startActivity(intent);
 			break;
+		case R.id.usecardate:
+		{	timepWindow = new TimePopupWindow(CarInfoActivity.this,itemsOnClick);
+			timepWindow.showAsDropDown(originview, 0, 0); 
+		}	break;
 		case R.id.star:	
 		{	menuWindow = new AddressPopupWindow(CarInfoActivity.this,itemOnClick);//实例化AddressPopupWindow
 			menuWindow.showAsDropDown(originview, 0, 0); //显示窗口
 		}	break;
 		case R.id.star3:
-		{	menuWindow = new AddressPopupWindow(CarInfoActivity.this,itemOnClick2);//实例化AddressPopupWindow
+		{	menuWindow = new AddressPopupWindow(CarInfoActivity.this,itemOnClick2);
 			menuWindow.showAsDropDown(originview, 0, 0); //显示窗口
 		}	break;
 		case R.id.Search:
@@ -265,4 +293,52 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 	              }
 	        }  
 	    }  
+	    /**
+		 * 定位SDK监听函数
+		 */
+	public class MyLocationListenner implements BDLocationListener {
+
+			@Override
+			public void onReceiveLocation(BDLocation location) {
+				if (location == null )
+					return;
+				if (isFirstLoc) {
+					isFirstLoc = false;
+					LatLng ll = new LatLng(location.getLatitude(),
+							location.getLongitude());
+					 // 发起反地理编码检索  
+		             mGeoCoder.reverseGeoCode((new ReverseGeoCodeOption())  
+		                     .location(ll));  
+				}
+			}
+	}
+	 // 地理编码监听器  
+    OnGetGeoCoderResultListener GeoListener = new OnGetGeoCoderResultListener() {  
+        public void onGetGeoCodeResult(GeoCodeResult result) {  
+            if (result == null || result.error != SearchResult.ERRORNO.NO_ERROR) {  
+                // 没有检索到结果  
+            }  
+            // 获取地理编码结果  
+        }  
+        @Override  
+        public void onGetReverseGeoCodeResult(ReverseGeoCodeResult result) {  
+            if (result == null || result.error != SearchResult.ERRORNO.NO_ERROR) {  
+                // 没有找到检索结果  
+            }  
+            // 获取反向地理编码结果  
+            else {  
+                // 当前位置信息  
+                mCurentInfo = new PoiInfo();  
+                mCurentInfo.address = result.getAddress();  
+                mCurentInfo.location = result.getLocation();  
+                mCurentInfo.name = "[位置]";  
+                if(result.getPoiList() != null){
+                	tvstartAddress.setText(mCurentInfo.address);
+                }else{
+                	tvstartAddress.setText("出发地");
+                }
+                
+            }  
+        }  
+    };  
 }

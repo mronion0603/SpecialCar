@@ -1,5 +1,19 @@
 package com.lc.official;
 
+import com.baidu.location.BDLocation;
+import com.baidu.location.BDLocationListener;
+import com.baidu.location.LocationClient;
+import com.baidu.location.LocationClientOption;
+import com.baidu.mapapi.SDKInitializer;
+import com.baidu.mapapi.map.BitmapDescriptor;
+import com.baidu.mapapi.model.LatLng;
+import com.baidu.mapapi.search.core.PoiInfo;
+import com.baidu.mapapi.search.core.SearchResult;
+import com.baidu.mapapi.search.geocode.GeoCodeResult;
+import com.baidu.mapapi.search.geocode.GeoCoder;
+import com.baidu.mapapi.search.geocode.OnGetGeoCoderResultListener;
+import com.baidu.mapapi.search.geocode.ReverseGeoCodeOption;
+import com.baidu.mapapi.search.geocode.ReverseGeoCodeResult;
 import com.lc.innercity.AddressActivity;
 import com.lc.innercity.BillingRuleActivity;
 import com.lc.innercity.CarDemandActivity;
@@ -21,10 +35,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnTouchListener;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -39,7 +51,7 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
 public class OfficialHomeActivity extends Activity implements OnClickListener {
 	public static final int REQUSET_NAMEPHONE = 1;
 	public static final int REQUSET_ADDRESS = 2;
-    TextView tvTitle,righttext,feeRule,txdate,tvname,tvphone,tvdate,tvaddress;
+    TextView tvTitle,righttext,feeRule,txdate,tvname,tvphone,tvdate,tvaddress,tvtimelong;
     ImageView ivleft;
     Button ivSearch;
     private RelativeLayout rls,rlusecar,rldate,rlmodifyname,rlstartaddress,rltimelong;
@@ -50,16 +62,40 @@ public class OfficialHomeActivity extends Activity implements OnClickListener {
 	TimePopupWindow timepWindow;
 	AddressPopupWindow menuWindow;
 	TimeLongPopupWindow timelongpWindow;
+	
+	// 定位相关
+ 	LocationClient mLocClient;
+ 	public MyLocationListenner myListener = new MyLocationListenner();
+ 	BitmapDescriptor mCurrentMarker;
+ 	boolean isFirstLoc = true;// 是否首次定位
+    GeoCoder mGeoCoder = null; 	 // 地理编码  
+    PoiInfo mCurentInfo;    // 当前位置信息
+    
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.official_home);
-		init();
-		
+		//在使用SDK各组件之前初始化context信息，传入ApplicationContext  
+        //注意该方法要再setContentView方法之前实现  
+        SDKInitializer.initialize(getApplicationContext());  
+		init();	
 	}
 
 	public void init(){
+		// 定位初始化
+		mLocClient = new LocationClient(this);
+		mLocClient.registerLocationListener(myListener);
+		LocationClientOption option = new LocationClientOption();
+		option.setOpenGps(true);// 打开gps
+		option.setCoorType("bd09ll"); // 设置坐标类型
+		option.setScanSpan(1000);
+		mLocClient.setLocOption(option);
+		mLocClient.start();
+		//地理编码  
+        mGeoCoder = GeoCoder.newInstance();  
+        mGeoCoder.setOnGetGeoCodeResultListener(GeoListener);
+        
 		ExitApplication.getInstance().addActivity(this);
 		tvaddress = (TextView) findViewById(R.id.TvAddress);
 		tvname = (TextView) findViewById(R.id.Name);
@@ -70,7 +106,7 @@ public class OfficialHomeActivity extends Activity implements OnClickListener {
 		tvTitle = (TextView) findViewById(R.id.topTv);
 		tvTitle.setText("公务包车");
 		righttext = (TextView) findViewById(R.id.righttext);
-		//righttext.setVisibility(View.VISIBLE);
+		tvtimelong = (TextView) findViewById(R.id.timelong);
 		righttext.setText("计费规则");
 		righttext.setOnClickListener(this);
 		ivSearch = (Button) findViewById(R.id.Search);
@@ -89,16 +125,6 @@ public class OfficialHomeActivity extends Activity implements OnClickListener {
 		
 		rldate = (RelativeLayout) findViewById(R.id.usecardate);
 		rldate.setOnClickListener(this);
-		rldate.setOnTouchListener(new OnTouchListener(){
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-				 if (event.getAction() == MotionEvent.ACTION_DOWN) { 
-					 timepWindow = new TimePopupWindow(OfficialHomeActivity.this,itemsOnClick);
-					 timepWindow.showAsDropDown(originview, 0, 0); 		   
-			     }         
-			     return true; 
-			}
-	    }); 
 		txdate = (TextView) findViewById(R.id.txdate);
 		
 		ivleft = (ImageView) findViewById(R.id.ArrowHead);
@@ -156,16 +182,39 @@ public class OfficialHomeActivity extends Activity implements OnClickListener {
 			}	
 		}
     };
-    
+  //为弹出窗口实现监听类
+    private OnClickListener timelongitemsOnClick = new OnClickListener(){
+
+		public void onClick(View v) {
+			switch (v.getId()) {
+			case R.id.comfirm:
+				String time = timelongpWindow.getTime();
+				Message message = Message.obtain();  
+			    message.obj = time;  
+				message.what = Global.TIMELONG_MESSAGE;  
+				mHandler.sendMessageDelayed(message, 50);
+				timelongpWindow.dismiss();   
+				break;
+			case R.id.canceltime:	
+				timelongpWindow.dismiss();   
+				break;
+			default:
+				break;
+			}	
+		}
+    };
 	@Override
 	public void onClick(View v) {
-		// TODO Auto-generated method stub
 		switch (v.getId()) {
 		case R.id.rlslidemenu:
 			finish();
 			break;
+		case R.id.usecardate:
+			timepWindow = new TimePopupWindow(OfficialHomeActivity.this,itemsOnClick);
+			timepWindow.showAsDropDown(originview, 0, 0); 	
+			break;
 		case R.id.Duration:
-			timelongpWindow = new TimeLongPopupWindow(OfficialHomeActivity.this);
+			timelongpWindow = new TimeLongPopupWindow(OfficialHomeActivity.this,timelongitemsOnClick);
 			timelongpWindow.showAsDropDown(originview, 0, 0); 		
 			break;
 		case R.id.righttext:
@@ -229,6 +278,11 @@ public class OfficialHomeActivity extends Activity implements OnClickListener {
 	            	tvaddress.setText(getaddress);
 	            break;
                 }
+	            case Global.TIMELONG_MESSAGE:{
+	            	String getdate = (String)msg.obj;
+	            	tvtimelong.setText(getdate+"小时");
+	            break;
+                }
             }
     }};
 	 	
@@ -256,4 +310,53 @@ public class OfficialHomeActivity extends Activity implements OnClickListener {
 	              }
 	        }  
 	    }  
+	    
+		 /**
+			 * 定位SDK监听函数
+			 */
+		public class MyLocationListenner implements BDLocationListener {
+
+				@Override
+				public void onReceiveLocation(BDLocation location) {
+					if (location == null )
+						return;
+					if (isFirstLoc) {
+						isFirstLoc = false;
+						LatLng ll = new LatLng(location.getLatitude(),
+								location.getLongitude());
+						 // 发起反地理编码检索  
+			             mGeoCoder.reverseGeoCode((new ReverseGeoCodeOption())  
+			                     .location(ll));  
+					}
+				}
+		}
+		 // 地理编码监听器  
+	    OnGetGeoCoderResultListener GeoListener = new OnGetGeoCoderResultListener() {  
+	        public void onGetGeoCodeResult(GeoCodeResult result) {  
+	            if (result == null || result.error != SearchResult.ERRORNO.NO_ERROR) {  
+	                // 没有检索到结果  
+	            }  
+	            // 获取地理编码结果  
+	        }  
+	        @Override  
+	        public void onGetReverseGeoCodeResult(ReverseGeoCodeResult result) {  
+	            if (result == null || result.error != SearchResult.ERRORNO.NO_ERROR) {  
+	                // 没有找到检索结果  
+	            }  
+	            // 获取反向地理编码结果  
+	            else {  
+	                // 当前位置信息  
+	                mCurentInfo = new PoiInfo();  
+	                mCurentInfo.address = result.getAddress();  
+	                mCurentInfo.location = result.getLocation();  
+	                mCurentInfo.name = "[位置]";  
+	                if(result.getPoiList() != null){
+	                	tvaddress.setText(mCurentInfo.address);
+	                }else{
+	                	tvaddress.setText("上车地");
+	                }
+	                
+	            }  
+	        }  
+	    };  
 }

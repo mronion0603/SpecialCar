@@ -6,20 +6,19 @@
     android:orientation="vertical"
     android:background="@drawable/register_bg">
     
-    <com.lc.slidingmenu.view.CircleImageView
-            xmlns:app="http://schemas.android.com/apk/res-auto"
+    <ImageView
+      
             android:id="@+id/profile_image"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center_vertical"
-            android:src="@drawable/register_car"
-            app:border_color="@color/text_green"
-            app:border_width="1dp" 
-            android:layout_marginBottom="50dip"
-            android:layout_marginTop="40dip"
+            android:background="@drawable/chtlogo"
+            android:layout_marginTop="60dip"
+            android:layout_marginLeft="50dip"
+            android:layout_marginRight="50dip"
+            android:layout_marginBottom="80dip"
             />
-    
           
            <EditText
             android:id="@+id/PhoneNumber"

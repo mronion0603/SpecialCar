@@ -15,12 +15,10 @@ import com.baidu.mapapi.map.MapStatus;
 import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
-import com.baidu.mapapi.map.Marker;
 import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.map.BaiduMap.OnMapStatusChangeListener;
-import com.baidu.mapapi.map.MyLocationConfiguration.LocationMode;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.search.core.PoiInfo;
 import com.baidu.mapapi.search.core.SearchResult;
@@ -29,7 +27,6 @@ import com.baidu.mapapi.search.geocode.GeoCoder;
 import com.baidu.mapapi.search.geocode.OnGetGeoCoderResultListener;
 import com.baidu.mapapi.search.geocode.ReverseGeoCodeOption;
 import com.baidu.mapapi.search.geocode.ReverseGeoCodeResult;
-import com.lc.innercity.AddressActivity.MyLocationListenner;
 import com.lc.specialcar.R;
 import com.lc.utils.ButtonEffect;
 import com.lc.utils.ExitApplication;
@@ -61,13 +58,11 @@ public class InnerCityHomeActivity extends Activity implements OnClickListener {
     ImageView ivleft;
     ImageView ivcenter;
     private RelativeLayout rls;
-    
     MapView mMapView = null;  
     BaiduMap mBaiduMap;
     // 定位相关
  	LocationClient mLocClient;
  	public MyLocationListenner myListener = new MyLocationListenner();
- 	private LocationMode mCurrentMode;
  	BitmapDescriptor mCurrentMarker;
  	boolean isFirstLoc = true;// 是否首次定位
     // 地理编码  
@@ -78,7 +73,6 @@ public class InnerCityHomeActivity extends Activity implements OnClickListener {
     List<PoiInfo> mInfoList;  
     PoiInfo mCurentInfo;  
     ImageView mSelectImg;
-    private Marker mMarkerA;
   
 	@Override
 	public void onCreate(Bundle savedInstanceState) {

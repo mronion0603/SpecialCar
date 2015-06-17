@@ -2,13 +2,16 @@ package com.lc.intercity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
+
 import com.lc.net.InterCarPoolNet;
 import com.lc.specialcar.R;
 import com.lc.utils.ExitApplication;
 import com.lc.utils.Global;
 import com.lc.utils.MySharePreference;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
@@ -20,6 +23,7 @@ import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
@@ -36,6 +40,7 @@ public class SearchCarpoolActivity extends Activity implements OnClickListener {
 	String getstart="",getend="", getdate="", getdevice="";
 	SimpleAdapter listItemAdapter;
 	InterCarPoolNet interCarPoolNet = new InterCarPoolNet();
+	private ProgressBar pb; 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
@@ -45,6 +50,9 @@ public class SearchCarpoolActivity extends Activity implements OnClickListener {
 	}
 
 	public void init(){
+		pb = (ProgressBar)findViewById(R.id.progress); 
+		pb.setProgress(0);  
+		pb.setIndeterminate(true);
 		Bundle extras = getIntent().getExtras();
 	    if(extras != null){
 	        	getstart = extras.getString("startAddress");
@@ -61,7 +69,7 @@ public class SearchCarpoolActivity extends Activity implements OnClickListener {
 		rls.setOnClickListener(this);
 		ivleft = (ImageView) findViewById(R.id.ArrowHead);
 		ivleft.setVisibility(View.VISIBLE);
-		listview=(ListView)findViewById(R.id.listview);
+		listview=(ListView)findViewById(R.id.carpoollistview);
 		getData();
 	    listItemAdapter = new SimpleAdapter(this,listItem,R.layout.activity_intercity_carpool_listitem , 
 				new String[]{"Time","PickUpArea","GetOffArea","CurNum","TotalNum"},
@@ -134,6 +142,8 @@ public class SearchCarpoolActivity extends Activity implements OnClickListener {
         }else{
            Toast.makeText(SearchCarpoolActivity.this,jsonobj.getString("Message"), Toast.LENGTH_LONG).show();
         } 
+   	    pb.setVisibility(View.GONE); 
+   	    listview.setVisibility(View.VISIBLE);
     }
     void addData(String str,String key)throws Exception{
         JSONObject jsonobj = new JSONObject(str); 

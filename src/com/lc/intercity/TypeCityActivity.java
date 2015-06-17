@@ -4,16 +4,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.lc.net.GetCityNet;
-import com.lc.specialcar.MainActivity;
 import com.lc.specialcar.R;
-import com.lc.user.Login2Activity;
+
 import com.lc.utils.ExitApplication;
 import com.lc.utils.Global;
-import com.lc.utils.MySharePreference;
+
 
 import android.app.Activity;
 import android.content.Intent;
@@ -29,7 +27,6 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
 
@@ -44,6 +41,7 @@ public class TypeCityActivity extends Activity implements OnClickListener {
     ListView mListView;  
     String citystr = "武汉";
     SimpleAdapter listItemAdapter;
+   // ProgressDialog proDialog;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
@@ -78,7 +76,7 @@ public class TypeCityActivity extends Activity implements OnClickListener {
 				new String[]{"groupItem"},
 				new int[]{R.id.groupItem});
         mListView.setAdapter(listItemAdapter);  
-       
+        //proDialog = android.app.ProgressDialog.show(TypeCityActivity.this, "正在取消订单", "");
 	}
 	
  // listView选项点击事件监听器  
@@ -169,6 +167,7 @@ public class TypeCityActivity extends Activity implements OnClickListener {
     	addData(str,"X");
     	addData(str,"Y");
     	addData(str,"Z");
+    	
     	/*
         int result = jsonobj.getInt("ResultCode");
    	    if(result==Global.SUCCESS){

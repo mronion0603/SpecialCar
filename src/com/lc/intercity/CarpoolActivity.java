@@ -15,11 +15,9 @@ import com.lc.utils.MySharePreference;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -37,7 +35,6 @@ public class CarpoolActivity extends Activity implements OnClickListener {
     ImageView ivleft;
     private RelativeLayout rls,modify;
     TextView chooseaddress;
-	private View originview; 
 	GroupAdapter groupAdapter;
 	EditText etnumber;
 	//自定义的弹出框类
@@ -61,8 +58,6 @@ public class CarpoolActivity extends Activity implements OnClickListener {
 	       pickUpArea = extras.getString("PickUpArea");
 	    }
 		ExitApplication.getInstance().addActivity(this);
-		LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);  
-		originview = layoutInflater.inflate(R.layout.activity_intercity_carpool, null); 
 		tvname = (TextView) findViewById(R.id.Name);
 		tvphone = (TextView) findViewById(R.id.Phone);
 		tvTitle = (TextView) findViewById(R.id.topTv);

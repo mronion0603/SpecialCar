@@ -6,8 +6,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLEncoder;
-
 import com.lc.utils.ConnectUrl;
 import com.lc.utils.Global;
 
@@ -36,7 +34,7 @@ public class GetCityNet {
 	              public void run() {       
 	                while (isRunning) {
 					  try {
-						Thread.currentThread().sleep(10);
+						//Thread.currentThread().sleep(10);
 	         		    String strurl =ConnectUrl.getcityurl;
 	                	URL url = null;
 	                	try{
@@ -74,7 +72,7 @@ public class GetCityNet {
 	                     msg.what = Global.CITY;
 	                     handler.sendMessage(msg); 	     
 	            	     isRunning = false;
-					 } catch (InterruptedException e1) {
+					 } catch (Exception e1) {
 								// TODO Auto-generated catch block
 								e1.printStackTrace();
 				     }

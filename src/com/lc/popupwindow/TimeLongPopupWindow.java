@@ -28,16 +28,17 @@ public class TimeLongPopupWindow extends PopupWindow {
 
 	//private Button btn_take_photo, btn_pick_photo, btn_cancel;
 	private View mMenuView;
-
+	NumericWheelAdapter hourAdapter;
+    WheelView hours2;
 	@SuppressWarnings("deprecation")
-	public TimeLongPopupWindow(Activity context) {
+	public TimeLongPopupWindow(Activity context,OnClickListener timelongitemsOnClick) {
 		super(context);
 		LayoutInflater inflater = (LayoutInflater) context
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		mMenuView = inflater.inflate(R.layout.time3_layout, null);
 		
-		final WheelView hours2 = (WheelView) mMenuView.findViewById(R.id.hour);
-		NumericWheelAdapter hourAdapter = new NumericWheelAdapter(context, 0, 23);
+		hours2 = (WheelView) mMenuView.findViewById(R.id.hour);
+	    hourAdapter = new NumericWheelAdapter(context, 0, 23);
 		hourAdapter.setItemResource(R.layout.wheel_text_item);
 		hourAdapter.setItemTextResource(R.id.text);
 		hours2.setViewAdapter(hourAdapter);
@@ -46,19 +47,9 @@ public class TimeLongPopupWindow extends PopupWindow {
 		hours2.setCurrentItem(calendar.get(Calendar.HOUR));
 	
 		Button confirm  = (Button) mMenuView.findViewById(R.id.comfirm);
-		confirm.setOnClickListener(new OnClickListener(){
-			@Override
-			public void onClick(View v) { 
-					dismiss();    
-			}	
-		});
+		confirm.setOnClickListener(timelongitemsOnClick);
 		Button cancel  = (Button) mMenuView.findViewById(R.id.canceltime);
-		cancel.setOnClickListener(new OnClickListener(){
-			@Override
-			public void onClick(View v) {	
-					dismiss();  
-			}	
-		});
+		cancel.setOnClickListener(timelongitemsOnClick);
 	
 		//设置SelectPicPopupWindow的View
 		this.setContentView(mMenuView);
@@ -87,5 +78,9 @@ public class TimeLongPopupWindow extends PopupWindow {
 				return true;
 			}
 		});
+	}
+	
+	public String getTime(){
+       return hourAdapter.getItemText(hours2.getCurrentItem())+"";
 	}
 }

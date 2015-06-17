@@ -55,7 +55,7 @@ public class InterCarPoolNet {
 	              public void run() {       
 	                while (isRunning) {
 					  try {
-						Thread.currentThread().sleep(10);
+						//Thread.currentThread().sleep(10);
 	         		    String strurl =ConnectUrl.getintercarpoolurl;
 	                	URL url = null;
 	                	try{
@@ -97,7 +97,7 @@ public class InterCarPoolNet {
 	                     msg.what = Global.INTERCARPOOL;
 	                     handler.sendMessage(msg); 	     
 	            	     isRunning = false;
-					 } catch (InterruptedException e1) {
+					 } catch (Exception e1) {
 								// TODO Auto-generated catch block
 								e1.printStackTrace();
 				     }
