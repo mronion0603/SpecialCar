@@ -5,9 +5,6 @@ import java.util.HashMap;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-
-import cn.trinea.android.common.view.DropDownListView;
-
 import com.lc.net.InterCarPoolNet;
 import com.lc.specialcar.R;
 import com.lc.utils.ExitApplication;
@@ -23,18 +20,12 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
-
-
-
-
 
 public class SearchCharteredCarActivity extends Activity implements OnClickListener {
 	
@@ -42,7 +33,8 @@ public class SearchCharteredCarActivity extends Activity implements OnClickListe
     
     ImageView ivleft;
     private RelativeLayout rls;
-    SimpleAdapter listItemAdapter;
+    //SimpleAdapter listItemAdapter;
+    CharteredListViewAdapter listItemAdapter;
     private ListView listview;
 	ArrayList<HashMap<String,Object>> listItem = new ArrayList<HashMap<String,Object>>();
 	String getstart="",getend="", getdate="", getdevice="";
@@ -77,9 +69,10 @@ public class SearchCharteredCarActivity extends Activity implements OnClickListe
 		listview=(ListView)findViewById(R.id.listview);
 		
 		getData();
-		listItemAdapter = new SimpleAdapter(this,listItem,R.layout.activity_intercity_searcharcar_listitem , 
-				new String[]{"Time","GetOffArea"},
-				new int[]{R.id.Time,R.id.GetOffArea});
+		listItemAdapter = new CharteredListViewAdapter(this,listItem);
+		//listItemAdapter = new SimpleAdapter(this,listItem,R.layout.activity_intercity_searcharcar_listitem , 
+		//		new String[]{"Time","GetOffArea"},
+		//		new int[]{R.id.Time,R.id.GetOffArea});
 		//listItemAdapter = new CarpoolListViewAdapter(this,listItem);
 		listview.setDividerHeight(0);
 		listview.setAdapter(listItemAdapter);

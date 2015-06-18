@@ -2,16 +2,13 @@ package com.lc.intercity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import com.lc.net.InterCarPoolNet;
 import com.lc.specialcar.R;
 import com.lc.utils.ExitApplication;
 import com.lc.utils.Global;
 import com.lc.utils.MySharePreference;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
@@ -25,7 +22,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Toast;
@@ -38,7 +34,8 @@ public class SearchCarpoolActivity extends Activity implements OnClickListener {
     private ListView listview;
 	ArrayList<HashMap<String,Object>> listItem = new ArrayList<HashMap<String,Object>>();
 	String getstart="",getend="", getdate="", getdevice="";
-	SimpleAdapter listItemAdapter;
+	//SimpleAdapter listItemAdapter;
+	CarpoolListViewAdapter listItemAdapter;
 	InterCarPoolNet interCarPoolNet = new InterCarPoolNet();
 	private ProgressBar pb; 
 	@Override
@@ -71,9 +68,10 @@ public class SearchCarpoolActivity extends Activity implements OnClickListener {
 		ivleft.setVisibility(View.VISIBLE);
 		listview=(ListView)findViewById(R.id.carpoollistview);
 		getData();
-	    listItemAdapter = new SimpleAdapter(this,listItem,R.layout.activity_intercity_carpool_listitem , 
-				new String[]{"Time","PickUpArea","GetOffArea","CurNum","TotalNum"},
-				new int[]{R.id.Time,R.id.PickUpArea,R.id.GetOffArea,R.id.CurNum,R.id.TotalNum});
+		listItemAdapter = new CarpoolListViewAdapter(this,listItem);
+	    //listItemAdapter = new SimpleAdapter(this,listItem,R.layout.activity_intercity_carpool_listitem , 
+		//		new String[]{"Time","PickUpArea","GetOffArea","CurNum","TotalNum"},
+		//		new int[]{R.id.Time,R.id.PickUpArea,R.id.GetOffArea,R.id.CurNum,R.id.TotalNum});
 		listview.setDividerHeight(0);
 		listview.setAdapter(listItemAdapter);
 		listview.setOnItemClickListener(new OnItemClickListener(){
@@ -127,7 +125,6 @@ public class SearchCarpoolActivity extends Activity implements OnClickListener {
 							parseJSON((String)msg.obj);
 							listItemAdapter.notifyDataSetChanged();
 						} catch (Exception e) {
-							
 							e.printStackTrace();
 						}      	
 	             break;

@@ -207,6 +207,7 @@ int id CarIcon 0x7f090036
 int id CurNum 0x7f09003c
 int id Divider1 0x7f09003a
 int id Duration 0x7f0900a2
+int id Email 0x7f0900da
 int id FeeRule 0x7f090023
 int id GetOffArea 0x7f090039
 int id InsDetail 0x7f090034
@@ -238,7 +239,7 @@ int id UseDate 0x7f090041
 int id Wait 0x7f090080
 int id account 0x7f090087
 int id account_arrow 0x7f090086
-int id action_settings 0x7f0900e0
+int id action_settings 0x7f0900e2
 int id address 0x7f090032
 int id adv_pager 0x7f09004c
 int id amount 0x7f0900a9
@@ -297,12 +298,12 @@ int id getoffaddress 0x7f090018
 int id groupItem 0x7f09006d
 int id groupItem2 0x7f09006c
 int id hour 0x7f0900c0
-int id icon 0x7f0900d9
+int id icon 0x7f0900db
 int id imageView 0x7f090005
-int id imageView1 0x7f0900db
-int id imageView2 0x7f0900dc
-int id imageView3 0x7f0900dd
-int id imageView4 0x7f0900de
+int id imageView1 0x7f0900dd
+int id imageView2 0x7f0900de
+int id imageView3 0x7f0900df
+int id imageView4 0x7f0900e0
 int id inputCode 0x7f0900d0
 int id intercity 0x7f090056
 int id itembg 0x7f09006b
@@ -382,7 +383,7 @@ int id slidingmenumain 0x7f0900b9
 int id star 0x7f090017
 int id star3 0x7f09001a
 int id startaddress 0x7f090014
-int id text 0x7f0900df
+int id text 0x7f0900e1
 int id time2_monthday 0x7f0900bb
 int id time2_weekday 0x7f0900ba
 int id time_picker 0x7f090058
@@ -411,6 +412,7 @@ int id tvShare 0x7f090092
 int id tvToday 0x7f090085
 int id tvendaddress 0x7f090040
 int id tvname 0x7f0900d4
+int id tvname1 0x7f0900d9
 int id tvstartactivity 0x7f09003f
 int id txdate 0x7f0900a1
 int id txdate2 0x7f0900a3
@@ -422,7 +424,7 @@ int id usecardate2 0x7f090075
 int id usecardate3 0x7f0900c2
 int id user_name 0x7f090083
 int id viewGroup 0x7f09004d
-int id xinlang 0x7f0900da
+int id xinlang 0x7f0900dc
 int layout activity_innercity_bill 0x7f030000
 int layout activity_innercity_carinfo 0x7f030001
 int layout activity_innercity_home 0x7f030002

@@ -12,6 +12,8 @@ public class MySharePreference {
 	 public static final String PHONE = "phone";
 	 public static final String AUTHN = "authn";
 	 public static final String USERNAME = "username";
+	 public static final String EMAIL = "email";
+	 public static final String GENDER = "gender";
 	 private static SharedPreferences getSharedPreferences(Context context,
 	            boolean isPersonal) {
 	        if (isPersonal) {

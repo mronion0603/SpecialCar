@@ -10,6 +10,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.lc.intercity.InterCityHomeActivity;
 import com.lc.specialcar.MainActivity;
 import com.lc.specialcar.R;
 import com.lc.user.AddressManageActivity;
@@ -28,6 +29,7 @@ import com.lc.utils.MySharePreference;
  * @description 侧边栏菜单
  */
 public class LeftFragment extends Fragment implements OnClickListener{
+	public static final int REQUSET = 1;
 	private View userinfo;
 	private View balanceView;
 	private View lastListView;
@@ -39,6 +41,7 @@ public class LeftFragment extends Fragment implements OnClickListener{
 	private View shareView;
 	private View moreView;
 	private TextView card;
+	private TextView tvname;
 	private View view;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -61,6 +64,7 @@ public class LeftFragment extends Fragment implements OnClickListener{
 	
 	
 	public void findViews(View view) {
+		
 		userinfo = view.findViewById(R.id.personbg);
 		balanceView = view.findViewById(R.id.officeaccount);
 		lastListView = view.findViewById(R.id.tvLastlist);
@@ -84,11 +88,18 @@ public class LeftFragment extends Fragment implements OnClickListener{
 		moreView.setOnClickListener(this);
 		
 		card = (TextView)view.findViewById(R.id.tvCard);
+		tvname = (TextView)view.findViewById(R.id.user_name);
   		if(MySharePreference.getStringValue(getActivity(), MySharePreference.USER_TYPE).equals("1")){
   		   card.setText("公务卡");
   		}else{
   		   card.setText("信用卡");
   		}
+  		String username = MySharePreference.getStringValue(getActivity(), MySharePreference.USERNAME);
+		if(username==null){
+			tvname.setText("公务专车");
+		}else{
+			tvname.setText(username);
+		}
 	}
 	
 	@Override
@@ -110,8 +121,7 @@ public class LeftFragment extends Fragment implements OnClickListener{
 		{	
 			Intent intent = new Intent();
 			intent.setClass(this.getActivity().getApplicationContext(), ModifyInfoActivity.class);
-			//intent.setClass(this.getActivity().getApplicationContext(), ChooseUserActivity.class);
-			startActivity(intent);
+			startActivityForResult(intent, REQUSET);  
 		}
 			break;
 		case R.id.officeaccount: {	
@@ -188,4 +198,17 @@ public class LeftFragment extends Fragment implements OnClickListener{
 		}
 	}
 	
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {  
+        super.onActivityResult(requestCode, resultCode, data);  
+        if (requestCode == InterCityHomeActivity.REQUSET && resultCode == Activity.RESULT_OK) {
+        	  String name ="";
+        	  Bundle extras = data.getExtras();
+              if(extras != null){
+            	  name = extras.getString("name");
+            	  tvname.setText(name);
+              }
+        }  
+       
+    }  	
 }
