@@ -2,13 +2,16 @@ package com.lc.user;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
+import org.json.JSONArray;
+import org.json.JSONObject;
+import com.lc.net.GetMessageNet;
 import com.lc.specialcar.R;
 import com.lc.utils.ExitApplication;
-
+import com.lc.utils.Global;
+import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -20,7 +23,6 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 
-
 public class MessageActivity extends Activity implements OnClickListener {
 	
     TextView tvTitle;
@@ -28,11 +30,12 @@ public class MessageActivity extends Activity implements OnClickListener {
     private RelativeLayout rls;
     private ListView listview;
   	ArrayList<HashMap<String,Object>> listItem = new ArrayList<HashMap<String,Object>>();
+  	GetMessageNet getMessageNet = new GetMessageNet();
+  	SimpleAdapter listItemAdapter;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
 		super.onCreate(savedInstanceState);
-
 		setContentView(R.layout.userinfo_message);
 		init();
 	}
@@ -48,7 +51,7 @@ public class MessageActivity extends Activity implements OnClickListener {
 		ivleft.setVisibility(View.VISIBLE);
 		listview=(ListView)findViewById(R.id.listview);
 		getData();
-		SimpleAdapter listItemAdapter = new SimpleAdapter(this,listItem,R.layout.userinfo_message_listitem , 
+		listItemAdapter = new SimpleAdapter(this,listItem,R.layout.userinfo_message_listitem , 
 				new String[]{"MessageTitle","MessageDate"},
 				new int[]{R.id.MessageTitle,R.id.MessageDate});
 		listview.setDividerHeight(1);
@@ -58,14 +61,15 @@ public class MessageActivity extends Activity implements OnClickListener {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
-				//Intent intent = new Intent();
-				//intent.setClass(getApplication(), ItineraryDetailActivity.class);
-				//startActivity(intent);
+				
 			}
 			
 		});
 	}
 	void getData(){
+		getMessageNet.setHandler(mhandler);
+		getMessageNet.getDataFromServer();
+		
 		for(int i=0;i<5;i++){
 		     HashMap<String , Object> map = new HashMap<String , Object>();
 			 map.put("MessageTitle", "您已成功支付专用车费120元");
@@ -73,6 +77,38 @@ public class MessageActivity extends Activity implements OnClickListener {
 			 listItem.add(map);
 		}
 	}
+	@SuppressLint("HandlerLeak")
+	public Handler mhandler= new Handler() {
+        public void handleMessage(android.os.Message msg) {
+            switch(msg.what) { 
+	            case Global.GETMESSAGE:{
+	            		try {
+							parseJSON((String)msg.obj);
+							listItemAdapter.notifyDataSetChanged();
+						} catch (Exception e) {
+							
+							e.printStackTrace();
+						}      	
+	             break;
+                }
+            }
+    }};
+    private void parseJSON(String str)throws Exception{  
+    	addData(str,"Data"); 
+    }
+    
+    void addData(String str,String key)throws Exception{
+        JSONObject jsonobj = new JSONObject(str); 
+        JSONArray jsonarray = jsonobj.getJSONArray(key);
+        for(int x=0;x<jsonarray.length();x++){
+        	JSONObject jsonobj2 = (JSONObject)jsonarray.get(x);
+        	 HashMap<String , Object> map = new HashMap<String , Object>();
+        	 map.put("MessageTitle",jsonobj2.getString("context"));
+			 map.put("MessageDate",jsonobj2.getString("sendTime"));
+			 listItem.add(map);
+        }
+    }
+    
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub

@@ -17,4 +17,5 @@ public class Global {
   public static final int INTERCARPOOL=204; //登录 
   public static final int ADDCARPOOL=205; //登录 
   public static final int UPDATEUSERINFO=206; //登录 
+  public static final int GETMESSAGE=207; //登录
 }

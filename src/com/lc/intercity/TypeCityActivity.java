@@ -2,17 +2,13 @@ package com.lc.intercity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import com.lc.net.GetCityNet;
 import com.lc.specialcar.R;
-
 import com.lc.utils.ExitApplication;
 import com.lc.utils.Global;
-
-
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -124,6 +120,7 @@ public class TypeCityActivity extends Activity implements OnClickListener {
 		}
 	}
 	
+	@SuppressLint("HandlerLeak")
 	public Handler mhandler= new Handler() {
         public void handleMessage(android.os.Message msg) {
             switch(msg.what) { 
@@ -140,7 +137,7 @@ public class TypeCityActivity extends Activity implements OnClickListener {
             }
     }};
     private void parseJSON(String str)throws Exception{  
-    	JSONObject jsonobj = new JSONObject(str); 
+    	//JSONObject jsonobj = new JSONObject(str); 
     	addData(str,"A");
     	addData(str,"B");
     	addData(str,"C");

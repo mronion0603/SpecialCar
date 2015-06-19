@@ -11,4 +11,5 @@ public class ConnectUrl {
  public static String getintercarpoolurl = commonurl+"getcjOrder";				 //手机号注册验证码
  public static String addintercarpoolurl = commonurl+"addOrder";	
  public static String updateuserurl = commonurl+"updateUser";	
+ public static String getmessageurl = commonurl+"getMessage";	
 }
