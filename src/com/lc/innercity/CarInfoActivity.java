@@ -1,5 +1,12 @@
 package com.lc.innercity;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
@@ -14,12 +21,14 @@ import com.baidu.mapapi.search.geocode.GeoCoder;
 import com.baidu.mapapi.search.geocode.OnGetGeoCoderResultListener;
 import com.baidu.mapapi.search.geocode.ReverseGeoCodeOption;
 import com.baidu.mapapi.search.geocode.ReverseGeoCodeResult;
+import com.lc.net.GetAddressNet;
 import com.lc.popupwindow.AddressPopupWindow;
 import com.lc.popupwindow.TimePopupWindow;
 import com.lc.specialcar.R;
 import com.lc.utils.ButtonEffect;
 import com.lc.utils.ExitApplication;
 import com.lc.utils.Global;
+import com.lc.utils.MySharePreference;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -60,7 +69,8 @@ public class CarInfoActivity extends Activity implements OnClickListener {
   	boolean isFirstLoc = true;// 是否首次定位
     GeoCoder mGeoCoder = null; 	 // 地理编码  
     PoiInfo mCurentInfo;    // 当前位置信息
-	
+    private List<HashMap<String , Object>> groups1= new ArrayList<HashMap<String , Object>>();
+    GetAddressNet getaddressnet = new GetAddressNet();
     @Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
@@ -137,12 +147,17 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 		imAddress.setOnClickListener(this);
 		getoffAddress = (ImageView) findViewById(R.id.star3);
 		getoffAddress.setOnClickListener(this);
+		
+		getaddressnet.setHandler(mHandler);
+        getaddressnet.setDevice(Global.DEVICE);
+        getaddressnet.setAuthn(MySharePreference.getStringValue(getApplication(), MySharePreference.AUTHN));
+        getaddressnet.getCodeFromServer();
 	}
 	//为弹出窗口实现监听类
     private OnItemClickListener  itemOnClick = new OnItemClickListener(){
 		@Override
 		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
-				String address = menuWindow.getItemStr(arg2);
+				String address = menuWindow.getItemStr2(arg2);
 				Message message = Message.obtain();  
 			    message.obj = address;  
 				message.what = Global.ADDRESS_MESSAGE;  
@@ -153,7 +168,7 @@ public class CarInfoActivity extends Activity implements OnClickListener {
     private OnItemClickListener  itemOnClick2 = new OnItemClickListener(){
 		@Override
 		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
-				String address = menuWindow.getItemStr(arg2);
+				String address = menuWindow.getItemStr2(arg2);
 				Message message = Message.obtain();  
 			    message.obj = address;  
 				message.what = Global.ADDRESS_END_MESSAGE;  
@@ -200,8 +215,31 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 	            	tvendAddress.setText(getaddress);
 	            break;
                 }
+	            case Global.GETADDRESS: {
+					try {
+						parseADDRESS((String) msg.obj);
+						// 显示窗口
+						menuWindow.showAsDropDown(originview, 0, 0);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					break;
+				}
             }
     }};
+    private void parseADDRESS(String str)throws Exception{ 
+	    groups1.clear();
+   	    JSONObject jsonobj = new JSONObject(str); 
+        JSONArray jsonarray = jsonobj.getJSONArray("Data");
+        for(int x=0;x<jsonarray.length();x++){
+       	 JSONObject jsonobj2 = (JSONObject)jsonarray.get(x); 
+        	 HashMap<String , Object> map = new HashMap<String , Object>();
+			 map.put("groupItem",jsonobj2.getString("commAddressId"));
+			 map.put("userId",jsonobj2.getString("userId"));
+			 map.put("address",jsonobj2.getString("address"));
+			 groups1.add(map);
+        }
+   }
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
@@ -219,11 +257,11 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 			timepWindow.showAsDropDown(originview, 0, 0); 
 		}	break;
 		case R.id.star:	
-		{	menuWindow = new AddressPopupWindow(CarInfoActivity.this,itemOnClick);//实例化AddressPopupWindow
+		{	menuWindow = new AddressPopupWindow(CarInfoActivity.this,itemOnClick,groups1);//实例化AddressPopupWindow
 			menuWindow.showAsDropDown(originview, 0, 0); //显示窗口
 		}	break;
 		case R.id.star3:
-		{	menuWindow = new AddressPopupWindow(CarInfoActivity.this,itemOnClick2);
+		{	menuWindow = new AddressPopupWindow(CarInfoActivity.this,itemOnClick2,groups1);
 			menuWindow.showAsDropDown(originview, 0, 0); //显示窗口
 		}	break;
 		case R.id.Search:

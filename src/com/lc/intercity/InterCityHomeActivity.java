@@ -157,6 +157,9 @@ public class InterCityHomeActivity extends Activity implements OnClickListener {
 				startActivity(intent);
 				}
               }else{
+            	if(getend.equals("输入目的地所在城市")||getend.length()<=0){
+ 					 Toast.makeText(InterCityHomeActivity.this, "请选择目的地城市", Toast.LENGTH_LONG).show();
+ 				}else{
             	Intent intent = new Intent();
   				intent.setClass(InterCityHomeActivity.this, SearchCharteredCarActivity.class);
   				intent.putExtra("device", Global.DEVICE);
@@ -164,6 +167,7 @@ public class InterCityHomeActivity extends Activity implements OnClickListener {
 				intent.putExtra("endAddress", getend);
 				intent.putExtra("date", requestdate);
   				startActivity(intent);
+ 				}
               }
 			break;
 			

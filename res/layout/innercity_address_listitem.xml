@@ -12,6 +12,7 @@
 	      android:layout_height="wrap_content"
 	      android:layout_marginLeft="20dip"
 	      android:layout_centerVertical="true"
+	      android:background="@drawable/person_site_edit"
 	     />
          <TextView
 	      android:id="@+id/groupItem"

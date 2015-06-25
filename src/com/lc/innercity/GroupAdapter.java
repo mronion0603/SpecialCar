@@ -1,6 +1,8 @@
 package com.lc.innercity;
 
+import java.util.HashMap;
 import java.util.List;
+
 
 
 
@@ -22,16 +24,13 @@ import android.widget.TextView;
 public class GroupAdapter extends BaseAdapter {  
   
     private Context context;  
-  
-    private List<String> list;  
-    private List<Integer> list2;  
+    private List<HashMap<String , Object>> list;  
     private int selectedPosition = 0;
-    public GroupAdapter(Context context, List<String> list,List<Integer> list2) {  
-  
+    public GroupAdapter(Context context, List<HashMap<String , Object>> list) {    
         this.context = context;  
         this.list = list;  
-        this.list2 = list2; 
     }  
+   
   
     @Override  
     public int getCount() {  
@@ -71,8 +70,8 @@ public class GroupAdapter extends BaseAdapter {
             holder=(ViewHolder) convertView.getTag();  
         }  
         holder.groupItem.setTextColor(Color.BLACK);  
-        holder.groupItem.setText(list.get(position));  
-        holder.groupImage.setBackgroundResource(list2.get(position));
+        holder.groupItem.setText((String)list.get(position).get("address"));  
+        //holder.groupImage.setBackgroundResource(list2.get(position));
         
         if(selectedPosition == position){
         	

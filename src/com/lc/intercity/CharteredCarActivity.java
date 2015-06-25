@@ -1,10 +1,16 @@
 package com.lc.intercity;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.lc.innercity.AddressActivity;
 import com.lc.innercity.ModifyNameActivity;
 import com.lc.net.AddCarPoolNet;
+import com.lc.net.GetAddressNet;
 import com.lc.popupwindow.AddressPopupWindow;
 import com.lc.specialcar.R;
 import com.lc.utils.ButtonEffect;
@@ -46,6 +52,8 @@ public class CharteredCarActivity extends Activity implements OnClickListener {
     String getorderNum="",pickUpArea="";
     int curnum =0,totalnum=0;
     AddCarPoolNet addCarPoolNet = new AddCarPoolNet();
+    GetAddressNet getaddressnet = new GetAddressNet();
+    private List<HashMap<String , Object>> groups1= new ArrayList<HashMap<String , Object>>();
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
@@ -89,17 +97,20 @@ public class CharteredCarActivity extends Activity implements OnClickListener {
 		}else{
 			tvname.setText(username);
 		}
+		// 实例化AddressPopupWindow
+		menuWindow = new AddressPopupWindow(CharteredCarActivity.this, itemOnClick,groups1);
 	}
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
 		case R.id.star:
-			//实例化AddressPopupWindow
-			menuWindow = new AddressPopupWindow(CharteredCarActivity.this,itemOnClick);
-			//显示窗口
-			menuWindow.showAsDropDown(originview, 0, 0); 
-			break;
+		{   star.setClickable(false);
+			getaddressnet.setHandler(mHandler);
+	        getaddressnet.setDevice(Global.DEVICE);
+	        getaddressnet.setAuthn(MySharePreference.getStringValue(getApplication(), MySharePreference.AUTHN));
+	        getaddressnet.getCodeFromServer();
+		}	break;
 		case R.id.modify:
 			{Intent intent5 = new Intent();
 			intent5.setClass(CharteredCarActivity.this,ModifyNameActivity.class);
@@ -126,15 +137,33 @@ public class CharteredCarActivity extends Activity implements OnClickListener {
 			
 			
 			break;
+		
 		default:
 			break;
 		}
 	}
+	 private void parseADDRESS(String str)throws Exception{ 
+		     groups1.clear();
+	    	 JSONObject jsonobj = new JSONObject(str); 
+	         JSONArray jsonarray = jsonobj.getJSONArray("Data");
+	         for(int x=0;x<jsonarray.length();x++){
+	        	 JSONObject jsonobj2 = (JSONObject)jsonarray.get(x); 
+	         	 HashMap<String , Object> map = new HashMap<String , Object>();
+	 			 map.put("groupItem",jsonobj2.getString("commAddressId"));
+	 			 map.put("userId",jsonobj2.getString("userId"));
+	 			 map.put("address",jsonobj2.getString("address"));
+	 			 groups1.add(map);
+	 			 //groups.add(R.drawable.person_site_edit);  
+	 			 //groupAdapter.notifyDataSetChanged();
+	 			 //listItem.add(map);
+	         }
+	    }
+	 
 	//为弹出窗口实现监听类
     private OnItemClickListener  itemOnClick = new OnItemClickListener(){
 		@Override
 		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
-				String address = menuWindow.getItemStr(arg2);
+				String address = menuWindow.getItemStr2(arg2);
 				Message message = Message.obtain();  
 			    message.obj = address;  
 				message.what = Global.ADDRESS_MESSAGE;  
@@ -143,26 +172,38 @@ public class CharteredCarActivity extends Activity implements OnClickListener {
 		}
     };
     @SuppressLint("HandlerLeak")
-   	private Handler mHandler = new Handler() {
-           public void handleMessage(android.os.Message msg) {
-               switch(msg.what) { 
-   	            case Global.ADDRESS_MESSAGE:{
-   	            	String getaddress = (String)msg.obj;
-   	            	chooseaddress.setText(getaddress);
-   	            break;
-                   }
-   	            case Global.ADDCARPOOL:{
-	            	try {
-						parseJSON((String)msg.obj);
-						
-					} catch (Exception e) {
-						
-						e.printStackTrace();
-					}      	
-	            break;
-             }
-               }
-       }};
+	private Handler mHandler = new Handler() {
+		public void handleMessage(android.os.Message msg) {
+			switch (msg.what) {
+			case Global.ADDRESS_MESSAGE: {
+				String getaddress = (String) msg.obj;
+				chooseaddress.setText(getaddress);
+				break;
+			}
+			case Global.ADDCARPOOL: {
+				try {
+					parseJSON((String) msg.obj);
+
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				break;
+			}
+			case Global.GETADDRESS: {
+				try {
+					parseADDRESS((String) msg.obj);
+					// 显示窗口
+					menuWindow.showAsDropDown(originview, 0, 0);
+				} catch (Exception e) {
+
+					e.printStackTrace();
+				}
+				star.setClickable(true);
+				break;
+			}
+			}
+		}
+	};
        private void parseJSON(String str)throws Exception{  
        	JSONObject jsonobj = new JSONObject(str); 
        	int result = jsonobj.getInt("ResultCode");

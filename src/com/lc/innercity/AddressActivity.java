@@ -68,6 +68,7 @@ public class AddressActivity extends Activity implements OnClickListener {
     List<PoiInfo> mInfoList;  
     PoiInfo mCurentInfo;  
     ImageView mSelectImg;
+    double lat=0.0,lont=0.0;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
@@ -278,6 +279,8 @@ public class AddressActivity extends Activity implements OnClickListener {
                 mAdapter.notifyDataSetChanged();  
                 //mLoadBar.setVisibility(View.GONE);  
                 if(result.getPoiList() != null){
+                	lat = mInfoList.get(0).location.latitude;
+                	lont = mInfoList.get(0).location.longitude;
                    curaddress.setText(mInfoList.get(0).address);
                 }else{
                    curaddress.setText("获取地址失败");
@@ -297,6 +300,8 @@ public class AddressActivity extends Activity implements OnClickListener {
 		{   Intent intent = new Intent();
 	        String address =  curaddress.getText().toString();
 	        intent.putExtra("address", address);
+	        intent.putExtra("latidute",lat);
+	        intent.putExtra("longitude", lont);
 	        setResult(RESULT_OK, intent); 
 			finish();
 		}	break;

@@ -12,4 +12,7 @@ public class ConnectUrl {
  public static String addintercarpoolurl = commonurl+"addOrder";	
  public static String updateuserurl = commonurl+"updateUser";	
  public static String getmessageurl = commonurl+"getMessage";	
+ public static String addAddress = commonurl+"addAddress";	
+ public static String getAddress = commonurl+"getAddress";	
+ 
 }
