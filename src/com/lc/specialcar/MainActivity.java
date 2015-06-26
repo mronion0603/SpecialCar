@@ -2,16 +2,26 @@ package com.lc.specialcar;
 
 
 
+import java.util.HashMap;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 import com.lc.innercity.InnerCityHomeActivity;
 import com.lc.intercity.InterCityHomeActivity;
+import com.lc.net.GetInfoNet;
 import com.lc.official.OfficialHomeActivity;
 import com.lc.shuttle.ShuttleHomeActivity;
 import com.lc.slidingmenu.fragment.LeftFragment;
 import com.lc.slidingmenu.fragment.RightFragment;
 import com.lc.urgent.UrgentHomeActivity;
+import com.lc.user.AddressManageActivity;
 import com.lc.utils.ExitApplication;
+import com.lc.utils.Global;
+import com.lc.utils.MySharePreference;
+
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.PagerAdapter;
@@ -46,6 +56,7 @@ public class MainActivity extends SlidingFragmentActivity implements OnClickList
 	private int[] imgIdArray ;
 	private long waitTime = 3000;  //退出按钮等待时间
     private long touchTime = 0;    //退出按钮记录按下时间    
+   
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
@@ -80,6 +91,7 @@ public class MainActivity extends SlidingFragmentActivity implements OnClickList
 		
 		
 	}
+	
 	void initViewPager(){
 		ViewGroup group = (ViewGroup)findViewById(R.id.viewGroup);
 		viewPager = (ViewPager) findViewById(R.id.adv_pager);

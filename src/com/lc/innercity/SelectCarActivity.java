@@ -68,10 +68,20 @@ public class SelectCarActivity extends Activity implements OnClickListener {
 			finish();
 			break;
 		case R.id.righttext:
-			finish();
-			//Intent intent = new Intent();
-			//intent.setClass(CancelOrderActivity.this,BillingRuleActivity.class);
-			//startActivity(intent);
+			String type="1";
+            if(flag1){
+			 type="1";	
+			}
+            if(flag2){
+             type="2";	
+			}
+            if(flag3){
+             type="3";	
+   			}
+			Intent intent = new Intent();
+		    intent.putExtra("type", type);
+		    setResult(RESULT_OK, intent); 
+		    finish();
 			break;
 		case R.id.select1:
 			if(flag1){

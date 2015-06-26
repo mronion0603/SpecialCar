@@ -2,13 +2,16 @@ package com.lc.intercity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
+
 import com.lc.net.InterCarPoolNet;
 import com.lc.specialcar.R;
 import com.lc.utils.ExitApplication;
 import com.lc.utils.Global;
 import com.lc.utils.MySharePreference;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
@@ -146,6 +149,8 @@ public class SearchCarpoolActivity extends Activity implements OnClickListener {
         JSONObject jsonobj = new JSONObject(str); 
         JSONArray jsonarray = jsonobj.getJSONArray(key);
         for(int x=0;x<jsonarray.length();x++){
+        	String limit = ((JSONObject)jsonarray.get(x)).getString("limitsit");
+        	if(!limit.equals("1")){
         	 HashMap<String , Object> map = new HashMap<String , Object>();
 			 map.put("CarIcon", "2");	
 			 map.put("orderNum",((JSONObject)jsonarray.get(x)).getString("ordernum"));
@@ -160,6 +165,7 @@ public class SearchCarpoolActivity extends Activity implements OnClickListener {
 			 map.put("CurNum",((JSONObject)jsonarray.get(x)).getString("countRider"));
 			 map.put("TotalNum",((JSONObject)jsonarray.get(x)).getString("limitsit"));
 			 listItem.add(map);
+        	}
         }
     }
 }

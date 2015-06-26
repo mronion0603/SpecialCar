@@ -139,4 +139,7 @@ public class AddressPopupWindow extends PopupWindow {
 	public String getItemStr2(int index){
 		return (String)groups3.get(index).get("address");
 	}
+	public HashMap<String , Object> getMap(int index){
+		return groups3.get(index);
+	}
 }

@@ -1,8 +1,13 @@
 package com.lc.slidingmenu.fragment;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.lc.intercity.InterCityHomeActivity;
+import com.lc.net.GetInfoNet;
 import com.lc.specialcar.MainActivity;
 import com.lc.specialcar.R;
 import com.lc.user.AddressManageActivity;
@@ -21,6 +27,7 @@ import com.lc.user.MessageActivity;
 import com.lc.user.ModifyInfoActivity;
 import com.lc.user.MoreActivity;
 import com.lc.user.ReceiptActivity;
+import com.lc.utils.Global;
 import com.lc.utils.MySharePreference;
 
 /**
@@ -43,6 +50,7 @@ public class LeftFragment extends Fragment implements OnClickListener{
 	private TextView card;
 	private TextView tvname;
 	private View view;
+	 GetInfoNet getInfoNet = new GetInfoNet();
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -94,14 +102,57 @@ public class LeftFragment extends Fragment implements OnClickListener{
   		}else{
   		   card.setText("信用卡");
   		}
-  		String username = MySharePreference.getStringValue(getActivity(), MySharePreference.USERNAME);
-		if(username==null){
-			tvname.setText("公务专车");
-		}else{
-			tvname.setText(username);
-		}
+  		getInfoNet.setHandler(mhandler);
+		getInfoNet.setDevice(Global.DEVICE);
+		getInfoNet.setAuthn(MySharePreference.getStringValue(getActivity(), MySharePreference.AUTHN));
+		getInfoNet.getCodeFromServer();
+		
 	}
 	
+	@SuppressLint("HandlerLeak")
+	public Handler mhandler= new Handler() {
+        public void handleMessage(android.os.Message msg) {
+            switch(msg.what) { 
+	            case Global.GETUSERINFO:{
+	            		try {
+							parseJSON((String)msg.obj);
+							
+						} catch (Exception e) {
+							
+							e.printStackTrace();
+						}      	
+	             break;
+                }
+            }
+    }};
+    private void parseJSON(String str)throws Exception{  
+    	//System.out.println(str);
+    	JSONObject jsonobj = new JSONObject(str); 
+    	int result = jsonobj.getInt("ResultCode");
+   	    if(result==Global.SUCCESS){
+   	        JSONArray jsonarray = jsonobj.getJSONArray("Data");
+   	        for(int x=0;x<jsonarray.length();x++){
+   	        	 JSONObject jsonobj2 = (JSONObject)jsonarray.get(x);
+   	        	 if(jsonobj2.has("username"))
+   	        	 MySharePreference.editStringValue(getActivity(), MySharePreference.USERNAME, jsonobj2.getString("username"));
+   	        	 if(jsonobj2.has("email"))
+   	        	 MySharePreference.editStringValue(getActivity(), MySharePreference.EMAIL, jsonobj2.getString("email"));
+   	        	 if(jsonobj2.has("gender"))
+   	        	 MySharePreference.editStringValue(getActivity(), MySharePreference.GENDER, jsonobj2.getString("gender"));
+   	             //System.out.println(jsonobj2.getString("email"));
+   	    
+   	        }
+   	        String username = MySharePreference.getStringValue(getActivity(), MySharePreference.USERNAME);
+ 		    if(username==null){
+ 			tvname.setText("公务专车");
+ 		    }else{
+ 			tvname.setText(username);
+ 		    }
+        }else{
+          //Toast.makeText(Activity.this,jsonobj.getString("Message"), Toast.LENGTH_LONG).show();
+        } 
+    }
+    
 	@Override
 	public void onDestroyView() {
 		super.onDestroyView();

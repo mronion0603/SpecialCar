@@ -20,4 +20,7 @@ public class Global {
   public static final int GETMESSAGE=207; //登录
   public static final int ADDADDRESS=208; //登录
   public static final int GETADDRESS=209; //登录
+  public static final int GETBAIDUROUTE=210; //登录
+  public static final int GETUSERINFO=211; //获取用户信息
+  public static final int ADDINNER=212;
 }

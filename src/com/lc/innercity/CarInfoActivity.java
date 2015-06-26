@@ -1,6 +1,8 @@
 package com.lc.innercity;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -21,7 +23,10 @@ import com.baidu.mapapi.search.geocode.GeoCoder;
 import com.baidu.mapapi.search.geocode.OnGetGeoCoderResultListener;
 import com.baidu.mapapi.search.geocode.ReverseGeoCodeOption;
 import com.baidu.mapapi.search.geocode.ReverseGeoCodeResult;
+import com.lc.intercity.SearchCharteredCarActivity;
+import com.lc.net.AddInnerNet;
 import com.lc.net.GetAddressNet;
+import com.lc.net.RouteMatrixNet;
 import com.lc.popupwindow.AddressPopupWindow;
 import com.lc.popupwindow.TimePopupWindow;
 import com.lc.specialcar.R;
@@ -38,6 +43,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -47,13 +53,16 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
 public class CarInfoActivity extends Activity implements OnClickListener {
 	public static final int REQUSET_NAMEPHONE = 1;
 	public static final int REQUSET_ADDRESS = 2;
 	public static final int REQUSET_ADDRESS2 = 3;
-    TextView tvTitle,righttext,feeRule,tvname,tvphone,tvstartAddress,tvendAddress,tvdate;
+	public static final int REQUSET_DEMAND = 4;
+	public static final int REQUSET_SELECTCAR = 5;
+    TextView tvTitle,righttext,feeRule,tvname,tvphone,tvstartAddress,tvendAddress,tvdate,tvmoney,tvdemand;
     ImageView ivleft;
     Button ivSearch;
     private RelativeLayout rls,rlusecar,rlselectcar,rldate,rlmodifyname,rlstartaddress,rlgetoffaddress;
@@ -71,6 +80,13 @@ public class CarInfoActivity extends Activity implements OnClickListener {
     PoiInfo mCurentInfo;    // 当前位置信息
     private List<HashMap<String , Object>> groups1= new ArrayList<HashMap<String , Object>>();
     GetAddressNet getaddressnet = new GetAddressNet();
+    RouteMatrixNet routeMatrixNet = new RouteMatrixNet();
+    double slat=0,slont =0,dlat=0,dlont=0;
+    int duration=0, distance =0;
+    double basicmoney=13,pricedis=1.5,pricedura=0.24;
+    String type="";
+    AddInnerNet addInnerNet = new AddInnerNet();
+    String getdate="";
     @Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
@@ -103,6 +119,8 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 		tvendAddress = (TextView) findViewById(R.id.AddressEnd);
 		tvTitle = (TextView) findViewById(R.id.topTv);
 		tvTitle.setText("市内预约");
+		tvdemand = (TextView) findViewById(R.id.Demand);
+		tvmoney = (TextView) findViewById(R.id.money2);
 		righttext = (TextView) findViewById(R.id.righttext);
 		righttext.setVisibility(View.VISIBLE);
 		righttext.setText("计费规则");
@@ -152,12 +170,26 @@ public class CarInfoActivity extends Activity implements OnClickListener {
         getaddressnet.setDevice(Global.DEVICE);
         getaddressnet.setAuthn(MySharePreference.getStringValue(getApplication(), MySharePreference.AUTHN));
         getaddressnet.getCodeFromServer();
+	
+        String username = MySharePreference.getStringValue(getApplication(), MySharePreference.USERNAME);
+		if(username==null){
+			tvname.setText( MySharePreference.getStringValue(getApplication(), MySharePreference.PHONE));
+		}else{
+			tvname.setText(username);
+		}
 	}
 	//为弹出窗口实现监听类
     private OnItemClickListener  itemOnClick = new OnItemClickListener(){
 		@Override
 		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
 				String address = menuWindow.getItemStr2(arg2);
+				HashMap<String , Object> map = menuWindow.getMap(arg2);
+				//System.out.println("map2:"+map.toString());
+				String strlat = (String)map.get("latidute");
+				String strlont = (String)map.get("longitude");
+				slat =Double.parseDouble(strlat) ;
+				slont =Double.parseDouble(strlont);
+				
 				Message message = Message.obtain();  
 			    message.obj = address;  
 				message.what = Global.ADDRESS_MESSAGE;  
@@ -169,6 +201,12 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 		@Override
 		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
 				String address = menuWindow.getItemStr2(arg2);
+				HashMap<String , Object> map = menuWindow.getMap(arg2);
+				//System.out.println("map2:"+map.toString());
+				String strlat = (String)map.get("latidute");
+				String strlont = (String)map.get("longitude");
+				dlat =Double.parseDouble(strlat) ;
+				dlont =Double.parseDouble(strlont);
 				Message message = Message.obtain();  
 			    message.obj = address;  
 				message.what = Global.ADDRESS_END_MESSAGE;  
@@ -182,6 +220,7 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 			switch (v.getId()) {
 			case R.id.comfirm:
 				String time = timepWindow.getTime();
+				getdate = timepWindow.getTimeUpload2();
 				Message message = Message.obtain();  
 			    message.obj = time;  
 				message.what = Global.TIME_MESSAGE;  
@@ -208,11 +247,29 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 	            case Global.ADDRESS_MESSAGE:{
 	            	String getaddress = (String)msg.obj;
 	            	tvstartAddress.setText(getaddress);
+	            	if(tvendAddress.getText().toString().equals("输入下车地址预估车费")|tvendAddress.getText().toString().equals("地址获取中...")
+	            			|tvendAddress.getText().toString().equals("获取地址失败")){
+	            		tvmoney.setText("");
+	            	}else{
+	            		routeMatrixNet.setHandler(mHandler);
+		            	routeMatrixNet.setOrigins(String.valueOf(slat)+","+String.valueOf(slont));
+		            	routeMatrixNet.setDestinations(String.valueOf(dlat)+","+String.valueOf(dlont));
+		            	routeMatrixNet.getCodeFromServer();
+	            	}
 	            break;
                 }
 	            case Global.ADDRESS_END_MESSAGE:{
 	            	String getaddress = (String)msg.obj;
 	            	tvendAddress.setText(getaddress);
+	            	if(tvstartAddress.getText().toString().equals("地址获取中...")
+	            			|tvstartAddress.getText().toString().equals("获取地址失败")){
+	            		tvmoney.setText("");
+	            	}else{
+	            	 routeMatrixNet.setHandler(mHandler);
+	            	 routeMatrixNet.setOrigins(String.valueOf(slat)+","+String.valueOf(slont));
+	            	 routeMatrixNet.setDestinations(String.valueOf(dlat)+","+String.valueOf(dlont));
+	            	 routeMatrixNet.getCodeFromServer();
+	            	}
 	            break;
                 }
 	            case Global.GETADDRESS: {
@@ -225,10 +282,60 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 					}
 					break;
 				}
+	            case Global.GETBAIDUROUTE: {
+					try {
+						parseRoute((String) msg.obj);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					break;
+				}
+	            case Global.ADDINNER: {
+	            	//Log.d("SC",(String) msg.obj );
+					try {
+						parseInner((String) msg.obj);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					break;
+				}
             }
     }};
+    private void parseInner(String str)throws Exception{ 
+    	JSONObject jsonobj = new JSONObject(str); 
+    	int result = jsonobj.getInt("ResultCode");
+   	    if(result==Global.SUCCESS){
+   	         Intent intent2 = new Intent();
+			 intent2.setClass(CarInfoActivity.this,SendDealActivity.class);
+			 startActivity(intent2);
+        }else{
+           Toast.makeText(CarInfoActivity.this,jsonobj.getString("Message"), Toast.LENGTH_LONG).show();
+        } 
+    }
+    private void parseRoute(String str)throws Exception{ 
+    	//System.out.println(str);
+    	 JSONObject jsonobj = new JSONObject(str);  
+         int result = jsonobj.getInt("status");
+    	 if(result==0){
+    		 JSONObject jsonobj2 = jsonobj.getJSONObject("result");
+    		 JSONArray jsonarray = jsonobj2.getJSONArray("elements");
+    		 //System.out.println(jsonarray);
+    		 for(int x=0;x<jsonarray.length();x++){
+    	       	     JSONObject jsonobj3 = (JSONObject)jsonarray.get(x); 
+    	        	 //HashMap<String , Object> map = new HashMap<String , Object>();
+    	        	 duration = jsonobj3.getJSONObject("duration").getInt("value");
+    			     distance = jsonobj3.getJSONObject("distance").getInt("value");
+    				 //groups1.add(map);
+    	     }
+    		 int price = (int)estimate(basicmoney,pricedis,pricedura);
+    		 tvmoney.setText("￥"+price);
+         }else{
+            Toast.makeText(CarInfoActivity.this,  result+"", Toast.LENGTH_LONG).show();
+         } 
+   }
     private void parseADDRESS(String str)throws Exception{ 
 	    groups1.clear();
+	   // System.out.println(str);
    	    JSONObject jsonobj = new JSONObject(str); 
         JSONArray jsonarray = jsonobj.getJSONArray("Data");
         for(int x=0;x<jsonarray.length();x++){
@@ -237,6 +344,9 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 			 map.put("groupItem",jsonobj2.getString("commAddressId"));
 			 map.put("userId",jsonobj2.getString("userId"));
 			 map.put("address",jsonobj2.getString("address"));
+			 map.put("longitude",jsonobj2.getString("longitude"));
+			 map.put("latidute",jsonobj2.getString("latidute"));
+			// System.out.println(map.toString());
 			 groups1.add(map);
         }
    }
@@ -265,20 +375,61 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 			menuWindow.showAsDropDown(originview, 0, 0); //显示窗口
 		}	break;
 		case R.id.Search:
-			Intent intent2 = new Intent();
-			intent2.setClass(CarInfoActivity.this,SendDealActivity.class);
-			startActivity(intent2);
+			
+			String endaddress = tvendAddress.getText().toString();
+			String startaddress = tvstartAddress.getText().toString();
+			
+			if(endaddress==null|endaddress.equals("输入下车地址预估车费")|endaddress.equals("地址获取中...")
+        			|endaddress.equals("获取地址失败")){
+				Toast.makeText(getApplication(), "请选择目的地", Toast.LENGTH_SHORT).show();
+			}else if(startaddress==null|startaddress.equals("地址获取中...")
+        			|startaddress.equals("获取地址失败")){
+				Toast.makeText(getApplication(), "请选择出发地", Toast.LENGTH_SHORT).show();
+			}else{
+				addInnerNet.setHandler(mHandler);
+				addInnerNet.setAuthn(MySharePreference.getStringValue(getApplication(), MySharePreference.AUTHN));
+	            addInnerNet.setDevice(Global.DEVICE);
+	            addInnerNet.setCartype(type);
+	            addInnerNet.setBasicMoney(String.valueOf(basicmoney));
+	            if(tvdemand.getText().toString()!=null)
+	            addInnerNet.setComment(tvdemand.getText().toString());
+	            addInnerNet.seteLatitude(String.valueOf(dlat));
+	            addInnerNet.seteLongitude(String.valueOf(dlont));
+	            addInnerNet.setEndAddress(endaddress);
+	            addInnerNet.setLongFootMoney("");
+	            addInnerNet.setMileage(String.valueOf(distance));
+	            addInnerNet.setRealMoney(String.valueOf(estimate(basicmoney,pricedis,pricedura)));
+	            addInnerNet.setRiderName(tvname.getText().toString());
+	            addInnerNet.setRiderPhone(MySharePreference.getStringValue(getApplication(), MySharePreference.PHONE));
+	            addInnerNet.setsLatitude(String.valueOf(slat));
+	            addInnerNet.setsLongitude(String.valueOf(slont));
+	            addInnerNet.setStartAddress(startaddress);
+	            String startTime = tvdate.getText().toString();
+	            if(startTime.equals("现在")){
+	            	SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm"); 
+	        		Date curDate = new Date(System.currentTimeMillis());//获取当前时间       
+	        		startTime  = formatter.format(curDate); 
+	        		addInnerNet.setStartTime(startTime);
+	            }else{
+	            	System.out.println("getdate:"+getdate);
+	            	addInnerNet.setStartTime(getdate);
+	            }
+	            addInnerNet.setVoucherMoney("0");
+	            addInnerNet.setVoucherNum("");
+	            addInnerNet.getDataFromServer();
+	            //
+			}
 			break;
 		case R.id.usecar:
-			Intent intent3 = new Intent();
+		{	Intent intent3 = new Intent();
 			intent3.setClass(CarInfoActivity.this,CarDemandActivity.class);
-			startActivity(intent3);
-			break;
+			startActivityForResult(intent3,REQUSET_DEMAND);
+		}	break;
 		case R.id.selectcar:
-			Intent intent4 = new Intent();
+		{	Intent intent4 = new Intent();
 			intent4.setClass(CarInfoActivity.this,SelectCarActivity.class);
-			startActivity(intent4);
-			break;
+			startActivityForResult(intent4, REQUSET_SELECTCAR);
+		}	break;
 		case R.id.rlmodifyname:
 			Intent intent5 = new Intent();
 			intent5.setClass(CarInfoActivity.this,ModifyNameActivity.class);
@@ -303,6 +454,22 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 	    @Override  
 	    protected void onActivityResult(int requestCode, int resultCode, Intent data) {  
 	        super.onActivityResult(requestCode, resultCode, data);  
+	        if (requestCode == REQUSET_SELECTCAR && resultCode == RESULT_OK) {
+	        	  //String type ="";
+	        	  Bundle extras = data.getExtras();
+	              if(extras != null){
+	            	  type = extras.getString("type");
+	            	 // tv.setText(type);
+	              }
+	        }  
+	        if (requestCode == REQUSET_DEMAND && resultCode == RESULT_OK) {
+	        	  String demand ="";
+	        	  Bundle extras = data.getExtras();
+	              if(extras != null){
+	            	  demand = extras.getString("demand");
+	            	  tvdemand.setText(demand);
+	              }
+	        }  
 	        if (requestCode == REQUSET_NAMEPHONE && resultCode == RESULT_OK) {
 	        	String name ="";
 	        	String phone ="";
@@ -316,10 +483,23 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 	        }  
 	        if (requestCode == REQUSET_ADDRESS && resultCode == RESULT_OK) {
 	        	String address ="";
+	        	
 	        	  Bundle extras = data.getExtras();
 	              if(extras != null){
 	            	  address = extras.getString("address");
+	            	  slat = extras.getDouble("latidute");
+	            	  slont = extras.getDouble("longitude");
 	            	  tvstartAddress.setText(address);
+	            	  if(tvendAddress.getText().toString().equals("输入下车地址预估车费")|tvendAddress.getText().toString().equals("地址获取中...")
+		            			|tvendAddress.getText().toString().equals("获取地址失败")){
+		            		tvmoney.setText("");
+		              }else{
+		            		routeMatrixNet.setHandler(mHandler);
+			            	routeMatrixNet.setOrigins(String.valueOf(slat)+","+String.valueOf(slont));
+			            	routeMatrixNet.setDestinations(String.valueOf(dlat)+","+String.valueOf(dlont));
+			            	routeMatrixNet.getCodeFromServer();
+		              }
+	            	  
 	              }
 	        }  
 	        if (requestCode == REQUSET_ADDRESS2 && resultCode == RESULT_OK) {
@@ -327,7 +507,18 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 	        	  Bundle extras = data.getExtras();
 	              if(extras != null){
 	            	  address = extras.getString("address");
+	            	  dlat = extras.getDouble("latidute");
+	            	  dlont = extras.getDouble("longitude");
 	            	  tvendAddress.setText(address);
+	            	  if(tvstartAddress.getText().toString().equals("地址获取中...")
+		            			|tvstartAddress.getText().toString().equals("获取地址失败")){
+		            		tvmoney.setText("");
+		              }else{
+		            	 routeMatrixNet.setHandler(mHandler);
+		            	 routeMatrixNet.setOrigins(String.valueOf(slat)+","+String.valueOf(slont));
+		            	 routeMatrixNet.setDestinations(String.valueOf(dlat)+","+String.valueOf(dlont));
+		            	 routeMatrixNet.getCodeFromServer();
+		              }
 	              }
 	        }  
 	    }  
@@ -370,6 +561,8 @@ public class CarInfoActivity extends Activity implements OnClickListener {
                 mCurentInfo.address = result.getAddress();  
                 mCurentInfo.location = result.getLocation();  
                 mCurentInfo.name = "[位置]";  
+                slat = mCurentInfo.location.latitude;
+                slont = mCurentInfo.location.longitude;
                 if(result.getPoiList() != null){
                 	tvstartAddress.setText(mCurentInfo.address);
                 }else{
@@ -379,4 +572,14 @@ public class CarInfoActivity extends Activity implements OnClickListener {
             }  
         }  
     };  
+    /**预估价格*/
+    public double estimate(double basicmoney,double pricedis, double pricedura){
+    	double totalmoney=0;
+    	double dis = (double)distance;
+    	double dura=(double)duration;
+    	dis = dis/1000;
+        dura = dura/60;
+    	totalmoney = basicmoney + pricedis*dis +pricedura*dura;
+        return totalmoney;
+    }
 }

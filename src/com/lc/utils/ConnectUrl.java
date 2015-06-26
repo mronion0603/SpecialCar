@@ -14,5 +14,7 @@ public class ConnectUrl {
  public static String getmessageurl = commonurl+"getMessage";	
  public static String addAddress = commonurl+"addAddress";	
  public static String getAddress = commonurl+"getAddress";	
- 
+ public static String getRouteMatrix ="http://api.map.baidu.com/direction/v1/routematrix";  //获取百度的距离时间评估	
+ public static String getUserinfo = commonurl+"getUser";
+ public static String addinneturl = commonurl+"addOrder";	
 }
