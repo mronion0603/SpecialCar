@@ -84,12 +84,14 @@ public class SearchCarpoolActivity extends Activity implements OnClickListener {
 				String CurNum = listItem.get(arg2).get("CurNum")+"";
 				String totalNum = listItem.get(arg2).get("TotalNum")+"";
 				String PickUpArea = listItem.get(arg2).get("PickUpArea")+"";
+				String driverid = listItem.get(arg2).get("driverid")+"";
 				Intent intent = new Intent();
 				intent.setClass(getApplication(), CarpoolActivity.class);
 				intent.putExtra("orderNum", orderNum);
 				intent.putExtra("CurNum", CurNum);
 				intent.putExtra("TotalNum", totalNum);
 				intent.putExtra("PickUpArea", PickUpArea);
+				intent.putExtra("driverid", driverid);
 				startActivity(intent);
 			}
 		});
@@ -149,12 +151,12 @@ public class SearchCarpoolActivity extends Activity implements OnClickListener {
         JSONObject jsonobj = new JSONObject(str); 
         JSONArray jsonarray = jsonobj.getJSONArray(key);
         for(int x=0;x<jsonarray.length();x++){
-        	String limit = ((JSONObject)jsonarray.get(x)).getString("limitsit");
-        	if(!limit.equals("1")){
+        	//String limit = ((JSONObject)jsonarray.get(x)).getString("limitsit");
+        	//if(!limit.equals("1")){
         	 HashMap<String , Object> map = new HashMap<String , Object>();
 			 map.put("CarIcon", "2");	
 			 map.put("orderNum",((JSONObject)jsonarray.get(x)).getString("ordernum"));
-			 //map.put("groupItem2",((JSONObject)jsonarray.get(x)).getString("driverid"));
+			 map.put("driverid",((JSONObject)jsonarray.get(x)).getString("driverid"));
 			 //map.put("groupItem3",((JSONObject)jsonarray.get(x)).getString("startAddress"));
 			 //map.put("groupItem4",((JSONObject)jsonarray.get(x)).getString("endAddress"));
 			 map.put("Time",((JSONObject)jsonarray.get(x)).getString("starttime"));
@@ -165,7 +167,7 @@ public class SearchCarpoolActivity extends Activity implements OnClickListener {
 			 map.put("CurNum",((JSONObject)jsonarray.get(x)).getString("countRider"));
 			 map.put("TotalNum",((JSONObject)jsonarray.get(x)).getString("limitsit"));
 			 listItem.add(map);
-        	}
+        	//}
         }
     }
 }

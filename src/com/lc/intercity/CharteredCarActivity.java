@@ -11,6 +11,7 @@ import com.lc.innercity.AddressActivity;
 import com.lc.innercity.ModifyNameActivity;
 import com.lc.net.AddCarPoolNet;
 import com.lc.net.GetAddressNet;
+import com.lc.net.NotifyDriverNet;
 import com.lc.popupwindow.AddressPopupWindow;
 import com.lc.specialcar.R;
 import com.lc.utils.ButtonEffect;
@@ -54,6 +55,9 @@ public class CharteredCarActivity extends Activity implements OnClickListener {
     AddCarPoolNet addCarPoolNet = new AddCarPoolNet();
     GetAddressNet getaddressnet = new GetAddressNet();
     private List<HashMap<String , Object>> groups1= new ArrayList<HashMap<String , Object>>();
+    String getdriverid="";
+    NotifyDriverNet notifyDriverNet = new NotifyDriverNet();
+    
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
@@ -69,6 +73,7 @@ public class CharteredCarActivity extends Activity implements OnClickListener {
 	       curnum = Integer.parseInt(extras.getString("CurNum"));
 	       totalnum = Integer.parseInt(extras.getString("TotalNum"));
 	       pickUpArea = extras.getString("PickUpArea");
+	       getdriverid= extras.getString("driverid");
 	    }
 		ExitApplication.getInstance().addActivity(this);
 		LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);  
@@ -133,6 +138,7 @@ public class CharteredCarActivity extends Activity implements OnClickListener {
 			addCarPoolNet.setRiderName(tvname.getText().toString());
 			addCarPoolNet.setRiderPhone(MySharePreference.getStringValue(getApplication(), MySharePreference.PHONE));
 			addCarPoolNet.setServiceTypeId("5");
+			addCarPoolNet.setCpbStauts("2");
 			addCarPoolNet.getDataFromServer();
 			
 			
@@ -208,10 +214,15 @@ public class CharteredCarActivity extends Activity implements OnClickListener {
        	JSONObject jsonobj = new JSONObject(str); 
        	int result = jsonobj.getInt("ResultCode");
       	    if(result==Global.SUCCESS){
+      	    	notifyDriverNet.setHandler(mHandler);
+       	    	notifyDriverNet.setDriverId(getdriverid);
+       	    	notifyDriverNet.getDataFromServer();
+       	    	
       	    	Intent intent = new Intent();
     			intent.putExtra("title", "包车");
     			intent.setClass(getApplication(), SignUpActivity.class);
     			startActivity(intent);
+    			
            }else{
               Toast.makeText(CharteredCarActivity.this,jsonobj.getString("Message"), Toast.LENGTH_LONG).show();
            } 

@@ -6,6 +6,7 @@ import org.json.JSONObject;
 import com.lc.innercity.GroupAdapter;
 import com.lc.innercity.ModifyNameActivity;
 import com.lc.net.AddCarPoolNet;
+import com.lc.net.NotifyDriverNet;
 import com.lc.popupwindow.AddressPopupWindow;
 import com.lc.specialcar.R;
 import com.lc.utils.ButtonEffect;
@@ -42,6 +43,8 @@ public class CarpoolActivity extends Activity implements OnClickListener {
     String getorderNum="",pickUpArea="";
     int curnum =0,totalnum=0;
     AddCarPoolNet addCarPoolNet = new AddCarPoolNet();
+    NotifyDriverNet notifyDriverNet = new NotifyDriverNet();
+    String getdriverid="";
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
@@ -56,6 +59,7 @@ public class CarpoolActivity extends Activity implements OnClickListener {
 	       curnum = Integer.parseInt(extras.getString("CurNum"));
 	       totalnum = Integer.parseInt(extras.getString("TotalNum"));
 	       pickUpArea = extras.getString("PickUpArea");
+	       getdriverid= extras.getString("driverid");
 	    }
 		ExitApplication.getInstance().addActivity(this);
 		tvname = (TextView) findViewById(R.id.Name);
@@ -106,6 +110,7 @@ public class CarpoolActivity extends Activity implements OnClickListener {
 				addCarPoolNet.setRiderName(tvname.getText().toString());
 				addCarPoolNet.setRiderPhone(MySharePreference.getStringValue(getApplication(), MySharePreference.PHONE));
 				addCarPoolNet.setServiceTypeId("5");
+				addCarPoolNet.setCpbStauts("1");
 				addCarPoolNet.getDataFromServer();
 				
 			}else{
@@ -131,6 +136,7 @@ public class CarpoolActivity extends Activity implements OnClickListener {
 					}      	
 	            break;
                 }
+	            
             }
     }};
     
@@ -138,15 +144,28 @@ public class CarpoolActivity extends Activity implements OnClickListener {
     	JSONObject jsonobj = new JSONObject(str); 
     	int result = jsonobj.getInt("ResultCode");
    	    if(result==Global.SUCCESS){
+   	    	notifyDriverNet.setHandler(mHandler);
+   	    	notifyDriverNet.setDriverId(getdriverid);
+   	    	notifyDriverNet.getDataFromServer();
+   	    	
    	    	Intent intent = new Intent();
 			intent.putExtra("title", "拼车");
 			intent.setClass(getApplication(), SignUpActivity.class);
 			startActivity(intent);
+			
         }else{
           Toast.makeText(CarpoolActivity.this,jsonobj.getString("Message"), Toast.LENGTH_LONG).show();
         } 
     }
-    
+    private void parseNotify(String str)throws Exception{  
+    	JSONObject jsonobj = new JSONObject(str); 
+    	int result = jsonobj.getInt("ResultCode");
+   	    if(result==Global.SUCCESS){
+   	    	
+        }else{
+          Toast.makeText(CarpoolActivity.this,jsonobj.getString("Message"), Toast.LENGTH_LONG).show();
+        } 
+    }
 	//重写的结果返回方法  
     @Override  
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {  

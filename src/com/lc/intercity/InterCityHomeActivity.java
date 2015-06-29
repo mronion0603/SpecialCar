@@ -73,9 +73,10 @@ public class InterCityHomeActivity extends Activity implements OnClickListener {
 		SimpleDateFormat formatter =   new SimpleDateFormat("yyyy-MM-dd HH:mm"); 
 		SimpleDateFormat formatter2 =   new SimpleDateFormat("yyyy-MM-dd");  
 		Date curDate = new Date(System.currentTimeMillis());//获取当前时间       
-		String   str  = formatter.format(curDate);  
+		String   str  = formatter2.format(curDate);  
 		tvdate.setText(str);
 		requestdate = formatter2.format(curDate);
+		
 	}
 	//为弹出窗口实现监听类
     private OnClickListener  itemsOnClick = new OnClickListener(){
@@ -109,7 +110,7 @@ public class InterCityHomeActivity extends Activity implements OnClickListener {
 	            	String getdate = (String)msg.obj;
 	            	tvdate.setText(getdate);
 	            break;
-                }
+               }
             }
     }};
 	@Override
