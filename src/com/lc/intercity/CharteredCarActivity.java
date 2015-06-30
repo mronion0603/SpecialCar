@@ -145,7 +145,6 @@ public class CharteredCarActivity extends Activity implements OnClickListener {
 			addCarPoolNet.setCpbStauts("2");
 			addCarPoolNet.getDataFromServer();
 			
-			
 			break;
 		
 		default:
@@ -193,7 +192,6 @@ public class CharteredCarActivity extends Activity implements OnClickListener {
 			case Global.ADDCARPOOL: {
 				try {
 					parseJSON((String) msg.obj);
-
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

@@ -1,15 +1,24 @@
 package com.lc.shuttle;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import com.lc.innercity.AddressActivity;
 import com.lc.innercity.CarDemandActivity;
 import com.lc.innercity.GroupAdapter;
 import com.lc.innercity.ModifyNameActivity;
+import com.lc.net.GetAddressNet;
 import com.lc.popupwindow.AddressPopupWindow;
 import com.lc.popupwindow.TimePopupWindow;
 import com.lc.specialcar.R;
 import com.lc.utils.ButtonEffect;
 import com.lc.utils.ExitApplication;
 import com.lc.utils.Global;
+import com.lc.utils.MySharePreference;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -42,6 +51,8 @@ public class SendActivity extends Activity implements OnClickListener {
 	GroupAdapter groupAdapter;
 	AddressPopupWindow menuWindow;	//自定义的弹出框类
 	TimePopupWindow timepWindow;
+	GetAddressNet getaddressnet = new GetAddressNet();
+	private List<HashMap<String , Object>> groups1= new ArrayList<HashMap<String , Object>>();
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
@@ -88,6 +99,10 @@ public class SendActivity extends Activity implements OnClickListener {
 		imAddress = (ImageView) findViewById(R.id.Star);
 		imAddress.setOnClickListener(this);
 		
+		  getaddressnet.setHandler(mHandler);
+	        getaddressnet.setDevice(Global.DEVICE);
+	        getaddressnet.setAuthn(MySharePreference.getStringValue(getApplication(), MySharePreference.AUTHN));
+	        getaddressnet.getCodeFromServer();
 	}
 	@Override
 	public void onClick(View v) {
@@ -95,7 +110,7 @@ public class SendActivity extends Activity implements OnClickListener {
 		switch (v.getId()) {
 	
 		case R.id.Star:
-			menuWindow = new AddressPopupWindow(SendActivity.this,itemOnClick);//实例化AddressPopupWindow
+			menuWindow = new AddressPopupWindow(SendActivity.this,itemOnClick,groups1);//实例化AddressPopupWindow
 			menuWindow.showAsDropDown(originview, 0, 0); //显示窗口
 			break;
 		
@@ -128,7 +143,7 @@ public class SendActivity extends Activity implements OnClickListener {
     private OnItemClickListener  itemOnClick = new OnItemClickListener(){
 		@Override
 		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
-				String address = menuWindow.getItemStr(arg2);
+				String address = menuWindow.getItemStr2(arg2);
 				Message message = Message.obtain();  
 			    message.obj = address;  
 				message.what = Global.ADDRESS_END_MESSAGE;  
@@ -172,8 +187,34 @@ public class SendActivity extends Activity implements OnClickListener {
 	            	tvendaddress.setText(getaddress);
 	            break;
                 }
+	            case Global.GETADDRESS: {
+					try {
+						parseADDRESS((String) msg.obj);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					break;
+				}
             }
     }};
+    private void parseADDRESS(String str)throws Exception{ 
+	    groups1.clear();
+	   // System.out.println(str);
+   	    JSONObject jsonobj = new JSONObject(str); 
+        JSONArray jsonarray = jsonobj.getJSONArray("Data");
+        for(int x=0;x<jsonarray.length();x++){
+       	 JSONObject jsonobj2 = (JSONObject)jsonarray.get(x); 
+        	 HashMap<String , Object> map = new HashMap<String , Object>();
+			 map.put("groupItem",jsonobj2.getString("commAddressId"));
+			 map.put("userId",jsonobj2.getString("userId"));
+			 map.put("address",jsonobj2.getString("address"));
+			 map.put("longitude",jsonobj2.getString("longitude"));
+			 map.put("latidute",jsonobj2.getString("latidute"));
+			// System.out.println(map.toString());
+			 groups1.add(map);
+        }
+   }
+    
 	//重写的结果返回方法  
 	@Override  
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {  

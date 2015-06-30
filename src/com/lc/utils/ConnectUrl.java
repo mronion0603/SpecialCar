@@ -21,5 +21,5 @@ public class ConnectUrl {
  public static String addinneturl = commonurl+"addOrder";	
  public static String addnotifydriver = commondriverurl+"pushCJ.ct";	
  public static String getCarType = commonurl+"getCarType";	
- 
+ public static String getNearbyDriver = commonurl+"selSNCoord";
 }

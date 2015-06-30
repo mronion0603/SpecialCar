@@ -26,7 +26,7 @@ public class AddressPopupWindow extends PopupWindow {
 	List<String> groups1;
 	List<HashMap<String , Object>> groups3;
 	private View mMenuView;
-	
+	/*
 	@SuppressWarnings("deprecation")
 	public AddressPopupWindow(Activity context,OnItemClickListener itemClickListener) {
 		super(context);
@@ -80,8 +80,7 @@ public class AddressPopupWindow extends PopupWindow {
 			}
 		});
 	}
-	
-	
+	*/
 	public AddressPopupWindow(Activity context,OnItemClickListener itemClickListener,List<HashMap<String , Object>> groups2 ) {
 		super(context);
 		LayoutInflater inflater = (LayoutInflater) context
@@ -132,10 +131,10 @@ public class AddressPopupWindow extends PopupWindow {
 			}
 		});
 	}
-	
+	/*
 	public String getItemStr(int index){
 		return groups1.get(index);
-	}
+	}*/
 	public String getItemStr2(int index){
 		return (String)groups3.get(index).get("address");
 	}

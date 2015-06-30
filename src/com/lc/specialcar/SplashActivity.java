@@ -1,6 +1,10 @@
 package com.lc.specialcar;
 
+import cn.jpush.android.api.InstrumentedActivity;
+import cn.jpush.android.api.JPushInterface;
+
 import com.lc.utils.MySharePreference;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
@@ -104,4 +108,15 @@ public class SplashActivity extends Activity {
             super.handleMessage(msg);
         }
     };
+    
+    @Override
+    protected void onResume() {
+        super.onResume();
+        JPushInterface.onResume(this);
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        JPushInterface.onPause(this);
+    }
 }

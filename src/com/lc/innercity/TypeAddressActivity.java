@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.baidu.mapapi.SDKInitializer;
-import com.baidu.mapapi.map.MapStatusUpdate;
-import com.baidu.mapapi.map.MapStatusUpdateFactory;
-import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.search.core.PoiInfo;
 import com.baidu.mapapi.search.core.SearchResult;
@@ -17,7 +14,6 @@ import com.baidu.mapapi.search.geocode.OnGetGeoCoderResultListener;
 import com.baidu.mapapi.search.geocode.ReverseGeoCodeOption;
 import com.baidu.mapapi.search.geocode.ReverseGeoCodeResult;
 import com.lc.specialcar.R;
-import com.lc.utils.ButtonEffect;
 import com.lc.utils.ExitApplication;
 
 import android.app.Activity;
@@ -30,7 +26,6 @@ import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
@@ -258,6 +253,5 @@ public class TypeAddressActivity extends Activity implements OnClickListener {
 		}
 	}
 	
-
 	   
 }

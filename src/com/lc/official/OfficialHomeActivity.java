@@ -1,5 +1,12 @@
 package com.lc.official;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
@@ -19,6 +26,7 @@ import com.lc.innercity.BillingRuleActivity;
 import com.lc.innercity.CarDemandActivity;
 import com.lc.innercity.GroupAdapter;
 import com.lc.innercity.ModifyNameActivity;
+import com.lc.net.GetAddressNet;
 import com.lc.popupwindow.AddressPopupWindow;
 import com.lc.popupwindow.TimeLongPopupWindow;
 import com.lc.popupwindow.TimePopupWindow;
@@ -26,6 +34,7 @@ import com.lc.specialcar.R;
 import com.lc.utils.ButtonEffect;
 import com.lc.utils.ExitApplication;
 import com.lc.utils.Global;
+import com.lc.utils.MySharePreference;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -71,6 +80,8 @@ public class OfficialHomeActivity extends Activity implements OnClickListener {
     GeoCoder mGeoCoder = null; 	 // 地理编码  
     PoiInfo mCurentInfo;    // 当前位置信息
     
+    GetAddressNet getaddressnet = new GetAddressNet();
+    private List<HashMap<String , Object>> groups1= new ArrayList<HashMap<String , Object>>();
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
@@ -141,6 +152,11 @@ public class OfficialHomeActivity extends Activity implements OnClickListener {
               
              }
         });
+        getaddressnet.setHandler(mHandler);
+        getaddressnet.setDevice(Global.DEVICE);
+        getaddressnet.setAuthn(MySharePreference.getStringValue(getApplication(), MySharePreference.AUTHN));
+        getaddressnet.getCodeFromServer();
+        
 	}
 	//为弹出窗口实现监听类
     private OnItemClickListener  itemOnClick = new OnItemClickListener(){
@@ -149,7 +165,8 @@ public class OfficialHomeActivity extends Activity implements OnClickListener {
 				long arg3) {
 			switch (arg0.getId()) {
 			case R.id.lvGroup:
-				String address = menuWindow.getItemStr(arg2);
+				String address =  menuWindow.getItemStr2(arg2);
+				//
 				Message message = Message.obtain();  
 			    message.obj = address;  
 				message.what = Global.ADDRESS_MESSAGE;  
@@ -223,7 +240,7 @@ public class OfficialHomeActivity extends Activity implements OnClickListener {
 			startActivity(intent);
 			break;
 		case R.id.star:
-			menuWindow = new AddressPopupWindow(OfficialHomeActivity.this,itemOnClick);//实例化AddressPopupWindow
+			menuWindow = new AddressPopupWindow(OfficialHomeActivity.this,itemOnClick,groups1);//实例化AddressPopupWindow
 			menuWindow.showAsDropDown(originview, 0, 0); 
 			break;
 		
@@ -283,9 +300,37 @@ public class OfficialHomeActivity extends Activity implements OnClickListener {
 	            	tvtimelong.setText(getdate+"小时");
 	            break;
                 }
+	            case Global.GETADDRESS: {
+					try {
+						parseADDRESS((String) msg.obj);
+						// 显示窗口
+						//menuWindow.showAsDropDown(originview, 0, 0);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					break;
+				}
             }
     }};
 	 	
+    private void parseADDRESS(String str)throws Exception{ 
+	    groups1.clear();
+	   // System.out.println(str);
+   	    JSONObject jsonobj = new JSONObject(str); 
+        JSONArray jsonarray = jsonobj.getJSONArray("Data");
+        for(int x=0;x<jsonarray.length();x++){
+       	 JSONObject jsonobj2 = (JSONObject)jsonarray.get(x); 
+        	 HashMap<String , Object> map = new HashMap<String , Object>();
+			 map.put("groupItem",jsonobj2.getString("commAddressId"));
+			 map.put("userId",jsonobj2.getString("userId"));
+			 map.put("address",jsonobj2.getString("address"));
+			 map.put("longitude",jsonobj2.getString("longitude"));
+			 map.put("latidute",jsonobj2.getString("latidute"));
+			// System.out.println(map.toString());
+			 groups1.add(map);
+        }
+   }
+    
 		//重写的结果返回方法  
 	    @Override  
 	    protected void onActivityResult(int requestCode, int resultCode, Intent data) {  
@@ -359,4 +404,13 @@ public class OfficialHomeActivity extends Activity implements OnClickListener {
 	            }  
 	        }  
 	    };  
+	    
+	    @Override  
+		 protected void onDestroy() {  
+		        super.onDestroy();  
+		        // 退出时销毁定位
+				mLocClient.stop();
+		 }  
+		
+	    
 }

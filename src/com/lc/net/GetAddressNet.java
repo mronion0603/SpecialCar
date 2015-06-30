@@ -43,7 +43,7 @@ public class GetAddressNet {
 	                while (isRunning) {
 					  try {
 						//Thread.currentThread().sleep(10);
-	         		    String strurl =ConnectUrl.getCarType;
+	         		    String strurl =ConnectUrl.getAddress;
 	                	URL url = null;
 	                	try{
 	                		url = new URL(strurl);
@@ -78,7 +78,7 @@ public class GetAddressNet {
 	        			}	
 	                	 Message msg = new Message();
 	                     msg.obj  = result;
-	                     msg.what = Global.GETCARTYPE;
+	                     msg.what = Global.GETADDRESS;
 	                     handler.sendMessage(msg); 	     
 	            	     isRunning = false;
 					 } catch (Exception e1) {

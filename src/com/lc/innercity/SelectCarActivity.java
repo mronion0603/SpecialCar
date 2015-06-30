@@ -8,21 +8,20 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-
-
-
-
 import com.lc.net.GetCarNet;
 import com.lc.specialcar.R;
 import com.lc.utils.ConnectUrl;
 import com.lc.utils.ExitApplication;
 import com.lc.utils.Global;
+import com.lc.utils.MyDialog;
 import com.lc.utils.MySharePreference;
 import com.lidroid.xutils.BitmapUtils;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -34,6 +33,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.Gallery;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,20 +41,19 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 
 
+@SuppressWarnings("deprecation")
 public class SelectCarActivity extends Activity implements OnClickListener {
-	   TextView tvTitle,textright;
+	    TextView tvTitle,textright;
 	    ImageView ivleft,ivCarbg;
 	    private RelativeLayout rls;
-	   // private int[] mImageResourceIds;
 	    private Gallery mGallery;
 	    Button bttype;
 	    TextView tv1,tv2,tv3;
-	    //String types[] = {"经济型","普通型","商务型"};
-	   // String tvs1[] = {"9元/起步价","10元/起步价","11元/起步价"};
-	    //String tvs2[] = {"1.6元/公里","1.7元/公里","1.8元/公里"};
-	    //String tvs3[] = {"0.27元/分钟","0.28元/分钟","0.29元/分钟"};
 	    List<HashMap<String,String>> list =new ArrayList<HashMap<String,String>>();
 	    GetCarNet getcarnet = new GetCarNet();
+	    int currentposition = 0;
+	    Dialog dia;
+		//private ProgressBar pb; 
 		@Override
 		public void onCreate(Bundle savedInstanceState) {
 			requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
@@ -63,7 +62,9 @@ public class SelectCarActivity extends Activity implements OnClickListener {
 			init();
 		}
 		public void init(){
+			
 			ExitApplication.getInstance().addActivity(this);
+			//pb = (ProgressBar)findViewById(R.id.progress); 
 			bttype= (Button) findViewById(R.id.Type);
 			tv1 = (TextView) findViewById(R.id.tv1);
 			tv2 = (TextView) findViewById(R.id.tv2);
@@ -87,6 +88,8 @@ public class SelectCarActivity extends Activity implements OnClickListener {
 			getcarnet.setAuthn(MySharePreference.getStringValue(getApplication(), MySharePreference.AUTHN));
 			getcarnet.getDataFromServer();
 			
+			dia = MyDialog.createLoadingDialog(SelectCarActivity.this, "正在加载");
+			dia.show();
 		}
 		
 		void initCarType(){
@@ -108,7 +111,7 @@ public class SelectCarActivity extends Activity implements OnClickListener {
 				@Override
 				public void onItemSelected(AdapterView<?> parent, View view,
 						int position, long id) {
-
+					currentposition = position;
 					 BitmapUtils bitmapUtils = new BitmapUtils(SelectCarActivity.this);
 				    	// 加载网络图片
 					    String str = list.get(position).get("carImg")+"";
@@ -117,11 +120,11 @@ public class SelectCarActivity extends Activity implements OnClickListener {
 					//ivCarbg.setBackgroundResource(mImageResourceIds[position]);
 					String type = list.get(position).get("carTypeId");
 					if(type.equals("1"))
-					bttype.setText("经济型");
+					bttype.setText("经济");
 					else if(type.equals("2"))
-					bttype.setText("普通型");
+					bttype.setText("普通");
 					else
-					bttype.setText("商务型");	
+					bttype.setText("商务");	
 					tv1.setText(list.get(position).get("bascMoney")+"元/起步价");
 					tv2.setText(list.get(position).get("mileageMoney")+"元/公里");
 					tv3.setText(list.get(position).get("timeMoney")+"元/分钟");
@@ -133,6 +136,8 @@ public class SelectCarActivity extends Activity implements OnClickListener {
 				}
 				
 			});
+			
+			dia.dismiss();
 		}
 		 @SuppressLint("HandlerLeak")
 			private Handler mHandler = new Handler() {
@@ -150,7 +155,7 @@ public class SelectCarActivity extends Activity implements OnClickListener {
 		        }};
 		        
 	private void parseJSON(String str) throws Exception {
-		System.out.println(str);
+		//System.out.println(str);
 		JSONObject jsonobj = new JSONObject(str);
 		if (jsonobj.getInt("ResultCode") == Global.SUCCESS) {
 			JSONArray jsonarray = jsonobj.getJSONArray("Data");
@@ -166,6 +171,7 @@ public class SelectCarActivity extends Activity implements OnClickListener {
 				map.put("inMileage", jsonobj2.getString("inMileage"));
 			    list.add(map);
 			}
+		
 			initCarType();
 		}else{
 			 Toast.makeText(SelectCarActivity.this,jsonobj.getString("Message"), Toast.LENGTH_LONG).show();
@@ -179,6 +185,15 @@ public class SelectCarActivity extends Activity implements OnClickListener {
 				finish();
 				break;
 			case R.id.righttext:
+		    
+				Intent intent = new Intent();
+				
+				intent.putExtra("strtype",bttype.getText().toString());
+			    intent.putExtra("type", (String)list.get(currentposition).get("carTypeId"));
+			    intent.putExtra("bascMoney", (String)list.get(currentposition).get("bascMoney"));
+			    intent.putExtra("mileageMoney", (String)list.get(currentposition).get("mileageMoney"));
+			    intent.putExtra("timeMoney", (String)list.get(currentposition).get("timeMoney"));
+			    setResult(RESULT_OK, intent); 
 				finish();
 				break;
 			case R.id.Search:
@@ -232,5 +247,10 @@ public class SelectCarActivity extends Activity implements OnClickListener {
 		        return imageView;
 		    }
 		}
-	   
+		 @Override  
+		 public void onBackPressed() {  
+			 if(dia.isShowing())
+		        dia.dismiss();
+		        finish();
+		 }  
 }

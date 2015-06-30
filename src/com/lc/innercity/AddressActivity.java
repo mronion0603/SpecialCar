@@ -16,7 +16,7 @@ import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.MyLocationData;
-import com.baidu.mapapi.map.MyLocationConfiguration.LocationMode;
+
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.search.core.PoiInfo;
 import com.baidu.mapapi.search.core.SearchResult;
@@ -57,7 +57,7 @@ public class AddressActivity extends Activity implements OnClickListener {
     // 定位相关
  	LocationClient mLocClient;
  	public MyLocationListenner myListener = new MyLocationListenner();
- 	private LocationMode mCurrentMode;
+ 	//private LocationMode mCurrentMode;
  	BitmapDescriptor mCurrentMarker;
  	boolean isFirstLoc = true;// 是否首次定位
     // 地理编码  

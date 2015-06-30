@@ -334,10 +334,9 @@
 	      android:layout_width="wrap_content"
 	      android:layout_height="wrap_content"
 	      android:layout_marginLeft="5dip"
-	      android:textSize="16sp"
+	      android:textSize="14sp"
 	      android:textColor="@color/text_brown"
 	      android:layout_centerVertical="true"
-	      android:text="经济"
 	    />
 	      <TextView
 	      android:id="@+id/FeeRule"

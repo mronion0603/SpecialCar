@@ -1,7 +1,11 @@
 package com.lc.innercity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
@@ -27,14 +31,19 @@ import com.baidu.mapapi.search.geocode.GeoCoder;
 import com.baidu.mapapi.search.geocode.OnGetGeoCoderResultListener;
 import com.baidu.mapapi.search.geocode.ReverseGeoCodeOption;
 import com.baidu.mapapi.search.geocode.ReverseGeoCodeResult;
+import com.lc.net.GetDriverNet;
 import com.lc.specialcar.R;
 import com.lc.utils.ButtonEffect;
 import com.lc.utils.ExitApplication;
+import com.lc.utils.Global;
+import com.lc.utils.MySharePreference;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
@@ -46,6 +55,7 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
 
@@ -73,7 +83,8 @@ public class InnerCityHomeActivity extends Activity implements OnClickListener {
     List<PoiInfo> mInfoList;  
     PoiInfo mCurentInfo;  
     ImageView mSelectImg;
-  
+    GetDriverNet getDriverNet = new GetDriverNet();
+    List<HashMap<String,String>> list =new ArrayList<HashMap<String,String>>();
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
@@ -151,6 +162,7 @@ public class InnerCityHomeActivity extends Activity implements OnClickListener {
         mListView.setAdapter(mAdapter);  
         mListView.setVisibility(View.GONE);
         mSelectImg = new ImageView(this);  
+        
 	}
 	
 	@Override  
@@ -168,16 +180,12 @@ public class InnerCityHomeActivity extends Activity implements OnClickListener {
             	  lat= extras.getDouble("latitude");
             	  lng= extras.getDouble("longitude");
             	  //System.out.println(address);
-            	  curaddress.setText(address);
-            	  
+            	  curaddress.setText(address); 
             	  LatLng ll = new LatLng(lat, lng);
 				  MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(ll);
 				  mBaiduMap.animateMapStatus(u);
-					
               }
-
         }  
-      
     }  
 	
 	/**
@@ -249,14 +257,11 @@ public class InnerCityHomeActivity extends Activity implements OnClickListener {
              mGeoCoder.reverseGeoCode((new ReverseGeoCodeOption())  
                      .location(centerLL));  
              
-             //mLoadBar.setVisibility(View.VISIBLE);  
-            
 		}
 
 		@Override
 		public void onMapStatusChangeStart(MapStatus arg0) {
-			// TODO Auto-generated method stub
-			
+			// TODO Auto-generated method stub	
 		}  
     };  
     
@@ -359,6 +364,8 @@ public class InnerCityHomeActivity extends Activity implements OnClickListener {
 				// map view 销毁后不在处理新接收的位置
 				if (location == null || mMapView == null)
 					return;
+			
+			        
 				MyLocationData locData = new MyLocationData.Builder()
 						.accuracy(location.getRadius())
 						// 此处设置开发者获取到的方向信息，顺时针0-360
@@ -366,13 +373,25 @@ public class InnerCityHomeActivity extends Activity implements OnClickListener {
 						.longitude(location.getLongitude()).build();
 				mBaiduMap.setMyLocationData(locData);
 				if (isFirstLoc) {
+					
+					//System.out.println(String.valueOf(location.getLatitude())+","+String.valueOf(location.getLongitude()));
+					getDriverNet.setHandler(mHandler);
+					getDriverNet.setLongitude(String.valueOf(location.getLongitude()));
+					getDriverNet.setLatitude(String.valueOf(location.getLatitude()));
+					getDriverNet.setDevice(Global.DEVICE);
+					getDriverNet.setAuthn(MySharePreference.getStringValue(
+							getApplication(), MySharePreference.AUTHN));
+					getDriverNet.getDataFromServer();
 					isFirstLoc = false;
+					
 					LatLng ll = new LatLng(location.getLatitude(),
 							location.getLongitude());
 					MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(ll);
 					mBaiduMap.animateMapStatus(u);
-					LatLng  llA = new LatLng(location.getLatitude()+0.01, location.getLongitude()+0.01);
-					  BitmapDescriptor bdA = BitmapDescriptorFactory
+					
+					/*
+					LatLng llA = new LatLng(location.getLatitude()+0.01, location.getLongitude()+0.01);
+					BitmapDescriptor bdA = BitmapDescriptorFactory
 								.fromResource(R.drawable.car1);
 					OverlayOptions ooA = new MarkerOptions().position(llA).icon(bdA)
 								.zIndex(9).draggable(true);
@@ -389,7 +408,9 @@ public class InnerCityHomeActivity extends Activity implements OnClickListener {
 					OverlayOptions ooD = new MarkerOptions().position(llD).icon(bdA)
 								.zIndex(9).draggable(true);
 					mBaiduMap.addOverlay(ooD);
+					*/
 					//initOverlay();
+				    	
 				}
 			}
 
@@ -397,4 +418,47 @@ public class InnerCityHomeActivity extends Activity implements OnClickListener {
 			}
 	}
 
+	@SuppressLint("HandlerLeak")
+	private Handler mHandler = new Handler() {
+        public void handleMessage(android.os.Message msg) {
+            switch(msg.what) { 
+	            case Global.GETNEARBYDRIVER:{
+	            	try {
+						parseJSON((String)msg.obj);
+					} catch (Exception e) {	
+						e.printStackTrace();
+					}      	
+	            break;
+                }
+            }
+        }};
+        private void parseJSON(String str) throws Exception {
+    		//System.out.println(str);
+    		JSONObject jsonobj = new JSONObject(str);
+    		if (jsonobj.getInt("ResultCode") == Global.SUCCESS) {
+    			JSONArray jsonarray = jsonobj.getJSONArray("Data");
+    			for (int x = 0; x < jsonarray.length(); x++) {
+    				JSONObject jsonobj2 = (JSONObject) jsonarray.get(x);
+    				HashMap<String, String> map = new HashMap<String, String>();
+    				map.put("carType", jsonobj2.getString("carType"));
+    				map.put("driverName", jsonobj2.getString("driverName"));
+    				map.put("phoneNum", jsonobj2.getString("phoneNum"));
+    				map.put("longitude", jsonobj2.getString("longitude"));
+    				map.put("latitude", jsonobj2.getString("latitude"));
+    				list.add(map);
+    			}
+    			for(int i=0;i<list.size();i++){
+					double lat=Double.parseDouble((String)list.get(i).get("latitude"));
+					double lont=Double.parseDouble((String)list.get(i).get("longitude"));
+					LatLng llA = new LatLng(lat, lont);
+					BitmapDescriptor bdA = BitmapDescriptorFactory
+								.fromResource(R.drawable.car1);
+					OverlayOptions ooA = new MarkerOptions().position(llA).icon(bdA)
+								.zIndex(9).draggable(true);
+					mBaiduMap.addOverlay(ooA);
+				}
+    		}else{
+    			 Toast.makeText(InnerCityHomeActivity.this,jsonobj.getString("Message"), Toast.LENGTH_LONG).show();
+    		}
+    	}
 }

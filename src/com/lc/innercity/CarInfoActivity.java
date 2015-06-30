@@ -61,6 +61,7 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 	public static final int REQUSET_DEMAND = 4;
 	public static final int REQUSET_SELECTCAR = 5;
     TextView tvTitle,righttext,feeRule,tvname,tvphone,tvstartAddress,tvendAddress,tvdate,tvmoney,tvdemand;
+    TextView tvtype;
     ImageView ivleft;
     Button ivSearch;
     private RelativeLayout rls,rlusecar,rlselectcar,rldate,rlmodifyname,rlstartaddress,rlgetoffaddress;
@@ -85,6 +86,12 @@ public class CarInfoActivity extends Activity implements OnClickListener {
     String type="";
     AddInnerNet addInnerNet = new AddInnerNet();
     String getdate="";
+	String ruleStr1 = "13";
+	String ruleStr2 = "元+";
+	String ruleStr3 = "1.5";
+	String ruleStr4 = "元/公里+";
+	String ruleStr5 = "0.24";
+	String ruleStr6 = "元/分钟";
     @Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
@@ -120,7 +127,8 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 		tvdemand = (TextView) findViewById(R.id.Demand);
 		tvmoney = (TextView) findViewById(R.id.money2);
 		righttext = (TextView) findViewById(R.id.righttext);
-		righttext.setVisibility(View.VISIBLE);
+		tvtype = (TextView) findViewById(R.id.financialType);
+		//righttext.setVisibility(View.VISIBLE);
 		righttext.setText("计费规则");
 		righttext.setOnClickListener(this);
 		ivSearch = (Button) findViewById(R.id.Search);
@@ -146,19 +154,9 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 		ivleft = (ImageView) findViewById(R.id.ArrowHead);
 		ivleft.setVisibility(View.VISIBLE);
 		feeRule=(TextView)findViewById(R.id.FeeRule);
-		String ruleStr1 = "13";
-		String ruleStr2 = "元+";
-		String ruleStr3 = "1.5";
-		String ruleStr4 = "元/公里+";
-		String ruleStr5 = "0.24";
-		String ruleStr6 = "元/分钟";
-		String newMessageInfo = "<font color='black'><b>" + ruleStr1+ "</b></font>"
-		                       +"<font color='gray'><b>" + ruleStr2+ "</b></font>"
-		                       +"<font color='black'><b>" + ruleStr3+ "</b></font>"
-		                       +"<font color='gray'><b>" + ruleStr4+ "</b></font>"
-		                       +"<font color='black'><b>" + ruleStr5+ "</b></font>"
-		                       +"<font color='gray'><b>" + ruleStr6+ "</b></font>";
-		feeRule.setText(Html.fromHtml(newMessageInfo));   
+	
+		
+		//feeRule.setText(Html.fromHtml(newMessageInfo));   
 		imAddress = (ImageView) findViewById(R.id.star);
 		imAddress.setOnClickListener(this);
 		getoffAddress = (ImageView) findViewById(R.id.star3);
@@ -273,8 +271,7 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 	            case Global.GETADDRESS: {
 					try {
 						parseADDRESS((String) msg.obj);
-						// 显示窗口
-						menuWindow.showAsDropDown(originview, 0, 0);
+				
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
@@ -376,13 +373,16 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 			
 			String endaddress = tvendAddress.getText().toString();
 			String startaddress = tvstartAddress.getText().toString();
-			
+			String strbill = feeRule.getText().toString();
+			System.out.println("strbill:"+strbill);
 			if(endaddress==null|endaddress.equals("输入下车地址预估车费")|endaddress.equals("地址获取中...")
         			|endaddress.equals("获取地址失败")){
 				Toast.makeText(getApplication(), "请选择目的地", Toast.LENGTH_SHORT).show();
 			}else if(startaddress==null|startaddress.equals("地址获取中...")
         			|startaddress.equals("获取地址失败")){
 				Toast.makeText(getApplication(), "请选择出发地", Toast.LENGTH_SHORT).show();
+			}else if(strbill==null|strbill.length()<=0){
+				Toast.makeText(getApplication(), "请选择车型", Toast.LENGTH_SHORT).show();
 			}else{
 				addInnerNet.setHandler(mHandler);
 				addInnerNet.setAuthn(MySharePreference.getStringValue(getApplication(), MySharePreference.AUTHN));
@@ -460,8 +460,21 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 	        	  //String type ="";
 	        	  Bundle extras = data.getExtras();
 	              if(extras != null){
-	            	  type = extras.getString("type");
-	            	 // tv.setText(type);
+	            	  type = extras.getString("type");	 
+	            	  ruleStr1= extras.getString("bascMoney");
+	            	  ruleStr3 = extras.getString("mileageMoney");
+	            	  ruleStr5= extras.getString("timeMoney");
+	            	  String newMessageInfo = "<font color='black'><b>" + ruleStr1+ "</b></font>"
+		                       +"<font color='gray'><b>" + ruleStr2+ "</b></font>"
+		                       +"<font color='black'><b>" + ruleStr3+ "</b></font>"
+		                       +"<font color='gray'><b>" + ruleStr4+ "</b></font>"
+		                       +"<font color='black'><b>" + ruleStr5+ "</b></font>"
+		                       +"<font color='gray'><b>" + ruleStr6+ "</b></font>";
+	            	  feeRule.setText(Html.fromHtml(newMessageInfo));
+	            	  basicmoney=Double.parseDouble(ruleStr1);
+	            	  pricedis=Double.parseDouble(ruleStr3);
+	            	  pricedura=Double.parseDouble(ruleStr5);
+	            	  tvtype.setText(extras.getString("strtype"));
 	              }
 	        }  
 	        if (requestCode == REQUSET_DEMAND && resultCode == RESULT_OK) {
@@ -584,4 +597,12 @@ public class CarInfoActivity extends Activity implements OnClickListener {
     	totalmoney = basicmoney + pricedis*dis +pricedura*dura;
         return totalmoney;
     }
+    
+    @Override  
+	 protected void onDestroy() {  
+	        super.onDestroy();  
+	        // 退出时销毁定位
+			mLocClient.stop();
+	 }  
+	
 }
