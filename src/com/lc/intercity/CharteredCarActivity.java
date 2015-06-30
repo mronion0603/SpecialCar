@@ -136,7 +136,11 @@ public class CharteredCarActivity extends Activity implements OnClickListener {
 			addCarPoolNet.setCjridersum("1");
 			addCarPoolNet.setOrderNum(getorderNum);			
 			addCarPoolNet.setRiderName(tvname.getText().toString());
-			addCarPoolNet.setRiderPhone(MySharePreference.getStringValue(getApplication(), MySharePreference.PHONE));
+			if(tvphone.getText().toString().equals("本人")){
+			   addCarPoolNet.setRiderPhone(MySharePreference.getStringValue(getApplication(), MySharePreference.PHONE));
+			}else{
+			   addCarPoolNet.setRiderPhone(tvphone.getText().toString());
+			}
 			addCarPoolNet.setServiceTypeId("5");
 			addCarPoolNet.setCpbStauts("2");
 			addCarPoolNet.getDataFromServer();

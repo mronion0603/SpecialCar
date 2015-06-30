@@ -24,4 +24,5 @@ public class Global {
   public static final int GETUSERINFO=211; //获取用户信息
   public static final int ADDINNER=212;
   public static final int NOTIFYDRIVER=213;
+  public static final int GETCARTYPE=214;
 }

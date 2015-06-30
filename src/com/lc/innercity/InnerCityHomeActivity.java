@@ -95,7 +95,7 @@ public class InnerCityHomeActivity extends Activity implements OnClickListener {
 		tvTitle = (TextView) findViewById(R.id.topTv);
 		tvTitle.setText("市内约租");
 		righttext = (TextView) findViewById(R.id.righttext);
-		righttext.setVisibility(View.VISIBLE);
+		//righttext.setVisibility(View.VISIBLE);
 		righttext.setText("计费规则");
 		righttext.setOnClickListener(this);
 		curaddress = (TextView) findViewById(R.id.curaddress);

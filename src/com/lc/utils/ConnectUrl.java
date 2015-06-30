@@ -1,6 +1,7 @@
 package com.lc.utils;
 
 public class ConnectUrl {
+ public static String commonurl0 = "http://120.24.172.238:8080/"+"image/";
  public static String commonurl = "http://120.24.172.238:8080/specialCar/";	//测试
  public static String commondriverurl = "http://120.24.172.238:8080/specialcardriver/";	//测试
  //public static String commonurl = "http://121.40.54.74:8080/";	//alpha地址
@@ -19,5 +20,6 @@ public class ConnectUrl {
  public static String getUserinfo = commonurl+"getUser";
  public static String addinneturl = commonurl+"addOrder";	
  public static String addnotifydriver = commondriverurl+"pushCJ.ct";	
+ public static String getCarType = commonurl+"getCarType";	
  
 }

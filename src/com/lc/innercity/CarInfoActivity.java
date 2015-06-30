@@ -23,7 +23,6 @@ import com.baidu.mapapi.search.geocode.GeoCoder;
 import com.baidu.mapapi.search.geocode.OnGetGeoCoderResultListener;
 import com.baidu.mapapi.search.geocode.ReverseGeoCodeOption;
 import com.baidu.mapapi.search.geocode.ReverseGeoCodeResult;
-import com.lc.intercity.SearchCharteredCarActivity;
 import com.lc.net.AddInnerNet;
 import com.lc.net.GetAddressNet;
 import com.lc.net.RouteMatrixNet;
@@ -43,7 +42,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.Html;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -400,7 +398,11 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 	            addInnerNet.setMileage(String.valueOf(distance));
 	            addInnerNet.setRealMoney(String.valueOf(estimate(basicmoney,pricedis,pricedura)));
 	            addInnerNet.setRiderName(tvname.getText().toString());
-	            addInnerNet.setRiderPhone(MySharePreference.getStringValue(getApplication(), MySharePreference.PHONE));
+	            if(tvphone.getText().toString().equals("本人")){
+	              addInnerNet.setRiderPhone(MySharePreference.getStringValue(getApplication(), MySharePreference.PHONE));
+	            }else{
+	              addInnerNet.setRiderPhone(tvphone.getText().toString());
+	            }
 	            addInnerNet.setsLatitude(String.valueOf(slat));
 	            addInnerNet.setsLongitude(String.valueOf(slont));
 	            addInnerNet.setStartAddress(startaddress);

@@ -40,28 +40,26 @@ public class NotifyDriverNet {
 	              public void run() {       
 	                while (isRunning) {
 					  try {
-						//Thread.currentThread().sleep(10);
-	         		    String strurl =ConnectUrl.addnotifydriver;
-	                	URL url = null;
-	                	try{
-	                		url = new URL(strurl);
-	                		HttpURLConnection urlConnection = (HttpURLConnection)url.openConnection();
-	                		urlConnection.setDoOutput(true);
-	                		urlConnection.setDoInput(true);
-	                		urlConnection.setRequestMethod("POST");
-	                		urlConnection.setUseCaches(false);
+						  String strurl =ConnectUrl.addnotifydriver;
+		                	//URL url = null;
+		                	try{
+		                		String spec = strurl +"?driverId=" + URLEncoder.encode(driverId, "UTF-8")
+		                                //+"&destinations=" + URLEncoder.encode(destinations, "UTF-8")   
+		                		        //+"&mcode=" + URLEncoder.encode(mcode, "UTF-8")
+		                		        ;
+		                        // 根据地址创建URL对象(网络访问的url)  
+		                        URL url = new URL(spec);  
+		                        // url.openConnection()打开网络链接  
+		                        HttpURLConnection urlConnection = (HttpURLConnection) url  
+		                                .openConnection();  
+		                        urlConnection.setRequestMethod("GET");// 设置请求的方式  
+		                        urlConnection.setReadTimeout(5000);// 设置超时的时间  
+		                        urlConnection.setConnectTimeout(5000);// 设置链接超时的时间  
+		                        // 设置请求的头  
+
+		                		urlConnection.setRequestProperty("Mime-Type", "application/x-www-form-urlencoded");
+		                		urlConnection.connect();
 	                		
-	                		urlConnection.setRequestProperty("Mime-Type", "application/x-www-form-urlencoded");
-	                		urlConnection.connect();
-	                		DataOutputStream outputStream = new DataOutputStream(urlConnection.getOutputStream());
-	                		
-	                		String content = "driverId=" + URLEncoder.encode(driverId, "UTF-8")
-	                				
-	                				;
-	                		outputStream.writeBytes(content);
-	                		outputStream.flush();
-	                		outputStream.close();
-	                		/*
 	                		int responseCode =urlConnection.getResponseCode();
 	                		// System.out.println(responseCode);
 	                		if ( responseCode== 200) { 
@@ -69,7 +67,7 @@ public class NotifyDriverNet {
 	                		  result = read(in);
 	                		 // System.out.println(result);
 	                		}
-	                		*/
+	                		
 	                		urlConnection.disconnect();
 	                
 	                	}catch (Exception e) {

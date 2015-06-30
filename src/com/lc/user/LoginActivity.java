@@ -72,7 +72,7 @@ public class LoginActivity extends Activity {
 				phoneNum= phoneET.getText().toString();
 				if(phoneNum.length()<=0){
 					Toast.makeText(LoginActivity.this, "手机号不能为空", Toast.LENGTH_SHORT).show();
-				}else if(CommonUtil.isMobileNO(phoneNum)){
+				}else {
 					recLen=30;
 					if(!startTimer){
 					timer.schedule(task, 1000, 1000);       // timeTask  
@@ -81,10 +81,9 @@ public class LoginActivity extends Activity {
 					getCodeNet.setPhone(phoneNum);
 					getCodeNet.getCodeFromServer();
 					startTimer = true;
-				}else{
-					Toast.makeText(LoginActivity.this, "不是手机号", Toast.LENGTH_SHORT).show();
-				}
-				
+				}//else{
+				//	Toast.makeText(LoginActivity.this, "不是手机号", Toast.LENGTH_SHORT).show();
+				//}
 			}
 		});
 		nextStep = (Button)findViewById(R.id.NextStep);

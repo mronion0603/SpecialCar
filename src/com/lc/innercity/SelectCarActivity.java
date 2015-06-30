@@ -1,129 +1,236 @@
 package com.lc.innercity;
 
 
-import com.lc.specialcar.R;
-import com.lc.utils.ButtonEffect;
-import com.lc.utils.ExitApplication;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+
+
+
+
+import com.lc.net.GetCarNet;
+import com.lc.specialcar.R;
+import com.lc.utils.ConnectUrl;
+import com.lc.utils.ExitApplication;
+import com.lc.utils.Global;
+import com.lc.utils.MySharePreference;
+import com.lidroid.xutils.BitmapUtils;
+
+import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Intent;
+import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.Gallery;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemSelectedListener;
 
 
 public class SelectCarActivity extends Activity implements OnClickListener {
-    TextView tvTitle,righttext;
-    ImageView ivleft,ivselect1,ivselect2,ivselect3;
-    private RelativeLayout rls;
-    private LinearLayout select1;
-    private LinearLayout select2;
-    private LinearLayout select3;
-    boolean flag1,flag2,flag3;
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
-		super.onCreate(savedInstanceState);    
-		setContentView(R.layout.innercity_select);
-		init();
-	}
-
-	public void init(){
-		ExitApplication.getInstance().addActivity(this);
-		flag1 = true;
-		flag2 = false;
-		flag3 = false;
+	   TextView tvTitle,textright;
+	    ImageView ivleft,ivCarbg;
+	    private RelativeLayout rls;
+	   // private int[] mImageResourceIds;
+	    private Gallery mGallery;
+	    Button bttype;
+	    TextView tv1,tv2,tv3;
+	    //String types[] = {"经济型","普通型","商务型"};
+	   // String tvs1[] = {"9元/起步价","10元/起步价","11元/起步价"};
+	    //String tvs2[] = {"1.6元/公里","1.7元/公里","1.8元/公里"};
+	    //String tvs3[] = {"0.27元/分钟","0.28元/分钟","0.29元/分钟"};
+	    List<HashMap<String,String>> list =new ArrayList<HashMap<String,String>>();
+	    GetCarNet getcarnet = new GetCarNet();
+		@Override
+		public void onCreate(Bundle savedInstanceState) {
+			requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
+			super.onCreate(savedInstanceState);
+			setContentView(R.layout.activity_innercity_bill);
+			init();
+		}
+		public void init(){
+			ExitApplication.getInstance().addActivity(this);
+			bttype= (Button) findViewById(R.id.Type);
+			tv1 = (TextView) findViewById(R.id.tv1);
+			tv2 = (TextView) findViewById(R.id.tv2);
+			tv3 = (TextView) findViewById(R.id.tv3);
+			mGallery = (Gallery) findViewById(R.id.gallery);
+			tvTitle = (TextView) findViewById(R.id.topTv);
+			tvTitle.setText("费用明细");
+			textright = (TextView) findViewById(R.id.righttext);
+			textright.setVisibility(View.VISIBLE);
+			textright.setText("保存");
+			textright.setOnClickListener(this);
+			rls = (RelativeLayout) findViewById(R.id.rlslidemenu);
+			rls.setOnClickListener(this);
+			ivleft = (ImageView) findViewById(R.id.ArrowHead);
+			ivleft.setVisibility(View.VISIBLE);
+			ivCarbg = (ImageView) findViewById(R.id.imageView);
+					
+			//initCarType();
+			getcarnet.setHandler(mHandler);
+			getcarnet.setDevice(Global.DEVICE);
+			getcarnet.setAuthn(MySharePreference.getStringValue(getApplication(), MySharePreference.AUTHN));
+			getcarnet.getDataFromServer();
+			
+		}
 		
-		tvTitle = (TextView) findViewById(R.id.topTv);
-		tvTitle.setText("选择车型");
-		righttext = (TextView) findViewById(R.id.righttext);
-		righttext.setVisibility(View.VISIBLE);
-		righttext.setText("保存");
-		righttext.setOnClickListener(this);
-		ivselect1 = (ImageView) findViewById(R.id.ivselect);
-		ivselect2 = (ImageView) findViewById(R.id.ivselect2);
-		ivselect3 = (ImageView) findViewById(R.id.ivselect3);
-		rls = (RelativeLayout) findViewById(R.id.rlslidemenu);
-		rls.setOnClickListener(this);
-		ivleft = (ImageView) findViewById(R.id.ArrowHead);
-		ivleft.setVisibility(View.VISIBLE);
-		select1 = (LinearLayout) findViewById(R.id.select1);
-		select1.setOnClickListener(this);
-		select2 = (LinearLayout) findViewById(R.id.select2);
-		select2.setOnClickListener(this);
-		select3 = (LinearLayout) findViewById(R.id.select3);
-		select3.setOnClickListener(this);
-	}
-	@Override
-	public void onClick(View v) {
-		// TODO Auto-generated method stub
-		switch (v.getId()) {
-		case R.id.rlslidemenu:
-			finish();
-			break;
-		case R.id.righttext:
-			String type="1";
-            if(flag1){
-			 type="1";	
-			}
-            if(flag2){
-             type="2";	
-			}
-            if(flag3){
-             type="3";	
-   			}
-			Intent intent = new Intent();
-		    intent.putExtra("type", type);
-		    setResult(RESULT_OK, intent); 
-		    finish();
-			break;
-		case R.id.select1:
-			if(flag1){
+		void initCarType(){
+			//mImageResourceIds = new int[]{R.drawable.temp1, R.drawable.temp2, R.drawable.temp5
+			//};
+		
+			mGallery.setAdapter(new ImageAdapter(this));
+			mGallery.setOnItemClickListener(new OnItemClickListener() {
+				  public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+					    //ivCarbg.setBackgroundResource(mImageResourceIds[arg2]);
+					    BitmapUtils bitmapUtils = new BitmapUtils(SelectCarActivity.this);
+				    	// 加载网络图片
+					    String str = list.get(arg2).get("carImg")+"";
+				    	bitmapUtils.display(ivCarbg, ConnectUrl.commonurl0+str);
+				      }
+				    });
+			mGallery.setSelection(list.size()/2);
+			mGallery.setOnItemSelectedListener(new OnItemSelectedListener(){
+				@Override
+				public void onItemSelected(AdapterView<?> parent, View view,
+						int position, long id) {
+
+					 BitmapUtils bitmapUtils = new BitmapUtils(SelectCarActivity.this);
+				    	// 加载网络图片
+					    String str = list.get(position).get("carImg")+"";
+				    	bitmapUtils.display(ivCarbg, ConnectUrl.commonurl0+str);
+				    	
+					//ivCarbg.setBackgroundResource(mImageResourceIds[position]);
+					String type = list.get(position).get("carTypeId");
+					if(type.equals("1"))
+					bttype.setText("经济型");
+					else if(type.equals("2"))
+					bttype.setText("普通型");
+					else
+					bttype.setText("商务型");	
+					tv1.setText(list.get(position).get("bascMoney")+"元/起步价");
+					tv2.setText(list.get(position).get("mileageMoney")+"元/公里");
+					tv3.setText(list.get(position).get("timeMoney")+"元/分钟");
+				}
+
+				@Override
+				public void onNothingSelected(AdapterView<?> parent) {
+
+				}
 				
-			}else{
-				ivselect1.setVisibility(View.VISIBLE);
-				ivselect2.setVisibility(View.GONE);
-				ivselect3.setVisibility(View.GONE);
-				flag1=true;
-				flag2=false;
-				flag3=false;
+			});
+		}
+		 @SuppressLint("HandlerLeak")
+			private Handler mHandler = new Handler() {
+		        public void handleMessage(android.os.Message msg) {
+		            switch(msg.what) { 
+			            case Global.GETCARTYPE:{
+			            	try {
+								parseJSON((String)msg.obj);
+							} catch (Exception e) {	
+								e.printStackTrace();
+							}      	
+			            break;
+		                }
+		            }
+		        }};
+		        
+	private void parseJSON(String str) throws Exception {
+		System.out.println(str);
+		JSONObject jsonobj = new JSONObject(str);
+		if (jsonobj.getInt("ResultCode") == Global.SUCCESS) {
+			JSONArray jsonarray = jsonobj.getJSONArray("Data");
+			for (int x = 0; x < jsonarray.length(); x++) {
+				JSONObject jsonobj2 = (JSONObject) jsonarray.get(x);
+				HashMap<String, String> map = new HashMap<String, String>();
+				map.put("carTypeId", jsonobj2.getString("carTypeId"));
+				map.put("bascMoney", jsonobj2.getString("bascMoney"));
+				map.put("mileageMoney", jsonobj2.getString("mileageMoney"));
+				map.put("timeMoney", jsonobj2.getString("timeMoney"));
+				map.put("carDesc", jsonobj2.getString("carDesc"));
+				map.put("carImg", jsonobj2.getString("carImg"));
+				map.put("inMileage", jsonobj2.getString("inMileage"));
+			    list.add(map);
 			}
-			break;
-		case R.id.select2:
-			if(flag2){
-				
-			}else{
-				ivselect2.setVisibility(View.VISIBLE);
-				ivselect3.setVisibility(View.GONE);
-				ivselect1.setVisibility(View.GONE);
-				flag2=true;
-				flag3=false;
-				flag1=false;
-			}
-			break;
-		case R.id.select3:
-			if(flag3){
-				
-			}else{
-				ivselect3.setVisibility(View.VISIBLE);
-				ivselect1.setVisibility(View.GONE);
-				ivselect2.setVisibility(View.GONE);
-				flag3=true;
-				flag1=false;
-				flag2=false;
-			}
-			break;
-		default:
-			break;
+			initCarType();
+		}else{
+			 Toast.makeText(SelectCarActivity.this,jsonobj.getString("Message"), Toast.LENGTH_LONG).show();
 		}
 	}
-	
-	 
+		@Override
+		public void onClick(View v) {
+			// TODO Auto-generated method stub
+			switch (v.getId()) {
+			case R.id.rlslidemenu:
+				finish();
+				break;
+			case R.id.righttext:
+				finish();
+				break;
+			case R.id.Search:
+					//Intent intent = new Intent();
+					//intent.setClass(InnerCityHomeActivity.this, SearchCarpoolActivity.class);
+					//startActivity(intent);
+	             
+				break;
+				
+			default:
+				break;
+			}
+		}
+
+		public class ImageAdapter extends BaseAdapter {
+
+		    Context mContext;        //上下文对象
+		    
+		    //构造方法
+		    public ImageAdapter(Context context) {
+		        this.mContext = context;
+		    }
+		    
+		    //获取图片的个数
+		    public int getCount() {
+		        return list.size();
+		    }
+
+		    //获取图片在库中的位置
+		    public Object getItem(int position) {
+		        return list.get(position);
+		    }
+
+		    //获取图片在库中的位置
+		    public long getItemId(int position) {
+		        return position;
+		    }
+
+		    //获取适配器中指定位置的视图对象
+		    public View getView(int position, View convertView, ViewGroup parent) {
+		        ImageView imageView = new ImageView(mContext);
+		       // imageView.setImageResource(mImageResourceIds[position]);
+		        imageView.setLayoutParams(new Gallery.LayoutParams(300, 400));
+		        imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
+		        
+		        BitmapUtils bitmapUtils = new BitmapUtils(SelectCarActivity.this);
+		    	// 加载网络图片
+			    String str = list.get(position).get("carImg")+"";
+		    	bitmapUtils.display(imageView, ConnectUrl.commonurl0+str);
+		    	
+		        return imageView;
+		    }
+		}
 	   
 }

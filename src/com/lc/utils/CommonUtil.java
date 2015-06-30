@@ -17,7 +17,7 @@ import android.net.NetworkInfo;
 public class CommonUtil {
 	
 	public static boolean isMobileNO(String paramString){
-		return Pattern.compile("^(\\+86)?((13[0-9])|(15[^4,\\D])|(18[0-1,5-9]))\\d{8}$").matcher(paramString).matches();
+		return Pattern.compile("^(\\+86)?((13[0-9])|(15[^4,\\D])|(18[0-4,5-9]))\\d{8}$").matcher(paramString).matches();
 	}
 	
 	 @SuppressLint("SdCardPath")
