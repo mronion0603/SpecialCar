@@ -1,10 +1,14 @@
 package com.lc.user;
 
+import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import cn.jpush.android.api.JPushInterface;
+import cn.jpush.android.api.TagAliasCallback;
 
 import com.lc.net.GetCode;
 import com.lc.net.LoginNet;
@@ -29,7 +33,7 @@ import android.widget.Toast;
 
 
 public class LoginActivity extends Activity {
-
+	
 	//private TextView title;
 	private TextView backbt;
 	private Button nextStep,getCode;
@@ -148,10 +152,9 @@ public class LoginActivity extends Activity {
 		                 System.out.println((String)msg.obj);
 		            	 if(result==Global.SUCCESS){
 		            		String getauthn = jsonobj.getJSONObject("Data").getString("authn");
-		            		//System.out.println("getauthn"+getauthn);
 		            		MySharePreference.editStringValue(getApplication(),MySharePreference.PHONE,phoneNum);
 		            		MySharePreference.editStringValue(getApplication(),MySharePreference.AUTHN,getauthn);
-		            		//System.out.println("getauthn2"+MySharePreference.getStringValue(getApplication(), MySharePreference.AUTHN));
+		            				            		
 		            		Intent intent = new Intent();
 		     				intent.setClass(getApplication(), MainActivity.class);
 		     				startActivity(intent);
@@ -164,6 +167,7 @@ public class LoginActivity extends Activity {
 					}  
 	             break;
                 }
+	           
             }
     }};
     @Override
@@ -171,5 +175,5 @@ public class LoginActivity extends Activity {
 	        super.onDestroy();
 	        timer.cancel();
 	    }
-
+  
 }

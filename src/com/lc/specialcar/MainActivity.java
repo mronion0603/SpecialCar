@@ -3,9 +3,13 @@ package com.lc.specialcar;
 
 
 import java.util.HashMap;
+import java.util.Set;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import cn.jpush.android.api.JPushInterface;
+import cn.jpush.android.api.TagAliasCallback;
 
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
@@ -42,6 +46,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends SlidingFragmentActivity implements OnClickListener, OnPageChangeListener {
+	private static final int MSG_SET_ALIAS = 1001;
 	private RelativeLayout rlslidemenu;
 	private Fragment mContent;
 	private TextView topTextView;
@@ -89,7 +94,8 @@ public class MainActivity extends SlidingFragmentActivity implements OnClickList
 		ivCity = (ImageView) findViewById(R.id.city);
 		ivCity.setOnClickListener(this);
 		
-		
+		// 调用 Handler 来异步设置别名
+		mHandler.sendMessage(mHandler.obtainMessage(MSG_SET_ALIAS, MySharePreference.getStringValue(getApplication(), MySharePreference.PHONE)));
 	}
 	
 	void initViewPager(){
@@ -319,7 +325,7 @@ public class MainActivity extends SlidingFragmentActivity implements OnClickList
 		private Handler mHandler = new Handler() {
 	        public void handleMessage(android.os.Message msg) {
 	            switch(msg.what) {
-	            case 1:
+	            case 1:{
 	                int totalcount = viewPager.getChildCount();//autoChangeViewPager.getChildCount();
 	                int currentItem = viewPager.getCurrentItem();
 	                int toItem = currentItem + 1 == totalcount ? 0 : currentItem + 1;
@@ -327,7 +333,13 @@ public class MainActivity extends SlidingFragmentActivity implements OnClickList
 	                viewPager.setCurrentItem(toItem, true);
 	                //ÿ�����ӷ���һ��message�������л�viewPager�е�ͼƬ
 	                this.sendEmptyMessageDelayed(1, 5000);
+	            }   break;   
+	            case MSG_SET_ALIAS:
+	                // 调用 JPush 接口来设置别名。
+	                JPushInterface.setAliasAndTags(getApplicationContext(),(String) msg.obj, null,mAliasCallback);
+	             break;
 	            }
+		       
 	        }
 	    };
 	    @Override  
@@ -341,4 +353,25 @@ public class MainActivity extends SlidingFragmentActivity implements OnClickList
 	           // finish();  
 	        }  
 	    }  
+	    private final TagAliasCallback mAliasCallback = new TagAliasCallback() {
+		    String logs ;
+		    @Override
+		    public void gotResult(int code, String alias, Set<String> tags) {
+		        switch (code) {
+		        case 0:
+		            logs = "Set tag and alias success";
+		            // 建议这里往 SharePreference 里写一个成功设置的状态。成功设置一次后，以后不必再次设置了。
+		            System.out.println(logs);
+		            break;
+		        case 6002:
+		            logs = "Failed to set alias and tags due to timeout. Try again after 60s.";
+		            mHandler.sendMessageDelayed(mHandler.obtainMessage(MSG_SET_ALIAS, alias), 1000 * 60);
+		            break;
+		        default:
+		            logs = "Failed with errorCode = " + code;
+		       
+		        }
+		        
+		    }
+		};
 }

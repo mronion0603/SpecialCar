@@ -18,7 +18,7 @@ public class NotifyDriverNet {
 	private Handler handler;
 	private boolean isRunning = false;
 	String result = "网络连接错误！";
-	String driverId = "";
+	String orderNum = "";
 
 	public NotifyDriverNet(){
 		
@@ -27,8 +27,8 @@ public class NotifyDriverNet {
 		this.handler = handler;
 	}
 	
-	public void setDriverId(String driverId){
-		this.driverId = driverId;
+	public void setOrderNum(String orderNum){
+		this.orderNum = orderNum;
 	}
 	
 	public void getDataFromServer(){
@@ -43,7 +43,7 @@ public class NotifyDriverNet {
 						  String strurl =ConnectUrl.addnotifydriver;
 		                	//URL url = null;
 		                	try{
-		                		String spec = strurl +"?driverId=" + URLEncoder.encode(driverId, "UTF-8")
+		                		String spec = strurl +"?orderNum=" + URLEncoder.encode(orderNum, "UTF-8")
 		                                //+"&destinations=" + URLEncoder.encode(destinations, "UTF-8")   
 		                		        //+"&mcode=" + URLEncoder.encode(mcode, "UTF-8")
 		                		        ;

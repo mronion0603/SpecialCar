@@ -100,6 +100,7 @@ public class CarpoolActivity extends Activity implements OnClickListener {
 			finish();
 			break;
 		case R.id.Search:
+			if(etnumber.getText().toString().length()>0){
 			int rider = Integer.parseInt(etnumber.getText().toString());
 			if(rider+curnum<=totalnum){
 				addCarPoolNet.setHandler(mHandler);	
@@ -119,6 +120,9 @@ public class CarpoolActivity extends Activity implements OnClickListener {
 				
 			}else{
 				Toast.makeText(CarpoolActivity.this,"超员啦", Toast.LENGTH_LONG).show();
+			}
+			}else{
+				Toast.makeText(CarpoolActivity.this,"请输入乘车人数", Toast.LENGTH_LONG).show();
 			}
 			break;
 		default:
@@ -148,8 +152,9 @@ public class CarpoolActivity extends Activity implements OnClickListener {
     	JSONObject jsonobj = new JSONObject(str); 
     	int result = jsonobj.getInt("ResultCode");
    	    if(result==Global.SUCCESS){
+   	    	
    	    	notifyDriverNet.setHandler(mHandler);
-   	    	notifyDriverNet.setDriverId(getdriverid);
+   	    	notifyDriverNet.setOrderNum(getorderNum);
    	    	notifyDriverNet.getDataFromServer();
    	    	
    	    	Intent intent = new Intent();

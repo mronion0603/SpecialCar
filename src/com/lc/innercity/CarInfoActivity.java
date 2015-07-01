@@ -25,6 +25,7 @@ import com.baidu.mapapi.search.geocode.ReverseGeoCodeOption;
 import com.baidu.mapapi.search.geocode.ReverseGeoCodeResult;
 import com.lc.net.AddInnerNet;
 import com.lc.net.GetAddressNet;
+import com.lc.net.NotifyDriverInnerNet;
 import com.lc.net.RouteMatrixNet;
 import com.lc.popupwindow.AddressPopupWindow;
 import com.lc.popupwindow.TimePopupWindow;
@@ -92,6 +93,7 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 	String ruleStr4 = "元/公里+";
 	String ruleStr5 = "0.24";
 	String ruleStr6 = "元/分钟";
+	NotifyDriverInnerNet notifyDriverInnerNet = new NotifyDriverInnerNet();
     @Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
@@ -297,9 +299,15 @@ public class CarInfoActivity extends Activity implements OnClickListener {
             }
     }};
     private void parseInner(String str)throws Exception{ 
+    	//System.out.println("返回:"+str);
     	JSONObject jsonobj = new JSONObject(str); 
     	int result = jsonobj.getInt("ResultCode");
    	    if(result==Global.SUCCESS){
+   	    	
+   	    	 notifyDriverInnerNet.setHandler(mHandler);
+   	    	 notifyDriverInnerNet.setOrderNum(jsonobj.getJSONObject("Data").getString("orderNum"));
+   	    	 notifyDriverInnerNet.getDataFromServer();
+   	    	
    	         Intent intent2 = new Intent();
 			 intent2.setClass(CarInfoActivity.this,SendDealActivity.class);
 			 startActivity(intent2);
@@ -374,7 +382,7 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 			String endaddress = tvendAddress.getText().toString();
 			String startaddress = tvstartAddress.getText().toString();
 			String strbill = feeRule.getText().toString();
-			System.out.println("strbill:"+strbill);
+			//System.out.println("strbill:"+strbill);
 			if(endaddress==null|endaddress.equals("输入下车地址预估车费")|endaddress.equals("地址获取中...")
         			|endaddress.equals("获取地址失败")){
 				Toast.makeText(getApplication(), "请选择目的地", Toast.LENGTH_SHORT).show();
@@ -413,13 +421,13 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 	        		startTime  = formatter.format(curDate); 
 	        		addInnerNet.setStartTime(startTime);
 	            }else{
-	            	System.out.println("getdate:"+getdate);
+	            	//System.out.println("getdate:"+getdate);
 	            	addInnerNet.setStartTime(getdate);
 	            }
 	            addInnerNet.setVoucherMoney("0");
 	            addInnerNet.setVoucherNum("");
 	            addInnerNet.getDataFromServer();
-	            //
+
 			}
 			break;
 		case R.id.usecar:

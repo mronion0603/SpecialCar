@@ -256,7 +256,13 @@ public class InnerCityHomeActivity extends Activity implements OnClickListener {
 		     // 发起反地理编码检索  
              mGeoCoder.reverseGeoCode((new ReverseGeoCodeOption())  
                      .location(centerLL));  
-             
+             getDriverNet.setHandler(mHandler);
+				getDriverNet.setLongitude(String.valueOf(centerLL.longitude));
+				getDriverNet.setLatitude(String.valueOf(centerLL.latitude));
+				getDriverNet.setDevice(Global.DEVICE);
+				getDriverNet.setAuthn(MySharePreference.getStringValue(
+						getApplication(), MySharePreference.AUTHN));
+				getDriverNet.getDataFromServer();
 		}
 
 		@Override
@@ -433,6 +439,7 @@ public class InnerCityHomeActivity extends Activity implements OnClickListener {
             }
         }};
         private void parseJSON(String str) throws Exception {
+        	mBaiduMap.clear();
     		//System.out.println(str);
     		JSONObject jsonobj = new JSONObject(str);
     		if (jsonobj.getInt("ResultCode") == Global.SUCCESS) {
@@ -458,7 +465,7 @@ public class InnerCityHomeActivity extends Activity implements OnClickListener {
 					mBaiduMap.addOverlay(ooA);
 				}
     		}else{
-    			 Toast.makeText(InnerCityHomeActivity.this,jsonobj.getString("Message"), Toast.LENGTH_LONG).show();
+    			 //Toast.makeText(InnerCityHomeActivity.this,jsonobj.getString("Message"), Toast.LENGTH_LONG).show();
     		}
     	}
 }

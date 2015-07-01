@@ -26,4 +26,5 @@ public class Global {
   public static final int NOTIFYDRIVER=213;
   public static final int GETCARTYPE=214;
   public static final int GETNEARBYDRIVER=215;
+
 }

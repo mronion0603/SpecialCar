@@ -162,9 +162,7 @@ public class CharteredCarActivity extends Activity implements OnClickListener {
 	 			 map.put("userId",jsonobj2.getString("userId"));
 	 			 map.put("address",jsonobj2.getString("address"));
 	 			 groups1.add(map);
-	 			 //groups.add(R.drawable.person_site_edit);  
-	 			 //groupAdapter.notifyDataSetChanged();
-	 			 //listItem.add(map);
+
 	         }
 	    }
 	 
@@ -217,7 +215,7 @@ public class CharteredCarActivity extends Activity implements OnClickListener {
        	int result = jsonobj.getInt("ResultCode");
       	    if(result==Global.SUCCESS){
       	    	notifyDriverNet.setHandler(mHandler);
-       	    	notifyDriverNet.setDriverId(getdriverid);
+      	    	notifyDriverNet.setOrderNum(getorderNum);
        	    	notifyDriverNet.getDataFromServer();
        	    	
       	    	Intent intent = new Intent();
