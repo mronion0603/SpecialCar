@@ -167,21 +167,21 @@ public class SearchCharteredCarActivity extends Activity implements OnClickListe
         JSONObject jsonobj = new JSONObject(str); 
         JSONArray jsonarray = jsonobj.getJSONArray(key);
         for(int x=0;x<jsonarray.length();x++){
-        	String cpbstatus = ((JSONObject)jsonarray.get(x)).getString("cpbStauts");
+        	String cpbstatus = ((JSONObject)jsonarray.get(x)).getString("cpbStatus");
         	if(cpbstatus.equals("2")|cpbstatus.equals("0")){
         	 HashMap<String , Object> map = new HashMap<String , Object>();
 			 map.put("CarIcon", "2");	
-			 map.put("orderNum",((JSONObject)jsonarray.get(x)).getString("ordernum"));
-			 map.put("driverid",((JSONObject)jsonarray.get(x)).getString("driverid"));
+			 map.put("orderNum",((JSONObject)jsonarray.get(x)).getString("orderNum"));
+			 map.put("driverid",((JSONObject)jsonarray.get(x)).getString("driverNum"));
 			 //map.put("groupItem3",((JSONObject)jsonarray.get(x)).getString("startAddress"));
 			 //map.put("groupItem4",((JSONObject)jsonarray.get(x)).getString("endAddress"));
-			 map.put("Time",((JSONObject)jsonarray.get(x)).getString("starttime"));
-			 map.put("PickUpArea",((JSONObject)jsonarray.get(x)).getString("cjwaitcaraddress"));
-			 map.put("GetOffArea",((JSONObject)jsonarray.get(x)).getString("cjstopaddress"));
+			 map.put("Time",((JSONObject)jsonarray.get(x)).getString("startTime"));
+			 map.put("PickUpArea",((JSONObject)jsonarray.get(x)).getString("accAddress"));
+			 map.put("GetOffArea",((JSONObject)jsonarray.get(x)).getString("stopAddress"));
 			 //map.put("groupItem5",((JSONObject)jsonarray.get(x)).getString("longitude"));
 			 //map.put("groupItem6",((JSONObject)jsonarray.get(x)).getString("latitude"));
-			 map.put("CurNum",((JSONObject)jsonarray.get(x)).getString("countRider"));
-			 map.put("TotalNum",((JSONObject)jsonarray.get(x)).getString("limitsit"));
+			 map.put("CurNum",((JSONObject)jsonarray.get(x)).getString("joinRider"));
+			 map.put("TotalNum",((JSONObject)jsonarray.get(x)).getString("limitSit"));
 			 listItem.add(map);
         	}
         }

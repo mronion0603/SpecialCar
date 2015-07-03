@@ -182,10 +182,10 @@ public class TypeCityActivity extends Activity implements OnClickListener {
         public void onItemClick(AdapterView<?> parent, View view, int position,  
                 long id) {  
             // TODO Auto-generated method stub  
-            
+        	SortModel sm = (SortModel)adapter.getItem(position);
             Intent intent = new Intent();
             intent.setClass(TypeCityActivity.this, InterCityHomeActivity.class);
-            String address =  listItem.get(position).get("groupItem")+"";
+            String address = sm.getName()+"";
             intent.putExtra("city", address);
             setResult(RESULT_OK, intent); 
             finish();
