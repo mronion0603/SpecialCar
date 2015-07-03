@@ -2,11 +2,8 @@ package com.lc.specialcar;
 
 
 
-import java.util.HashMap;
-import java.util.Set;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
+import java.util.Set;
 
 import cn.jpush.android.api.JPushInterface;
 import cn.jpush.android.api.TagAliasCallback;
@@ -15,15 +12,13 @@ import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 import com.lc.innercity.InnerCityHomeActivity;
 import com.lc.intercity.InterCityHomeActivity;
-import com.lc.net.GetInfoNet;
 import com.lc.official.OfficialHomeActivity;
 import com.lc.shuttle.ShuttleHomeActivity;
 import com.lc.slidingmenu.fragment.LeftFragment;
 import com.lc.slidingmenu.fragment.RightFragment;
 import com.lc.urgent.UrgentHomeActivity;
-import com.lc.user.AddressManageActivity;
+import com.lc.user.ItineraryActivity;
 import com.lc.utils.ExitApplication;
-import com.lc.utils.Global;
 import com.lc.utils.MySharePreference;
 
 import android.support.v4.app.Fragment;
@@ -61,7 +56,7 @@ public class MainActivity extends SlidingFragmentActivity implements OnClickList
 	private int[] imgIdArray ;
 	private long waitTime = 3000;  //退出按钮等待时间
     private long touchTime = 0;    //退出按钮记录按下时间    
-   
+   // private ImageView rightiv;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
@@ -210,6 +205,11 @@ public class MainActivity extends SlidingFragmentActivity implements OnClickList
 		case R.id.rlslidemenu:
 			toggle();
 			break;
+		case R.id.topButton2:
+			{Intent intent = new Intent();
+			 intent.setClass(MainActivity.this, ItineraryActivity.class);
+			 startActivity(intent);
+			}	break;
 		case R.id.intercity:
 			Intent intent = new Intent();
 			intent.setClass(MainActivity.this, InterCityHomeActivity.class);

@@ -274,7 +274,18 @@
 	      android:layout_alignParentRight="true"
 	      android:layout_centerVertical="true"
 	     />
-	      
+	       <TextView
+	      android:id="@+id/Demand"
+	      android:layout_toLeftOf="@+id/arrow4"
+	      android:layout_width="200dip"
+	      android:gravity="right"
+	      android:singleLine="true"
+	      android:layout_height="wrap_content"
+	      android:layout_marginLeft="20dip"
+	      android:textSize="14sp"
+	      android:textColor="@color/black"
+	      android:layout_centerVertical="true"
+	     />
 	    </RelativeLayout>
 	     <ImageView
 	      android:layout_width="fill_parent"

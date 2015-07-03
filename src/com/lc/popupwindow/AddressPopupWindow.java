@@ -33,17 +33,10 @@ public class AddressPopupWindow extends PopupWindow {
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		mMenuView = inflater.inflate(R.layout.innercity_address, null);
 		
-		
         // 加载数据  
 		 groups3 = new ArrayList<HashMap<String , Object>>(); 
 		 groups3= groups2;
-		 /*
-         List<Integer> groups = new ArrayList<Integer>();  
-         groups.add(R.drawable.select_site_home);  
-         groups.add(R.drawable.select_site_work);  
-         groups.add(R.drawable.select_site_collect);
-         groups.add(R.drawable.select_site_collect);
-         */
+
          GroupAdapter groupAdapter = new GroupAdapter(context, groups2);  
          ListView lv_group1 = (ListView) mMenuView.findViewById(R.id.lvGroup);  
          lv_group1.setAdapter(groupAdapter);  

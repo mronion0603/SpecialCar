@@ -1,7 +1,7 @@
 package com.lc.official;
 
 
-import com.lc.innercity.BillingRuleActivity;
+import com.lc.innercity.SelectCarActivity;
 import com.lc.innercity.SendDealActivity;
 import com.lc.specialcar.R;
 import com.lc.utils.ButtonEffect;
@@ -92,7 +92,7 @@ public class SelectCarGroupActivity extends Activity implements OnClickListener 
 		case R.id.righttext:
 			//finish();
 			Intent intent = new Intent();
-			intent.setClass(SelectCarGroupActivity.this,BillingRuleActivity.class);
+			intent.setClass(SelectCarGroupActivity.this,SelectCarActivity.class);
 			startActivity(intent);
 			break;
 		case R.id.Search:

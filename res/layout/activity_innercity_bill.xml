@@ -24,7 +24,7 @@
         android:background="@drawable/fee"
         android:layout_marginLeft="10dip"
         android:layout_marginTop="20dip"
-        android:text="商务型"
+        
     />
     </RelativeLayout>
     <TextView
@@ -33,7 +33,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"    
         android:layout_gravity="center"
-        android:text="10元/起步价"
         android:textColor="@color/black"
         android:textSize="18sp"
     />
@@ -50,7 +49,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"    
         android:layout_gravity="center"
-        android:text="1.6元/公里"
         android:textColor="@color/black"
         android:textSize="18sp"
     />
@@ -63,11 +61,10 @@
         android:textSize="18sp"
     />
       <TextView
-           android:id="@+id/tv3"
+        android:id="@+id/tv3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"    
         android:layout_gravity="center"
-        android:text="0.27-0.27元/分钟"
         android:textColor="@color/black"
         android:layout_marginBottom="20dip"
         android:textSize="18sp"

@@ -157,7 +157,6 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 		ivleft.setVisibility(View.VISIBLE);
 		feeRule=(TextView)findViewById(R.id.FeeRule);
 	
-		
 		//feeRule.setText(Html.fromHtml(newMessageInfo));   
 		imAddress = (ImageView) findViewById(R.id.star);
 		imAddress.setOnClickListener(this);
@@ -303,7 +302,6 @@ public class CarInfoActivity extends Activity implements OnClickListener {
     	JSONObject jsonobj = new JSONObject(str); 
     	int result = jsonobj.getInt("ResultCode");
    	    if(result==Global.SUCCESS){
-   	    	
    	    	 notifyDriverInnerNet.setHandler(mHandler);
    	    	 notifyDriverInnerNet.setOrderNum(jsonobj.getJSONObject("Data").getString("orderNum"));
    	    	 notifyDriverInnerNet.getDataFromServer();

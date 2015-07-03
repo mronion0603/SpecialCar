@@ -74,7 +74,7 @@ public class SelectCarActivity extends Activity implements OnClickListener {
 			tvTitle.setText("费用明细");
 			textright = (TextView) findViewById(R.id.righttext);
 			textright.setVisibility(View.VISIBLE);
-			textright.setText("保存");
+			textright.setText("确定");
 			textright.setOnClickListener(this);
 			rls = (RelativeLayout) findViewById(R.id.rlslidemenu);
 			rls.setOnClickListener(this);

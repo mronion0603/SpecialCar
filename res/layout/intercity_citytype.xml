@@ -17,20 +17,24 @@
 	      android:layout_width="wrap_content"
 	      android:layout_height="wrap_content"
 	      android:layout_marginLeft="10dip"
-	      android:background="@drawable/city_register_site2"  
+	      android:background="@drawable/city_register_site2" 
+	      android:layout_centerVertical="true" 
 	    />
-	     <EditText
-	      android:id="@+id/etAddress"
-	      android:layout_toRightOf="@+id/date"
-	      android:layout_width="wrap_content"
-	      android:layout_height="wrap_content"
-	      android:layout_marginLeft="20dip"
-	      android:textSize="18sp"
-	      android:textColor="@color/black"
-	      android:background="@color/white"
-	      android:layout_centerVertical="true"
-	      android:hint="请输入城市"
-	    />
+	    <com.lc.sortlistview.ClearEditText
+        android:id="@+id/filter_edit"
+        android:layout_toRightOf="@+id/date"
+        android:layout_marginTop="5dip"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/search_bar_edit_selector"
+        android:drawableLeft="@drawable/search_bar_icon_normal"
+        android:hint="请输入关键字"
+        android:singleLine="true"
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip"
+        android:layout_centerVertical="true"
+        android:textSize="15.0dip" />
+	    
 	     
 	    </RelativeLayout>  
 	     <ImageView
@@ -42,11 +46,31 @@
 	    android:layout_width="fill_parent"
 	    android:layout_height="fill_parent" 
 	    >
+	    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
         <ListView
 	      android:id="@+id/place_list"
-	      android:layout_width="wrap_content"
+	      android:layout_width="fill_parent"
 	      android:layout_height="wrap_content"
 	     
 	     /> 
+	      <TextView
+            android:id="@+id/dialog"
+            android:layout_width="80.0dip"
+            android:layout_height="80.0dip"
+            android:layout_gravity="center"
+            android:background="@drawable/show_head_toast_bg"
+            android:gravity="center"
+            android:textColor="#ffffffff"
+            android:textSize="30.0dip"
+            android:visibility="invisible" />
+
+        <com.lc.sortlistview.SideBar
+            android:id="@+id/sidrbar"
+            android:layout_width="30.0dip"
+            android:layout_height="fill_parent"
+            android:layout_gravity="right|center" />
+	     </FrameLayout>
         </RelativeLayout>
 </LinearLayout>

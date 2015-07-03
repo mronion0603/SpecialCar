@@ -3,6 +3,8 @@ package com.lc.innercity;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONObject;
+
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
@@ -16,7 +18,6 @@ import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.MyLocationData;
-
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.search.core.PoiInfo;
 import com.baidu.mapapi.search.core.SearchResult;
@@ -25,13 +26,18 @@ import com.baidu.mapapi.search.geocode.GeoCoder;
 import com.baidu.mapapi.search.geocode.OnGetGeoCoderResultListener;
 import com.baidu.mapapi.search.geocode.ReverseGeoCodeOption;
 import com.baidu.mapapi.search.geocode.ReverseGeoCodeResult;
+import com.lc.net.AddAddressNet;
 import com.lc.specialcar.R;
 import com.lc.utils.ExitApplication;
+import com.lc.utils.Global;
+import com.lc.utils.MySharePreference;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
@@ -43,13 +49,14 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class AddressActivity extends Activity implements OnClickListener {
 	public static final int REQUSET = 1;
     TextView tvTitle,righttext;
     TextView curaddress;
     ImageView ivleft;
-    ImageView ivcenter;
+    ImageView ivcenter,ivstar;
     private RelativeLayout rls;
     
     MapView mMapView = null;  
@@ -69,6 +76,7 @@ public class AddressActivity extends Activity implements OnClickListener {
     PoiInfo mCurentInfo;  
     ImageView mSelectImg;
     double lat=0.0,lont=0.0;
+    AddAddressNet addaddressnet = new AddAddressNet();
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
@@ -95,7 +103,7 @@ public class AddressActivity extends Activity implements OnClickListener {
 		ivleft = (ImageView) findViewById(R.id.ArrowHead);
 		ivleft.setVisibility(View.VISIBLE);
 		ivcenter = (ImageView) findViewById(R.id.ivpoint);
-		
+		ivstar = (ImageView) findViewById(R.id.star);
         //获取地图控件引用  
         mMapView = (MapView) findViewById(R.id.bmapView);  
         mBaiduMap = mMapView.getMap();
@@ -141,6 +149,7 @@ public class AddressActivity extends Activity implements OnClickListener {
         mListView.setAdapter(mAdapter);  
         mListView.setVisibility(View.GONE);
         mSelectImg = new ImageView(this);  
+        ivstar.setOnClickListener(this);
 	}
 	
 	@Override  
@@ -296,6 +305,16 @@ public class AddressActivity extends Activity implements OnClickListener {
 		case R.id.rlslidemenu:
 			finish();
 			break;
+		case R.id.star:
+		{
+		  addaddressnet.setHandler(mHandler);
+      	  addaddressnet.setDevice(Global.DEVICE);
+      	  addaddressnet.setAuth(MySharePreference.getStringValue(getApplication(), MySharePreference.AUTHN));
+      	  addaddressnet.setAddress(curaddress.getText().toString());
+      	  addaddressnet.setLatidute(String.valueOf(lat));
+      	  addaddressnet.setLongitude(String.valueOf(lont));
+      	  addaddressnet.getDataFromServer();
+		}	break;
 		case R.id.righttext:
 		{   Intent intent = new Intent();
 	        String address =  curaddress.getText().toString();
@@ -315,6 +334,30 @@ public class AddressActivity extends Activity implements OnClickListener {
 		}
 	}
 	
+	@SuppressLint("HandlerLeak")
+	private Handler mHandler = new Handler() {
+        public void handleMessage(android.os.Message msg) {
+            switch(msg.what) { 
+	            case Global.ADDADDRESS:{
+	            	try {
+						parseJSON((String)msg.obj);
+					} catch (Exception e) {	
+						e.printStackTrace();
+					}      	
+	            break;
+                }
+            }
+    }};
+    private void parseJSON(String str)throws Exception{  
+    	JSONObject jsonobj = new JSONObject(str); 
+    	int result = jsonobj.getInt("ResultCode");
+   	    if(result==Global.SUCCESS){
+   	      //groupAdapter.notifyDataSetChanged();
+   	    	Toast.makeText(AddressActivity.this,jsonobj.getString("Message"), Toast.LENGTH_LONG).show();
+        }else{
+          Toast.makeText(AddressActivity.this,jsonobj.getString("Message"), Toast.LENGTH_LONG).show();
+        } 
+   }
 	 @Override  
 	 protected void onDestroy() {  
 	        super.onDestroy();  

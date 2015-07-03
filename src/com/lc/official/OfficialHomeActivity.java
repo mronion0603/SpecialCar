@@ -60,7 +60,8 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
 public class OfficialHomeActivity extends Activity implements OnClickListener {
 	public static final int REQUSET_NAMEPHONE = 1;
 	public static final int REQUSET_ADDRESS = 2;
-    TextView tvTitle,righttext,feeRule,txdate,tvname,tvphone,tvdate,tvaddress,tvtimelong;
+	public static final int REQUSET_DEMAND = 4;
+    TextView tvTitle,righttext,feeRule,txdate,tvname,tvphone,tvdate,tvaddress,tvtimelong,tvdemand;
     ImageView ivleft;
     Button ivSearch;
     private RelativeLayout rls,rlusecar,rldate,rlmodifyname,rlstartaddress,rltimelong;
@@ -133,7 +134,7 @@ public class OfficialHomeActivity extends Activity implements OnClickListener {
 		rlmodifyname.setOnClickListener(this);
 		rlstartaddress= (RelativeLayout) findViewById(R.id.startaddress);
 		rlstartaddress.setOnClickListener(this);
-		
+		tvdemand = (TextView) findViewById(R.id.Demand);
 		rldate = (RelativeLayout) findViewById(R.id.usecardate);
 		rldate.setOnClickListener(this);
 		txdate = (TextView) findViewById(R.id.txdate);
@@ -157,6 +158,13 @@ public class OfficialHomeActivity extends Activity implements OnClickListener {
         getaddressnet.setAuthn(MySharePreference.getStringValue(getApplication(), MySharePreference.AUTHN));
         getaddressnet.getCodeFromServer();
         
+        String username = MySharePreference.getStringValue(getApplication(), MySharePreference.USERNAME);
+		if(username==null){
+			tvname.setText( MySharePreference.getStringValue(getApplication(), MySharePreference.PHONE));
+		}else{
+			tvname.setText(username);
+		}
+		
 	}
 	//为弹出窗口实现监听类
     private OnItemClickListener  itemOnClick = new OnItemClickListener(){
@@ -263,7 +271,7 @@ public class OfficialHomeActivity extends Activity implements OnClickListener {
 		case R.id.usecar:
 			Intent intent3 = new Intent();
 			intent3.setClass(OfficialHomeActivity.this,CarDemandActivity.class);
-			startActivity(intent3);
+			startActivityForResult(intent3,REQUSET_DEMAND);
 			break;
 		
 		case R.id.rlmodifyname:
@@ -354,6 +362,14 @@ public class OfficialHomeActivity extends Activity implements OnClickListener {
 	            	  tvaddress.setText(address);
 	              }
 	        }  
+	        if (requestCode == REQUSET_DEMAND && resultCode == RESULT_OK) {
+	        	  String demand ="";
+	        	  Bundle extras = data.getExtras();
+	              if(extras != null){
+	            	  demand = extras.getString("demand");
+	            	  tvdemand.setText(demand);
+	              }
+	        }  
 	    }  
 	    
 		 /**
@@ -367,8 +383,7 @@ public class OfficialHomeActivity extends Activity implements OnClickListener {
 						return;
 					if (isFirstLoc) {
 						isFirstLoc = false;
-						LatLng ll = new LatLng(location.getLatitude(),
-								location.getLongitude());
+						LatLng ll = new LatLng(location.getLatitude(),location.getLongitude());
 						 // 发起反地理编码检索  
 			             mGeoCoder.reverseGeoCode((new ReverseGeoCodeOption())  
 			                     .location(ll));  
@@ -399,8 +414,7 @@ public class OfficialHomeActivity extends Activity implements OnClickListener {
 	                	tvaddress.setText(mCurentInfo.address);
 	                }else{
 	                	tvaddress.setText("上车地");
-	                }
-	                
+	                } 
 	            }  
 	        }  
 	    };  
