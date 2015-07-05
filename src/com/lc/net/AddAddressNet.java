@@ -76,7 +76,7 @@ public class AddAddressNet {
 	                				+"&device=" + URLEncoder.encode(device, "UTF-8")
 	                				+"&address=" + URLEncoder.encode(address, "UTF-8")
 	                				+"&longitude=" + URLEncoder.encode(longitude, "UTF-8")
-	                				+"&latidute=" + URLEncoder.encode(latidute, "UTF-8")
+	                				+"&latitude=" + URLEncoder.encode(latidute, "UTF-8")
 	                				;
 	                		outputStream.writeBytes(content);
 	                		outputStream.flush();

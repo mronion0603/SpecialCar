@@ -66,7 +66,7 @@ public class CarInfoActivity extends Activity implements OnClickListener {
     ImageView ivleft;
     Button ivSearch;
     private RelativeLayout rls,rlusecar,rlselectcar,rldate,rlmodifyname,rlstartaddress,rlgetoffaddress;
-    private ImageView imAddress,getoffAddress;
+    private ImageView getoffAddress;
 	private View originview; 
 	GroupAdapter groupAdapter;
     AddressPopupWindow menuWindow;	//自定义的弹出框类
@@ -106,6 +106,14 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 	}
 
 	public void init(){
+		String getAddress="";
+		Bundle extras = getIntent().getExtras();
+	    if(extras != null){
+	       getAddress = extras.getString("address");
+	       slont = extras.getDouble("lontitude");
+	       slat = extras.getDouble("latitude");
+	       System.out.println(slont+"");
+	    }
 		// 定位初始化
 		mLocClient = new LocationClient(this);
 		mLocClient.registerLocationListener(myListener);
@@ -145,7 +153,7 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 		rlmodifyname = (RelativeLayout) findViewById(R.id.rlmodifyname);
 		rlmodifyname.setOnClickListener(this);
 		rlstartaddress= (RelativeLayout) findViewById(R.id.startaddress);
-		rlstartaddress.setOnClickListener(this);
+		//rlstartaddress.setOnClickListener(this);
 		rlgetoffaddress= (RelativeLayout) findViewById(R.id.getoffaddress);
 		rlgetoffaddress.setOnClickListener(this);
 		rldate = (RelativeLayout) findViewById(R.id.usecardate);
@@ -158,8 +166,8 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 		feeRule=(TextView)findViewById(R.id.FeeRule);
 	
 		//feeRule.setText(Html.fromHtml(newMessageInfo));   
-		imAddress = (ImageView) findViewById(R.id.star);
-		imAddress.setOnClickListener(this);
+		//imAddress = (ImageView) findViewById(R.id.star);
+		//imAddress.setOnClickListener(this);
 		getoffAddress = (ImageView) findViewById(R.id.star3);
 		getoffAddress.setOnClickListener(this);
 		
@@ -174,6 +182,8 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 		}else{
 			tvname.setText(username);
 		}
+		tvstartAddress.setText(getAddress);
+		
 	}
 	//为弹出窗口实现监听类
     private OnItemClickListener  itemOnClick = new OnItemClickListener(){
@@ -265,6 +275,8 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 	            	 routeMatrixNet.setHandler(mHandler);
 	            	 routeMatrixNet.setOrigins(String.valueOf(slat)+","+String.valueOf(slont));
 	            	 routeMatrixNet.setDestinations(String.valueOf(dlat)+","+String.valueOf(dlont));
+	            	 System.out.println(String.valueOf(slat)+","+String.valueOf(slont));
+	            	 System.out.println(String.valueOf(dlat)+","+String.valueOf(dlont));
 	            	 routeMatrixNet.getCodeFromServer();
 	            	}
 	            break;
@@ -314,7 +326,7 @@ public class CarInfoActivity extends Activity implements OnClickListener {
         } 
     }
     private void parseRoute(String str)throws Exception{ 
-    	//System.out.println(str);
+    	 System.out.println("route:"+str);
     	 JSONObject jsonobj = new JSONObject(str);  
          int result = jsonobj.getInt("status");
     	 if(result==0){
@@ -346,7 +358,7 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 			 map.put("userId",jsonobj2.getString("userId"));
 			 map.put("address",jsonobj2.getString("address"));
 			 map.put("longitude",jsonobj2.getString("longitude"));
-			 map.put("latidute",jsonobj2.getString("latidute"));
+			 map.put("latidute",jsonobj2.getString("latitude"));
 			// System.out.println(map.toString());
 			 groups1.add(map);
         }
@@ -367,10 +379,12 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 		{	timepWindow = new TimePopupWindow(CarInfoActivity.this,itemsOnClick);
 			timepWindow.showAsDropDown(originview, 0, 0); 
 		}	break;
+		/*
 		case R.id.star:	
 		{	menuWindow = new AddressPopupWindow(CarInfoActivity.this,itemOnClick,groups1);//实例化AddressPopupWindow
 			menuWindow.showAsDropDown(originview, 0, 0); //显示窗口
 		}	break;
+		*/
 		case R.id.star3:
 		{	menuWindow = new AddressPopupWindow(CarInfoActivity.this,itemOnClick2,groups1);
 			menuWindow.showAsDropDown(originview, 0, 0); //显示窗口
@@ -582,13 +596,13 @@ public class CarInfoActivity extends Activity implements OnClickListener {
                 mCurentInfo.address = result.getAddress();  
                 mCurentInfo.location = result.getLocation();  
                 mCurentInfo.name = "[位置]";  
-                slat = mCurentInfo.location.latitude;
-                slont = mCurentInfo.location.longitude;
-                if(result.getPoiList() != null){
-                	tvstartAddress.setText(mCurentInfo.address);
-                }else{
-                	tvstartAddress.setText("出发地");
-                }
+                //slat = mCurentInfo.location.latitude;
+                //slont = mCurentInfo.location.longitude;
+               // if(result.getPoiList() != null){
+                	//tvstartAddress.setText(mCurentInfo.address);
+               // }else{
+                	//tvstartAddress.setText("出发地");
+               // }
                 
             }  
         }  

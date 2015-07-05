@@ -72,7 +72,7 @@ public class ModifyUserInfoNet {
 	                		
 	                		String content = "authn=" + URLEncoder.encode(authn, "UTF-8")
 	                				+"&device=" + URLEncoder.encode(device, "UTF-8")
-	                				+"&username=" + URLEncoder.encode(username, "UTF-8")
+	                				+"&userName=" + URLEncoder.encode(username, "UTF-8")
 	                				+"&gender=" + URLEncoder.encode(gender, "UTF-8")
 	                				+"&email=" + URLEncoder.encode(email, "UTF-8")
 	      

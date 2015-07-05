@@ -31,7 +31,9 @@ import com.baidu.mapapi.search.geocode.GeoCoder;
 import com.baidu.mapapi.search.geocode.OnGetGeoCoderResultListener;
 import com.baidu.mapapi.search.geocode.ReverseGeoCodeOption;
 import com.baidu.mapapi.search.geocode.ReverseGeoCodeResult;
+import com.lc.net.GetAddressNet;
 import com.lc.net.GetDriverNet;
+import com.lc.popupwindow.AddressPopupWindow;
 import com.lc.specialcar.R;
 import com.lc.utils.ButtonEffect;
 import com.lc.utils.ExitApplication;
@@ -40,10 +42,13 @@ import com.lc.utils.MySharePreference;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
@@ -60,12 +65,12 @@ import android.widget.AdapterView.OnItemClickListener;
 
 
 public class InnerCityHomeActivity extends Activity implements OnClickListener {
-	
+	AddressPopupWindow menuWindow;	//自定义的弹出框类
 	public static final int REQUSET = 1;
     TextView tvTitle,righttext;
     TextView curaddress;
     Button ivSearch;
-    ImageView ivleft;
+    ImageView ivleft,ivstar;
     ImageView ivcenter;
     private RelativeLayout rls;
     MapView mMapView = null;  
@@ -85,7 +90,11 @@ public class InnerCityHomeActivity extends Activity implements OnClickListener {
     ImageView mSelectImg;
     GetDriverNet getDriverNet = new GetDriverNet();
     List<HashMap<String,String>> list =new ArrayList<HashMap<String,String>>();
-	@Override
+    GetAddressNet getaddressnet = new GetAddressNet();
+    private List<HashMap<String , Object>> groups1= new ArrayList<HashMap<String , Object>>();
+    double slat=0,slont =0;
+    private View originview; 
+    @Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
 		super.onCreate(savedInstanceState);
@@ -98,6 +107,9 @@ public class InnerCityHomeActivity extends Activity implements OnClickListener {
 	}
 
 	public void init(){
+		LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);  
+		originview = layoutInflater.inflate(R.layout.activity_innercity_home, null);  
+		
 		ExitApplication.getInstance().addActivity(this);
 		ivSearch = (Button) findViewById(R.id.Search);
 		ivSearch.setOnClickListener(this);
@@ -116,7 +128,8 @@ public class InnerCityHomeActivity extends Activity implements OnClickListener {
 		ivleft = (ImageView) findViewById(R.id.ArrowHead);
 		ivleft.setVisibility(View.VISIBLE);
 		ivcenter = (ImageView) findViewById(R.id.ivpoint);
-		
+		ivstar= (ImageView) findViewById(R.id.star);
+		ivstar.setOnClickListener(this);
         //获取地图控件引用  
         mMapView = (MapView) findViewById(R.id.bmapView);  
         mBaiduMap = mMapView.getMap();
@@ -163,6 +176,10 @@ public class InnerCityHomeActivity extends Activity implements OnClickListener {
         mListView.setVisibility(View.GONE);
         mSelectImg = new ImageView(this);  
         
+        getaddressnet.setHandler(mHandler);
+        getaddressnet.setDevice(Global.DEVICE);
+        getaddressnet.setAuthn(MySharePreference.getStringValue(getApplication(), MySharePreference.AUTHN));
+        getaddressnet.getCodeFromServer();
 	}
 	
 	@Override  
@@ -304,6 +321,8 @@ public class InnerCityHomeActivity extends Activity implements OnClickListener {
                 //mLoadBar.setVisibility(View.GONE);  
                 if(result.getPoiList() != null){
                    curaddress.setText(mInfoList.get(0).address);
+                   slont = mInfoList.get(0).location.longitude;
+                   slat = mInfoList.get(0).location.latitude;
                 }else{
                    curaddress.setText("获取地址失败");
                 }
@@ -326,15 +345,48 @@ public class InnerCityHomeActivity extends Activity implements OnClickListener {
 			startActivity(intent);
 		}	break;
 		case R.id.Search:
-		{	Intent intent = new Intent();
+		{	
+			if(curaddress.getText().toString().equals("获取地址失败")|curaddress.getText().toString().equals("地址获取中...")){
+				Toast.makeText(InnerCityHomeActivity.this,"开始地址还未选择", Toast.LENGTH_LONG).show();
+		    	
+			}else{Intent intent = new Intent();
 			intent.setClass(InnerCityHomeActivity.this, CarInfoActivity.class);	
+			intent.putExtra("address", curaddress.getText().toString());
+			intent.putExtra("lontitude", slont);
+			intent.putExtra("latitude", slat);
 			startActivity(intent);  
+			}
+		}	break;	
+		case R.id.star:
+		{	
+			menuWindow = new AddressPopupWindow(InnerCityHomeActivity.this,itemOnClick,groups1);//实例化AddressPopupWindow
+			menuWindow.showAsDropDown(originview, 0, 0); //显示窗口
 		}	break;	
 		default:
 			break;
 		}
 	}
 	
+	//为弹出窗口实现监听类
+    private OnItemClickListener  itemOnClick = new OnItemClickListener(){
+		@Override
+		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
+				String address = menuWindow.getItemStr2(arg2);
+				HashMap<String , Object> map = menuWindow.getMap(arg2);
+				//System.out.println("map2:"+map.toString());
+				String strlat = (String)map.get("latidute");
+				String strlont = (String)map.get("longitude");
+				slat =Double.parseDouble(strlat) ;
+				slont =Double.parseDouble(strlont);
+				
+				Message message = Message.obtain();  
+			    message.obj = address;  
+				message.what = Global.ADDRESS_MESSAGE;  
+				mHandler.sendMessageDelayed(message, 50);
+				menuWindow.dismiss();   
+		}
+    };
+    
 	 @Override  
 	 protected void onDestroy() {  
 	        super.onDestroy();  
@@ -436,8 +488,39 @@ public class InnerCityHomeActivity extends Activity implements OnClickListener {
 					}      	
 	            break;
                 }
+	            case Global.GETADDRESS: {
+					try {
+						parseADDRESS((String) msg.obj);
+				
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					break;
+				}
+	            case Global.ADDRESS_MESSAGE:{
+	            	String getaddress = (String)msg.obj;
+	            	curaddress.setText(getaddress);	
+	            break;
+                }
             }
         }};
+        private void parseADDRESS(String str)throws Exception{ 
+    	    groups1.clear();
+    	   // System.out.println(str);
+       	    JSONObject jsonobj = new JSONObject(str); 
+            JSONArray jsonarray = jsonobj.getJSONArray("Data");
+            for(int x=0;x<jsonarray.length();x++){
+           	 JSONObject jsonobj2 = (JSONObject)jsonarray.get(x); 
+            	 HashMap<String , Object> map = new HashMap<String , Object>();
+    			 map.put("groupItem",jsonobj2.getString("commAddressId"));
+    			 map.put("userId",jsonobj2.getString("userId"));
+    			 map.put("address",jsonobj2.getString("address"));
+    			 map.put("longitude",jsonobj2.getString("longitude"));
+    			 map.put("latidute",jsonobj2.getString("latitude"));
+    			// System.out.println(map.toString());
+    			 groups1.add(map);
+            }
+        }
         private void parseJSON(String str) throws Exception {
         	mBaiduMap.clear();
     		//System.out.println(str);

@@ -126,22 +126,21 @@ public class LeftFragment extends Fragment implements OnClickListener{
             }
     }};
     private void parseJSON(String str)throws Exception{  
-    	//System.out.println(str);
+    	System.out.println(str);
     	JSONObject jsonobj = new JSONObject(str); 
     	int result = jsonobj.getInt("ResultCode");
    	    if(result==Global.SUCCESS){
-   	        JSONArray jsonarray = jsonobj.getJSONArray("Data");
-   	        for(int x=0;x<jsonarray.length();x++){
-   	        	 JSONObject jsonobj2 = (JSONObject)jsonarray.get(x);
-   	        	 if(jsonobj2.has("username"))
-   	        	 MySharePreference.editStringValue(getActivity(), MySharePreference.USERNAME, jsonobj2.getString("username"));
+   	    	JSONObject jsonobj2 = jsonobj.getJSONObject("Data");
+   	        //for(int x=0;x<jsonarray.length();x++){
+   	        	// JSONObject jsonobj2 = (JSONObject)jsonarray.get(x);
+   	        	 if(jsonobj2.has("userName"))
+   	        	 MySharePreference.editStringValue(getActivity(), MySharePreference.USERNAME, jsonobj2.getString("userName"));
    	        	 if(jsonobj2.has("email"))
    	        	 MySharePreference.editStringValue(getActivity(), MySharePreference.EMAIL, jsonobj2.getString("email"));
    	        	 if(jsonobj2.has("gender"))
    	        	 MySharePreference.editStringValue(getActivity(), MySharePreference.GENDER, jsonobj2.getString("gender"));
    	             //System.out.println(jsonobj2.getString("email"));
-   	    
-   	        }
+   	        //}
    	        String username = MySharePreference.getStringValue(getActivity(), MySharePreference.USERNAME);
  		    if(username==null){
  			tvname.setText("公务专车");

@@ -268,7 +268,7 @@
         <!-- 目前这个渠道统计功能的报表还未开放。-->
         <meta-data android:name="JPUSH_CHANNEL" android:value="developer-default"/>
         <!-- Required. AppKey copied from Portal -->
-        <meta-data android:name="JPUSH_APPKEY" android:value="c8dee17b165d021c2f9219ea"/> 
+         <meta-data android:name="JPUSH_APPKEY" android:value="594513c14ce48a376f9644ea"/> 
         
     </application>
 
