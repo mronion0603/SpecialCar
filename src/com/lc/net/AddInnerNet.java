@@ -145,7 +145,7 @@ public class AddInnerNet {
 	                		String content = "authn=" + URLEncoder.encode(authn, "UTF-8")
 	                				+"&device=" + URLEncoder.encode(device, "UTF-8")
 	                				+"&serviceTypeId=" + URLEncoder.encode(serviceTypeId, "UTF-8")
-	                			    +"&carType=" + URLEncoder.encode(cartype, "UTF-8")
+	                			    +"&carTypeId=" + URLEncoder.encode(cartype, "UTF-8")
 	                			    +"&startTime=" + URLEncoder.encode(startTime, "UTF-8")
 	                			+"&startAddress=" + URLEncoder.encode(startAddress, "UTF-8")
 	                			+"&endAddress=" + URLEncoder.encode(endAddress, "UTF-8")

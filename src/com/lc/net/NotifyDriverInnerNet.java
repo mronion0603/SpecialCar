@@ -57,11 +57,11 @@ public class NotifyDriverInnerNet {
 		                		urlConnection.connect();
 	                		
 	                		int responseCode =urlConnection.getResponseCode();
-	                		// System.out.println(responseCode);
+	                		System.out.println("responseCode:"+responseCode);
 	                		if ( responseCode== 200) { 
 	                		  InputStream in = urlConnection.getInputStream();  
 	                		  result = read(in);
-	                		 // System.out.println(result);
+	                		  System.out.println("result:"+result);
 	                		}
 	                		
 	                		urlConnection.disconnect();
