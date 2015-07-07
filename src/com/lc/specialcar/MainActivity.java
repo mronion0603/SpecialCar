@@ -90,7 +90,7 @@ public class MainActivity extends SlidingFragmentActivity implements OnClickList
 		ivCity.setOnClickListener(this);
 		
 		// 调用 Handler 来异步设置别名
-		mHandler.sendMessage(mHandler.obtainMessage(MSG_SET_ALIAS, MySharePreference.getStringValue(getApplication(), MySharePreference.PHONE)));
+		mHandler.sendMessage(mHandler.obtainMessage(MSG_SET_ALIAS, MySharePreference.getStringValue(getApplication(), MySharePreference.UUID)));
 	}
 	
 	void initViewPager(){

@@ -189,17 +189,22 @@
            <EditText
             android:id="@+id/feedbackET"
             android:hint="其他要求"
-            
+            android:inputType="textMultiLine"	
             android:layout_width="wrap_content"
-            android:layout_height="180dip"
+            android:layout_height="wrap_content"
             android:gravity="top"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dip"
             android:layout_marginTop="10dip"
             android:layout_marginLeft="10dip"
             android:textSize="18sp"
+            android:enabled="true"	
+            android:minLines="8"	
+            android:maxLines="10"
             android:background="@color/white"
+            android:scrollbars="vertical" 
             />
+          
         </RelativeLayout>
          <ImageView
 	      android:layout_width="fill_parent"

@@ -23,4 +23,5 @@ public class ConnectUrl {
  public static String getCarType = commonurl+"getCarType";	
  public static String getNearbyDriver = commonurl+"selSNCoord";
  public static String addnotifydriverinner = commondriverurl+"pushSN.ct";
+ public static String getBlance = commonurl+"selBalance";
 }

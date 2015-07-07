@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.lc.intercity.InterCityHomeActivity;
+import com.lc.net.GetBalanceNet;
 import com.lc.net.GetInfoNet;
 import com.lc.specialcar.MainActivity;
 import com.lc.specialcar.R;
@@ -49,8 +50,10 @@ public class LeftFragment extends Fragment implements OnClickListener{
 	private View moreView;
 	private TextView card;
 	private TextView tvname;
+	private TextView tvmoney,tvbalance;
 	private View view;
-	 GetInfoNet getInfoNet = new GetInfoNet();
+	GetInfoNet getInfoNet = new GetInfoNet();
+	GetBalanceNet getBalanceNet = new GetBalanceNet();
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -97,16 +100,24 @@ public class LeftFragment extends Fragment implements OnClickListener{
 		
 		card = (TextView)view.findViewById(R.id.tvCard);
 		tvname = (TextView)view.findViewById(R.id.user_name);
+		tvmoney = (TextView)view.findViewById(R.id.tvToday);
+		tvbalance = (TextView)view.findViewById(R.id.account);
   		if(MySharePreference.getStringValue(getActivity(), MySharePreference.USER_TYPE).equals("1")){
   		   card.setText("公务卡");
+  		   tvmoney.setText("对公结算");
   		}else{
   		   card.setText("信用卡");
+  		   tvmoney.setText("余额");
   		}
   		getInfoNet.setHandler(mhandler);
 		getInfoNet.setDevice(Global.DEVICE);
 		getInfoNet.setAuthn(MySharePreference.getStringValue(getActivity(), MySharePreference.AUTHN));
 		getInfoNet.getCodeFromServer();
 		
+		getBalanceNet.setHandler(mhandler);
+		getBalanceNet.setDevice(Global.DEVICE);
+		getBalanceNet.setAuthn(MySharePreference.getStringValue(getActivity(), MySharePreference.AUTHN));
+		getBalanceNet.getCodeFromServer();
 	}
 	
 	@SuppressLint("HandlerLeak")
@@ -123,10 +134,30 @@ public class LeftFragment extends Fragment implements OnClickListener{
 						}      	
 	             break;
                 }
+	            case Global.GETBALANCE:{
+            		try {
+						parseBalance((String)msg.obj);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}      	
+                 break;
+                }
             }
     }};
+    private void parseBalance(String str)throws Exception{  
+    	//System.out.println(str);
+    	JSONObject jsonobj = new JSONObject(str); 
+    	int result = jsonobj.getInt("ResultCode");
+   	    if(result==Global.SUCCESS){
+   	    	JSONObject jsonobj2 = jsonobj.getJSONObject("Data");
+   	        //String username = MySharePreference.getStringValue(getActivity(), MySharePreference.USERNAME);  
+   	    	tvbalance.setText("￥"+jsonobj2.getString("balance"));
+        }else{
+          
+        } 
+    }
     private void parseJSON(String str)throws Exception{  
-    	System.out.println(str);
+    	//System.out.println(str);
     	JSONObject jsonobj = new JSONObject(str); 
     	int result = jsonobj.getInt("ResultCode");
    	    if(result==Global.SUCCESS){

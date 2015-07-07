@@ -147,6 +147,7 @@ public class LoginActivity extends Activity {
                 }
 	            case Global.LOGIN:{
 	            	try {
+	            		 //System.out.println((String)msg.obj);
 		            	 JSONObject jsonobj = new JSONObject((String)msg.obj);  
 		                 int result = jsonobj.getInt("ResultCode");
 		                 System.out.println((String)msg.obj);
@@ -154,7 +155,9 @@ public class LoginActivity extends Activity {
 		            		String getauthn = jsonobj.getJSONObject("Data").getString("authn");
 		            		MySharePreference.editStringValue(getApplication(),MySharePreference.PHONE,phoneNum);
 		            		MySharePreference.editStringValue(getApplication(),MySharePreference.AUTHN,getauthn);
-		            				            		
+		            		String getuuid = jsonobj.getJSONObject("Data").getString("uuid");     
+		            		MySharePreference.editStringValue(getApplication(),MySharePreference.UUID,getuuid);
+		            		
 		            		Intent intent = new Intent();
 		     				intent.setClass(getApplication(), MainActivity.class);
 		     				startActivity(intent);
