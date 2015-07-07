@@ -157,7 +157,7 @@ public class LoginActivity extends Activity {
 		            		MySharePreference.editStringValue(getApplication(),MySharePreference.AUTHN,getauthn);
 		            		String getuuid = jsonobj.getJSONObject("Data").getString("uuid");     
 		            		MySharePreference.editStringValue(getApplication(),MySharePreference.UUID,getuuid);
-		            		
+		            		//
 		            		Intent intent = new Intent();
 		     				intent.setClass(getApplication(), MainActivity.class);
 		     				startActivity(intent);
