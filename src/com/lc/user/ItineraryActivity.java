@@ -3,12 +3,20 @@ package com.lc.user;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import com.lc.net.GetOrderNet;
 import com.lc.specialcar.R;
 import com.lc.utils.ExitApplication;
+import com.lc.utils.Global;
+import com.lc.utils.MySharePreference;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -28,6 +36,8 @@ public class ItineraryActivity extends Activity implements OnClickListener {
     private RelativeLayout rls;
     private ListView listview;
   	ArrayList<HashMap<String,Object>> listItem = new ArrayList<HashMap<String,Object>>();
+  	GetOrderNet getOrderNet = new GetOrderNet();
+  	SimpleAdapter listItemAdapter;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
@@ -49,9 +59,9 @@ public class ItineraryActivity extends Activity implements OnClickListener {
 		ivleft.setVisibility(View.VISIBLE);
 		listview=(ListView)findViewById(R.id.listview);
 		getData();
-		SimpleAdapter listItemAdapter = new SimpleAdapter(this,listItem,R.layout.userinfo_itinerary_listitem , 
-				new String[]{"OrderStatus","OrderNumber","OrderDate","OrderAddress"},
-				new int[]{R.id.OrderStatus,R.id.OrderNumber,R.id.OrderDate,R.id.OrderAddress});
+		listItemAdapter = new SimpleAdapter(this,listItem,R.layout.userinfo_itinerary_listitem , 
+				new String[]{"OrderStatus","OrderDate","SerTypeId","OrderAddress","endAddress"},
+				new int[]{R.id.OrderStatus,R.id.OrderDate,R.id.OrderType,R.id.OrderAddress,R.id.OrderEndAddress});
 		listview.setDividerHeight(20);
 		
 		listview.setAdapter(listItemAdapter);
@@ -67,6 +77,11 @@ public class ItineraryActivity extends Activity implements OnClickListener {
 		});
 	}
 	void getData(){
+		getOrderNet.setHandler(mhandler);
+		getOrderNet.setDevice(Global.DEVICE);
+		getOrderNet.setAuthn(MySharePreference.getStringValue(getApplication(), MySharePreference.AUTHN));
+		getOrderNet.getCodeFromServer();
+		/*
 		for(int i=0;i<5;i++){
 		     HashMap<String , Object> map = new HashMap<String , Object>();
 			 map.put("OrderStatus","已完成");
@@ -75,7 +90,78 @@ public class ItineraryActivity extends Activity implements OnClickListener {
 			 map.put("OrderAddress","汉口火车站");
 			 listItem.add(map);
 		}
+		*/
 	}
+	@SuppressLint("HandlerLeak")
+	public Handler mhandler= new Handler() {
+        public void handleMessage(android.os.Message msg) {
+            switch(msg.what) { 
+	            case Global.GETORDER:{
+	            		try {
+							parseJSON((String)msg.obj);
+							listItemAdapter.notifyDataSetChanged();
+						} catch (Exception e) {
+							
+							e.printStackTrace();
+						}      	
+	             break;
+                }
+            }
+    }};
+    private void parseJSON(String str)throws Exception{  
+    	//System.out.println(str);
+		JSONObject jsonobj = new JSONObject(str);
+		int result = jsonobj.getInt("ResultCode");
+		if (result == Global.SUCCESS) {
+			JSONArray jsonarray = jsonobj.getJSONArray("Data");
+			for (int x = 0; x < jsonarray.length(); x++) {
+				JSONObject jsonobj2 = (JSONObject) jsonarray.get(x);
+				HashMap<String, Object> map = new HashMap<String, Object>();
+				String getorderStatus = jsonobj2.getString("orderStatus");
+				if(getorderStatus.equals("0")){
+					map.put("OrderStatus","待服务");
+				}else if(getorderStatus.equals("1")){
+					map.put("OrderStatus","已完成");
+				}else if(getorderStatus.equals("2")){
+					map.put("OrderStatus","服务中");
+				}else if(getorderStatus.equals("-1")){
+					map.put("OrderStatus","取消");
+				}else{
+					map.put("OrderStatus","代付款");
+				}
+				map.put("OrderNumber", jsonobj2.getString("orderNum"));
+				map.put("OrderDate", jsonobj2.getString("startTime"));
+				map.put("OrderAddress", jsonobj2.getString("startAddress"));
+				String getSerTypeId = jsonobj2.getString("SerTypeId");
+				if(getSerTypeId.equals("1")){
+				   map.put("SerTypeId", "接机");
+				}else if(getSerTypeId.equals("2")){
+					map.put("SerTypeId", "送机");	
+				}else if(getSerTypeId.equals("3")){
+					map.put("SerTypeId", "公务包车");
+				}else if(getSerTypeId.equals("4")){
+					map.put("SerTypeId", "市内约租");
+				}else{
+					map.put("SerTypeId", "城际约租");
+				}
+				map.put("carTypeId", jsonobj2.getString("carTypeId"));
+				map.put("flightNum", jsonobj2.getString("flightNum"));
+				map.put("airport", jsonobj2.getString("airport"));
+				map.put("endAddress", jsonobj2.getString("endAddress"));
+				map.put("useCarTime", jsonobj2.getString("useCarTime"));
+				map.put("carSum", jsonobj2.getString("carSum"));
+				map.put("riderName", jsonobj2.getString("riderName"));
+				map.put("riderPhone", jsonobj2.getString("riderPhone"));
+				map.put("comment", jsonobj2.getString("comment"));
+				map.put("mileage", jsonobj2.getString("mileage"));
+				map.put("time", jsonobj2.getString("time"));
+				map.put("realMoney", jsonobj2.getString("realMoney"));
+				listItem.add(map);
+			}
+		} else {
+
+		}
+    }
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub

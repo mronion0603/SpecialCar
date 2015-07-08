@@ -25,4 +25,5 @@ public class ConnectUrl {
  public static String addnotifydriverinner = commondriverurl+"pushSN.ct";
  public static String getBlance = commonurl+"selBalance";
  public static String getDiscount = commonurl+"getVoucher";
+ public static String getOrder = commonurl+"getOrder";
 }

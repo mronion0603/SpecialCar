@@ -4,23 +4,30 @@
     android:layout_height="wrap_content"
     android:background="@color/white"
     android:orientation="vertical"  
-    android:paddingTop="10dip"
-    android:paddingBottom="10dip"
     >
-            <ImageView
+           
+            <RelativeLayout 
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    android:id="@+id/ll1"
+			    android:paddingTop="10dip"
+                android:paddingBottom="10dip"
+			    >
+			     <ImageView
 	            android:id="@+id/ivmessage"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
 	            android:layout_alignParentRight="true"
 	            android:layout_centerVertical="true"
 	            android:layout_marginLeft="20dip"
-	             android:layout_marginRight="15dip"
+	            android:layout_marginRight="15dip"
 	            android:background="@drawable/rule"
 	            />
             <LinearLayout
 		    android:layout_width="fill_parent"
 		    android:layout_height="wrap_content"
 		    android:orientation="vertical"
+		    	    android:id="@+id/ll2"
 	        >
 	           <LinearLayout
 			    android:layout_width="wrap_content"
@@ -60,9 +67,47 @@
 	            android:layout_marginLeft="20dip"
 	            />
 	            </LinearLayout>
-	          
-	          
+
 	          </LinearLayout>
-	            
+	           
+	          </RelativeLayout>
+	           <ImageView
+	            android:id="@+id/iv1"
+	            android:layout_width="fill_parent"
+	            android:layout_height="1dip"
+	            android:background="@color/user_divider2"
+	            android:layout_below="@+id/ll1"
+	            />
+	        <LinearLayout
+	        android:id="@+id/llrule"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:orientation="horizontal"
+		    android:layout_below="@+id/iv1"
+		    android:background="@color/instructionbg"
+		    android:paddingTop="10dip"
+		    android:paddingBottom="10dip"
+	        >
+          
+	        <TextView
+		      android:layout_width="wrap_content"
+		      android:layout_height="wrap_content"
+		      android:gravity="center"
+		      android:layout_marginLeft="20dip"
+		      android:text="使用规则:"
+		      android:textColor="@color/black"
+		      android:textSize="16sp" >
+		    </TextView>
+		     <TextView
+		      android:id="@+id/rule"
+		      android:layout_width="wrap_content"
+		      android:layout_height="wrap_content"
+		      android:gravity="center"
+		      android:layout_marginLeft="2dip"
+		      android:text="使用规则"
+		      android:textColor="@color/black2"
+		      android:textSize="14sp" >
+		    </TextView>
+	        </LinearLayout>
        
 </RelativeLayout>

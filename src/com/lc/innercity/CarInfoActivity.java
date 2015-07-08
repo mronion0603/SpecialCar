@@ -30,6 +30,7 @@ import com.lc.net.RouteMatrixNet;
 import com.lc.popupwindow.AddressPopupWindow;
 import com.lc.popupwindow.TimePopupWindow;
 import com.lc.specialcar.R;
+import com.lc.user.Discount2Activity;
 import com.lc.utils.ButtonEffect;
 import com.lc.utils.ExitApplication;
 import com.lc.utils.Global;
@@ -61,11 +62,12 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 	public static final int REQUSET_ADDRESS2 = 3;
 	public static final int REQUSET_DEMAND = 4;
 	public static final int REQUSET_SELECTCAR = 5;
+	public static final int REQUSET_DISCOUNT = 6;
     TextView tvTitle,righttext,feeRule,tvname,tvphone,tvstartAddress,tvendAddress,tvdate,tvmoney,tvdemand;
     TextView tvtype;
     ImageView ivleft;
     Button ivSearch;
-    private RelativeLayout rls,rlusecar,rlselectcar,rldate,rlmodifyname,rlstartaddress,rlgetoffaddress;
+    private RelativeLayout rls,rlusecar,rlselectcar,rldate,rlmodifyname,rldiscount,rlgetoffaddress;
     private ImageView getoffAddress;
 	private View originview; 
 	GroupAdapter groupAdapter;
@@ -95,6 +97,7 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 	String ruleStr6 = "元/分钟";
 	NotifyDriverInnerNet notifyDriverInnerNet = new NotifyDriverInnerNet();
 	String driveridStr="";
+	String vMoneystr="0";	String voucherNumstr="";
     @Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
@@ -154,8 +157,10 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 		rlselectcar.setOnClickListener(this);
 		rlmodifyname = (RelativeLayout) findViewById(R.id.rlmodifyname);
 		rlmodifyname.setOnClickListener(this);
-		rlstartaddress= (RelativeLayout) findViewById(R.id.startaddress);
+		//rlstartaddress= (RelativeLayout) findViewById(R.id.startaddress);
 		//rlstartaddress.setOnClickListener(this);
+		rldiscount= (RelativeLayout) findViewById(R.id.rldiscount);
+		rldiscount.setOnClickListener(this);
 		rlgetoffaddress= (RelativeLayout) findViewById(R.id.getoffaddress);
 		rlgetoffaddress.setOnClickListener(this);
 		rldate = (RelativeLayout) findViewById(R.id.usecardate);
@@ -374,10 +379,10 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 			finish();
 			break;
 		case R.id.righttext:
-			Intent intent = new Intent();
+		{	Intent intent = new Intent();
 			intent.setClass(CarInfoActivity.this,BillingRuleActivity.class);
 			startActivity(intent);
-			break;
+		}	break;
 		case R.id.usecardate:
 		{	timepWindow = new TimePopupWindow(CarInfoActivity.this,itemsOnClick);
 			timepWindow.showAsDropDown(originview, 0, 0); 
@@ -457,20 +462,25 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 			startActivityForResult(intent4, REQUSET_SELECTCAR);
 		}	break;
 		case R.id.rlmodifyname:
-			Intent intent5 = new Intent();
+		{	Intent intent5 = new Intent();
 			intent5.setClass(CarInfoActivity.this,ModifyNameActivity.class);
 			startActivityForResult(intent5, REQUSET_NAMEPHONE);  
-			break;
+		}	break;
 		case R.id.startaddress:
-			Intent intent6 = new Intent();
+		{	Intent intent6 = new Intent();
 			intent6.setClass(CarInfoActivity.this,AddressActivity.class);
 			startActivityForResult(intent6, REQUSET_ADDRESS);  
-			break;
+		}	break;
 		case R.id.getoffaddress:
-			Intent intent7 = new Intent();
+		{	Intent intent7 = new Intent();
 			intent7.setClass(CarInfoActivity.this,AddressActivity.class);
 			startActivityForResult(intent7, REQUSET_ADDRESS2);  
-			break;
+		}	break;
+		case R.id.rldiscount:
+		{	Intent intent = new Intent();
+			intent.setClass(CarInfoActivity.this,Discount2Activity.class);
+			startActivityForResult(intent,REQUSET_DISCOUNT);
+		}	break;
 		default:
 			break;
 		}
@@ -499,6 +509,17 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 	            	  pricedis=Double.parseDouble(ruleStr3);
 	            	  pricedura=Double.parseDouble(ruleStr5);
 	            	  tvtype.setText(extras.getString("strtype"));
+	              }
+	        }  
+	        if (requestCode == REQUSET_DISCOUNT && resultCode == RESULT_OK) {
+	        	  String voucherNum ="";
+	        	  String money ="";
+	        	  Bundle extras = data.getExtras();
+	              if(extras != null){
+	            	  voucherNum = extras.getString("voucherNum");
+	            	  money = extras.getString("vMoney");
+	            	  voucherNumstr = voucherNum;
+	            	  vMoneystr = money;
 	              }
 	        }  
 	        if (requestCode == REQUSET_DEMAND && resultCode == RESULT_OK) {

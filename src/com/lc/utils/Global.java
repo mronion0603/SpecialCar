@@ -28,4 +28,5 @@ public class Global {
   public static final int GETNEARBYDRIVER=215;
   public static final int GETBALANCE=216;
   public static final int GETDISCOUNT=217;
+  public static final int GETORDER=218;
 }

@@ -178,6 +178,9 @@
         <activity
             android:name="com.lc.user.DiscountActivity"
             android:label="@string/app_name" />
+         <activity
+            android:name="com.lc.user.Discount2Activity"
+            android:label="@string/app_name" />
         <activity
             android:name="com.lc.user.ChargeOnlineActivity"
             android:label="@string/app_name" />
