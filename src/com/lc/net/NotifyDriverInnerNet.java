@@ -6,7 +6,9 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+
 import com.lc.utils.ConnectUrl;
+
 import android.os.Handler;
 
 
@@ -15,14 +17,16 @@ public class NotifyDriverInnerNet {
 	private boolean isRunning = false;
 	String result = "网络连接错误！";
 	String orderNum = "";
-
+	String driverNum = "";
 	public NotifyDriverInnerNet(){
 		
 	}
 	public void setHandler(Handler handler){
 		this.handler = handler;
 	}
-	
+	public void setDriverNum(String driverNum){
+		this.driverNum = driverNum;
+	}
 	public void setOrderNum(String orderNum){
 		this.orderNum = orderNum;
 	}
@@ -40,7 +44,7 @@ public class NotifyDriverInnerNet {
 		                	//URL url = null;
 		                	try{
 		                		String spec = strurl +"?orderNum=" + URLEncoder.encode(orderNum, "UTF-8")
-		                                //+"&destinations=" + URLEncoder.encode(destinations, "UTF-8")   
+		                                +"&driverNum=" + URLEncoder.encode(driverNum, "UTF-8")   
 		                		        //+"&mcode=" + URLEncoder.encode(mcode, "UTF-8")
 		                		        ;
 		                        // 根据地址创建URL对象(网络访问的url)  

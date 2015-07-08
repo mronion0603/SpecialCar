@@ -94,6 +94,7 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 	String ruleStr5 = "0.24";
 	String ruleStr6 = "元/分钟";
 	NotifyDriverInnerNet notifyDriverInnerNet = new NotifyDriverInnerNet();
+	String driveridStr="";
     @Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
@@ -112,7 +113,8 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 	       getAddress = extras.getString("address");
 	       slont = extras.getDouble("lontitude");
 	       slat = extras.getDouble("latitude");
-	       System.out.println(slont+"");
+	       driveridStr= extras.getString("driveridStr");
+	       //System.out.println(slont+"");
 	    }
 		// 定位初始化
 		mLocClient = new LocationClient(this);
@@ -316,6 +318,7 @@ public class CarInfoActivity extends Activity implements OnClickListener {
    	    if(result==Global.SUCCESS){
    	    	 notifyDriverInnerNet.setHandler(mHandler);
    	    	 notifyDriverInnerNet.setOrderNum(jsonobj.getJSONObject("Data").getString("orderNum"));
+   	    	 notifyDriverInnerNet.setDriverNum(driveridStr);
    	    	 notifyDriverInnerNet.getDataFromServer();
    	    	
    	         Intent intent2 = new Intent();
@@ -418,6 +421,7 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 	            addInnerNet.setMileage(String.valueOf(distance));
 	            addInnerNet.setRealMoney(String.valueOf(estimate(basicmoney,pricedis,pricedura)));
 	            addInnerNet.setRiderName(tvname.getText().toString());
+	            addInnerNet.setDriverNum(driveridStr);
 	            if(tvphone.getText().toString().equals("本人")){
 	              addInnerNet.setRiderPhone(MySharePreference.getStringValue(getApplication(), MySharePreference.PHONE));
 	            }else{

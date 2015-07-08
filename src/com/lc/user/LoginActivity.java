@@ -150,7 +150,7 @@ public class LoginActivity extends Activity {
 	            		 //System.out.println((String)msg.obj);
 		            	 JSONObject jsonobj = new JSONObject((String)msg.obj);  
 		                 int result = jsonobj.getInt("ResultCode");
-		                 System.out.println((String)msg.obj);
+		                 //System.out.println((String)msg.obj);
 		            	 if(result==Global.SUCCESS){
 		            		String getauthn = jsonobj.getJSONObject("Data").getString("authn");
 		            		MySharePreference.editStringValue(getApplication(),MySharePreference.PHONE,phoneNum);

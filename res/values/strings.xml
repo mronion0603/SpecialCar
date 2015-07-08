@@ -16,5 +16,5 @@
 	
 	<string name="account">¥1200</string>
 	<string name="discount">¥120</string>
-	
+	<string name="money">¥</string>
 </resources>

@@ -27,4 +27,5 @@ public class Global {
   public static final int GETCARTYPE=214;
   public static final int GETNEARBYDRIVER=215;
   public static final int GETBALANCE=216;
+  public static final int GETDISCOUNT=217;
 }

@@ -41,13 +41,16 @@ public class AddInnerNet {
 	String longFootMoney = "";
 	String voucherNum = "";
 	String voucherMoney = "";
+	String driverNum = "";
 	public AddInnerNet(){
 		
 	}
 	public void setHandler(Handler handler){
 		this.handler = handler;
 	}
-	
+	public void setDriverNum(String driverNum){
+		this.driverNum = driverNum;
+	}
 	public void setServiceTypeId(String serviceTypeId){
 		this.serviceTypeId = serviceTypeId;
 	}
@@ -164,6 +167,7 @@ public class AddInnerNet {
 	                				+"&voucherNum=" + URLEncoder.encode(voucherNum, "UTF-8")
 	                				+"&voucherMoney=" + URLEncoder.encode(voucherMoney, "UTF-8")
 	                				+"&realMoney=" + URLEncoder.encode(realMoney, "UTF-8")
+	                				//+"&driverNum=" + URLEncoder.encode(driverNum, "UTF-8")
 	                				;
 	                		
 	                		outputStream.writeBytes(content);
@@ -175,7 +179,7 @@ public class AddInnerNet {
 	                		if ( responseCode== 200) { 
 	                		  InputStream in = urlConnection.getInputStream();  
 	                		  result = read(in);
-	                		  System.out.println(result);
+	                		  //System.out.println(result);
 	                		}
 	                		urlConnection.disconnect();
 	                

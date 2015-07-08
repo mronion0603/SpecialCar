@@ -94,6 +94,7 @@ public class InnerCityHomeActivity extends Activity implements OnClickListener {
     private List<HashMap<String , Object>> groups1= new ArrayList<HashMap<String , Object>>();
     double slat=0,slont =0;
     private View originview; 
+    String driveridStr="";
     @Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
@@ -109,12 +110,10 @@ public class InnerCityHomeActivity extends Activity implements OnClickListener {
 	public void init(){
 		LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);  
 		originview = layoutInflater.inflate(R.layout.activity_innercity_home, null);  
-		
 		ExitApplication.getInstance().addActivity(this);
 		ivSearch = (Button) findViewById(R.id.Search);
 		ivSearch.setOnClickListener(this);
 		ButtonEffect.setButtonStateChangeListener(ivSearch);
-		
 		tvTitle = (TextView) findViewById(R.id.topTv);
 		tvTitle.setText("市内约租");
 		righttext = (TextView) findViewById(R.id.righttext);
@@ -142,14 +141,11 @@ public class InnerCityHomeActivity extends Activity implements OnClickListener {
 	        .zoom(12)
 	        .build();
 	        //定义MapStatusUpdate对象，以便描述地图状态将要发生的变化
-
-
 	        MapStatusUpdate mMapStatusUpdate = MapStatusUpdateFactory.newMapStatus(mMapStatus);
 	        //改变地图状态
 	        mBaiduMap.setMapStatus(mMapStatusUpdate);
 	        
 		// 定位初始化
-	        
 		mLocClient = new LocationClient(this);
 		mLocClient.registerLocationListener(myListener);
 		LocationClientOption option = new LocationClientOption();
@@ -354,6 +350,7 @@ public class InnerCityHomeActivity extends Activity implements OnClickListener {
 			intent.putExtra("address", curaddress.getText().toString());
 			intent.putExtra("lontitude", slont);
 			intent.putExtra("latitude", slat);
+			intent.putExtra("driveridStr",driveridStr);
 			startActivity(intent);  
 			}
 		}	break;	
@@ -447,28 +444,7 @@ public class InnerCityHomeActivity extends Activity implements OnClickListener {
 					MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(ll);
 					mBaiduMap.animateMapStatus(u);
 					
-					/*
-					LatLng llA = new LatLng(location.getLatitude()+0.01, location.getLongitude()+0.01);
-					BitmapDescriptor bdA = BitmapDescriptorFactory
-								.fromResource(R.drawable.car1);
-					OverlayOptions ooA = new MarkerOptions().position(llA).icon(bdA)
-								.zIndex(9).draggable(true);
-					mBaiduMap.addOverlay(ooA);
-					LatLng  llB = new LatLng(location.getLatitude()-0.03, location.getLongitude()+0.024);
-					OverlayOptions ooB = new MarkerOptions().position(llB).icon(bdA)
-								.zIndex(9).draggable(true);
-					mBaiduMap.addOverlay(ooB);
-					LatLng  llC = new LatLng(location.getLatitude()+0.023, location.getLongitude()+0.016);
-					OverlayOptions ooC = new MarkerOptions().position(llC).icon(bdA)
-								.zIndex(9).draggable(true);
-					mBaiduMap.addOverlay(ooC);
-					LatLng  llD = new LatLng(location.getLatitude()-0.033, location.getLongitude()-0.036);
-					OverlayOptions ooD = new MarkerOptions().position(llD).icon(bdA)
-								.zIndex(9).draggable(true);
-					mBaiduMap.addOverlay(ooD);
-					*/
-					//initOverlay();
-				    	
+					
 				}
 			}
 
@@ -522,8 +498,9 @@ public class InnerCityHomeActivity extends Activity implements OnClickListener {
             }
         }
         private void parseJSON(String str) throws Exception {
+        
         	mBaiduMap.clear();
-    		//System.out.println(str);
+    		System.out.println(str);
     		JSONObject jsonobj = new JSONObject(str);
     		if (jsonobj.getInt("ResultCode") == Global.SUCCESS) {
     			JSONArray jsonarray = jsonobj.getJSONArray("Data");
@@ -535,6 +512,8 @@ public class InnerCityHomeActivity extends Activity implements OnClickListener {
     				map.put("phoneNum", jsonobj2.getString("phoneNum"));
     				map.put("longitude", jsonobj2.getString("longitude"));
     				map.put("latitude", jsonobj2.getString("latitude"));
+    				map.put("driverNum", jsonobj2.getString("driverNum"));
+    				driveridStr=driveridStr+jsonobj2.getString("driverNum")+",";
     				list.add(map);
     			}
     			for(int i=0;i<list.size();i++){

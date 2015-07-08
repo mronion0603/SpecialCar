@@ -23,6 +23,7 @@ import com.lc.specialcar.R;
 import com.lc.user.AddressManageActivity;
 import com.lc.user.AndroidShare;
 import com.lc.user.BalanceActivity;
+import com.lc.user.DiscountActivity;
 import com.lc.user.ItineraryActivity;
 import com.lc.user.MessageActivity;
 import com.lc.user.ModifyInfoActivity;
@@ -79,7 +80,7 @@ public class LeftFragment extends Fragment implements OnClickListener{
 		userinfo = view.findViewById(R.id.personbg);
 		balanceView = view.findViewById(R.id.officeaccount);
 		lastListView = view.findViewById(R.id.tvLastlist);
-		discussView = view.findViewById(R.id.tvDiscussMeeting);
+		discussView = view.findViewById(R.id.discount);
 		itineraryView = view.findViewById(R.id.Itinerary);
 		receiptView = view.findViewById(R.id.Receipt);
 		addressView = view.findViewById(R.id.AddressManage);
@@ -214,10 +215,12 @@ public class LeftFragment extends Fragment implements OnClickListener{
 			//newContent = new LastListFragment();
 			//title = getString(R.string.lastList);
 			break;
-		case R.id.tvDiscussMeeting: // 讨论集会
-			//newContent = new DiscussFragment();
-			//title = getString(R.string.discussMeetting);
-			break;
+		case R.id.discount: // 优惠券
+		{	
+			Intent intent = new Intent();
+			intent.setClass(this.getActivity().getApplicationContext(), DiscountActivity.class);
+			startActivity(intent);
+		}	break;
 		case R.id.Itinerary: 
 		{   // 行程
 			Intent intent = new Intent();
