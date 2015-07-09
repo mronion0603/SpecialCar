@@ -445,6 +445,8 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 	            	//System.out.println("getdate:"+getdate);
 	            	addInnerNet.setStartTime(getdate);
 	            }
+	            
+	            System.out.println("vMoneystr:"+vMoneystr+" voucherNumstr:"+voucherNumstr);
 	            addInnerNet.setVoucherMoney("0");
 	            addInnerNet.setVoucherNum("");
 	            addInnerNet.getDataFromServer();

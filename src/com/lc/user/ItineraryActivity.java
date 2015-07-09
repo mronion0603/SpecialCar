@@ -60,7 +60,7 @@ public class ItineraryActivity extends Activity implements OnClickListener {
 		listview=(ListView)findViewById(R.id.listview);
 		getData();
 		listItemAdapter = new SimpleAdapter(this,listItem,R.layout.userinfo_itinerary_listitem , 
-				new String[]{"OrderStatus","OrderDate","SerTypeId","OrderAddress","endAddress"},
+				new String[]{"OrderStatus","OrderDate","SerTypeId","OrderAddress","EndAddress"},
 				new int[]{R.id.OrderStatus,R.id.OrderDate,R.id.OrderType,R.id.OrderAddress,R.id.OrderEndAddress});
 		listview.setDividerHeight(20);
 		
@@ -71,6 +71,23 @@ public class ItineraryActivity extends Activity implements OnClickListener {
 					long arg3) {
 				Intent intent = new Intent();
 				intent.setClass(getApplication(), ItineraryDetailActivity.class);
+				intent.putExtra("OrderStatus", (String)listItem.get(arg2).get("OrderStatus"));
+				intent.putExtra("OrderNum", (String)listItem.get(arg2).get("OrderNum"));
+				intent.putExtra("StartTime", (String)listItem.get(arg2).get("StartTime"));
+				intent.putExtra("StartAddress", (String)listItem.get(arg2).get("StartAddress"));
+				intent.putExtra("SerTypeId", (String)listItem.get(arg2).get("SerTypeId"));
+				intent.putExtra("CarTypeId", (String)listItem.get(arg2).get("CarTypeId"));
+				intent.putExtra("FlightNum", (String)listItem.get(arg2).get("FlightNum"));
+				intent.putExtra("Airport", (String)listItem.get(arg2).get("Airport"));
+				intent.putExtra("EndAddress", (String)listItem.get(arg2).get("EndAddress"));
+				intent.putExtra("UseCarTime", (String)listItem.get(arg2).get("UseCarTime"));
+				intent.putExtra("CarSum", (String)listItem.get(arg2).get("CarSum"));
+				intent.putExtra("RiderName", (String)listItem.get(arg2).get("RiderName"));
+				intent.putExtra("RiderPhone", (String)listItem.get(arg2).get("RiderPhone"));
+				intent.putExtra("Comment", (String)listItem.get(arg2).get("Comment"));
+				intent.putExtra("Mileage", (String)listItem.get(arg2).get("Mileage"));
+				intent.putExtra("Time", (String)listItem.get(arg2).get("Time"));
+				intent.putExtra("RealMoney", (String)listItem.get(arg2).get("RealMoney"));
 				startActivity(intent);
 			}
 			
@@ -144,18 +161,18 @@ public class ItineraryActivity extends Activity implements OnClickListener {
 				}else{
 					map.put("SerTypeId", "城际约租");
 				}
-				map.put("carTypeId", jsonobj2.getString("carTypeId"));
-				map.put("flightNum", jsonobj2.getString("flightNum"));
-				map.put("airport", jsonobj2.getString("airport"));
-				map.put("endAddress", jsonobj2.getString("endAddress"));
-				map.put("useCarTime", jsonobj2.getString("useCarTime"));
-				map.put("carSum", jsonobj2.getString("carSum"));
-				map.put("riderName", jsonobj2.getString("riderName"));
-				map.put("riderPhone", jsonobj2.getString("riderPhone"));
-				map.put("comment", jsonobj2.getString("comment"));
-				map.put("mileage", jsonobj2.getString("mileage"));
-				map.put("time", jsonobj2.getString("time"));
-				map.put("realMoney", jsonobj2.getString("realMoney"));
+				map.put("CarTypeId", jsonobj2.getString("carTypeId"));
+				map.put("FlightNum", jsonobj2.getString("flightNum"));
+				map.put("Airport", jsonobj2.getString("airport"));
+				map.put("EndAddress", jsonobj2.getString("endAddress"));
+				map.put("UseCarTime", jsonobj2.getString("useCarTime"));
+				map.put("CarSum", jsonobj2.getString("carSum"));
+				map.put("RiderName", jsonobj2.getString("riderName"));
+				map.put("RiderPhone", jsonobj2.getString("riderPhone"));
+				map.put("Comment", jsonobj2.getString("comment"));
+				map.put("Mileage", jsonobj2.getString("mileage"));
+				map.put("Time", jsonobj2.getString("time"));
+				map.put("RealMoney", jsonobj2.getString("realMoney"));
 				listItem.add(map);
 			}
 		} else {
