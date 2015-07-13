@@ -1,15 +1,6 @@
 package com.lc.user;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Timer;
 
-import com.lc.innercity.AddressActivity;
-import com.lc.innercity.GroupAdapter;
-import com.lc.innercity.TypeAddressActivity;
-import com.lc.intercity.InterCityHomeActivity;
-import com.lc.intercity.SearchCarpoolActivity;
-import com.lc.intercity.SearchCharteredCarActivity;
 import com.lc.specialcar.ChooseUserActivity;
 import com.lc.specialcar.R;
 import com.lc.utils.ButtonEffect;
@@ -39,6 +30,7 @@ public class MoreActivity extends Activity implements OnClickListener {
     ImageView ivleft;
     private RelativeLayout rls;
     Button ivSearch;
+    private RelativeLayout rl1,rl2,rl3;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
@@ -59,7 +51,12 @@ public class MoreActivity extends Activity implements OnClickListener {
 		rls.setOnClickListener(this);
 		ivleft = (ImageView) findViewById(R.id.ArrowHead);
 		ivleft.setVisibility(View.VISIBLE);
-		
+		rl1 = (RelativeLayout) findViewById(R.id.morenotify);
+		rl1.setOnClickListener(this);
+		rl2 = (RelativeLayout) findViewById(R.id.usecardate);
+		rl2.setOnClickListener(this);
+		rl3 = (RelativeLayout) findViewById(R.id.usecardate2);
+		rl3.setOnClickListener(this);
 	}
 	@Override
 	public void onClick(View v) {
@@ -68,7 +65,18 @@ public class MoreActivity extends Activity implements OnClickListener {
 		case R.id.rlslidemenu:
 			finish();
 			break;
+		case R.id.morenotify:
+		{	
+			Intent intent = new Intent();
+			intent.setClass(getApplication(), AgreementActivity.class);
+			startActivity(intent);
+		}	break;
+		case R.id.usecardate:
 			
+			break;
+		case R.id.usecardate2:
+			
+			break;
 		case R.id.Search:
 			MySharePreference.clearPersonal(getApplication());
 			finish();

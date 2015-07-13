@@ -16,17 +16,18 @@
 	    android:id="@+id/usecardate"
 	    android:background="@color/white"
 	    >
-	    <ImageView
-	      android:id="@+id/date"
-	      android:layout_width="wrap_content"
-	      android:layout_height="wrap_content"
-	      android:layout_marginLeft="10dip"
-	      android:background="@drawable/order_wait_driver2"  
-	    />
+	     <com.lc.utils.CircularImage
+            android:id="@+id/driverImg"
+	        android:layout_width="60.0dip"
+	        android:layout_height="60.0dip"
+	        android:layout_marginLeft="10dip"
+            android:layout_centerVertical="true"
+            android:background="@drawable/order_wait_driver2"
+	     />
 	    <LinearLayout 
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content" 
-	    android:layout_toRightOf="@+id/date"
+	    android:layout_toRightOf="@+id/driverImg"
 	    android:layout_centerVertical="true"
 	    android:orientation="vertical" 
 	    >
@@ -50,6 +51,12 @@
                 style="@style/foodRatingBar"
                />
 	     </LinearLayout>
+	      <RelativeLayout 
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content" 
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+	    >
 	      <TextView
 	      android:id="@+id/car"
 	      android:layout_width="wrap_content"
@@ -59,24 +66,24 @@
 	      android:textColor="@color/black2"
 	      android:text="奥迪"
 	      android:layout_alignParentRight="true"
-	      android:layout_centerVertical="true"
+	
 	     />
 	     <TextView
 	      android:id="@+id/carnumber"
-	      android:layout_toLeftOf="@+id/car"
+	      android:layout_below="@+id/car"
 	      android:layout_width="wrap_content"
 	      android:layout_height="wrap_content"
-	      android:layout_marginRight="10dip"
+	      android:layout_marginTop="10dip"
 	      android:text="鄂A 5***6"
-	      android:layout_centerVertical="true"
-	      
+	      android:layout_alignRight="@+id/car"
 	     />
-	     
+	     </RelativeLayout>
 	    </RelativeLayout>  
 	    <LinearLayout 
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
 	    android:background="@color/white"
+	    android:paddingBottom="5dip"
 	    android:layout_marginLeft="10dip"
 	    android:layout_marginRight="10dip"
 	    android:orientation="vertical" >
@@ -205,6 +212,7 @@
 	            android:text="光谷广场"
 	            />
 	     </LinearLayout>
+	    
 	     <LinearLayout
 			    android:layout_width="wrap_content"
 			    android:layout_height="wrap_content"
@@ -229,6 +237,15 @@
 	            android:text="中山公园"
 	            />
 	     </LinearLayout>
+	      </LinearLayout>
+	     <LinearLayout 
+	        android:id="@+id/llextend"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:background="@color/bg_color"
+		    android:layout_marginLeft="10dip"
+		    android:layout_marginRight="10dip"
+		    android:orientation="vertical" >
 	     <LinearLayout
 			    android:layout_width="wrap_content"
 			    android:layout_height="wrap_content"
@@ -253,15 +270,7 @@
 	            android:text="20公里"
 	            />
 	     </LinearLayout>
-	     </LinearLayout>
-	     <LinearLayout 
-	        android:id="@+id/llextend"
-		    android:layout_width="match_parent"
-		    android:layout_height="wrap_content"
-		    android:background="@color/bg_color"
-		    android:layout_marginLeft="10dip"
-		    android:layout_marginRight="10dip"
-		    android:orientation="vertical" >
+	    
 	     <LinearLayout
 			    android:layout_width="wrap_content"
 			    android:layout_height="wrap_content"
@@ -286,6 +295,7 @@
 	            android:text="30分钟"
 	            />
 	     </LinearLayout>
+	     
 	     <LinearLayout
 			    android:layout_width="wrap_content"
 			    android:layout_height="wrap_content"
@@ -407,4 +417,22 @@
 	            />
 	     </LinearLayout>
 	     </LinearLayout>
+	    <RelativeLayout 
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent" 
+	    >
+        <Button
+          android:id="@+id/Search"
+	      android:layout_width="fill_parent"
+	      android:layout_height="50dip"
+	      android:layout_marginLeft="10dip"
+	      android:layout_marginRight="10dip"
+	      android:layout_centerHorizontal="true"
+	      android:layout_alignParentBottom="true"
+	      android:background="@drawable/btn2"
+	      android:text="马上预约"
+	      android:textColor="@color/white"
+	      android:layout_marginBottom="10dip"
+	      />
+        </RelativeLayout>
 </LinearLayout>

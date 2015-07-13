@@ -25,7 +25,7 @@
 	      android:layout_height="wrap_content"
 	      android:layout_marginLeft="20dip"
 	      android:background="@drawable/city_register_user2"  
-	            android:layout_centerVertical="true"
+	      android:layout_centerVertical="true"
 	    />
 	     <TextView
 	      android:id="@+id/Name"
@@ -174,7 +174,7 @@
 	      android:layout_height="wrap_content"
 	      android:layout_marginLeft="20dip"
 	      android:background="@drawable/city_site_get_off"  
-	            android:layout_centerVertical="true"
+	      android:layout_centerVertical="true"
 	    />
 	     <TextView
 	      android:layout_toRightOf="@+id/date3"
@@ -320,14 +320,25 @@
 	      android:layout_centerVertical="true"
 	     />
 	      <TextView
-	      android:id="@+id/financialType"
+	      android:id="@+id/money2"
 	      android:layout_toLeftOf="@+id/arrow5"
 	      android:layout_width="wrap_content"
 	      android:layout_height="wrap_content"
-	      android:layout_marginLeft="5dip"
+	      android:textSize="20sp"
+	      android:layout_marginLeft="20dip"
+	      android:layout_marginRight="10dip"
+	      android:textColor="@color/text_brown"
+	    />
+	      <TextView
+	      android:id="@+id/financialType"
+	      android:layout_toLeftOf="@+id/money2"
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:layout_marginLeft="10dip"
 	      android:textSize="14sp"
 	      android:textColor="@color/text_brown"
 	      android:layout_centerVertical="true"
+	     
 	    />
 	      <TextView
 	      android:id="@+id/FeeRule"
@@ -336,6 +347,7 @@
 	      android:layout_height="wrap_content"
 	      android:textSize="14sp"
 	      android:layout_centerVertical="true"
+	      android:visibility="gone"
 	    />
 	    </RelativeLayout>
 	     <ImageView
@@ -394,35 +406,7 @@
 	      android:layout_height="1dip"
 	      android:background="@color/user_divider3"
 	    />
-	    <RelativeLayout 
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content" 
-	    android:layout_marginTop="10dip"
-	    android:paddingTop="10dip"
-	    android:paddingBottom="10dip"
-	    android:id="@+id/moresafty6"
-	    android:layout_gravity="center"
-	    >
-	      <TextView
-	      android:id="@+id/money"
-	      android:layout_width="wrap_content"
-	      android:layout_height="wrap_content"
-	      android:layout_marginLeft="5dip"
-	      android:textSize="20sp"
-	      android:textColor="@color/black"	   
-	      android:text="预估价"
-	    />
-	      <TextView
-	      android:id="@+id/money2"
-	      android:layout_toRightOf="@+id/money"
-	      android:layout_width="wrap_content"
-	      android:layout_height="wrap_content"
-	      android:textSize="20sp"
-	      android:layout_marginLeft="20dip"
-	      android:textColor="@color/text_brown"
-	    />
-	        
-	    </RelativeLayout>
+
         <RelativeLayout 
 	    android:layout_width="fill_parent"
 	    android:layout_height="fill_parent" 
@@ -435,10 +419,10 @@
 	      android:layout_marginRight="10dip"
 	      android:layout_centerHorizontal="true"
 	      android:layout_alignParentBottom="true"
-	      android:layout_marginBottom="50dip"
 	      android:background="@drawable/btn2"
 	      android:text="马上预约"
 	      android:textColor="@color/white"
+	      android:layout_marginBottom="10dip"
 	      />
         </RelativeLayout>
 </LinearLayout>

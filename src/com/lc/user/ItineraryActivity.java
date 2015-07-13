@@ -72,9 +72,9 @@ public class ItineraryActivity extends Activity implements OnClickListener {
 				Intent intent = new Intent();
 				intent.setClass(getApplication(), ItineraryDetailActivity.class);
 				intent.putExtra("OrderStatus", (String)listItem.get(arg2).get("OrderStatus"));
-				intent.putExtra("OrderNum", (String)listItem.get(arg2).get("OrderNum"));
-				intent.putExtra("StartTime", (String)listItem.get(arg2).get("StartTime"));
-				intent.putExtra("StartAddress", (String)listItem.get(arg2).get("StartAddress"));
+				intent.putExtra("OrderNum", (String)listItem.get(arg2).get("OrderNumber"));
+				intent.putExtra("StartTime", (String)listItem.get(arg2).get("OrderDate"));
+				intent.putExtra("StartAddress", (String)listItem.get(arg2).get("OrderAddress"));
 				intent.putExtra("SerTypeId", (String)listItem.get(arg2).get("SerTypeId"));
 				intent.putExtra("CarTypeId", (String)listItem.get(arg2).get("CarTypeId"));
 				intent.putExtra("FlightNum", (String)listItem.get(arg2).get("FlightNum"));
@@ -88,6 +88,16 @@ public class ItineraryActivity extends Activity implements OnClickListener {
 				intent.putExtra("Mileage", (String)listItem.get(arg2).get("Mileage"));
 				intent.putExtra("Time", (String)listItem.get(arg2).get("Time"));
 				intent.putExtra("RealMoney", (String)listItem.get(arg2).get("RealMoney"));
+				
+				intent.putExtra("carNum", (String)listItem.get(arg2).get("carNum"));
+				intent.putExtra("carType", (String)listItem.get(arg2).get("carType"));
+				intent.putExtra("driverName", (String)listItem.get(arg2).get("driverName"));
+				intent.putExtra("driverImg", (String)listItem.get(arg2).get("driverImg"));
+				intent.putExtra("mileageMoney", (String)listItem.get(arg2).get("mileageMoney"));
+				intent.putExtra("bascMoney", (String)listItem.get(arg2).get("bascMoney"));
+				intent.putExtra("timeMoney", (String)listItem.get(arg2).get("timeMoney"));
+				intent.putExtra("vouMoney", (String)listItem.get(arg2).get("vouMoney"));
+				intent.putExtra("asssScore", (String)listItem.get(arg2).get("asssScore"));
 				startActivity(intent);
 			}
 			
@@ -126,7 +136,7 @@ public class ItineraryActivity extends Activity implements OnClickListener {
             }
     }};
     private void parseJSON(String str)throws Exception{  
-    	//System.out.println(str);
+    	System.out.println(str);
 		JSONObject jsonobj = new JSONObject(str);
 		int result = jsonobj.getInt("ResultCode");
 		if (result == Global.SUCCESS) {
@@ -173,6 +183,16 @@ public class ItineraryActivity extends Activity implements OnClickListener {
 				map.put("Mileage", jsonobj2.getString("mileage"));
 				map.put("Time", jsonobj2.getString("time"));
 				map.put("RealMoney", jsonobj2.getString("realMoney"));
+				
+				map.put("carNum", jsonobj2.getString("carNum"));
+				map.put("carType", jsonobj2.getString("carType"));
+				map.put("driverName", jsonobj2.getString("driverName"));
+				map.put("driverImg", jsonobj2.getString("driverImg"));
+				map.put("mileageMoney", jsonobj2.getString("mileageMoney"));
+				map.put("bascMoney", jsonobj2.getString("bascMoney"));
+				map.put("timeMoney", jsonobj2.getString("timeMoney"));
+				map.put("vouMoney", jsonobj2.getString("vouMoney"));
+				map.put("asssScore", jsonobj2.getString("assessScore"));
 				listItem.add(map);
 			}
 		} else {
@@ -186,7 +206,6 @@ public class ItineraryActivity extends Activity implements OnClickListener {
 		case R.id.rlslidemenu:
 			finish();
 			break;
-		
 		default:
 			break;
 		}

@@ -123,7 +123,4 @@ public class SelectCar2Activity extends Activity implements OnClickListener {
 			break;
 		}
 	}
-	
-	 
-	   
 }

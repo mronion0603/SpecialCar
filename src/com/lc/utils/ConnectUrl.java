@@ -26,4 +26,5 @@ public class ConnectUrl {
  public static String getBlance = commonurl+"selBalance";
  public static String getDiscount = commonurl+"getVoucher";
  public static String getOrder = commonurl+"getOrder";
+ public static String getAccount = commonurl+"getAccount";
 }

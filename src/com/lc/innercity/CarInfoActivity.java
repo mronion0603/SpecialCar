@@ -349,7 +349,7 @@ public class CarInfoActivity extends Activity implements OnClickListener {
     				 //groups1.add(map);
     	     }
     		 int price = (int)estimate(basicmoney,pricedis,pricedura);
-    		 tvmoney.setText("￥"+price);
+    		 tvmoney.setText("￥"+price+"起");
          }else{
             Toast.makeText(CarInfoActivity.this,  result+"", Toast.LENGTH_LONG).show();
          } 
@@ -511,6 +511,8 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 	            	  pricedis=Double.parseDouble(ruleStr3);
 	            	  pricedura=Double.parseDouble(ruleStr5);
 	            	  tvtype.setText(extras.getString("strtype"));
+	            	  int price = (int)estimate(basicmoney,pricedis,pricedura);
+	         		  tvmoney.setText("￥"+price+"起");
 	              }
 	        }  
 	        if (requestCode == REQUSET_DISCOUNT && resultCode == RESULT_OK) {

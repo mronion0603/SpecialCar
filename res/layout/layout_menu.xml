@@ -321,15 +321,18 @@
         android:layout_width="match_parent"
         android:layout_height="0.5dip"
         android:layout_marginLeft="20.0dip"
+        android:visibility="gone"
         android:background="@color/user_divider1" />
      <View
         android:layout_width="match_parent"
         android:layout_height="0.5dip"
         android:layout_marginLeft="20.0dip"
+        android:visibility="gone"
         android:background="@color/user_divider2" />
       <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         >
 	 <TextView
         android:id="@+id/tvInvite"

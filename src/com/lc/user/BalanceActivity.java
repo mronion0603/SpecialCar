@@ -26,12 +26,13 @@ import android.widget.TextView;
 
 
 public class BalanceActivity extends Activity implements OnClickListener {
-	 TextView tvTitle,righttext;
+	 TextView tvTitle,righttext,tvaccount;
 	 ImageView ivleft;
 	 
 	 private RelativeLayout rls;
 	 private RelativeLayout detail;
 	 Button charge;
+	 String getBalance="";
 	@Override  
     protected void onCreate(Bundle savedInstanceState) {  
         super.onCreate(savedInstanceState);  
@@ -41,7 +42,12 @@ public class BalanceActivity extends Activity implements OnClickListener {
 
 	}
 	void init(){
+		Bundle extras = getIntent().getExtras();
+	    if(extras != null){
+	    	getBalance = extras.getString("account");
+	    }
 		ExitApplication.getInstance().addActivity(this);
+		tvaccount = (TextView) findViewById(R.id.account);
 		righttext = (TextView) findViewById(R.id.righttext);
 		righttext.setOnClickListener(this);
 		tvTitle = (TextView) findViewById(R.id.topTv);
@@ -54,6 +60,7 @@ public class BalanceActivity extends Activity implements OnClickListener {
 		detail.setOnClickListener(this);
 		charge = (Button) findViewById(R.id.Search);
 		charge.setOnClickListener(this);
+		tvaccount.setText(getBalance+"元");
 	}
 	@Override
 	public void onClick(View v) {

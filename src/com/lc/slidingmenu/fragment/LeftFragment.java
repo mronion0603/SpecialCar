@@ -55,6 +55,7 @@ public class LeftFragment extends Fragment implements OnClickListener{
 	private View view;
 	GetInfoNet getInfoNet = new GetInfoNet();
 	GetBalanceNet getBalanceNet = new GetBalanceNet();
+	String strbalance="";
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -152,6 +153,7 @@ public class LeftFragment extends Fragment implements OnClickListener{
    	    if(result==Global.SUCCESS){
    	    	JSONObject jsonobj2 = jsonobj.getJSONObject("Data");
    	        //String username = MySharePreference.getStringValue(getActivity(), MySharePreference.USERNAME);  
+   	    	strbalance = jsonobj2.getString("balance");
    	    	tvbalance.setText("￥"+jsonobj2.getString("balance"));
         }else{
           
@@ -209,6 +211,7 @@ public class LeftFragment extends Fragment implements OnClickListener{
 		case R.id.officeaccount: {	
 			Intent intent = new Intent();
 			intent.setClass(this.getActivity().getApplicationContext(), BalanceActivity.class);
+			intent.putExtra("account", strbalance);
 			startActivity(intent);
 		}break;
 		case R.id.tvLastlist:// 往期列表
