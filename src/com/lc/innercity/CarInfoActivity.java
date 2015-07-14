@@ -282,8 +282,8 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 	            	 routeMatrixNet.setHandler(mHandler);
 	            	 routeMatrixNet.setOrigins(String.valueOf(slat)+","+String.valueOf(slont));
 	            	 routeMatrixNet.setDestinations(String.valueOf(dlat)+","+String.valueOf(dlont));
-	            	 System.out.println(String.valueOf(slat)+","+String.valueOf(slont));
-	            	 System.out.println(String.valueOf(dlat)+","+String.valueOf(dlont));
+	            	 //System.out.println(String.valueOf(slat)+","+String.valueOf(slont));
+	            	 //System.out.println(String.valueOf(dlat)+","+String.valueOf(dlont));
 	            	 routeMatrixNet.getCodeFromServer();
 	            	}
 	            break;

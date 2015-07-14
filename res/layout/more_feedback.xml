@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/empty_cart_view"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" 
+    android:orientation="vertical"
+    android:background="#ffefebe7">
+   <include layout="@layout/main_head" />
+      
+    <RelativeLayout
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dip"
+    android:background="#ffffff"
+    >
+       
+           <EditText
+            android:id="@+id/feedbackET"
+            android:hint="请提出您的宝贵建议"
+            
+            android:layout_width="wrap_content"
+            android:layout_height="200dip"
+            android:gravity="top"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dip"
+            android:layout_marginTop="10dip"
+            android:layout_marginLeft="10dip"
+            android:textSize="18sp"
+            android:background="@color/white"
+            />
+    </RelativeLayout>
+     <RelativeLayout 
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent" 
+	    >
+        <Button
+          android:id="@+id/Search"
+	      android:layout_width="fill_parent"
+	      android:layout_height="50dip"
+	      android:layout_marginLeft="10dip"
+	      android:layout_marginRight="10dip"
+	      android:layout_centerHorizontal="true"
+	      android:layout_alignParentBottom="true"
+	      android:background="@drawable/btn2"
+	      android:text="提交"
+	      android:textColor="@color/white"
+	      android:layout_marginBottom="50dip"
+	      />
+        </RelativeLayout>
+   
+</LinearLayout>

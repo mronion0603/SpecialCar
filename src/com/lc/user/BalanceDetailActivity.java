@@ -1,6 +1,9 @@
 package com.lc.user;
 
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 import org.json.JSONArray;
@@ -79,7 +82,7 @@ public class BalanceDetailActivity extends Activity implements OnClickListener {
 		getAccountNet.setDevice(Global.DEVICE);
 		getAccountNet.setAuthn(MySharePreference.getStringValue(getApplication(), MySharePreference.AUTHN));
 		getAccountNet.getCodeFromServer();
-		
+		/*
 		for(int i=0;i<5;i++){
 		     HashMap<String , Object> map = new HashMap<String , Object>();
 			 map.put("MessageTitle", "13123123");
@@ -87,6 +90,7 @@ public class BalanceDetailActivity extends Activity implements OnClickListener {
 			 map.put("Money", "¥120");
 			 listItem.add(map);
 		}
+		*/
 	}
 	
 	@SuppressLint("HandlerLeak")
@@ -105,6 +109,7 @@ public class BalanceDetailActivity extends Activity implements OnClickListener {
                 }
             }
     }};
+
     private void parseJSON(String str)throws Exception{  
     	System.out.println(str);
 		JSONObject jsonobj = new JSONObject(str);
@@ -116,14 +121,18 @@ public class BalanceDetailActivity extends Activity implements OnClickListener {
 				HashMap<String, Object> map = new HashMap<String, Object>();
 				
 				map.put("rechType", jsonobj2.getString("rechType"));
-				map.put("MessageDate", jsonobj2.getString("time"));
+				long time  = Long.parseLong(jsonobj2.getString("time"));
+				SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				//前面的lSysTime是秒数，先乘1000得到毫秒数，再转为java.util.Date类型
+				
+				java.util.Date dt = new Date(time);  
+				String sDateTime = sdf.format(dt);  //得到精确到秒的表示：08/31/2006 21:08:00
+				//System.out.println(sDateTime);
+				map.put("MessageDate", sDateTime);
 				map.put("MessageTitle", jsonobj2.getString("orderNum"));
-				if(jsonobj2.getString("addMoney")!=null){
-					map.put("Money", jsonobj2.getString("addMoney"));
-				}
-				if(jsonobj2.getString("subMoney")!=null){
-					map.put("Money", jsonobj2.getString("subMoney"));
-				}
+			    map.put("Money", jsonobj2.getString("money"));
+				
+				
 				listItem.add(map);
 			}
 		} else {

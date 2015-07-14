@@ -164,6 +164,9 @@
             android:name="com.lc.user.MoreActivity"
             android:label="@string/app_name" />
         <activity
+            android:name="com.lc.user.AboutActivity"
+            android:label="@string/app_name" />
+        <activity
             android:name="com.lc.user.ModifyInfoActivity"
             android:label="@string/app_name" />
         <activity
@@ -174,6 +177,9 @@
             android:label="@string/app_name" />
         <activity
             android:name="com.lc.user.ChargeActivity"
+            android:label="@string/app_name" />
+        <activity
+            android:name="com.lc.pay.PayActivity"
             android:label="@string/app_name" />
          <activity
             android:name="com.lc.user.AgreementActivity"
@@ -189,6 +195,9 @@
             android:label="@string/app_name" />
         <activity
             android:name="com.lc.user.ChargeCardActivity"
+            android:label="@string/app_name" />
+         <activity
+            android:name="com.lc.user.FeedBackActivity"
             android:label="@string/app_name" />
         <activity
             android:name="com.lc.user.ChargeSuccessActivity"

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="400dip" android:layout_height="160dip" >
+    <LinearLayout android:id="@+id/dialog_title_lay" 
+        android:layout_width="fill_parent" 
+        android:layout_height="70dip"
+        android:background="@drawable/dialog_top"
+        android:orientation="vertical"
+        android:gravity="center_vertical" >
+        <TextView
+            android:id="@+id/littleIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="是否继续等待"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:layout_margin="10dip"
+            />
+       </LinearLayout>
+     <LinearLayout android:id="@+id/dialog_title_lay2" 
+        android:layout_below="@+id/dialog_title_lay"
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content"
+        android:background="@drawable/dialog_bottom"
+        android:orientation="horizontal"
+        android:gravity="center_vertical" >
+         <LinearLayout 
+        android:id="@+id/button"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:gravity="center_vertical" >
+        <TextView  
+            android:id="@+id/lefttx"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/text_green"
+            android:textSize="18sp"
+            android:text="取消"
+            android:layout_margin="10dip"
+            android:layout_gravity="center"
+            />
+        </LinearLayout>
+        <LinearLayout 
+        android:id="@+id/rightbutton"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:gravity="center_vertical" >
+          <TextView
+                android:id="@+id/righttx"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/text_green"
+            android:textSize="18sp"
+            android:text="确定"
+            android:layout_margin="10dip"
+            android:layout_gravity="center"
+            />
+          </LinearLayout>
+       </LinearLayout>
+</RelativeLayout>

@@ -15,15 +15,8 @@ import android.view.Window;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.RadioGroup.OnCheckedChangeListener;
-
-
-
 
 public class MoreActivity extends Activity implements OnClickListener {
 	TextView tvTitle;
@@ -72,11 +65,15 @@ public class MoreActivity extends Activity implements OnClickListener {
 			startActivity(intent);
 		}	break;
 		case R.id.usecardate:
-			
-			break;
+		{	Intent intent = new Intent();
+		    intent.setClass(getApplication(), AboutActivity.class);
+		    startActivity(intent);
+		}	break;
 		case R.id.usecardate2:
-			
-			break;
+		{	Intent intent = new Intent();
+	        intent.setClass(getApplication(), FeedBackActivity.class);
+	        startActivity(intent);
+		}	break;
 		case R.id.Search:
 			MySharePreference.clearPersonal(getApplication());
 			finish();

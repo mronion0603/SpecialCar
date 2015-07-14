@@ -109,7 +109,7 @@ public class ItineraryDetailActivity extends Activity implements OnClickListener
         	bt.setText("取消");
         }else if(orderStatus.equals("待付款")){
         	llextend.setVisibility(View.VISIBLE);
-        	bt.setText("去付款");
+        	bt.setText("去充值");
         }else if(orderStatus.equals("已完成")){
         	llextend.setVisibility(View.VISIBLE);
         	bt.setText("去评价");

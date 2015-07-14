@@ -17,6 +17,7 @@ import com.lc.innercity.BillingRuleActivity;
 import com.lc.innercity.CarDemandActivity;
 import com.lc.innercity.GroupAdapter;
 import com.lc.innercity.ModifyNameActivity;
+import com.lc.pay.PayActivity;
 import com.lc.specialcar.R;
 import com.lc.utils.ButtonEffect;
 import com.lc.utils.ExitApplication;
@@ -36,6 +37,7 @@ import android.view.View.OnTouchListener;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.PopupWindow;
@@ -55,9 +57,9 @@ import android.widget.TimePicker;
 public class ChargeOnlineActivity extends Activity implements OnClickListener {
 	
     TextView feeRule,txdate;
- 
+    EditText et;
    // Button ivSearch;
-    private RelativeLayout rlusecar,rldate,rlmodifyname,rlstartaddress;
+    private RelativeLayout rlalipay,rldate,rlmodifyname,rlstartaddress;
     private ImageView imAddress;
 
 	//RadioGroup group;
@@ -73,20 +75,27 @@ public class ChargeOnlineActivity extends Activity implements OnClickListener {
 
 	public void init(){
 		ExitApplication.getInstance().addActivity(this);
-	
-
-	
+		et=(EditText)findViewById(R.id.txdate2);
+		rlalipay=(RelativeLayout)findViewById(R.id.rlalipay);
+		rlalipay.setOnClickListener(this);
 		
 	}
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
-		
-		case R.id.usecar:
+		case R.id.rlalipay:
+		{
 			
-			break;
-		
+			Intent intent = new Intent(ChargeOnlineActivity.this,PayActivity.class);
+			intent.putExtra("type", "new");
+			intent.putExtra("itemname", "充值");
+			intent.putExtra("itemprice",et.getText().toString());
+			intent.putExtra("itemcontent","春泰专车账号充值");
+			intent.putExtra("serviceid","12");
+			startActivity(intent);
+			
+		}	break;
 		
 		default:
 			break;

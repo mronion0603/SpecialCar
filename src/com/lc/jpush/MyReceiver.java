@@ -3,6 +3,8 @@ package com.lc.jpush;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.lc.innercity.SendDealActivity;
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -136,16 +138,16 @@ public class MyReceiver extends BroadcastReceiver {
 	}
 	//send msg to MainActivity
 	private void processCustomMessage(Context context, Bundle bundle) {
-		String message = bundle.getString(JPushInterface.EXTRA_MESSAGE);
-		String extras = bundle.getString(JPushInterface.EXTRA_EXTRA);
-		System.out.println("message:"+message+" extras:"+extras);
-		/*
-		if (MainActivity.isForeground) {
+		//String message = bundle.getString(JPushInterface.EXTRA_MESSAGE);
+		//String extras = bundle.getString(JPushInterface.EXTRA_EXTRA);
+		//System.out.println("message:"+message+" extras:"+extras);
+		
+		//if (SendDealActivity.isForeground) {
 			String message = bundle.getString(JPushInterface.EXTRA_MESSAGE);
-			String extras = bundle.getString(JPushInterface.EXTRA_EXTRA);
-			Intent msgIntent = new Intent(MainActivity.MESSAGE_RECEIVED_ACTION);
-			msgIntent.putExtra(MainActivity.KEY_MESSAGE, message);
-			if (!ExampleUtil.isEmpty(extras)) {
+			//String extras = bundle.getString(JPushInterface.EXTRA_EXTRA);
+			Intent msgIntent = new Intent(SendDealActivity.MESSAGE_RECEIVED_ACTION);
+			msgIntent.putExtra(SendDealActivity.KEY_MESSAGE, message);
+			/*if (!ExampleUtil.isEmpty(extras)) {
 				try {
 					JSONObject extraJson = new JSONObject(extras);
 					if (null != extraJson && extraJson.length() > 0) {
@@ -154,8 +156,9 @@ public class MyReceiver extends BroadcastReceiver {
 				} catch (JSONException e) {
 				}
 			}
+			*/
 			context.sendBroadcast(msgIntent);
-		}
-		*/
+		//}
+		
 	}
 }

@@ -70,10 +70,10 @@
 	     />
 	     
 	    </RelativeLayout>  
-	     <ImageView
-	      android:layout_width="fill_parent"
-	      android:layout_height="1dip"
-	      android:background="@color/text_green"
+	    <ImageView
+	    android:layout_width="fill_parent"
+	    android:layout_height="1dip"
+	    android:background="@color/text_green"
 	    /> 
         <RelativeLayout 
 	    android:layout_width="fill_parent"

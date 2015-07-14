@@ -5,6 +5,73 @@
     android:orientation="vertical" >
 
     <include layout="@layout/main_head" />
+    <RelativeLayout 
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content" 
+	    android:paddingTop="10dip"
+	    android:paddingBottom="10dip"
+	    android:id="@+id/usecar"
+	    android:background="@color/white"
+	    android:visibility="gone"
+	    >
+	    <com.lc.utils.CircularImage
+            android:id="@+id/driverimg"
+	        android:layout_width="75.0dip"
+	        android:layout_height="75.0dip"
+	        android:layout_marginLeft="10dip"
+            android:background="@drawable/order_wait_driver2"
+	     />
+	    <LinearLayout 
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content" 
+	    android:layout_toRightOf="@+id/driverimg"
+	    android:layout_centerVertical="true"
+	    android:orientation="vertical" 
+	    >
+	     <TextView
+	      android:id="@+id/drivername"
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:layout_marginLeft="20dip"
+	      android:textSize="18sp"
+	      android:textColor="@color/black"
+	      android:layout_marginBottom="10dip"
+	      android:text="王师傅"
+	      android:textStyle="bold"
+	     />
+	     <TextView
+	      android:id="@+id/carNum"
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:layout_marginLeft="20dip"
+	      android:textSize="18sp"
+	      android:textColor="@color/text_brown"
+	      android:text="鄂A 46987"
+	     />
+	     </LinearLayout>
+	      <TextView
+	      android:id="@+id/contact"
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:layout_marginRight="10dip"
+	      android:textSize="16sp"
+	      android:textColor="@color/black2"
+	      android:text="联系师傅"
+	      android:layout_alignParentRight="true"
+	      android:layout_centerVertical="true"
+	     />
+	     <ImageView
+	      android:id="@+id/contactDriver"
+	      android:layout_toLeftOf="@+id/contact"
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:layout_marginRight="10dip"
+	      android:background="@drawable/order_wait_phone2"
+	      android:layout_centerVertical="true"
+	      
+	     />
+	     
+	    </RelativeLayout>  
         <RelativeLayout 
 	    android:layout_width="fill_parent"
 	    android:layout_height="fill_parent" 
@@ -17,7 +84,8 @@
        <RelativeLayout 
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content" 
-	       android:layout_centerInParent="true"
+	    android:layout_centerInParent="true"
+	    android:id="@+id/rlwait"
 	    >
          <ImageView
           android:id="@+id/sendbg"

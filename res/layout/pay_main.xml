@@ -1,0 +1,27 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+
+    <include 
+        android:id="@+id/titlebar"
+        layout="@layout/main_head"/>
+
+    <fragment
+        android:id="@+id/fragment"
+        android:layout_below="@+id/titlebar"
+        android:name="com.lc.pay.ExternalFragment"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+    <ProgressBar     
+	    android:id="@+id/progress2"    
+	    style="?android:attr/progressBarStyleLarge"    
+	    android:layout_width="wrap_content"    
+	    android:layout_height="wrap_content"    
+	    android:max="100"     
+	    android:progress="50"     
+	    android:secondaryProgress="70"     
+	    android:layout_centerInParent="true"
+	    />  
+</RelativeLayout>

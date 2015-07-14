@@ -154,7 +154,7 @@ public class ItineraryActivity extends Activity implements OnClickListener {
 				}else if(getorderStatus.equals("-1")){
 					map.put("OrderStatus","取消");
 				}else{
-					map.put("OrderStatus","代付款");
+					map.put("OrderStatus","待付款");
 				}
 				map.put("OrderNumber", jsonobj2.getString("orderNum"));
 				map.put("OrderDate", jsonobj2.getString("startTime"));

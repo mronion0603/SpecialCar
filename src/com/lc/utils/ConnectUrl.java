@@ -27,4 +27,5 @@ public class ConnectUrl {
  public static String getDiscount = commonurl+"getVoucher";
  public static String getOrder = commonurl+"getOrder";
  public static String getAccount = commonurl+"getAccount";
+ public static String getPayOrder = commonurl+"addAliPayMoney";
 }
