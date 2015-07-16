@@ -84,7 +84,7 @@ public class LoginNet {
 	                	 Message msg = new Message();
 	                     msg.obj  = result;
 	                     msg.what = Global.LOGIN;
-	                     handler.sendMessage(msg); 	     
+	                     handler.sendMessageDelayed(msg, 500);	     
 	            	     isRunning = false;
 					 } catch (Exception e1) {
 						e1.printStackTrace();

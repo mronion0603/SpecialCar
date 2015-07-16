@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/empty_cart_view"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" 
+    android:orientation="vertical"
+    android:background="#ffefebe7">
+    <include 
+        android:id="@+id/title1"
+        layout = "@layout/main_head"/>
+
+    <com.baidu.mapapi.map.MapView  
+    android:id="@+id/bmapView" 
+    android:layout_below="@+id/title1" 
+    android:layout_width="fill_parent"  
+    android:layout_height="fill_parent"  
+    android:clickable="true" />
+    <LinearLayout 
+        android:layout_alignParentBottom="true"
+        android:layout_width="fill_parent"
+        android:layout_height="50dip"
+        android:orientation="horizontal"
+        android:background="@color/bg_color"
+        android:visibility="gone"
+    >
+       <Button 
+           android:id="@+id/guide1"
+           android:text="客户端导航"
+           android:layout_weight="1"
+           android:layout_width="0dip"
+           android:layout_height="40dip"
+           android:layout_margin="5dip"
+           android:textColor="@color/white"
+           android:background="@drawable/btn2"
+           />    
+        <Button 
+           android:id="@+id/guide2"
+           android:text="Web导航"
+           android:layout_weight="1"
+           android:layout_width="0dip"
+           android:layout_height="40dip"
+           android:layout_margin="5dip"
+           android:textColor="@color/white"
+           android:background="@drawable/btn2"
+           />    
+    </LinearLayout>
+</RelativeLayout>

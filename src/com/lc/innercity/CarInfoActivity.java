@@ -64,7 +64,7 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 	public static final int REQUSET_SELECTCAR = 5;
 	public static final int REQUSET_DISCOUNT = 6;
     TextView tvTitle,righttext,feeRule,tvname,tvphone,tvstartAddress,tvendAddress,tvdate,tvmoney,tvdemand;
-    TextView tvtype;
+    TextView tvtype,tvgetoff;
     ImageView ivleft;
     Button ivSearch;
     private RelativeLayout rls,rlusecar,rlselectcar,rldate,rlmodifyname,rldiscount,rlgetoffaddress;
@@ -165,6 +165,7 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 		rlgetoffaddress.setOnClickListener(this);
 		rldate = (RelativeLayout) findViewById(R.id.usecardate);
 		rldate.setOnClickListener(this);
+		tvgetoff = (TextView) findViewById(R.id.tvgetoff);
 		tvdate = (TextView) findViewById(R.id.tvDate);
 		tvname = (TextView) findViewById(R.id.Name);
 		tvphone = (TextView) findViewById(R.id.Phone);
@@ -190,7 +191,7 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 			tvname.setText(username);
 		}
 		tvstartAddress.setText(getAddress);
-		
+
 	}
 	//为弹出窗口实现监听类
     private OnItemClickListener  itemOnClick = new OnItemClickListener(){
@@ -261,8 +262,8 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 	            case Global.ADDRESS_MESSAGE:{
 	            	String getaddress = (String)msg.obj;
 	            	tvstartAddress.setText(getaddress);
-	            	if(tvendAddress.getText().toString().equals("输入下车地址预估车费")|tvendAddress.getText().toString().equals("地址获取中...")
-	            			|tvendAddress.getText().toString().equals("获取地址失败")){
+	            	if(tvendAddress.getText().toString().equals("输入下车地址预估车费")|tvgetoff.getText().toString().equals("地址获取中...")
+	            			|tvgetoff.getText().toString().equals("获取地址失败")){
 	            		tvmoney.setText("");
 	            	}else{
 	            		routeMatrixNet.setHandler(mHandler);
@@ -274,10 +275,11 @@ public class CarInfoActivity extends Activity implements OnClickListener {
                 }
 	            case Global.ADDRESS_END_MESSAGE:{
 	            	String getaddress = (String)msg.obj;
-	            	tvendAddress.setText(getaddress);
+	            	tvendAddress.setText("");
+	            	tvgetoff.setText(getaddress);
 	            	if(tvstartAddress.getText().toString().equals("地址获取中...")
 	            			|tvstartAddress.getText().toString().equals("获取地址失败")){
-	            		tvmoney.setText("");
+	                 tvmoney.setText("");
 	            	}else{
 	            	 routeMatrixNet.setHandler(mHandler);
 	            	 routeMatrixNet.setOrigins(String.valueOf(slat)+","+String.valueOf(slont));
@@ -399,11 +401,11 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 		}	break;
 		case R.id.Search:
 			
-			String endaddress = tvendAddress.getText().toString();
+			String endaddress = tvgetoff.getText().toString();
 			String startaddress = tvstartAddress.getText().toString();
 			String strbill = feeRule.getText().toString();
 			//System.out.println("strbill:"+strbill);
-			if(endaddress==null|endaddress.equals("输入下车地址预估车费")|endaddress.equals("地址获取中...")
+			if(endaddress==null|tvendAddress.getText().toString().equals("输入下车地址预估车费")|endaddress.equals("地址获取中...")
         			|endaddress.equals("获取地址失败")){
 				Toast.makeText(getApplication(), "请选择目的地", Toast.LENGTH_SHORT).show();
 			}else if(startaddress==null|startaddress.equals("地址获取中...")
@@ -447,8 +449,8 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 	            }
 	            
 	            System.out.println("vMoneystr:"+vMoneystr+" voucherNumstr:"+voucherNumstr);
-	            addInnerNet.setVoucherMoney("0");
-	            addInnerNet.setVoucherNum("");
+	            addInnerNet.setVoucherMoney(vMoneystr);
+	            addInnerNet.setVoucherNum(voucherNumstr);
 	            addInnerNet.getDataFromServer();
 
 			}
@@ -554,8 +556,8 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 	            	  slat = extras.getDouble("latidute");
 	            	  slont = extras.getDouble("longitude");
 	            	  tvstartAddress.setText(address);
-	            	  if(tvendAddress.getText().toString().equals("输入下车地址预估车费")|tvendAddress.getText().toString().equals("地址获取中...")
-		            			|tvendAddress.getText().toString().equals("获取地址失败")){
+	            	  if(tvendAddress.getText().toString().equals("输入下车地址预估车费")|tvgetoff.getText().toString().equals("地址获取中...")
+		            			|tvgetoff.getText().toString().equals("获取地址失败")){
 		            		tvmoney.setText("");
 		              }else{
 		            		routeMatrixNet.setHandler(mHandler);
@@ -573,7 +575,8 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 	            	  address = extras.getString("address");
 	            	  dlat = extras.getDouble("latidute");
 	            	  dlont = extras.getDouble("longitude");
-	            	  tvendAddress.setText(address);
+	            	  tvendAddress.setText("");
+	            	  tvgetoff.setText(address);
 	            	  if(tvstartAddress.getText().toString().equals("地址获取中...")
 		            			|tvstartAddress.getText().toString().equals("获取地址失败")){
 		            		tvmoney.setText("");

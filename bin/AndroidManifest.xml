@@ -184,6 +184,9 @@
          <activity
             android:name="com.lc.user.AgreementActivity"
             android:label="@string/app_name" />
+         <activity
+            android:name="com.lc.user.ServiceMapActivity"
+            android:label="@string/app_name" />
         <activity
             android:name="com.lc.user.DiscountActivity"
             android:label="@string/app_name" />

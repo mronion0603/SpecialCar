@@ -61,8 +61,8 @@ public class BalanceDetailActivity extends Activity implements OnClickListener {
 		listview=(ListView)findViewById(R.id.listview);
 		getData();
 		listItemAdapter = new SimpleAdapter(this,listItem,R.layout.userinfo_balancedetail_listitem , 
-				new String[]{"MessageTitle","MessageDate","Money"},
-				new int[]{R.id.MessageTitle,R.id.MessageDate,R.id.Money});
+				new String[]{"MessageTitle","MessageDate","Money","MoneyType"},
+				new int[]{R.id.MessageTitle,R.id.MessageDate,R.id.Money,R.id.MoneyType});
 		listview.setDividerHeight(1);
 		
 		listview.setAdapter(listItemAdapter);
@@ -121,6 +121,7 @@ public class BalanceDetailActivity extends Activity implements OnClickListener {
 				HashMap<String, Object> map = new HashMap<String, Object>();
 				
 				map.put("rechType", jsonobj2.getString("rechType"));
+				/*
 				long time  = Long.parseLong(jsonobj2.getString("time"));
 				SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				//前面的lSysTime是秒数，先乘1000得到毫秒数，再转为java.util.Date类型
@@ -128,11 +129,20 @@ public class BalanceDetailActivity extends Activity implements OnClickListener {
 				java.util.Date dt = new Date(time);  
 				String sDateTime = sdf.format(dt);  //得到精确到秒的表示：08/31/2006 21:08:00
 				//System.out.println(sDateTime);
-				map.put("MessageDate", sDateTime);
+				 */
+				map.put("MessageDate", jsonobj2.getString("time"));
 				map.put("MessageTitle", jsonobj2.getString("orderNum"));
-			    map.put("Money", jsonobj2.getString("money"));
-				
-				
+			   
+				String money = jsonobj2.getString("money");
+				double moneyint = Double.parseDouble(money);
+				if(moneyint>0){
+					 map.put("MoneyType", "充值");
+					 map.put("Money", money);
+				}else{
+					 map.put("MoneyType", "消费");
+					 moneyint = 0-moneyint;
+					 map.put("Money", String.valueOf(moneyint));
+				}
 				listItem.add(map);
 			}
 		} else {

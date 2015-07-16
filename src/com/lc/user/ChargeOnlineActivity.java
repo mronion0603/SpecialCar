@@ -50,6 +50,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.PopupWindow.OnDismissListener;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 
 
@@ -86,15 +87,18 @@ public class ChargeOnlineActivity extends Activity implements OnClickListener {
 		switch (v.getId()) {
 		case R.id.rlalipay:
 		{
-			
+			String money = et.getText().toString();
+			if(money==null|money.length()<=0){
+				Toast.makeText(getApplication(), "请输入充值金额", Toast.LENGTH_SHORT).show();
+			}else{
 			Intent intent = new Intent(ChargeOnlineActivity.this,PayActivity.class);
 			intent.putExtra("type", "new");
 			intent.putExtra("itemname", "充值");
-			intent.putExtra("itemprice",et.getText().toString());
+			intent.putExtra("itemprice",money);
 			intent.putExtra("itemcontent","春泰专车账号充值");
 			intent.putExtra("serviceid","12");
 			startActivity(intent);
-			
+			}
 		}	break;
 		
 		default:

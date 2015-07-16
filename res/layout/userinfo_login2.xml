@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/empty_cart_view"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" 
@@ -53,18 +54,21 @@
             />
           
     </LinearLayout>
-    <Button 
-        android:id="@+id/NextStep"
+    <com.lc.progressbutton.CircularProgressButton
+        android:id="@+id/circularButton1"
         android:layout_width="fill_parent"
-        android:layout_height="50dip"
-        android:background="@drawable/btn2"
-        android:text="登录"
-        android:textColor="@color/white"
-        android:textSize="18sp"
+        android:layout_height="50dp"
         android:layout_marginTop="20dip"
         android:layout_marginLeft="20dip"
         android:layout_marginRight="20dip"
-        />
+        android:textColor="@color/cpb_white"
+        android:textSize="18sp"
+        app:cpb_textComplete="登录成功"
+        app:cpb_textError="错误"
+        app:cpb_textIdle="登录" 
+        app:cpb_selectorIdle="@drawable/idle_state_selector"
+        app:cpb_selectorComplete="@drawable/complete_state_selector"
+        app:cpb_selectorError="@drawable/error_state_selector"/>
     <TextView 
         android:id="@+id/back"
         android:layout_width="fill_parent"

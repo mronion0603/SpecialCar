@@ -69,9 +69,11 @@ public class ItineraryActivity extends Activity implements OnClickListener {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
+				String status = (String)listItem.get(arg2).get("OrderStatus");
+				if(!status.equals("服务中")){
 				Intent intent = new Intent();
 				intent.setClass(getApplication(), ItineraryDetailActivity.class);
-				intent.putExtra("OrderStatus", (String)listItem.get(arg2).get("OrderStatus"));
+				intent.putExtra("OrderStatus", status);
 				intent.putExtra("OrderNum", (String)listItem.get(arg2).get("OrderNumber"));
 				intent.putExtra("StartTime", (String)listItem.get(arg2).get("OrderDate"));
 				intent.putExtra("StartAddress", (String)listItem.get(arg2).get("OrderAddress"));
@@ -99,7 +101,17 @@ public class ItineraryActivity extends Activity implements OnClickListener {
 				intent.putExtra("vouMoney", (String)listItem.get(arg2).get("vouMoney"));
 				intent.putExtra("asssScore", (String)listItem.get(arg2).get("asssScore"));
 				startActivity(intent);
+			}else{
+				Intent intent = new Intent();
+				intent.setClass(getApplication(), ServiceMapActivity.class);
+				intent.putExtra("slongitude", (String)listItem.get(arg2).get("slongitude"));
+				intent.putExtra("slatitude", (String)listItem.get(arg2).get("slatitude"));
+				intent.putExtra("elongitude", (String)listItem.get(arg2).get("elongitude"));
+				intent.putExtra("elatitude", (String)listItem.get(arg2).get("elatitude"));
+				startActivity(intent);
 			}
+		  }
+
 			
 		});
 	}
@@ -193,6 +205,10 @@ public class ItineraryActivity extends Activity implements OnClickListener {
 				map.put("timeMoney", jsonobj2.getString("timeMoney"));
 				map.put("vouMoney", jsonobj2.getString("vouMoney"));
 				map.put("asssScore", jsonobj2.getString("assessScore"));
+				map.put("slongitude", jsonobj2.getString("slongitude"));
+				map.put("slatitude", jsonobj2.getString("slatitude"));
+				map.put("elongitude", jsonobj2.getString("elongitude"));
+				map.put("elatitude", jsonobj2.getString("elatitude"));
 				listItem.add(map);
 			}
 		} else {

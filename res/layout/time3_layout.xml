@@ -79,7 +79,7 @@
 	      android:layout_height="wrap_content"
 	      android:textSize="16sp"
 	      android:textColor="@color/black"
-	      android:text="小时"
+	      android:text="天"
 	      android:gravity="center"
 	      android:paddingTop="10dip"
           android:paddingBottom="10dip"

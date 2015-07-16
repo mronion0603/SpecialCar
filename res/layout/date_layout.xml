@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"  
+    android:layout_width="fill_parent"  
+    android:layout_height="fill_parent"  
+
+     >  
+   <LinearLayout 
+     android:layout_width="fill_parent"  
+     android:layout_height="fill_parent"  
+     android:alpha="0.8"
+     android:orientation="vertical"  
+     android:background="@drawable/menu_list_selected"  >
+     
+     </LinearLayout>
+   <LinearLayout 
+    android:layout_height="wrap_content"
+    android:layout_width="fill_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:layout_alignParentBottom="true"
+    android:id="@+id/ll"
+    >
+     <ImageView
+          android:id="@+id/divider"
+	      android:layout_width="fill_parent"
+	      android:layout_height="2dip"
+	      android:background="@color/text_green"
+	     />
+    <RelativeLayout  
+          android:layout_width="fill_parent"
+          android:layout_height="50dip" 
+          android:id="@+id/rl2"
+          android:paddingLeft="10dip"
+          android:paddingRight="10dip"
+          android:background="@drawable/wheel_bg1"
+          >
+          <Button
+          android:id="@+id/comfirm"
+          android:text="确认"
+          android:textSize="16sp"
+          android:textColor="@color/black"
+	      android:layout_width="60dip"
+	      android:layout_height="40dip"
+	      android:background="@drawable/rectangle"
+	      android:layout_marginBottom="10dip"
+	      android:layout_alignParentRight="true"
+	      android:layout_centerVertical="true"
+	     />
+         
+          <Button
+          android:id="@+id/canceltime"
+          android:text="取消"
+          android:textColor="@color/black"
+          android:textSize="16sp"
+	      android:layout_width="60dip"
+	      android:layout_height="40dip"
+	      android:background="@drawable/rectangle"
+	      android:layout_alignParentLeft="true"
+	      android:layout_centerVertical="true"
+	     />
+      </RelativeLayout>  
+       <ImageView
+       
+	      android:layout_width="fill_parent"
+	      android:layout_height="1dip"
+	      android:background="@color/user_divider3"
+	     />
+    <LinearLayout 
+    android:layout_height="wrap_content"
+    android:layout_width="fill_parent"
+    android:orientation="horizontal"
+    android:background="@color/white"
+    >
+          <TextView
+	      android:layout_width="fill_parent"
+	      android:layout_height="wrap_content"
+	      android:textSize="16sp"
+	      android:textColor="@color/black"
+	      android:text="日期"
+	      android:gravity="center"
+	      android:paddingTop="10dip"
+          android:paddingBottom="10dip"
+          android:background="@drawable/wheel_bg1"
+	     />
+    </LinearLayout>
+    <LinearLayout 
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:orientation="vertical"
+        >
+      
+        <kankan.wheel.widget.WheelView android:id="@+id/day"
+            android:layout_width="fill_parent"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dip"
+            android:paddingBottom="10dip"
+          />
+    </LinearLayout>        
+</LinearLayout>
+</RelativeLayout>

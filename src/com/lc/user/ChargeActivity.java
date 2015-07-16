@@ -134,7 +134,6 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
 		}
 		@Override
 		public void onCheckedChanged(RadioGroup arg0, int arg1) {
-			// TODO Auto-generated method stub
 			 switch(arg1){
 		        case R.id.radio_button0:
 		            //Toast.makeText(MainActivity.this,"button0",Toast.LENGTH_SHORT).show();
@@ -144,8 +143,7 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
 		            
 		            tabhost.setCurrentTabByTag("iCatalog");
 		            break;
-		       
-		          
+  
 		    }
 		}
 

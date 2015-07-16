@@ -3,11 +3,13 @@ package com.lc.intercity;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import com.lc.popupwindow.DatePopupWindow;
 import com.lc.popupwindow.TimePopupWindow;
 import com.lc.specialcar.R;
 import com.lc.utils.ButtonEffect;
 import com.lc.utils.ExitApplication;
 import com.lc.utils.Global;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
@@ -36,7 +38,7 @@ public class InterCityHomeActivity extends Activity implements OnClickListener {
     private RelativeLayout endaddress,startaddress,choosedate;
     RadioGroup group;
 	private View originview; 
-	TimePopupWindow timepWindow;
+	DatePopupWindow timepWindow;
 	String requestdate="";
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -120,7 +122,7 @@ public class InterCityHomeActivity extends Activity implements OnClickListener {
 			finish();
 			break;
 		case R.id.usecardate:
-			 timepWindow = new TimePopupWindow(InterCityHomeActivity.this,itemsOnClick);
+			 timepWindow = new DatePopupWindow(InterCityHomeActivity.this,itemsOnClick);
 			 timepWindow.showAsDropDown(originview, 0, 0); 
 			break;
 		case R.id.moresafty:  //出发地

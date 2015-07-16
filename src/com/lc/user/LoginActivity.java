@@ -1,20 +1,19 @@
 package com.lc.user;
 
-import java.util.Set;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import cn.jpush.android.api.JPushInterface;
-import cn.jpush.android.api.TagAliasCallback;
+
 
 import com.lc.net.GetCode;
 import com.lc.net.LoginNet;
+import com.lc.progressbutton.CircularProgressButton;
 import com.lc.specialcar.MainActivity;
 import com.lc.specialcar.R;
-import com.lc.utils.CommonUtil;
 import com.lc.utils.ExitApplication;
 import com.lc.utils.Global;
 import com.lc.utils.MySharePreference;
@@ -33,10 +32,10 @@ import android.widget.Toast;
 
 
 public class LoginActivity extends Activity {
-	
 	//private TextView title;
 	private TextView backbt;
-	private Button nextStep,getCode;
+	private Button getCode;
+	  CircularProgressButton nextStep;
 	private EditText phoneET,codeET;
 	private String phoneNum="";
 	private String getCodeStr="";
@@ -59,6 +58,7 @@ public class LoginActivity extends Activity {
 		getCodeNet = new GetCode();
 		loginNet = new LoginNet();
 		ExitApplication.getInstance().addActivity(this);
+		nextStep = (CircularProgressButton) findViewById(R.id.circularButton1);
 		phoneET = (EditText)findViewById(R.id.PhoneNumber);
 		codeET = (EditText)findViewById(R.id.inputCode);
 		
@@ -90,10 +90,13 @@ public class LoginActivity extends Activity {
 				//}
 			}
 		});
-		nextStep = (Button)findViewById(R.id.NextStep);
+		//nextStep = (Button)findViewById(R.id.NextStep);
+		nextStep.setIndeterminateProgressMode(true);
 		nextStep.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v) {
+				nextStep.setClickable(false);
+				nextStep.setProgress(50);
 				getCodeStr = codeET.getText().toString();
 				loginNet.setHandler(handler);
 				loginNet.setPhone(phoneNum);
@@ -152,6 +155,7 @@ public class LoginActivity extends Activity {
 		                 int result = jsonobj.getInt("ResultCode");
 		                 //System.out.println((String)msg.obj);
 		            	 if(result==Global.SUCCESS){
+		            		nextStep.setProgress(100);
 		            		String getauthn = jsonobj.getJSONObject("Data").getString("authn");
 		            		MySharePreference.editStringValue(getApplication(),MySharePreference.PHONE,phoneNum);
 		            		MySharePreference.editStringValue(getApplication(),MySharePreference.AUTHN,getauthn);
@@ -163,6 +167,8 @@ public class LoginActivity extends Activity {
 		     				startActivity(intent);
 		    				finish();
 		                 }else{
+		                	nextStep.setProgress(-1);
+		                	nextStep.setClickable(true);
 		                    Toast.makeText(LoginActivity.this, jsonobj.getString("Message"), Toast.LENGTH_LONG).show();
 		                 } 
 	            	} catch (JSONException e) {

@@ -1,6 +1,7 @@
 package com.lc.official;
 import com.lc.innercity.SelectCarActivity;
 import com.lc.innercity.SendDealActivity;
+import com.lc.intercity.SignUpActivity;
 import com.lc.specialcar.R;
 import com.lc.utils.ButtonEffect;
 import com.lc.utils.ExitApplication;
@@ -79,7 +80,7 @@ public class SelectCarPersonActivity extends Activity implements OnClickListener
 			break;
 		case R.id.Search:
 			Intent intent2 = new Intent();
-			intent2.setClass(SelectCarPersonActivity.this,SendDealActivity.class);
+			intent2.setClass(SelectCarPersonActivity.this,SignUpActivity.class);
 			startActivity(intent2);
 			
 			break;

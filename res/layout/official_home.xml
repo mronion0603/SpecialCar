@@ -112,7 +112,7 @@
 	      android:textSize="16sp"
 	      android:textColor="@color/text_brown"
 	      android:layout_centerVertical="true"
-	      android:text="2小时"
+	      android:text="1天"
 	      />
 	    </RelativeLayout>    
 	    <ImageView

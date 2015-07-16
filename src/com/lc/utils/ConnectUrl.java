@@ -1,10 +1,11 @@
 package com.lc.utils;
 
 public class ConnectUrl {
- public static String commonurl0 = "http://120.24.172.238:8080/"+"image/";
- public static String commonurl = "http://120.24.172.238:8080/specialCar/";	//测试
- public static String commondriverurl = "http://120.24.172.238:8080/specialcardriver/";	//测试
- //public static String commonurl = "http://121.40.54.74:8080/";	//alpha地址
+	//public static String basic = "http://120.24.172.238:8080/";
+	public static String basic = "http://112.74.82.102/";
+ public static String commonurl0 = basic+"image/";
+ public static String commonurl = basic+"specialCar/";	//测试
+ public static String commondriverurl = basic+"specialcardriver/";	//测试
  
  public static String getcodeurl = commonurl+"sendAuthCode";				 //手机号注册验证码
  public static String getloginurl = commonurl+"login";				 //手机号注册验证码

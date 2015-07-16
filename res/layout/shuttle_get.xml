@@ -191,7 +191,7 @@
 	      android:textSize="18sp"
 	      android:textColor="@color/black2"
 	      android:layout_centerVertical="true"
-	      android:text="请输入下车地点"
+	      android:text="请输入上车地点"
 	    />
 	     <ImageView
 	      android:id="@+id/Star"

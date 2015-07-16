@@ -177,6 +177,7 @@ public class PayActivity extends FragmentActivity {
 		title = (TextView)findViewById(R.id.topTv);
 		title.setText("支付宝充值");
 		backbt = (ImageView)findViewById(R.id.ArrowHead);
+		backbt.setVisibility(View.VISIBLE);
 		backbt.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v) {

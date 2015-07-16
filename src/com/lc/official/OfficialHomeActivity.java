@@ -86,7 +86,7 @@ public class OfficialHomeActivity extends Activity implements OnClickListener {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
-		super.onCreate(savedInstanceState);
+		super.onCreate(savedInstanceState);    
 		setContentView(R.layout.official_home);
 		//在使用SDK各组件之前初始化context信息，传入ApplicationContext  
         //注意该方法要再setContentView方法之前实现  
@@ -305,7 +305,7 @@ public class OfficialHomeActivity extends Activity implements OnClickListener {
                 }
 	            case Global.TIMELONG_MESSAGE:{
 	            	String getdate = (String)msg.obj;
-	            	tvtimelong.setText(getdate+"小时");
+	            	tvtimelong.setText(getdate+"天");
 	            break;
                 }
 	            case Global.GETADDRESS: {

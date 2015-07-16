@@ -7,6 +7,7 @@ import com.lc.utils.ExitApplication;
 import com.lidroid.xutils.BitmapUtils;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -79,6 +80,7 @@ public class ItineraryDetailActivity extends Activity implements OnClickListener
 	    }
 		ExitApplication.getInstance().addActivity(this);
 		bt= (Button) findViewById(R.id.Search);
+		bt.setOnClickListener(this);
 		rb= (RatingBar) findViewById(R.id.ratingBar1);
 		tvTitle = (TextView) findViewById(R.id.topTv);
 		tvTitle.setText("行程明细");
@@ -148,9 +150,17 @@ public class ItineraryDetailActivity extends Activity implements OnClickListener
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
 		case R.id.rlslidemenu:
-			finish();
-			break;
-		
+		{	finish();
+		}	break;
+		case R.id.Search:
+		{
+			if(bt.getText().toString().equals("去充值")){
+				Intent intent =new Intent();
+				intent.setClass(getApplication(), ChargeActivity.class);
+				startActivity(intent);
+			}
+		}break;
+			
 		default:
 			break;
 		}

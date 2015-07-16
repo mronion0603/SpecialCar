@@ -67,6 +67,7 @@ import android.widget.AdapterView.OnItemClickListener;
 public class InnerCityHomeActivity extends Activity implements OnClickListener {
 	AddressPopupWindow menuWindow;	//自定义的弹出框类
 	public static final int REQUSET = 1;
+	public static final int TypeAddress = 2;
     TextView tvTitle,righttext;
     TextView curaddress;
     Button ivSearch;
@@ -197,6 +198,25 @@ public class InnerCityHomeActivity extends Activity implements OnClickListener {
             	  LatLng ll = new LatLng(lat, lng);
 				  MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(ll);
 				  mBaiduMap.animateMapStatus(u);
+              }
+        }  
+        if (requestCode == TypeAddress && resultCode == RESULT_OK) {
+        	//carListItem.clear();
+        	//getMyCarNet.getCarFromServer(); 
+        	 // System.out.println("开始");
+        	  String address ="";
+        	  double lat,lng;
+        	  Bundle extras = data.getExtras();
+              if(extras != null){
+            	  address = extras.getString("address");
+            	  lat= extras.getDouble("latitude");
+            	  lng= extras.getDouble("longitude");
+            	  //System.out.println(address);
+            	  curaddress.setText(address);
+            	  
+            	  LatLng ll = new LatLng(lat, lng);
+				  MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(ll);
+				  mBaiduMap.animateMapStatus(u);	
               }
         }  
     }  
@@ -334,6 +354,12 @@ public class InnerCityHomeActivity extends Activity implements OnClickListener {
 			finish();
 			
 			break;
+		case R.id.curaddress:{
+			Intent intent = new Intent();
+			intent.setClass(InnerCityHomeActivity.this,TypeAddressActivity.class);
+			startActivityForResult(intent, TypeAddress);
+			break;
+		}
 		case R.id.righttext:
 		{//finish();
 			Intent intent = new Intent();
