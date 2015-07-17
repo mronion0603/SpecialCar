@@ -526,6 +526,7 @@ public class InnerCityHomeActivity extends Activity implements OnClickListener {
         private void parseJSON(String str) throws Exception {
         
         	mBaiduMap.clear();
+        	driveridStr="";
     		System.out.println(str);
     		JSONObject jsonobj = new JSONObject(str);
     		if (jsonobj.getInt("ResultCode") == Global.SUCCESS) {
