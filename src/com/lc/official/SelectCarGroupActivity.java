@@ -1,16 +1,28 @@
 package com.lc.official;
 
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import org.json.JSONObject;
+
+import com.lc.innercity.CarInfoActivity;
 import com.lc.innercity.SelectCarActivity;
 import com.lc.innercity.SendDealActivity;
 import com.lc.intercity.SignUpActivity;
+import com.lc.net.AddInnerNet;
+import com.lc.net.AddOfficeNet;
 import com.lc.specialcar.R;
 import com.lc.utils.ButtonEffect;
 import com.lc.utils.ExitApplication;
+import com.lc.utils.Global;
+import com.lc.utils.MySharePreference;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -18,6 +30,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class SelectCarGroupActivity extends Activity implements OnClickListener {
@@ -31,6 +44,11 @@ public class SelectCarGroupActivity extends Activity implements OnClickListener 
     Button btsearch;
     private Button plus,minus,plus2,minus2,plus3,minus3;
     private TextView amount,amount2,amount3;
+    private AddOfficeNet addInnerNet = new AddOfficeNet();
+	String vMoneystr="0";	
+	String voucherNumstr="";
+	String getname="",getlat="",getlont="",getaddress="",getphone="",gettime="",gettimelong="0",getdemand="";
+	String economy="0",common="0",business="0";
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
@@ -40,6 +58,18 @@ public class SelectCarGroupActivity extends Activity implements OnClickListener 
 	}
 
 	public void init(){
+		Bundle extras = getIntent().getExtras();
+		if(extras != null){
+			getname = extras.getString("username");
+			getlat = extras.getString("sLatitude");
+			getlont = extras.getString("sLongitude");
+			getaddress = extras.getString("StartAddress");
+			getphone = extras.getString("phone");
+			gettime = extras.getString("starttime");
+			gettimelong = extras.getString("timelong");
+			getdemand= extras.getString("commont");
+        }
+		
 		ExitApplication.getInstance().addActivity(this);
 		flag1 = true;
 		flag2 = false;
@@ -96,11 +126,34 @@ public class SelectCarGroupActivity extends Activity implements OnClickListener 
 			intent.setClass(SelectCarGroupActivity.this,SelectCarActivity.class);
 			startActivity(intent);
 			break;
-		case R.id.Search:
-			Intent intent2 = new Intent();
-			intent2.setClass(SelectCarGroupActivity.this,SignUpActivity.class);
-			startActivity(intent2);
-			break;
+		case R.id.Search:{	
+			addInnerNet.setHandler(mHandler);
+			addInnerNet.setAuthn(MySharePreference.getStringValue(getApplication(), MySharePreference.AUTHN));
+            addInnerNet.setDevice(Global.DEVICE);
+            addInnerNet.setComment(getdemand);
+            addInnerNet.setRiderName(getname);  
+            addInnerNet.setRiderPhone(getphone);
+            addInnerNet.setsLatitude(getlat);
+            addInnerNet.setsLongitude(getlont);
+            addInnerNet.setStartAddress(getaddress);
+            addInnerNet.setStartTime(gettime);
+            addInnerNet.setServiceTypeId("32");
+            if(flag1)
+            addInnerNet.setEconomy(amount.getText().toString());
+            else
+            addInnerNet.setEconomy(economy);
+            if(flag2)
+            addInnerNet.setCommon(amount2.getText().toString());
+            else
+            addInnerNet.setCommon(common);
+            if(flag3)
+            addInnerNet.setBusiness(amount3.getText().toString());
+            else
+            addInnerNet.setBusiness(business);
+            addInnerNet.setUseCarTime(gettimelong);
+            addInnerNet.getDataFromServer();
+			
+		}	break;
 		case R.id.select1:
 			if(flag1){
 				flag1=false;
@@ -193,6 +246,41 @@ public class SelectCarGroupActivity extends Activity implements OnClickListener 
 		}
 	}
 	
-	 
-	   
+	  @SuppressLint("HandlerLeak")
+		private Handler mHandler = new Handler() {
+	        public void handleMessage(android.os.Message msg) {
+	            switch(msg.what) {
+		            case Global.ADDINNER: {
+		            	//Log.d("SC",(String) msg.obj );
+						try {
+							parseInner((String) msg.obj);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+						break;
+					}
+	            }
+	    }};
+	    private void parseInner(String str)throws Exception{ 
+	    	//System.out.println("返回:"+str);
+	    	JSONObject jsonobj = new JSONObject(str); 
+	    	int result = jsonobj.getInt("ResultCode");
+	   	    if(result==Global.SUCCESS){
+	   	    	/*
+	   	    	 notifyDriverInnerNet.setHandler(mHandler);
+	   	    	 notifyDriverInnerNet.setOrderNum(jsonobj.getJSONObject("Data").getString("orderNum"));
+	   	    	 notifyDriverInnerNet.setDriverNum(driveridStr);
+	   	    	 notifyDriverInnerNet.getDataFromServer();
+	   	    	*/
+	   	    	Intent intent2 = new Intent();
+				intent2.setClass(SelectCarGroupActivity.this,SignUpActivity.class);
+				startActivity(intent2);
+				 //ivSearch.setProgress(0);
+				 //ivSearch.setClickable(true);
+	        }else{
+	          // ivSearch.setProgress(50);
+	         //  ivSearch.setClickable(true);
+	           Toast.makeText(SelectCarGroupActivity.this,jsonobj.getString("Message"), Toast.LENGTH_LONG).show();
+	        } 
+	    }
 }

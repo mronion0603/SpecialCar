@@ -11,12 +11,14 @@ import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.model.LatLng;
+import com.lc.net.CancelInnerNet;
 import com.lc.popupwindow.ContactWindow;
 import com.lc.specialcar.R;
 import com.lc.utils.CircularImage;
 import com.lc.utils.ConnectUrl;
 import com.lc.utils.ExitApplication;
 import com.lc.utils.Global;
+import com.lc.utils.MySharePreference;
 import com.lidroid.xutils.BitmapUtils;
 
 import android.app.Activity;
@@ -63,6 +65,8 @@ public class SendDealActivity extends Activity implements OnClickListener {
 	private MyAlertDialog myAlertDialog;  //自定义对话框
 	public static final int  TIMELONG =120;
 	BaiduMap mBaiduMap;
+	CancelInnerNet cancelInnerNet = new CancelInnerNet();
+	String getOrderNum="";
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
@@ -76,6 +80,11 @@ public class SendDealActivity extends Activity implements OnClickListener {
 	}
 
 	public void init(){
+		Bundle extras = getIntent().getExtras();
+	    if(extras != null){
+	    	getOrderNum = extras.getString("orderNum");
+	       
+	    }
 		LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);  
 		originview = layoutInflater.inflate(R.layout.innercity_senddeal, null); 
 		ExitApplication.getInstance().addActivity(this);
@@ -196,10 +205,15 @@ public class SendDealActivity extends Activity implements OnClickListener {
 	        contactWindow.showAsDropDown(originview, 0, 0); 
 		}	break;
 		case R.id.righttext:
+			cancelInnerNet.setHandler(mHandler);
+			cancelInnerNet.setOrderNum(getOrderNum);
+			cancelInnerNet.setAuthn(MySharePreference.getStringValue(getApplication(), MySharePreference.AUTHN));
+			cancelInnerNet.getDataFromServer();
 			finish();
-			Intent intent = new Intent();
-			intent.setClass(SendDealActivity.this,CancelOrderActivity.class);
-			startActivity(intent);
+			//Intent intent = new Intent();
+			//intent.setClass(SendDealActivity.this,CancelOrderActivity.class);
+			//startActivity(intent);
+			
 			break;
 		default:
 			break;
@@ -244,6 +258,11 @@ public class SendDealActivity extends Activity implements OnClickListener {
 				// timer.schedule(task, 1000, 1000); // timeTask
 	            break;
 	            }
+	            case Global.CANCEL_INNER:{
+	            	//用intent启动拨打电话  
+	                //finish();
+	                break;
+	                }
 	            }
 	        }};
 	 @Override  
@@ -257,6 +276,7 @@ public class SendDealActivity extends Activity implements OnClickListener {
 	           animationDrawable.stop();
 			   animationDrawable =null; 
 	        }
+	        //unregisterReceiver(mMessageReceiver);
 	    }  
 	    @Override  
 	    protected void onResume() {  
@@ -275,14 +295,11 @@ public class SendDealActivity extends Activity implements OnClickListener {
 	   
 	    TimerTask task = new TimerTask() {  
 	        @Override  
-	        public void run() {  
-	  
+	        public void run() {   
 	            runOnUiThread(new Runnable() {      // UI thread  
 	                @Override  
-	                public void run() {  
-	                   
+	                public void run() {  	                   
 					if (recLen <= 0) {
-
 						// timer.cancel();
 						if (animationDrawable != null) {
 							animationDrawable.stop();
@@ -304,6 +321,10 @@ public class SendDealActivity extends Activity implements OnClickListener {
 									.setOnNegativeButton(new OnClickListener() {
 										@Override
 										public void onClick(View v) {
+											cancelInnerNet.setHandler(mHandler);
+											cancelInnerNet.setOrderNum(getOrderNum);
+											cancelInnerNet.setAuthn(MySharePreference.getStringValue(getApplication(), MySharePreference.AUTHN));
+											cancelInnerNet.getDataFromServer();
 											myAlertDialog.dismiss();
 											finish();
 										}

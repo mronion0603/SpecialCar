@@ -1,6 +1,8 @@
 package com.lc.official;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -57,6 +59,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 
+@SuppressLint("SimpleDateFormat")
 public class OfficialHomeActivity extends Activity implements OnClickListener {
 	public static final int REQUSET_NAMEPHONE = 1;
 	public static final int REQUSET_ADDRESS = 2;
@@ -83,6 +86,9 @@ public class OfficialHomeActivity extends Activity implements OnClickListener {
     
     GetAddressNet getaddressnet = new GetAddressNet();
     private List<HashMap<String , Object>> groups1= new ArrayList<HashMap<String , Object>>();
+    double lat=0,lont=0;
+    String time="";
+    String time3="";
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
@@ -192,9 +198,10 @@ public class OfficialHomeActivity extends Activity implements OnClickListener {
 		public void onClick(View v) {
 			switch (v.getId()) {
 			case R.id.comfirm:
-				String time = timepWindow.getTime();
+				String time2 = timepWindow.getTime();
+				time3 =  timepWindow.getTimeUpload2();
 				Message message = Message.obtain();  
-			    message.obj = time;  
+			    message.obj = time2;  
 				message.what = Global.TIME_MESSAGE;  
 				mHandler.sendMessageDelayed(message, 50);
 				timepWindow.dismiss();   
@@ -213,7 +220,7 @@ public class OfficialHomeActivity extends Activity implements OnClickListener {
 		public void onClick(View v) {
 			switch (v.getId()) {
 			case R.id.comfirm:
-				String time = timelongpWindow.getTime();
+				time = timelongpWindow.getTime();
 				Message message = Message.obtain();  
 			    message.obj = time;  
 				message.what = Global.TIMELONG_MESSAGE;  
@@ -264,6 +271,33 @@ public class OfficialHomeActivity extends Activity implements OnClickListener {
             }else{
           	    Intent intent2 = new Intent();
 				intent2.setClass(OfficialHomeActivity.this, SelectCarGroupActivity.class);
+				intent2.putExtra("sLatitude", String.valueOf(lat));
+				intent2.putExtra("sLongitude", String.valueOf(lont));
+				intent2.putExtra("StartAddress", tvaddress.getText().toString());
+				intent2.putExtra("username", tvname.getText().toString());
+				if(tvphone.getText().toString().equals("本人")){
+		          intent2.putExtra("phone", MySharePreference.getStringValue(getApplication(), MySharePreference.PHONE));
+				}else{
+		          intent2.putExtra("phone", tvphone.getText().toString());
+		        }
+				String startTime = tvdate.getText().toString();
+				if(startTime.equals("现在")){
+	            	SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm"); 
+	        		Date curDate = new Date(System.currentTimeMillis());//获取当前时间       
+	        		startTime  = formatter.format(curDate); 
+	        		intent2.putExtra("starttime", startTime);
+	            }else{
+				    intent2.putExtra("starttime", time3);
+	            }
+				if(tvtimelong.getText().equals("1天"))
+				intent2.putExtra("timelong", String.valueOf(24*60));
+				else{
+				intent2.putExtra("timelong", String.valueOf(Integer.parseInt(time)*24*60));
+				}
+				if( tvdemand.getText().toString()!=null)
+				intent2.putExtra("commont", tvdemand.getText().toString());
+				else
+				intent2.putExtra("commont","");	
 				startActivity(intent2);
             }
 
@@ -359,6 +393,8 @@ public class OfficialHomeActivity extends Activity implements OnClickListener {
 	        	  Bundle extras = data.getExtras();
 	              if(extras != null){
 	            	  address = extras.getString("address");
+	            	  lat = extras.getDouble("latidute");
+	            	  lont = extras.getDouble("longitude");
 	            	  tvaddress.setText(address);
 	              }
 	        }  
@@ -383,6 +419,7 @@ public class OfficialHomeActivity extends Activity implements OnClickListener {
 						return;
 					if (isFirstLoc) {
 						isFirstLoc = false;
+						
 						LatLng ll = new LatLng(location.getLatitude(),location.getLongitude());
 						 // 发起反地理编码检索  
 			             mGeoCoder.reverseGeoCode((new ReverseGeoCodeOption())  
@@ -411,6 +448,8 @@ public class OfficialHomeActivity extends Activity implements OnClickListener {
 	                mCurentInfo.location = result.getLocation();  
 	                mCurentInfo.name = "[位置]";  
 	                if(result.getPoiList() != null){
+	                	lat = mCurentInfo.location.latitude;
+						lont = mCurentInfo.location.longitude;
 	                	tvaddress.setText(mCurentInfo.address);
 	                }else{
 	                	tvaddress.setText("上车地");

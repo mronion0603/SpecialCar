@@ -1,9 +1,11 @@
 package com.lc.user;
 
+import com.lc.net.CancelInnerNet;
 import com.lc.specialcar.R;
 import com.lc.utils.CircularImage;
 import com.lc.utils.ConnectUrl;
 import com.lc.utils.ExitApplication;
+import com.lc.utils.MySharePreference;
 import com.lidroid.xutils.BitmapUtils;
 
 import android.app.Activity;
@@ -37,7 +39,8 @@ public class ItineraryDetailActivity extends Activity implements OnClickListener
     Button bt;
     TextView tvdriverName,tvcar,tvcarnumber,tvOrderStatus,tvriderName,tvorderNum,tvusecarTime,tvstartAddress,
              tvendAddress,tvmile,tvtimelong,tvstartMoney,tvtimefee,tvlongfee,tvdiscount,tvrealmoney;
-	@Override
+    //CancelInnerNet cancelInnerNet = new CancelInnerNet();
+    @Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
 		super.onCreate(savedInstanceState);
@@ -158,6 +161,14 @@ public class ItineraryDetailActivity extends Activity implements OnClickListener
 				Intent intent =new Intent();
 				intent.setClass(getApplication(), ChargeActivity.class);
 				startActivity(intent);
+			}
+			if(bt.getText().toString().equals("取消")){
+				/*
+				cancelInnerNet.setHandler(mHandler);
+				cancelInnerNet.setOrderNum(getOrderNum);
+				cancelInnerNet.setAuthn(MySharePreference.getStringValue(getApplication(), MySharePreference.AUTHN));
+				cancelInnerNet.getDataFromServer();
+			    */
 			}
 		}break;
 			

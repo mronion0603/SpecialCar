@@ -36,7 +36,6 @@
 	      android:textSize="18sp"
 	      android:textColor="@color/black"
 	      android:layout_marginBottom="10dip"
-	      android:text="王师傅"
 	      android:textStyle="bold"
 	     />
 	     <TextView
@@ -46,7 +45,6 @@
 	      android:layout_marginLeft="20dip"
 	      android:textSize="18sp"
 	      android:textColor="@color/text_brown"
-	      android:text="鄂A 46987"
 	     />
 	     </LinearLayout>
 	      <TextView

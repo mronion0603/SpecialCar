@@ -1,6 +1,7 @@
 package com.lc.popupwindow;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 import kankan.wheel.widget.WheelView;
@@ -77,7 +78,9 @@ public class TimePopupWindow extends PopupWindow {
 		mins.setCyclic(true);
 		// set current time
 		Calendar calendar = Calendar.getInstance(Locale.US);
-		hours.setCurrentItem(calendar.get(Calendar.HOUR));
+		Date d = new Date();
+		int hour = d.getHours();
+		hours.setCurrentItem(hour);
 		mins.setCurrentItem(calendar.get(Calendar.MINUTE));
 		//ampm.setCurrentItem(calendar.get(Calendar.AM_PM));
 
@@ -127,7 +130,12 @@ public class TimePopupWindow extends PopupWindow {
 		return dayAdapter.getItemText2(day.getCurrentItem())+"";
 	}
 	public String getTimeUpload2(){
-		String date2 = hourAdapter.getItemText(hours.getCurrentItem())+":";
+		String hour = hourAdapter.getItemText(hours.getCurrentItem())+"";
+		if(hour.length()<=1){
+			hour="0"+hour;	
+		}
+		String date2 = hour+":";
+		
 		String date3 = minAdapter.getItemText(mins.getCurrentItem())+"";
 		return dayAdapter.getItemText2(day.getCurrentItem())+" "+date2+date3;
 	}

@@ -42,8 +42,20 @@ public class AddInnerNet {
 	String voucherNum = "";
 	String voucherMoney = "";
 	String driverNum = "";
+	String economy = "0";
+	String common = "0";
+	String business = "0";
 	public AddInnerNet(){
 		
+	}
+	public void setEconomy(String economy){
+		this.economy = economy;
+	}
+	public void setCommon(String common){
+		this.common = common;
+	}
+	public void setBusiness(String business){
+		this.business = business;
 	}
 	public void setHandler(Handler handler){
 		this.handler = handler;

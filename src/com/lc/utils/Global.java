@@ -30,4 +30,5 @@ public class Global {
   public static final int GETDISCOUNT=217;
   public static final int GETORDER=218;
   public static final int GETACCOUNT=219;
+  public static final int CANCEL_INNER=220;
 }

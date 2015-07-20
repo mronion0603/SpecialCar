@@ -5,15 +5,30 @@
     android:orientation="vertical" >
 
     <include layout="@layout/main_head" />
+     <RelativeLayout 
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content" 
+	    android:paddingTop="10dip"
+	    android:paddingBottom="10dip"
+	    android:layout_gravity="center"
+	    android:layout_marginBottom="10dip"
+        android:background="@color/white"
+	    >
+     <ImageView
+	      android:layout_centerHorizontal="true"
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:background="@drawable/img_car"  
+	    />
+     </RelativeLayout>
         <RelativeLayout 
-	    android:layout_width="wrap_content"
+	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content" 
 	    android:paddingTop="10dip"
 	    android:paddingBottom="10dip"
 	    android:id="@+id/usecardate"
 	    android:layout_gravity="center"
-	    android:layout_marginTop="30dip"
-
+	     android:background="@color/white"
 	    >
 	    <ImageView
 	      android:id="@+id/date"
@@ -34,15 +49,16 @@
 	    />
 	     
 	    </RelativeLayout>  
+	     
 	      <RelativeLayout 
-	    android:layout_width="wrap_content"
+	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content" 
 	    android:paddingTop="10dip"
 	    android:paddingBottom="10dip"
 	    android:id="@+id/usecardate2"
 	    android:layout_gravity="center"
-	    android:layout_marginTop="30dip"
-
+	     android:background="@color/white"
+	     android:layout_marginTop="1dip"
 	    >
 	    <ImageView
 	      android:id="@+id/date2"
@@ -64,14 +80,14 @@
 	     
 	    </RelativeLayout>  
         <RelativeLayout 
-	    android:layout_width="wrap_content"
+	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content" 
 	    android:paddingTop="10dip"
 	    android:paddingBottom="10dip"
 	    android:id="@+id/usecardate3"
 	    android:layout_gravity="center"
-	    android:layout_marginTop="30dip"
-
+	    android:background="@color/white"
+	    android:layout_marginTop="1dip"
 	    >
 	    <ImageView
 	      android:id="@+id/date3"
@@ -97,10 +113,19 @@
 	      android:layout_height="wrap_content"
 	      android:textSize="18sp"
 	      android:textColor="@color/black"
-	      android:layout_gravity="center"
+          android:layout_marginBottom="10dip"
 	      android:text="服务申明"
-	      android:layout_marginTop="40dip"
+	      android:layout_marginTop="10dip"
 	    />
+	    <RelativeLayout 
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent" 
+	    android:paddingTop="10dip"
+	    android:paddingBottom="10dip"
+	    android:layout_gravity="center"
+	    android:background="@color/white"
+	    android:layout_marginTop="1dip"
+	    >
 	       <TextView
 	      android:layout_width="wrap_content"
 	      android:layout_height="wrap_content"
@@ -112,4 +137,5 @@
 	      android:text="  这是应急专车服务相关规则这是应急专车服务相关规则这是应急专车服务相关规则这是应急专车服务相关规则这是应急专车服务相关规则这是应急专车服务相关规则这是应急专车服务相关规则这是应急专车服务相关规则"
 	     
 	    />
+	       </RelativeLayout>
 </LinearLayout>

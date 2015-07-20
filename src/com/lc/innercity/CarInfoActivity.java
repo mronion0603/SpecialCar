@@ -29,6 +29,7 @@ import com.lc.net.NotifyDriverInnerNet;
 import com.lc.net.RouteMatrixNet;
 import com.lc.popupwindow.AddressPopupWindow;
 import com.lc.popupwindow.TimePopupWindow;
+import com.lc.progressbutton.CircularProgressButton;
 import com.lc.specialcar.R;
 import com.lc.user.Discount2Activity;
 import com.lc.utils.ButtonEffect;
@@ -66,7 +67,7 @@ public class CarInfoActivity extends Activity implements OnClickListener {
     TextView tvTitle,righttext,feeRule,tvname,tvphone,tvstartAddress,tvendAddress,tvdate,tvmoney,tvdemand;
     TextView tvtype,tvgetoff;
     ImageView ivleft;
-    Button ivSearch;
+    CircularProgressButton ivSearch;
     private RelativeLayout rls,rlusecar,rlselectcar,rldate,rlmodifyname,rldiscount,rlgetoffaddress;
     private ImageView getoffAddress;
 	private View originview; 
@@ -146,7 +147,8 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 		//righttext.setVisibility(View.VISIBLE);
 		righttext.setText("计费规则");
 		righttext.setOnClickListener(this);
-		ivSearch = (Button) findViewById(R.id.Search);
+		ivSearch = (CircularProgressButton) findViewById(R.id.Search);
+		ivSearch.setIndeterminateProgressMode(true);
 		ivSearch.setOnClickListener(this);
 		ButtonEffect.setButtonStateChangeListener(ivSearch);
 		rls = (RelativeLayout) findViewById(R.id.rlslidemenu);
@@ -330,8 +332,13 @@ public class CarInfoActivity extends Activity implements OnClickListener {
    	    	
    	         Intent intent2 = new Intent();
 			 intent2.setClass(CarInfoActivity.this,SendDealActivity.class);
+			 intent2.putExtra("orderNum", jsonobj.getJSONObject("Data").getString("orderNum"));
 			 startActivity(intent2);
+			 ivSearch.setProgress(0);
+			 ivSearch.setClickable(true);
         }else{
+           ivSearch.setProgress(50);
+           ivSearch.setClickable(true);
            Toast.makeText(CarInfoActivity.this,jsonobj.getString("Message"), Toast.LENGTH_LONG).show();
         } 
     }
@@ -414,6 +421,8 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 			}else if(strbill==null|strbill.length()<=0){
 				Toast.makeText(getApplication(), "请选择车型", Toast.LENGTH_SHORT).show();
 			}else{
+				ivSearch.setClickable(false);
+				ivSearch.setProgress(50);
 				addInnerNet.setHandler(mHandler);
 				addInnerNet.setAuthn(MySharePreference.getStringValue(getApplication(), MySharePreference.AUTHN));
 	            addInnerNet.setDevice(Global.DEVICE);
@@ -440,11 +449,13 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 	            String startTime = tvdate.getText().toString();
 	            if(startTime.equals("现在")){
 	            	SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm"); 
+	            	
 	        		Date curDate = new Date(System.currentTimeMillis());//获取当前时间       
 	        		startTime  = formatter.format(curDate); 
+	        		System.out.println("startTime:"+startTime);
 	        		addInnerNet.setStartTime(startTime);
 	            }else{
-	            	//System.out.println("getdate:"+getdate);
+	            	System.out.println("getdate:"+getdate);
 	            	addInnerNet.setStartTime(getdate);
 	            }
 	            
