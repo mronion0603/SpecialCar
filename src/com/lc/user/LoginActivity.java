@@ -3,7 +3,6 @@ package com.lc.user;
 
 import java.util.Timer;
 import java.util.TimerTask;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -17,7 +16,7 @@ import com.lc.specialcar.R;
 import com.lc.utils.ExitApplication;
 import com.lc.utils.Global;
 import com.lc.utils.MySharePreference;
-
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -31,6 +30,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+@SuppressLint("HandlerLeak")
 public class LoginActivity extends Activity {
 	//private TextView title;
 	private TextView backbt;

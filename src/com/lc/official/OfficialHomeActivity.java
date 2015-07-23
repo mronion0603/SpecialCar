@@ -267,6 +267,33 @@ public class OfficialHomeActivity extends Activity implements OnClickListener {
             if(rb.getText().equals("个人包车")){
 				Intent intent2 = new Intent();
 				intent2.setClass(OfficialHomeActivity.this, SelectCarPersonActivity.class);
+				intent2.putExtra("sLatitude", String.valueOf(lat));
+				intent2.putExtra("sLongitude", String.valueOf(lont));
+				intent2.putExtra("StartAddress", tvaddress.getText().toString());
+				intent2.putExtra("username", tvname.getText().toString());
+				if(tvphone.getText().toString().equals("本人")){
+		          intent2.putExtra("phone", MySharePreference.getStringValue(getApplication(), MySharePreference.PHONE));
+				}else{
+		          intent2.putExtra("phone", tvphone.getText().toString());
+		        }
+				String startTime = tvdate.getText().toString();
+				if(startTime.equals("现在")){
+	            	SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm"); 
+	        		Date curDate = new Date(System.currentTimeMillis());//获取当前时间       
+	        		startTime  = formatter.format(curDate); 
+	        		intent2.putExtra("starttime", startTime);
+	            }else{
+				    intent2.putExtra("starttime", time3);
+	            }
+				if(tvtimelong.getText().equals("1天"))
+				intent2.putExtra("timelong", String.valueOf(24*60));
+				else{
+				intent2.putExtra("timelong", String.valueOf(Integer.parseInt(time)*24*60));
+				}
+				if( tvdemand.getText().toString()!=null)
+				intent2.putExtra("commont", tvdemand.getText().toString());
+				else
+				intent2.putExtra("commont","");	
 				startActivity(intent2);
             }else{
           	    Intent intent2 = new Intent();

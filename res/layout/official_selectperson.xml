@@ -1,4 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_color"
@@ -35,22 +36,24 @@
 		      android:layout_height="1dip"
 		      android:background="@color/user_divider3"
 		      />
-		   <LinearLayout 
+		   <RelativeLayout 
 		    android:id="@+id/select1"
 		    android:layout_width="fill_parent"
 		    android:layout_height="wrap_content" 
-		    android:orientation="horizontal"
 		    android:background="@color/white"
 		    >
 		      <ImageView
+		      android:id="@+id/im1"
 		      android:layout_width="90dip"
 		      android:layout_height="80dip"
 		      android:layout_marginLeft="10dip"
 		      android:background="@drawable/public_car"
 		      android:layout_marginTop="10dip"
 		      android:layout_marginBottom="10dip"
-		       />
+		      />
 		        <LinearLayout 
+		        android:id="@+id/ll1"
+		        android:layout_toRightOf="@+id/im1"
 			    android:layout_width="wrap_content"
 			    android:layout_height="wrap_content" 
 			    android:orientation="vertical"
@@ -64,51 +67,51 @@
 				    android:layout_marginBottom="10dip"
 				    >
 				    <TextView
-		              
+		              android:id="@+id/type1"
 				      android:layout_width="wrap_content"
 				      android:layout_height="wrap_content"
 				      android:layout_marginLeft="10dip"
 				      android:textSize="18sp"
 				      android:textColor="@color/black"
-				      android:text="豪华型"
+				
 				    />
 				    <TextView
-		 
-				      android:layout_width="80dip"
+		              android:id="@+id/price1"
+				      android:layout_width="100dip"
 				      android:layout_height="30dip"
 				      android:layout_marginLeft="10dip"
 				      android:textSize="18sp"
 				      android:textColor="@color/text_green"
-				      android:text="@string/discount"
 				      android:gravity="center"
 				      android:background="@drawable/rectangle2"
 				    />
 			    </LinearLayout>
 			    <TextView
-	 
+	              android:id="@+id/cardis1"
 			      android:layout_width="wrap_content"
 			      android:layout_height="wrap_content"
 			      android:layout_marginLeft="10dip"
 			      android:textSize="14sp"
 			      android:textColor="@color/black2"
-			      android:text="帕萨特   天籁   凯美瑞等同级车型"
+			    
 			      android:layout_marginBottom="10dip"
 			    />
 			    </LinearLayout>
                <ImageView
                 android:id="@+id/ivselect"
+                android:layout_alignParentRight="true"
 		        android:layout_width="50dip"
 		        android:layout_height="50dip"
 		        android:background="@drawable/selectcar2"
 		    
                 />
-              </LinearLayout>   
+              </RelativeLayout>   
               <ImageView         
 		      android:layout_width="fill_parent"
 		      android:layout_height="1dip"
 		      android:background="@color/user_divider3"
 		      />
-              <LinearLayout 
+              <RelativeLayout 
 		    android:id="@+id/select2"
 		    android:layout_width="fill_parent"
 		    android:layout_height="wrap_content" 
@@ -116,6 +119,7 @@
 		    android:background="@color/white"
 		    >
 		      <ImageView
+		      android:id="@+id/im2"
 		      android:layout_width="90dip"
 		      android:layout_height="80dip"
 		      android:layout_marginLeft="10dip"
@@ -124,6 +128,7 @@
 		      android:layout_marginBottom="10dip"
 		       />
 		        <LinearLayout 
+		        android:layout_toRightOf="@+id/im2"
 			    android:layout_width="wrap_content"
 			    android:layout_height="wrap_content" 
 			    android:orientation="vertical"
@@ -137,58 +142,57 @@
 				    android:layout_marginBottom="10dip"
 				    >
 				    <TextView
-		              
+		              android:id="@+id/type2"
 				      android:layout_width="wrap_content"
 				      android:layout_height="wrap_content"
 				      android:layout_marginLeft="10dip"
 				      android:textSize="18sp"
 				      android:textColor="@color/black"
-				      android:text="豪华型"
+
 				    />
 				    <TextView
-		 
-				      android:layout_width="80dip"
+		              android:id="@+id/price2"
+				      android:layout_width="100dip"
 				      android:layout_height="30dip"
 				      android:layout_marginLeft="10dip"
 				      android:textSize="18sp"
 				      android:textColor="@color/text_green"
-				      android:text="@string/discount"
 				      android:gravity="center"
 				      android:background="@drawable/rectangle2"
 				    />
 			    </LinearLayout>
 			    <TextView
-	 
+	              android:id="@+id/cardis2"
 			      android:layout_width="wrap_content"
 			      android:layout_height="wrap_content"
 			      android:layout_marginLeft="10dip"
 			      android:textSize="14sp"
 			      android:textColor="@color/black2"
-			      android:text="帕萨特   天籁   凯美瑞等同级车型"
 			      android:layout_marginBottom="10dip"
 			    />
 			    </LinearLayout>
                <ImageView
                 android:id="@+id/ivselect2"
+                android:layout_alignParentRight="true"
 		        android:layout_width="50dip"
 		        android:layout_height="50dip"
 		        android:background="@drawable/selectcar2"
 		        android:visibility="gone"
                 />
-              </LinearLayout>   
+              </RelativeLayout>   
               <ImageView
 		      android:layout_width="fill_parent"
 		      android:layout_height="1dip"
 		      android:background="@color/user_divider3"
 		      />
-              <LinearLayout 
+              <RelativeLayout 
 		    android:id="@+id/select3"
 		    android:layout_width="fill_parent"
 		    android:layout_height="wrap_content" 
-		    android:orientation="horizontal"
 		    android:background="@color/white"
 		    >
 		      <ImageView
+		      android:id="@+id/im3"
 		      android:layout_width="90dip"
 		      android:layout_height="80dip"
 		      android:layout_marginLeft="10dip"
@@ -200,6 +204,7 @@
 			    android:layout_width="wrap_content"
 			    android:layout_height="wrap_content" 
 			    android:orientation="vertical"
+			    android:layout_toRightOf="@+id/im3"
 			    >
 			     <LinearLayout 
 			         
@@ -210,34 +215,32 @@
 				    android:layout_marginBottom="10dip"
 				    >
 				    <TextView
-		              
+		              android:id="@+id/type3"
 				      android:layout_width="wrap_content"
 				      android:layout_height="wrap_content"
 				      android:layout_marginLeft="10dip"
 				      android:textSize="18sp"
 				      android:textColor="@color/black"
-				      android:text="豪华型"
+				
 				    />
 				    <TextView
-		 
-				      android:layout_width="80dip"
+		               android:id="@+id/price3"
+				      android:layout_width="100dip"
 				      android:layout_height="30dip"
 				      android:layout_marginLeft="10dip"
 				      android:textSize="18sp"
 				      android:textColor="@color/text_green"
-				      android:text="@string/discount"
 				      android:gravity="center"
 				      android:background="@drawable/rectangle2"
 				    />
 			    </LinearLayout>
 			    <TextView
-	 
+	              android:id="@+id/cardis3"
 			      android:layout_width="wrap_content"
 			      android:layout_height="wrap_content"
 			      android:layout_marginLeft="10dip"
 			      android:textSize="14sp"
 			      android:textColor="@color/black2"
-			      android:text="帕萨特   天籁   凯美瑞等同级车型"
 			      android:layout_marginBottom="10dip"
 			    />
 			    </LinearLayout>
@@ -245,10 +248,11 @@
                 android:id="@+id/ivselect3"
 		        android:layout_width="50dip"
 		        android:layout_height="50dip"
+		        android:layout_alignParentRight="true"
 		        android:background="@drawable/selectcar2"
 		        android:visibility="gone"
                 />
-              </LinearLayout>   
+              </RelativeLayout>   
               <ImageView         
 		      android:layout_width="fill_parent"
 		      android:layout_height="1dip"
@@ -259,19 +263,24 @@
 	    android:layout_width="fill_parent"
 	    android:layout_height="fill_parent" 
 	    >
-        <Button
-          android:id="@+id/Search"
-	      android:layout_width="fill_parent"
-	      android:layout_height="50dip"
-	      android:layout_marginLeft="10dip"
-	      android:layout_marginRight="10dip"
-	      android:layout_centerHorizontal="true"
-	      android:layout_alignParentBottom="true"
-	      android:layout_marginBottom="50dip"
-	      android:background="@drawable/btn2"
-	      android:text="预约"
-	      android:textColor="@color/white"
-	      />
+        <com.lc.progressbutton.CircularProgressButton
+        android:id="@+id/Search"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="10dip"
+	    android:layout_marginRight="10dip"
+	    android:layout_marginBottom="50dip"
+	    android:layout_centerHorizontal="true"
+	    android:layout_alignParentBottom="true"
+        android:textColor="@color/cpb_white"
+        android:textSize="18sp"
+        app:cpb_textComplete="马上预约"
+        app:cpb_textError="错误"
+        app:cpb_textIdle="马上预约" 
+        app:cpb_selectorIdle="@drawable/idle_state_selector"
+        app:cpb_selectorComplete="@drawable/complete_state_selector"
+        app:cpb_selectorError="@drawable/error_state_selector"/>
+   
         </RelativeLayout>
 	  
 </LinearLayout>

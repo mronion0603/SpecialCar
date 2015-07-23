@@ -30,4 +30,5 @@ public class ConnectUrl {
  public static String getAccount = commonurl+"getAccount";
  public static String getPayOrder = commonurl+"addAliPayMoney";
  public static String cancelInnerOrder = commonurl+"cancelSNOrder";
+ public static String getAirport= commonurl+"selAirportByCity";	
 }

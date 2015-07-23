@@ -1,22 +1,27 @@
 package com.lc.official;
 
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import org.json.JSONArray;
 import org.json.JSONObject;
 
-import com.lc.innercity.CarInfoActivity;
 import com.lc.innercity.SelectCarActivity;
-import com.lc.innercity.SendDealActivity;
 import com.lc.intercity.SignUpActivity;
-import com.lc.net.AddInnerNet;
 import com.lc.net.AddOfficeNet;
+import com.lc.net.GetCarNet;
+import com.lc.progressbutton.CircularProgressButton;
 import com.lc.specialcar.R;
 import com.lc.utils.ButtonEffect;
+import com.lc.utils.ConnectUrl;
 import com.lc.utils.ExitApplication;
 import com.lc.utils.Global;
 import com.lc.utils.MySharePreference;
+import com.lidroid.xutils.BitmapUtils;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -35,13 +40,13 @@ import android.widget.Toast;
 
 public class SelectCarGroupActivity extends Activity implements OnClickListener {
     TextView tvTitle,righttext;
-    ImageView ivleft,ivselect1,ivselect2,ivselect3;
+    ImageView ivleft,ivselect1,ivselect2,ivselect3,car1,car2,car3;;
     private RelativeLayout rls;
     private RelativeLayout select1;
     private RelativeLayout select2;
     private RelativeLayout select3;
     boolean flag1,flag2,flag3;
-    Button btsearch;
+    CircularProgressButton btsearch;
     private Button plus,minus,plus2,minus2,plus3,minus3;
     private TextView amount,amount2,amount3;
     private AddOfficeNet addInnerNet = new AddOfficeNet();
@@ -49,6 +54,9 @@ public class SelectCarGroupActivity extends Activity implements OnClickListener 
 	String voucherNumstr="";
 	String getname="",getlat="",getlont="",getaddress="",getphone="",gettime="",gettimelong="0",getdemand="";
 	String economy="0",common="0",business="0";
+	TextView type1,type2,type3,price1,price2,price3;
+	GetCarNet getcarnet = new GetCarNet();
+	List<HashMap<String,String>> list =new ArrayList<HashMap<String,String>>();
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
@@ -74,7 +82,15 @@ public class SelectCarGroupActivity extends Activity implements OnClickListener 
 		flag1 = true;
 		flag2 = false;
 		flag3 = false;
-		
+		car1 = (ImageView) findViewById(R.id.iv1);
+		car2 = (ImageView) findViewById(R.id.iv2);
+		car3 = (ImageView) findViewById(R.id.iv3);
+		price1 = (TextView) findViewById(R.id.price1);
+		price2 = (TextView) findViewById(R.id.price2);
+		price3 = (TextView) findViewById(R.id.price3);
+		type1 = (TextView) findViewById(R.id.type1);
+		type2 = (TextView) findViewById(R.id.type2);
+		type3 = (TextView) findViewById(R.id.type3);
 		tvTitle = (TextView) findViewById(R.id.topTv);
 		tvTitle.setText("选择车型");
 		righttext = (TextView) findViewById(R.id.righttext);
@@ -94,8 +110,9 @@ public class SelectCarGroupActivity extends Activity implements OnClickListener 
 		select2.setOnClickListener(this);
 		select3 = (RelativeLayout) findViewById(R.id.select3);
 		select3.setOnClickListener(this);
-		btsearch = (Button) findViewById(R.id.Search);
+		btsearch = (CircularProgressButton) findViewById(R.id.Search);
 		ButtonEffect.setButtonStateChangeListener(btsearch);
+		btsearch.setIndeterminateProgressMode(true);
 		btsearch.setOnClickListener(this);
 		plus = (Button) findViewById(R.id.plus);
 		minus = (Button) findViewById(R.id.minus);
@@ -112,6 +129,11 @@ public class SelectCarGroupActivity extends Activity implements OnClickListener 
 		amount3 = (TextView)findViewById(R.id.amount3);
 		plus3.setOnClickListener(this);
 		minus3.setOnClickListener(this);
+		getcarnet.setHandler(mHandler);
+		getcarnet.setDevice(Global.DEVICE);
+		getcarnet.setAuthn(MySharePreference.getStringValue(getApplication(), MySharePreference.AUTHN));
+		getcarnet.getDataFromServer();
+		
 	}
 	@Override
 	public void onClick(View v) {
@@ -127,6 +149,8 @@ public class SelectCarGroupActivity extends Activity implements OnClickListener 
 			startActivity(intent);
 			break;
 		case R.id.Search:{	
+			btsearch.setClickable(false);
+			btsearch.setProgress(50);
 			addInnerNet.setHandler(mHandler);
 			addInnerNet.setAuthn(MySharePreference.getStringValue(getApplication(), MySharePreference.AUTHN));
             addInnerNet.setDevice(Global.DEVICE);
@@ -151,6 +175,7 @@ public class SelectCarGroupActivity extends Activity implements OnClickListener 
             else
             addInnerNet.setBusiness(business);
             addInnerNet.setUseCarTime(gettimelong);
+            addInnerNet.setCartype("1");
             addInnerNet.getDataFromServer();
 			
 		}	break;
@@ -251,7 +276,6 @@ public class SelectCarGroupActivity extends Activity implements OnClickListener 
 	        public void handleMessage(android.os.Message msg) {
 	            switch(msg.what) {
 		            case Global.ADDINNER: {
-		            	//Log.d("SC",(String) msg.obj );
 						try {
 							parseInner((String) msg.obj);
 						} catch (Exception e) {
@@ -259,6 +283,14 @@ public class SelectCarGroupActivity extends Activity implements OnClickListener 
 						}
 						break;
 					}
+		            case Global.GETCARTYPE:{
+		            	try {
+							parseJSON((String)msg.obj);
+						} catch (Exception e) {	
+							e.printStackTrace();
+						}    
+		            	break;
+		            }
 	            }
 	    }};
 	    private void parseInner(String str)throws Exception{ 
@@ -266,21 +298,49 @@ public class SelectCarGroupActivity extends Activity implements OnClickListener 
 	    	JSONObject jsonobj = new JSONObject(str); 
 	    	int result = jsonobj.getInt("ResultCode");
 	   	    if(result==Global.SUCCESS){
-	   	    	/*
-	   	    	 notifyDriverInnerNet.setHandler(mHandler);
-	   	    	 notifyDriverInnerNet.setOrderNum(jsonobj.getJSONObject("Data").getString("orderNum"));
-	   	    	 notifyDriverInnerNet.setDriverNum(driveridStr);
-	   	    	 notifyDriverInnerNet.getDataFromServer();
-	   	    	*/
 	   	    	Intent intent2 = new Intent();
 				intent2.setClass(SelectCarGroupActivity.this,SignUpActivity.class);
 				startActivity(intent2);
-				 //ivSearch.setProgress(0);
-				 //ivSearch.setClickable(true);
+				btsearch.setProgress(0);
+				btsearch.setClickable(true);
+				finish();
 	        }else{
-	          // ivSearch.setProgress(50);
-	         //  ivSearch.setClickable(true);
+	        	btsearch.setProgress(50);
+	        	btsearch.setClickable(true);
 	           Toast.makeText(SelectCarGroupActivity.this,jsonobj.getString("Message"), Toast.LENGTH_LONG).show();
 	        } 
 	    }
+	    private void parseJSON(String str) throws Exception {
+			//System.out.println(str);
+			JSONObject jsonobj = new JSONObject(str);
+			if (jsonobj.getInt("ResultCode") == Global.SUCCESS) {
+				JSONArray jsonarray = jsonobj.getJSONArray("Data");
+				for (int x = 0; x < jsonarray.length(); x++) {
+					JSONObject jsonobj2 = (JSONObject) jsonarray.get(x);
+					HashMap<String, String> map = new HashMap<String, String>();
+					map.put("carTypeId", jsonobj2.getString("carTypeId"));
+					map.put("bascMoney", jsonobj2.getString("bascMoney"));
+					map.put("mileageMoney", jsonobj2.getString("mileageMoney"));
+					map.put("timeMoney", jsonobj2.getString("timeMoney"));
+					map.put("carDesc", jsonobj2.getString("carDesc"));
+					map.put("carImg", jsonobj2.getString("carImg"));
+					map.put("inMileage", jsonobj2.getString("inMileage"));
+					map.put("inTime", jsonobj2.getString("inTime"));
+					map.put("officalMoney", jsonobj2.getString("officalMoney"));
+				    list.add(map);
+				}
+				BitmapUtils bitmapUtils = new BitmapUtils(SelectCarGroupActivity.this);
+			    bitmapUtils.display(car1, ConnectUrl.commonurl0+list.get(0).get("carImg"));
+			    bitmapUtils.display(car2, ConnectUrl.commonurl0+list.get(1).get("carImg"));
+			    bitmapUtils.display(car3, ConnectUrl.commonurl0+list.get(2).get("carImg"));
+				type1.setText("经济型");
+				type2.setText("普通型");
+				type3.setText("商务型");
+				price1.setText("¥"+list.get(0).get("officalMoney"));
+				price2.setText("¥"+list.get(1).get("officalMoney"));
+				price3.setText("¥"+list.get(2).get("officalMoney"));
+			}else{
+				 Toast.makeText(SelectCarGroupActivity.this,jsonobj.getString("Message"), Toast.LENGTH_LONG).show();
+			}
+		}
 }

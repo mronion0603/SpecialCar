@@ -209,7 +209,7 @@ public class SendActivity extends Activity implements OnClickListener {
 			 map.put("userId",jsonobj2.getString("userId"));
 			 map.put("address",jsonobj2.getString("address"));
 			 map.put("longitude",jsonobj2.getString("longitude"));
-			 map.put("latidute",jsonobj2.getString("latidute"));
+			 map.put("latidute",jsonobj2.getString("latitude"));
 			// System.out.println(map.toString());
 			 groups1.add(map);
         }

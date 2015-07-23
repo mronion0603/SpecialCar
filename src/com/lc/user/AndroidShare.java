@@ -12,6 +12,7 @@ import com.lc.specialcar.R;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -176,9 +177,13 @@ public class AndroidShare extends Dialog implements AdapterView.OnItemClickListe
 		PackageManager packageManager = context.getPackageManager();
 
 		List<PackageInfo> pinfo = packageManager.getInstalledPackages(0);
+		
 		for (int i = 0; i < pinfo.size(); i++) {
-			if (((PackageInfo) pinfo.get(i)).packageName.equalsIgnoreCase(packageName))
+			if (((PackageInfo) pinfo.get(i)).packageName.equalsIgnoreCase(packageName)){
+				//System.out.println("PackageInfo"+((PackageInfo) pinfo.get(i)).packageName+"");
+				//System.out.println(packageName);
 				return true;
+			}
 		}
 		return false;
 	}
@@ -237,6 +242,7 @@ public class AndroidShare extends Dialog implements AdapterView.OnItemClickListe
 			return;
 		}
 
+        try{
 		Intent intent = new Intent("android.intent.action.SEND");
 		if ((imgPath == null) || (imgPath.equals(""))) {
 			intent.setType("text/plain");
@@ -264,6 +270,9 @@ public class AndroidShare extends Dialog implements AdapterView.OnItemClickListe
 		    sendIntent.setType( "vnd.android-dir/mms-sms" );  
 		    context.startActivity(sendIntent );
 		}
+        }catch (ActivityNotFoundException  e){
+            Toast.makeText(context, "您的手机没有安装新浪微博客户端或微博版本过低", Toast.LENGTH_LONG).show();
+        } 
 	}
 
 	private File getFileCache() {

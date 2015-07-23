@@ -157,12 +157,12 @@ public class ItineraryActivity extends Activity implements OnClickListener {
 				JSONObject jsonobj2 = (JSONObject) jsonarray.get(x);
 				HashMap<String, Object> map = new HashMap<String, Object>();
 				String getorderStatus = jsonobj2.getString("orderStatus");
-				if(getorderStatus.equals("0")){
-					map.put("OrderStatus","待服务");
-				}else if(getorderStatus.equals("1")){
+				if(getorderStatus.equals("2")){        //司机已接单 乘客未上车
+					map.put("OrderStatus","待服务");   
+				}else if(getorderStatus.equals("1")){  //订单结束，已扣费
 					map.put("OrderStatus","已完成");
-				}else if(getorderStatus.equals("2")){
-					map.put("OrderStatus","服务中");
+				}else if(getorderStatus.equals("3")){  //乘客已上车
+					map.put("OrderStatus","服务中");   
 				}else if(getorderStatus.equals("-1")){
 					map.put("OrderStatus","取消");
 				}else{

@@ -182,13 +182,13 @@ public class SendDealActivity extends Activity implements OnClickListener {
 			JSONObject jsonobj = new JSONObject(str);
 			int result = jsonobj.getInt("ResultCode");
 			if (result == Global.SUCCESS) {
-				JSONObject jsonobj2 = jsonobj.getJSONObject("Data");
-				tvdrivername.setText(jsonobj2.getString("driverName"));
-				tvcarnum.setText(jsonobj2.getString("carNum"));
-				phonenum=jsonobj2.getString("phoneNum");
+				//JSONObject jsonobj2 = jsonobj.getJSONObject("Data");
+				tvdrivername.setText(jsonobj.getString("driverName"));
+				tvcarnum.setText(jsonobj.getString("carNum"));
+				phonenum=jsonobj.getString("phoneNum");
 					
 				BitmapUtils bitmapUtils = new BitmapUtils(SendDealActivity.this);
-		        bitmapUtils.display(ivdriverimg, ConnectUrl.commonurl0+jsonobj2.getString("driverImg"));
+		        bitmapUtils.display(ivdriverimg, ConnectUrl.commonurl0+jsonobj.getString("driverImg"));
 			} else {
 
 			}

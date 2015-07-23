@@ -53,6 +53,7 @@ public class SelectCarActivity extends Activity implements OnClickListener {
 	    GetCarNet getcarnet = new GetCarNet();
 	    int currentposition = 0;
 	    Dialog dia;
+	 
 		//private ProgressBar pb; 
 		@Override
 		public void onCreate(Bundle savedInstanceState) {
@@ -124,7 +125,8 @@ public class SelectCarActivity extends Activity implements OnClickListener {
 					else if(type.equals("2"))
 					bttype.setText("普通");
 					else
-					bttype.setText("商务");	
+					bttype.setText("商务");
+					//bttype.setText(list.get(position).get("carDesc"));
 					tv1.setText(list.get(position).get("bascMoney")+"元/起步价");
 					tv2.setText(list.get(position).get("mileageMoney")+"元/公里");
 					tv3.setText(list.get(position).get("timeMoney")+"元/分钟");
@@ -155,7 +157,7 @@ public class SelectCarActivity extends Activity implements OnClickListener {
 		        }};
 		        
 	private void parseJSON(String str) throws Exception {
-		//System.out.println(str);
+		System.out.println("ss:"+str);
 		JSONObject jsonobj = new JSONObject(str);
 		if (jsonobj.getInt("ResultCode") == Global.SUCCESS) {
 			JSONArray jsonarray = jsonobj.getJSONArray("Data");

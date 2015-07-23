@@ -5,13 +5,23 @@ package com.lc.specialcar;
 
 import java.util.Set;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import cn.jpush.android.api.JPushInterface;
 import cn.jpush.android.api.TagAliasCallback;
 
+import com.baidu.location.BDLocation;
+import com.baidu.location.BDLocationListener;
+import com.baidu.location.LocationClient;
+import com.baidu.location.LocationClientOption;
+import com.baidu.mapapi.map.BitmapDescriptor;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
+import com.lc.innercity.CarInfoActivity;
 import com.lc.innercity.InnerCityHomeActivity;
 import com.lc.intercity.InterCityHomeActivity;
+import com.lc.net.BaiduCityNet;
 import com.lc.official.OfficialHomeActivity;
 import com.lc.shuttle.ShuttleHomeActivity;
 import com.lc.slidingmenu.fragment.LeftFragment;
@@ -19,6 +29,7 @@ import com.lc.slidingmenu.fragment.RightFragment;
 import com.lc.urgent.UrgentHomeActivity;
 import com.lc.user.ItineraryActivity;
 import com.lc.utils.ExitApplication;
+import com.lc.utils.Global;
 import com.lc.utils.MySharePreference;
 
 import android.support.v4.app.Fragment;
@@ -57,6 +68,13 @@ public class MainActivity extends SlidingFragmentActivity implements OnClickList
 	private long waitTime = 3000;  //退出按钮等待时间
     private long touchTime = 0;    //退出按钮记录按下时间    
    // private ImageView rightiv;
+    // 定位相关
+ 	LocationClient mLocClient;
+ 	public MyLocationListenner myListener = new MyLocationListenner();
+ 	BitmapDescriptor mCurrentMarker;
+ 	boolean isFirstLoc = true;// 是否首次定位
+    String getcity ="";
+    BaiduCityNet baiduCityNet = new BaiduCityNet();
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
@@ -69,6 +87,16 @@ public class MainActivity extends SlidingFragmentActivity implements OnClickList
 	}
 
 	void init(){
+		 // 定位初始化
+		mLocClient = new LocationClient(this);
+		mLocClient.registerLocationListener(myListener);
+		LocationClientOption option = new LocationClientOption();
+		option.setOpenGps(true);// 打开gps
+		option.setCoorType("bd09ll"); // 设置坐标类型
+		option.setScanSpan(1000);
+		mLocClient.setLocOption(option);
+		mLocClient.start();    
+		
 		ExitApplication.getInstance().addActivity(this);
 		rlslidemenu = (RelativeLayout) findViewById(R.id.rlslidemenu);
 		rlslidemenu.setOnClickListener(this);
@@ -334,14 +362,37 @@ public class MainActivity extends SlidingFragmentActivity implements OnClickList
 	                //ÿ�����ӷ���һ��message�������л�viewPager�е�ͼƬ
 	                this.sendEmptyMessageDelayed(1, 5000);
 	            }   break;   
-	            case MSG_SET_ALIAS:
+	            case MSG_SET_ALIAS:{
 	                // 调用 JPush 接口来设置别名。
 	                JPushInterface.setAliasAndTags(getApplicationContext(),(String) msg.obj, null,mAliasCallback);
 	             break;
 	            }
-		       
+	            case Global.GETBAIDUCITY:{
+	                try {
+						parseCity((String) msg.obj);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+	                break;
+	            }
+	            
+            }
 	        }
 	    };
+	    
+	    private void parseCity(String str)throws Exception{ 
+	    	 str = str.substring(29, str.length()-1);
+	    	 //System.out.println(str);
+	    	 JSONObject jsonobj = new JSONObject(str);  
+	         int result = jsonobj.getInt("status");
+	    	 if(result==0){
+	    		 JSONObject jsonobj2 = jsonobj.getJSONObject("result").getJSONObject("addressComponent");
+	    		 //JSONObject jsonarray = jsonobj2.getJSONObject("city");
+	    		 //System.out.println(jsonobj2.getString("city"));
+	    		 MySharePreference.editStringValue(getApplication(), MySharePreference.CITY, jsonobj2.getString("city"));		
+	         }
+	   }
 	    @Override  
 	    public void onBackPressed() {  
 	        long currentTime = System.currentTimeMillis();  
@@ -374,4 +425,31 @@ public class MainActivity extends SlidingFragmentActivity implements OnClickList
 		        
 		    }
 		};
+		
+		 /**
+		 * 定位SDK监听函数
+		 */
+	public class MyLocationListenner implements BDLocationListener {
+
+			@Override
+			public void onReceiveLocation(BDLocation location) {
+				if (location == null )
+					return;		
+					//LatLng ll = new LatLng(location.getLatitude(),location.getLongitude());
+				
+				if (isFirstLoc) {
+					isFirstLoc = false;  
+				    //System.out.println("getLatitude:"+location.getLatitude());
+				   // System.out.println("getLongitude:"+location.getLongitude());
+				    String locationstr = String.valueOf(location.getLatitude())+","+String.valueOf(location.getLongitude());
+				    baiduCityNet.setHandler(mHandler);
+				    baiduCityNet.setLocation(locationstr);
+				    baiduCityNet.getCodeFromServer();
+				}
+		    }	
+			public void onReceivePoi(BDLocation poiLocation) {
+				getcity = poiLocation.getCity();
+			    System.out.println("getcity2:"+getcity);
+			}
+	}
 }

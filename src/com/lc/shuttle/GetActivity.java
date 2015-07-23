@@ -7,6 +7,12 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.baidu.location.BDLocation;
+import com.baidu.location.BDLocationListener;
+import com.baidu.location.LocationClient;
+import com.baidu.location.LocationClientOption;
+import com.baidu.mapapi.SDKInitializer;
+import com.baidu.mapapi.map.BitmapDescriptor;
 import com.lc.innercity.AddressActivity;
 import com.lc.innercity.CarDemandActivity;
 import com.lc.innercity.GroupAdapter;
@@ -55,17 +61,21 @@ public class GetActivity extends Activity implements OnClickListener {
 	TimePopupWindow timepWindow;
 	GetAddressNet getaddressnet = new GetAddressNet();
 	private List<HashMap<String , Object>> groups1= new ArrayList<HashMap<String , Object>>();
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
 		super.onCreate(savedInstanceState);
 		
 		setContentView(R.layout.shuttle_get);
+		SDKInitializer.initialize(getApplicationContext());  
 		init();
 		
 	}
 
 	public void init(){
+		
+		
 		ExitApplication.getInstance().addActivity(this);
 		LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);  
 		originview = layoutInflater.inflate(R.layout.activity_innercity_carinfo, null);  
@@ -106,7 +116,7 @@ public class GetActivity extends Activity implements OnClickListener {
 	        getaddressnet.setDevice(Global.DEVICE);
 	        getaddressnet.setAuthn(MySharePreference.getStringValue(getApplication(), MySharePreference.AUTHN));
 	        getaddressnet.getCodeFromServer();
-	        
+	    
 	}
 	@Override
 	public void onClick(View v) {
@@ -211,7 +221,7 @@ public class GetActivity extends Activity implements OnClickListener {
 			 map.put("userId",jsonobj2.getString("userId"));
 			 map.put("address",jsonobj2.getString("address"));
 			 map.put("longitude",jsonobj2.getString("longitude"));
-			 map.put("latidute",jsonobj2.getString("latidute"));
+			 map.put("latidute",jsonobj2.getString("latitude"));
 			// System.out.println(map.toString());
 			 groups1.add(map);
         }
@@ -241,5 +251,6 @@ public class GetActivity extends Activity implements OnClickListener {
 	              }
 	        }  
 	    }  
-	    
+	   
+
 }
