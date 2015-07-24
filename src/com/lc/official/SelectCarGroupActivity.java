@@ -36,6 +36,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ImageView.ScaleType;
 
 
 public class SelectCarGroupActivity extends Activity implements OnClickListener {
@@ -330,6 +331,9 @@ public class SelectCarGroupActivity extends Activity implements OnClickListener 
 				    list.add(map);
 				}
 				BitmapUtils bitmapUtils = new BitmapUtils(SelectCarGroupActivity.this);
+				car1.setScaleType(ScaleType.FIT_XY);//铺满
+				car2.setScaleType(ScaleType.FIT_XY);
+				car3.setScaleType(ScaleType.FIT_XY);
 			    bitmapUtils.display(car1, ConnectUrl.commonurl0+list.get(0).get("carImg"));
 			    bitmapUtils.display(car2, ConnectUrl.commonurl0+list.get(1).get("carImg"));
 			    bitmapUtils.display(car3, ConnectUrl.commonurl0+list.get(2).get("carImg"));

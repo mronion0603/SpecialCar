@@ -33,4 +33,5 @@ public class Global {
   public static final int CANCEL_INNER=220;
   public static final int AIRPORT=221;
   public static final int GETBAIDUCITY=222;
+  public static final int CHOOSECITY=223;
 }

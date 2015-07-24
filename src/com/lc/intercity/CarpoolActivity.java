@@ -43,7 +43,7 @@ public class CarpoolActivity extends Activity implements OnClickListener {
     String getorderNum="",pickUpArea="";
     int curnum =0,totalnum=0;
     AddCarPoolNet addCarPoolNet = new AddCarPoolNet();
-    NotifyDriverNet notifyDriverNet = new NotifyDriverNet();
+   // NotifyDriverNet notifyDriverNet = new NotifyDriverNet();
     String getdriverid="";
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -153,9 +153,9 @@ public class CarpoolActivity extends Activity implements OnClickListener {
     	int result = jsonobj.getInt("ResultCode");
    	    if(result==Global.SUCCESS){
    	    	
-   	    	notifyDriverNet.setHandler(mHandler);
-   	    	notifyDriverNet.setOrderNum(getorderNum);
-   	    	notifyDriverNet.getDataFromServer();
+   	    	//notifyDriverNet.setHandler(mHandler);
+   	    	//notifyDriverNet.setOrderNum(getorderNum);
+   	    	//notifyDriverNet.getDataFromServer();
    	    	
    	    	Intent intent = new Intent();
 			intent.putExtra("title", "拼车");

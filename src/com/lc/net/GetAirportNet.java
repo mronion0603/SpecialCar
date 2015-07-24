@@ -20,6 +20,7 @@ public class GetAirportNet {
 	String result = "网络连接错误！";
 	String authn = "";
 	String device = "";
+	String city = "";
 	public GetAirportNet(){
 		
 	}
@@ -28,6 +29,9 @@ public class GetAirportNet {
 	}
 	public void setDevice(String device){
 		this.device = device;
+	}
+	public void setCity(String city){
+		this.city = city;
 	}
 	public void setAuthn(String authn){
 		this.authn = authn;
@@ -58,7 +62,9 @@ public class GetAirportNet {
 	                		DataOutputStream outputStream = new DataOutputStream(urlConnection.getOutputStream());
 	                		
 	                		String content ="authn=" + URLEncoder.encode(authn, "UTF-8")
-	                				+"&device=" + URLEncoder.encode(device, "UTF-8");
+	                				+"&device=" + URLEncoder.encode(device, "UTF-8")
+	                				+"&city=" + URLEncoder.encode(city, "UTF-8")
+	                				;
 	                		
 	                		outputStream.writeBytes(content);
 	                		outputStream.flush();

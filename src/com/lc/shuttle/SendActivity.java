@@ -12,6 +12,7 @@ import com.lc.innercity.CarDemandActivity;
 import com.lc.innercity.GroupAdapter;
 import com.lc.innercity.ModifyNameActivity;
 import com.lc.net.GetAddressNet;
+import com.lc.net.GetAirportNet;
 import com.lc.popupwindow.AddressPopupWindow;
 import com.lc.popupwindow.TimePopupWindow;
 import com.lc.specialcar.R;
@@ -43,9 +44,11 @@ import android.widget.AdapterView.OnItemClickListener;
 public class SendActivity extends Activity implements OnClickListener {
 	public static final int REQUSET_NAMEPHONE = 1;
 	public static final int REQUSET_ADDRESS = 2;
+	public static final int REQUSET_DEMAND = 3;
     TextView feeRule,txdate,tvname,tvphone,tvendaddress;
+    TextView etAirport,tvdemand;
     Button ivSearch;
-    private RelativeLayout rlusecar,rldate,rlmodifyname,rlstartaddress;
+    private RelativeLayout rlusecar,rldate,rlmodifyname,rlstartaddress,rlAirportAddress;
     private ImageView imAddress;
 	private View originview; 
 	GroupAdapter groupAdapter;
@@ -53,6 +56,10 @@ public class SendActivity extends Activity implements OnClickListener {
 	TimePopupWindow timepWindow;
 	GetAddressNet getaddressnet = new GetAddressNet();
 	private List<HashMap<String , Object>> groups1= new ArrayList<HashMap<String , Object>>();
+	String getCity="";
+	GetAirportNet getAirportNet = new GetAirportNet();
+	AddressPopupWindow airportWindow;
+	private List<HashMap<String , Object>> groups2= new ArrayList<HashMap<String , Object>>();
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
@@ -63,19 +70,22 @@ public class SendActivity extends Activity implements OnClickListener {
 	}
 
 	public void init(){
+		getCity = MySharePreference.getStringValue(getApplication(), MySharePreference.CITY);
 		ExitApplication.getInstance().addActivity(this);
 		LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);  
 		originview = layoutInflater.inflate(R.layout.activity_innercity_carinfo, null);  
 		tvname = (TextView) findViewById(R.id.Name);
 		tvphone = (TextView) findViewById(R.id.Phone);
 		tvendaddress = (TextView) findViewById(R.id.getoffaddress);
+		tvdemand = (TextView) findViewById(R.id.Demand);
 		ivSearch = (Button) findViewById(R.id.Search);
 		ivSearch.setOnClickListener(this);
 		ButtonEffect.setButtonStateChangeListener(ivSearch);
-		
+		tvname = (TextView) findViewById(R.id.Name);
 		rlusecar = (RelativeLayout) findViewById(R.id.usecar);
 		rlusecar.setOnClickListener(this);
-		
+		rlAirportAddress= (RelativeLayout) findViewById(R.id.AirportAddress);
+		rlAirportAddress.setOnClickListener(this);
 		rlmodifyname = (RelativeLayout) findViewById(R.id.rlmodifyname);
 		rlmodifyname.setOnClickListener(this);
 		rlstartaddress= (RelativeLayout) findViewById(R.id.startaddress);
@@ -94,21 +104,40 @@ public class SendActivity extends Activity implements OnClickListener {
 			}
 	       
 	    }); 
-		txdate = (TextView) findViewById(R.id.txdate);
+		etAirport = (TextView) findViewById(R.id.airport);
 		
 		imAddress = (ImageView) findViewById(R.id.Star);
 		imAddress.setOnClickListener(this);
 		
-		  getaddressnet.setHandler(mHandler);
-	        getaddressnet.setDevice(Global.DEVICE);
-	        getaddressnet.setAuthn(MySharePreference.getStringValue(getApplication(), MySharePreference.AUTHN));
-	        getaddressnet.getCodeFromServer();
+		getaddressnet.setHandler(mHandler);
+	    getaddressnet.setDevice(Global.DEVICE);
+	    getaddressnet.setAuthn(MySharePreference.getStringValue(getApplication(), MySharePreference.AUTHN));
+	    getaddressnet.getCodeFromServer();
+	    
+	    String username = MySharePreference.getStringValue(getApplication(), MySharePreference.USERNAME);
+		if(username==null){
+			tvname.setText( MySharePreference.getStringValue(getApplication(), MySharePreference.PHONE));
+		}else{
+			tvname.setText(username);
+		}
+		if(getCity.length()>=1){
+			    getAirportNet.setHandler(mHandler);
+			    getAirportNet.setDevice(Global.DEVICE);
+			    getAirportNet.setAuthn(MySharePreference.getStringValue(getApplication(), MySharePreference.AUTHN));
+			    getCity=getCity.substring(0, getCity.length()-1);
+			    //System.out.println(getCity);
+			    getAirportNet.setCity(getCity);
+			    getAirportNet.getDataFromServer();
+	    }
 	}
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
-	
+		case R.id.AirportAddress:{
+			airportWindow = new AddressPopupWindow(SendActivity.this,itemOnClick2,groups2);//实例化AddressPopupWindow
+			airportWindow.showAsDropDown(originview, 0, 0); //显示窗口
+		}	break;
 		case R.id.Star:
 			menuWindow = new AddressPopupWindow(SendActivity.this,itemOnClick,groups1);//实例化AddressPopupWindow
 			menuWindow.showAsDropDown(originview, 0, 0); //显示窗口
@@ -121,7 +150,7 @@ public class SendActivity extends Activity implements OnClickListener {
 		case R.id.usecar:
 			Intent intent3 = new Intent();
 			intent3.setClass(SendActivity.this,CarDemandActivity.class);
-			startActivity(intent3);
+			startActivityForResult(intent3, REQUSET_DEMAND);  
 			break;
 		
 		case R.id.rlmodifyname:
@@ -173,6 +202,18 @@ public class SendActivity extends Activity implements OnClickListener {
 			}	
 		}
     };
+    //为飞机场窗口实现监听类
+    private OnItemClickListener  itemOnClick2 = new OnItemClickListener(){
+		@Override
+		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
+			    String getairportname = airportWindow.getItemStr2(arg2);
+				Message message = Message.obtain();  
+			    message.obj = getairportname;  
+				message.what = Global.CHOOSECITY;  
+				mHandler.sendMessageDelayed(message, 50);
+				airportWindow.dismiss();   
+		}
+    };
 	@SuppressLint("HandlerLeak")
 	private Handler mHandler = new Handler() {
         public void handleMessage(android.os.Message msg) {
@@ -195,8 +236,38 @@ public class SendActivity extends Activity implements OnClickListener {
 					}
 					break;
 				}
+	            case Global.CHOOSECITY: {
+	            	etAirport.setText((String) msg.obj);
+					break;
+				}
+	            case Global.AIRPORT: {
+					try {
+						parseAIRPORT((String) msg.obj);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					break;
+				}
             }
     }};
+    private void parseAIRPORT(String str)throws Exception{ 
+    	//System.out.println(str);
+   	    JSONObject jsonobj = new JSONObject(str); 
+   	    int result = jsonobj.getInt("ResultCode");
+	    if(result==Global.SUCCESS){
+	    	JSONArray jsonarray = jsonobj.getJSONArray("Data");
+	    	 for(int x=0;x<jsonarray.length();x++){
+	           	 JSONObject jsonobj2 = (JSONObject)jsonarray.get(x); 
+	            	 HashMap<String , Object> map = new HashMap<String , Object>();
+	    			 map.put("city",jsonobj2.getString("city"));   //城市名
+	    			 map.put("longitude",jsonobj2.getString("longitude"));
+	    			 map.put("latitude",jsonobj2.getString("latitude"));
+	    			 map.put("address",jsonobj2.getString("airportName")); //机场名
+	    			 //System.out.println(map.toString());
+	    			 groups2.add(map);
+	         }
+	    }
+    }
     private void parseADDRESS(String str)throws Exception{ 
 	    groups1.clear();
 	   // System.out.println(str);
@@ -236,6 +307,14 @@ public class SendActivity extends Activity implements OnClickListener {
            if(extras != null){
          	  address = extras.getString("address");
          	  tvendaddress.setText(address);
+           }
+       }  
+	   if (requestCode == REQUSET_DEMAND && resultCode == RESULT_OK) {
+     	  String demand ="";
+     	  Bundle extras = data.getExtras();
+           if(extras != null){
+         	  demand = extras.getString("demand");
+         	  tvdemand.setText(demand);
            }
        }  
 	 }  

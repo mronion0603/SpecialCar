@@ -50,7 +50,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -96,7 +95,7 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 	String ruleStr4 = "元/公里+";
 	String ruleStr5 = "0.24";
 	String ruleStr6 = "元/分钟";
-	NotifyDriverInnerNet notifyDriverInnerNet = new NotifyDriverInnerNet();
+	//NotifyDriverInnerNet notifyDriverInnerNet = new NotifyDriverInnerNet();
 	String driveridStr="";
 	String vMoneystr="0";	String voucherNumstr="";
     @Override
@@ -325,17 +324,18 @@ public class CarInfoActivity extends Activity implements OnClickListener {
     	JSONObject jsonobj = new JSONObject(str); 
     	int result = jsonobj.getInt("ResultCode");
    	    if(result==Global.SUCCESS){
-   	    	 notifyDriverInnerNet.setHandler(mHandler);
-   	    	 notifyDriverInnerNet.setOrderNum(jsonobj.getJSONObject("Data").getString("orderNum"));
-   	    	 notifyDriverInnerNet.setDriverNum(driveridStr);
-   	    	 notifyDriverInnerNet.getDataFromServer();
+   	    	 //notifyDriverInnerNet.setHandler(mHandler);
+   	    	 //notifyDriverInnerNet.setOrderNum(jsonobj.getJSONObject("Data").getString("orderNum"));
+   	    	 //notifyDriverInnerNet.setDriverNum(driveridStr);
+   	    	 //notifyDriverInnerNet.getDataFromServer();
    	    	
    	         Intent intent2 = new Intent();
 			 intent2.setClass(CarInfoActivity.this,SendDealActivity.class);
 			 intent2.putExtra("orderNum", jsonobj.getJSONObject("Data").getString("orderNum"));
 			 startActivity(intent2);
-			 ivSearch.setProgress(0);
+			 //ivSearch.setProgress(0);
 			 ivSearch.setClickable(true);
+			 finish();
         }else{
            ivSearch.setProgress(50);
            ivSearch.setClickable(true);
@@ -452,18 +452,15 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 	            	
 	        		Date curDate = new Date(System.currentTimeMillis());//获取当前时间       
 	        		startTime  = formatter.format(curDate); 
-	        		System.out.println("startTime:"+startTime);
 	        		addInnerNet.setStartTime(startTime);
 	            }else{
-	            	System.out.println("getdate:"+getdate);
+
 	            	addInnerNet.setStartTime(getdate);
 	            }
 	            
-	            System.out.println("vMoneystr:"+vMoneystr+" voucherNumstr:"+voucherNumstr);
 	            addInnerNet.setVoucherMoney(vMoneystr);
 	            addInnerNet.setVoucherNum(voucherNumstr);
 	            addInnerNet.getDataFromServer();
-
 			}
 			break;
 		case R.id.usecar:

@@ -214,9 +214,9 @@ public class CharteredCarActivity extends Activity implements OnClickListener {
        	JSONObject jsonobj = new JSONObject(str); 
        	int result = jsonobj.getInt("ResultCode");
       	    if(result==Global.SUCCESS){
-      	    	notifyDriverNet.setHandler(mHandler);
-      	    	notifyDriverNet.setOrderNum(getorderNum);
-       	    	notifyDriverNet.getDataFromServer();
+      	    	//notifyDriverNet.setHandler(mHandler);
+      	    	//notifyDriverNet.setOrderNum(getorderNum);
+       	    	//notifyDriverNet.getDataFromServer();
        	    	
       	    	Intent intent = new Intent();
     			intent.putExtra("title", "包车");

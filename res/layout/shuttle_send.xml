@@ -92,12 +92,13 @@
 	      android:layout_centerVertical="true" 
 	    />
 	     <TextView
+	      android:id="@+id/airport"
 	      android:layout_toRightOf="@+id/date3"
 	      android:layout_width="wrap_content"
 	      android:layout_height="wrap_content"
 	      android:layout_marginLeft="20dip"
 	      android:textSize="18sp"
-	      android:textColor="@color/black2"
+	      android:textColor="@color/black"
 	      android:layout_centerVertical="true"
 	      android:text="请输入机场"
 	    />
@@ -141,7 +142,7 @@
 	      android:textSize="18sp"
 	      android:textColor="@color/black2"
 	      android:layout_centerVertical="true"
-	      android:text="请输入下车地点"
+	      android:text="请输入上车地点"
 	    />
 	     <ImageView
 	      android:id="@+id/Star"
@@ -181,7 +182,7 @@
 	      android:layout_centerVertical="true"
 	    />
 	     <TextView
-	         android:id="@+id/Name"
+	      android:id="@+id/Name"
 	      android:layout_toRightOf="@+id/moresaftyim"
 	      android:layout_width="wrap_content"
 	      android:layout_height="wrap_content"
@@ -201,7 +202,7 @@
 	      android:layout_centerVertical="true"
 	     />
 	      <TextView
-	          android:id="@+id/Phone"
+	      android:id="@+id/Phone"
 	      android:layout_toLeftOf="@+id/arrow1"
 	      android:layout_width="wrap_content"
 	      android:layout_height="wrap_content"
@@ -209,7 +210,7 @@
 	      android:textSize="16sp"
 	      android:textColor="@color/text_brown"
 	      android:layout_centerVertical="true"
-	      android:text=""
+	      android:text="本人"
 	      />
 	    </RelativeLayout>
 	     <ImageView
@@ -261,7 +262,18 @@
 	      android:layout_alignParentRight="true"
 	      android:layout_centerVertical="true"
 	     />
-	      
+	      <TextView
+	      android:id="@+id/Demand"
+	      android:layout_toLeftOf="@+id/arrow4"
+	      android:layout_width="200dip"
+	      android:gravity="right"
+	      android:singleLine="true"
+	      android:layout_height="wrap_content"
+	      android:layout_marginLeft="20dip"
+	      android:textSize="14sp"
+	      android:textColor="@color/black"
+	      android:layout_centerVertical="true"
+	    />
 	    </RelativeLayout>
 	     <ImageView
 	      android:layout_width="fill_parent"

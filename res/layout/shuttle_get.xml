@@ -1,4 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_color"
@@ -25,16 +26,17 @@
 	      android:background="@drawable/airport_plane"  
 	      android:layout_centerVertical="true"
 	    />
-	     <TextView
-	      android:id="@+id/txdate2"
+	     <EditText
+	      android:id="@+id/flightnum"
 	      android:layout_toRightOf="@+id/date2"
 	      android:layout_width="wrap_content"
 	      android:layout_height="wrap_content"
 	      android:layout_marginLeft="20dip"
 	      android:textSize="18sp"
-	      android:textColor="@color/text_color"
+	      android:textColor="@color/black"
 	      android:layout_centerVertical="true"
-	      android:text="请输入航班号"
+	      android:background="@color/white"
+	      android:hint="请输入航班号"
 	    />
 	     <ImageView
 	      android:id="@+id/arrow3"
@@ -142,12 +144,13 @@
 	      android:layout_centerVertical="true" 
 	    />
 	     <TextView
+	      android:id="@+id/airport"
 	      android:layout_toRightOf="@+id/date3"
 	      android:layout_width="wrap_content"
 	      android:layout_height="wrap_content"
 	      android:layout_marginLeft="20dip"
 	      android:textSize="18sp"
-	      android:textColor="@color/black2"
+	      android:textColor="@color/black"
 	      android:layout_centerVertical="true"
 	      android:text="请输入机场"
 	    />
@@ -191,7 +194,7 @@
 	      android:textSize="18sp"
 	      android:textColor="@color/black2"
 	      android:layout_centerVertical="true"
-	      android:text="请输入上车地点"
+	      android:text="请输入下车地点"
 	    />
 	     <ImageView
 	      android:id="@+id/Star"
@@ -259,19 +262,10 @@
 	      android:textSize="16sp"
 	      android:textColor="@color/text_brown"
 	      android:layout_centerVertical="true"
-	      android:text=""
+	      android:text="本人"
 	      />
 	    </RelativeLayout>
-	     <ImageView
-	      android:layout_width="fill_parent"
-	      android:layout_height="1dip"
-	      android:background="@color/user_divider3"
-	    /> 
-	      <ImageView
-	      android:layout_width="fill_parent"
-	      android:layout_height="20dip"
-	    />
-	     <ImageView
+	    <ImageView
 	      android:layout_width="fill_parent"
 	      android:layout_height="1dip"
 	      android:background="@color/user_divider3"
@@ -311,36 +305,171 @@
 	      android:layout_alignParentRight="true"
 	      android:layout_centerVertical="true"
 	     />
-	      
+	      <TextView
+	      android:id="@+id/Demand"
+	      android:layout_toLeftOf="@+id/arrow4"
+	      android:layout_width="200dip"
+	      android:gravity="right"
+	      android:singleLine="true"
+	      android:layout_height="wrap_content"
+	      android:layout_marginLeft="20dip"
+	      android:textSize="14sp"
+	      android:textColor="@color/black"
+	      android:layout_centerVertical="true"
+	    />
 	    </RelativeLayout>
 	     <ImageView
 	      android:layout_width="fill_parent"
 	      android:layout_height="1dip"
 	      android:background="@color/user_divider3"
 	    />
-	      <ImageView
+	     <ImageView
 	      android:layout_width="fill_parent"
 	      android:layout_height="20dip"
-	  
+	     />
+	     <ImageView
+	      android:layout_width="fill_parent"
+	      android:layout_height="1dip"
+	      android:background="@color/user_divider3"
+	    /> 
+	     <RelativeLayout 
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content" 
+	    android:paddingTop="10dip"
+	    android:paddingBottom="10dip"
+	    android:id="@+id/selectcar"
+	    android:background="@color/white"
+	    >
+	    <ImageView
+	      android:id="@+id/moresaftyim5"
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:layout_marginLeft="20dip"
+	      android:background="@drawable/city_register_car2"  
+	      android:layout_centerVertical="true"
 	    />
-	
+	     <TextView
+	      android:layout_toRightOf="@+id/moresaftyim5"
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:layout_marginLeft="20dip"
+	      android:textSize="18sp"
+	      android:textColor="@color/black"
+	      android:layout_centerVertical="true"
+	      android:text="选车"
+	    />
+	     <ImageView
+	      android:id="@+id/arrow5"
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:layout_marginRight="20dip"
+	      android:background="@drawable/arrows_2"
+	      android:layout_alignParentRight="true"
+	      android:layout_centerVertical="true"
+	     />
+	      <TextView
+	      android:id="@+id/money2"
+	      android:layout_toLeftOf="@+id/arrow5"
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:textSize="20sp"
+	      android:layout_marginLeft="20dip"
+	      android:layout_marginRight="10dip"
+	      android:textColor="@color/text_brown"
+	    />
+	      <TextView
+	      android:id="@+id/financialType"
+	      android:layout_toLeftOf="@+id/money2"
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:layout_marginLeft="10dip"
+	      android:textSize="14sp"
+	      android:textColor="@color/text_brown"
+	      android:layout_centerVertical="true"
+	     
+	    />
+	      <TextView
+	      android:id="@+id/FeeRule"
+	      android:layout_toLeftOf="@+id/financialType"
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:textSize="14sp"
+	      android:layout_centerVertical="true"
+	      android:visibility="gone"
+	    />
+	    </RelativeLayout>
+	     <ImageView
+	      android:layout_width="fill_parent"
+	      android:layout_height="1dip"
+	      android:background="@color/user_divider3"
+	    />
+	      <RelativeLayout 
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content" 
+	    android:paddingTop="10dip"
+	    android:paddingBottom="10dip"
+	    android:id="@+id/rldiscount"
+	    android:background="@color/white"
+	    >
+	    <ImageView
+	      android:id="@+id/moresaftyim6"
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:layout_marginLeft="20dip"
+	      android:background="@drawable/discount"  
+	      android:layout_centerVertical="true"
+	    />
+	     <TextView
+	      android:layout_toRightOf="@+id/moresaftyim6"
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:layout_marginLeft="20dip"
+	      android:textSize="18sp"
+	      android:textColor="@color/black"
+	      android:layout_centerVertical="true"
+	      android:text="优惠券"
+	    />
+	     <ImageView
+	      android:id="@+id/arrow6"
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:layout_marginRight="20dip"
+	      android:background="@drawable/arrows_2"
+	      android:layout_alignParentRight="true"
+	      android:layout_centerVertical="true"
+	     />
+	      <TextView
+	      android:id="@+id/tvdiscount"
+	      android:layout_toLeftOf="@+id/arrow6"
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:layout_marginLeft="5dip"
+	      android:textSize="14sp"
+	      android:textColor="@color/text_brown"
+	      android:layout_centerVertical="true"
+	    />
+	    </RelativeLayout> 
 	    
         <RelativeLayout 
 	    android:layout_width="fill_parent"
 	    android:layout_height="fill_parent" 
 	    >
-        <Button
-          android:id="@+id/Search"
-	      android:layout_width="fill_parent"
-	      android:layout_height="50dip"
-	      android:layout_marginLeft="10dip"
-	      android:layout_marginRight="10dip"
-	      android:layout_centerHorizontal="true"
-	      android:layout_alignParentBottom="true"
-	      android:layout_marginBottom="50dip"
-	      android:background="@drawable/btn2"
-	      android:text="提交"
-	      android:textColor="@color/white"
-	      />
+        <com.lc.progressbutton.CircularProgressButton
+        android:id="@+id/Search"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="10dip"
+	    android:layout_marginRight="10dip"
+	    android:layout_marginBottom="10dip"
+	    android:layout_centerHorizontal="true"
+	    android:layout_alignParentBottom="true"
+        android:textColor="@color/cpb_white"
+        android:textSize="18sp"
+        app:cpb_textComplete="马上预约"
+        app:cpb_textError="错误"
+        app:cpb_textIdle="马上预约" 
+        app:cpb_selectorIdle="@drawable/idle_state_selector"
+        app:cpb_selectorComplete="@drawable/complete_state_selector"
+        app:cpb_selectorError="@drawable/error_state_selector"/>
         </RelativeLayout>
 </LinearLayout>

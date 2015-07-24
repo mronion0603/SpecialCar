@@ -69,13 +69,14 @@ public class MessageActivity extends Activity implements OnClickListener {
 	void getData(){
 		getMessageNet.setHandler(mhandler);
 		getMessageNet.getDataFromServer();
-		
+		/*
 		for(int i=0;i<5;i++){
 		     HashMap<String , Object> map = new HashMap<String , Object>();
 			 map.put("MessageTitle", "您已成功支付专用车费120元");
 			 map.put("MessageDate", "2015-5-5 10:00");
 			 listItem.add(map);
 		}
+		*/
 	}
 	@SuppressLint("HandlerLeak")
 	public Handler mhandler= new Handler() {

@@ -69,7 +69,7 @@
 				    android:layout_marginBottom="10dip"
 				    >
 				    <TextView
-		                android:id="@+id/type1"
+		              android:id="@+id/type1"
 				      android:layout_width="wrap_content"
 				      android:layout_height="wrap_content"
 				      android:layout_marginLeft="10dip"
@@ -84,7 +84,6 @@
 				      android:layout_marginLeft="10dip"
 				      android:textSize="18sp"
 				      android:textColor="@color/text_green"
-				      android:text="@string/discount"
 				      android:gravity="center"
 				      android:background="@drawable/rectangle2"
 				    />
@@ -95,7 +94,7 @@
 				      android:layout_marginLeft="10dip"
 				      android:textSize="16sp"
 				      android:textColor="@color/black2"
-				      android:text="奥迪A6"
+				      android:text="经济型"
 				    />
 			    </LinearLayout>
 			    <LinearLayout
@@ -208,7 +207,6 @@
 				      android:layout_marginLeft="10dip"
 				      android:textSize="18sp"
 				      android:textColor="@color/text_green"
-				      android:text="@string/discount"
 				      android:gravity="center"
 				      android:background="@drawable/rectangle2"
 				    />
@@ -219,7 +217,7 @@
 				      android:layout_marginLeft="10dip"
 				      android:textSize="16sp"
 				      android:textColor="@color/black2"
-				      android:text="奥迪A6"
+				      android:text="普通型"
 				    />
 			    </LinearLayout>
 			   <LinearLayout
@@ -333,7 +331,6 @@
 				      android:layout_marginLeft="10dip"
 				      android:textSize="18sp"
 				      android:textColor="@color/text_green"
-				      android:text="@string/discount"
 				      android:gravity="center"
 				      android:background="@drawable/rectangle2"
 				    />
@@ -344,7 +341,7 @@
 				      android:layout_marginLeft="10dip"
 				      android:textSize="16sp"
 				      android:textColor="@color/black2"
-				      android:text="奥迪A6"
+				      android:text="商务型"
 				    />
 			    </LinearLayout>
 			    <LinearLayout
