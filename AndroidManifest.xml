@@ -163,6 +163,9 @@
         <activity
             android:name="com.lc.user.MoreActivity"
             android:label="@string/app_name" />
+         <activity
+            android:name="com.lc.user.ReceiptHelpActivity"
+            android:label="@string/app_name" />
         <activity
             android:name="com.lc.user.AboutActivity"
             android:label="@string/app_name" />

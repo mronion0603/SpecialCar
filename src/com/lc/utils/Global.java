@@ -34,4 +34,7 @@ public class Global {
   public static final int AIRPORT=221;
   public static final int GETBAIDUCITY=222;
   public static final int CHOOSECITY=223;
+  public static final int ADDRECEIPT=224;
+  public static final int GETMAXRECEIPT=225;
+  public static final int DELADDRESS=226;
 }

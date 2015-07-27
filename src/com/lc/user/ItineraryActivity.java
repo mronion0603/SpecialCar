@@ -80,7 +80,7 @@ public class ItineraryActivity extends Activity implements OnClickListener {
 				intent.putExtra("SerTypeId", (String)listItem.get(arg2).get("SerTypeId"));
 				intent.putExtra("CarTypeId", (String)listItem.get(arg2).get("CarTypeId"));
 				intent.putExtra("FlightNum", (String)listItem.get(arg2).get("FlightNum"));
-				intent.putExtra("Airport", (String)listItem.get(arg2).get("Airport"));
+				//intent.putExtra("Airport", (String)listItem.get(arg2).get("Airport"));
 				intent.putExtra("EndAddress", (String)listItem.get(arg2).get("EndAddress"));
 				intent.putExtra("UseCarTime", (String)listItem.get(arg2).get("UseCarTime"));
 				intent.putExtra("CarSum", (String)listItem.get(arg2).get("CarSum"));
@@ -185,7 +185,7 @@ public class ItineraryActivity extends Activity implements OnClickListener {
 				}
 				map.put("CarTypeId", jsonobj2.getString("carTypeId"));
 				map.put("FlightNum", jsonobj2.getString("flightNum"));
-				map.put("Airport", jsonobj2.getString("airport"));
+				//map.put("Airport", jsonobj2.getString("airport"));
 				map.put("EndAddress", jsonobj2.getString("endAddress"));
 				map.put("UseCarTime", jsonobj2.getString("useCarTime"));
 				map.put("CarSum", jsonobj2.getString("carSum"));

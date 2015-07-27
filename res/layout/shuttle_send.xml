@@ -1,17 +1,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_color"
     android:orientation="vertical" >
-
-   
      <ImageView
 	      android:layout_width="fill_parent"
 	      android:layout_height="1dip"
 	      android:background="@color/user_divider3"
 	      android:layout_marginTop="10dip"
 	    />
-      
+ 
 	    <RelativeLayout 
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content" 
@@ -37,7 +36,7 @@
 	      android:textSize="18sp"
 	      android:textColor="@color/text_color"
 	      android:layout_centerVertical="true"
-	      android:text="请输入接机时间"
+	      android:text="请输入送机时间"
 	    />
 	     <ImageView
 	      android:id="@+id/arrow2"
@@ -98,7 +97,7 @@
 	      android:layout_height="wrap_content"
 	      android:layout_marginLeft="20dip"
 	      android:textSize="18sp"
-	      android:textColor="@color/black"
+	      android:textColor="@color/black2"
 	      android:layout_centerVertical="true"
 	      android:text="请输入机场"
 	    />
@@ -134,7 +133,7 @@
 	      android:layout_centerVertical="true" 
 	    />
 	     <TextView
-	      android:id="@+id/getoffaddress"
+	      android:id="@+id/getoffAddress"
 	      android:layout_toRightOf="@+id/date2"
 	      android:layout_width="wrap_content"
 	      android:layout_height="wrap_content"
@@ -213,16 +212,7 @@
 	      android:text="本人"
 	      />
 	    </RelativeLayout>
-	     <ImageView
-	      android:layout_width="fill_parent"
-	      android:layout_height="1dip"
-	      android:background="@color/user_divider3"
-	    /> 
-	      <ImageView
-	      android:layout_width="fill_parent"
-	      android:layout_height="20dip"
-	    />
-	     <ImageView
+	    <ImageView
 	      android:layout_width="fill_parent"
 	      android:layout_height="1dip"
 	      android:background="@color/user_divider3"
@@ -280,29 +270,153 @@
 	      android:layout_height="1dip"
 	      android:background="@color/user_divider3"
 	    />
-	      <ImageView
+	     <ImageView
 	      android:layout_width="fill_parent"
 	      android:layout_height="20dip"
-	  
+	     />
+	     <ImageView
+	      android:layout_width="fill_parent"
+	      android:layout_height="1dip"
+	      android:background="@color/user_divider3"
+	    /> 
+	     <RelativeLayout 
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content" 
+	    android:paddingTop="10dip"
+	    android:paddingBottom="10dip"
+	    android:id="@+id/selectcar"
+	    android:background="@color/white"
+	    >
+	    <ImageView
+	      android:id="@+id/moresaftyim5"
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:layout_marginLeft="20dip"
+	      android:background="@drawable/city_register_car2"  
+	      android:layout_centerVertical="true"
 	    />
-	
+	     <TextView
+	      android:layout_toRightOf="@+id/moresaftyim5"
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:layout_marginLeft="20dip"
+	      android:textSize="18sp"
+	      android:textColor="@color/black"
+	      android:layout_centerVertical="true"
+	      android:text="选车"
+	    />
+	     <ImageView
+	      android:id="@+id/arrow5"
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:layout_marginRight="20dip"
+	      android:background="@drawable/arrows_2"
+	      android:layout_alignParentRight="true"
+	      android:layout_centerVertical="true"
+	     />
+	      <TextView
+	      android:id="@+id/money2"
+	      android:layout_toLeftOf="@+id/arrow5"
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:textSize="20sp"
+	      android:layout_marginLeft="20dip"
+	      android:layout_marginRight="10dip"
+	      android:textColor="@color/text_brown"
+	    />
+	      <TextView
+	      android:id="@+id/financialType"
+	      android:layout_toLeftOf="@+id/money2"
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:layout_marginLeft="10dip"
+	      android:textSize="14sp"
+	      android:textColor="@color/text_brown"
+	      android:layout_centerVertical="true"
+	     
+	    />
+	      <TextView
+	      android:id="@+id/FeeRule"
+	      android:layout_toLeftOf="@+id/financialType"
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:textSize="14sp"
+	      android:layout_centerVertical="true"
+	      android:visibility="gone"
+	    />
+	    </RelativeLayout>
+	     <ImageView
+	      android:layout_width="fill_parent"
+	      android:layout_height="1dip"
+	      android:background="@color/user_divider3"
+	    />
+	      <RelativeLayout 
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content" 
+	    android:paddingTop="10dip"
+	    android:paddingBottom="10dip"
+	    android:id="@+id/rldiscount"
+	    android:background="@color/white"
+	    >
+	    <ImageView
+	      android:id="@+id/moresaftyim6"
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:layout_marginLeft="20dip"
+	      android:background="@drawable/discount"  
+	      android:layout_centerVertical="true"
+	    />
+	     <TextView
+	      android:layout_toRightOf="@+id/moresaftyim6"
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:layout_marginLeft="20dip"
+	      android:textSize="18sp"
+	      android:textColor="@color/black"
+	      android:layout_centerVertical="true"
+	      android:text="优惠券"
+	    />
+	     <ImageView
+	      android:id="@+id/arrow6"
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:layout_marginRight="20dip"
+	      android:background="@drawable/arrows_2"
+	      android:layout_alignParentRight="true"
+	      android:layout_centerVertical="true"
+	     />
+	      <TextView
+	      android:id="@+id/tvdiscount"
+	      android:layout_toLeftOf="@+id/arrow6"
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:layout_marginLeft="5dip"
+	      android:textSize="14sp"
+	      android:textColor="@color/text_brown"
+	      android:layout_centerVertical="true"
+	    />
+	    </RelativeLayout> 
 	    
         <RelativeLayout 
 	    android:layout_width="fill_parent"
 	    android:layout_height="fill_parent" 
 	    >
-        <Button
-          android:id="@+id/Search"
-	      android:layout_width="fill_parent"
-	      android:layout_height="50dip"
-	      android:layout_marginLeft="10dip"
-	      android:layout_marginRight="10dip"
-	      android:layout_centerHorizontal="true"
-	      android:layout_alignParentBottom="true"
-	      android:layout_marginBottom="50dip"
-	      android:background="@drawable/btn2"
-	      android:text="提交"
-	      android:textColor="@color/white"
-	      />
+        <com.lc.progressbutton.CircularProgressButton
+        android:id="@+id/Search"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="10dip"
+	    android:layout_marginRight="10dip"
+	    android:layout_marginBottom="10dip"
+	    android:layout_centerHorizontal="true"
+	    android:layout_alignParentBottom="true"
+        android:textColor="@color/cpb_white"
+        android:textSize="18sp"
+        app:cpb_textComplete="马上预约"
+        app:cpb_textError="错误"
+        app:cpb_textIdle="马上预约" 
+        app:cpb_selectorIdle="@drawable/idle_state_selector"
+        app:cpb_selectorComplete="@drawable/complete_state_selector"
+        app:cpb_selectorError="@drawable/error_state_selector"/>
         </RelativeLayout>
 </LinearLayout>

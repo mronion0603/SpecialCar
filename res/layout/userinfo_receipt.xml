@@ -1,4 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_color"
@@ -6,7 +7,6 @@
 
     <include layout="@layout/main_head" />
     
-	   
 	      <LinearLayout
 			    android:layout_width="fill_parent"
 			    android:layout_height="wrap_content"
@@ -24,14 +24,15 @@
 	            android:layout_marginLeft="10dip"
 	            android:text="发票内容"
 	            />
-	            <TextView
-	            android:id="@+id/OrderStatus"
+	            <EditText
+	            android:id="@+id/Content"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
 	            android:textSize="16sp" 
 	            android:textColor="@color/black2"
 	            android:layout_marginLeft="20dip"
-	            android:text="请输入发票内容"
+	            android:background="@color/white"
+	            android:hint="请输入发票内容"
 	            />
 	     </LinearLayout>
 	     <LinearLayout
@@ -51,14 +52,15 @@
 	            android:layout_marginLeft="10dip"
 	            android:text="发票抬头"
 	            />
-	            <TextView
-	            android:id="@+id/OrderStatus"
+	            <EditText
+	            android:id="@+id/Company"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
 	            android:textSize="16sp" 
 	            android:textColor="@color/black2"
 	            android:layout_marginLeft="20dip"
-	            android:text="请输入单位名称或个人"
+	            android:hint="请输入单位名称或个人"
+	            android:background="@color/white"
 	            />
 	     </LinearLayout>
 	     <LinearLayout
@@ -78,14 +80,15 @@
 	            android:layout_marginLeft="10dip"
 	            android:text="收件人"
 	            />
-	            <TextView
-	            android:id="@+id/OrderStatus"
+	            <EditText
+	            android:id="@+id/Name"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
 	            android:textSize="16sp" 
 	            android:textColor="@color/black2"
 	            android:layout_marginLeft="20dip"
-	            android:text="陈XX"
+	            android:hint="请输入收件人"
+	            android:background="@color/white"
 	            />
 	     </LinearLayout>
 	     <LinearLayout
@@ -105,14 +108,15 @@
 	            android:layout_marginLeft="10dip"
 	            android:text="手机号"
 	            />
-	            <TextView
-	            android:id="@+id/OrderStatus"
+	            <EditText
+	            android:id="@+id/phonenumber"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
 	            android:textSize="16sp" 
+	            android:inputType="phone"
 	            android:textColor="@color/black2"
 	            android:layout_marginLeft="20dip"
-	            android:text="12312312312"
+	            android:background="@color/white"
 	            />
 	     </LinearLayout>
 	     <LinearLayout
@@ -132,14 +136,15 @@
 	            android:layout_marginLeft="10dip"
 	            android:text="地址"
 	            />
-	            <TextView
-	            android:id="@+id/OrderStatus"
+	            <EditText
+	            android:id="@+id/Address"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
 	            android:textSize="16sp" 
 	            android:textColor="@color/black2"
 	            android:layout_marginLeft="20dip"
-	            android:text="请输入详细地址"
+	            android:hint="请输入详细地址"
+	            android:background="@color/white"
 	            />
 	     </LinearLayout>
 	     <LinearLayout
@@ -159,32 +164,66 @@
 	            android:layout_marginLeft="10dip"
 	            android:text="发票面额"
 	            />
-	            <TextView
-	            android:id="@+id/OrderStatus"
+	            <EditText
+	            android:id="@+id/Num"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
 	            android:textSize="16sp" 
+	            android:inputType="number"
 	            android:textColor="@color/black2"
 	            android:layout_marginLeft="20dip"
-	            android:text="请输入发票面额"
+	            android:hint="请输入发票面额"
+	            android:background="@color/white"
+	            />
+	     </LinearLayout>
+	     <LinearLayout
+			    android:layout_width="fill_parent"
+			    android:layout_height="wrap_content"
+			    android:orientation="horizontal"
+			    android:background="@color/white"
+			    android:paddingTop="10dip"
+			    android:paddingBottom="10dip"
+			    android:layout_marginTop="10dip"
+		        >
+		        <TextView
+	            android:layout_width="120dip"
+	            android:layout_height="wrap_content"
+	            android:textSize="16sp" 
+	            android:textColor="@color/black"
+	            android:layout_marginLeft="10dip"
+	            android:text="最高可开票金额"
+	            />
+	            <TextView
+	            android:id="@+id/MaxNum"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:textSize="16sp" 
+	            android:textColor="@color/black"
+	            android:layout_marginLeft="20dip"
+	            android:textStyle="bold"
 	            />
 	     </LinearLayout>
 	     <RelativeLayout 
 	    android:layout_width="fill_parent"
 	    android:layout_height="fill_parent" 
 	    >
-          <Button
-          android:id="@+id/Search"
-	      android:layout_width="fill_parent"
-	      android:layout_height="50dip"
-	      android:layout_margin="10dip"
-	      android:layout_alignParentBottom="true"
-	      android:layout_centerHorizontal="true"
-	      android:background="@drawable/btn2"
-	      android:text="提交"
-	      android:textColor="@color/white"
-	      />
+          <com.lc.progressbutton.CircularProgressButton
+        android:id="@+id/Search"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="10dip"
+	    android:layout_marginRight="10dip"
+	    android:layout_marginBottom="10dip"
+	    android:layout_centerHorizontal="true"
+	    android:layout_alignParentBottom="true"
+        android:textColor="@color/cpb_white"
+        android:textSize="18sp"
+        app:cpb_textComplete="提交"
+        app:cpb_textError="错误"
+        app:cpb_textIdle="提交" 
+        app:cpb_selectorIdle="@drawable/idle_state_selector"
+        app:cpb_selectorComplete="@drawable/complete_state_selector"
+        app:cpb_selectorError="@drawable/error_state_selector"/>
         </RelativeLayout>
-	    
 	    
 </LinearLayout>

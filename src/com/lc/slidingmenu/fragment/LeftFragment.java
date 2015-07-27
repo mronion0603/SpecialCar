@@ -1,6 +1,6 @@
 package com.lc.slidingmenu.fragment;
 
-import org.json.JSONArray;
+
 import org.json.JSONObject;
 
 import android.annotation.SuppressLint;

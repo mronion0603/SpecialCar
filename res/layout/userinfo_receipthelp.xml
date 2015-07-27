@@ -1,0 +1,82 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" 
+    android:background="@color/bg_color"
+    android:orientation="vertical"
+    >
+
+
+    <include layout="@layout/main_head" />
+    <ScrollView 
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+     >
+    <LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+      android:orientation="vertical"
+     >
+	    
+	     <TextView
+	     android:id="@+id/moresaftyim"
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:layout_marginLeft="10dip"
+	      android:layout_marginRight="10dip"
+	      android:textSize="16sp"
+	      android:textColor="@color/black"
+
+	      android:text="1.	发票类别为“叫车服务费”。"
+	    />
+	     
+	   
+	     <TextView
+	      android:id="@+id/date"
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:layout_marginLeft="10dip"
+	      android:layout_marginRight="10dip"
+	      android:layout_marginTop="10dip"
+	      android:textSize="16sp"
+	      android:textColor="@color/black"
+
+	      android:text="2.	通过银行卡（包括信用卡和借记卡）和网上支付平台（包括微信支付和支付宝）支付的乘车费用，可用于开具发票。"
+	      />
+	     
+	     <TextView
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:layout_marginLeft="10dip"
+	      android:layout_marginRight="10dip"
+	      android:layout_marginTop="10dip"
+	      android:textSize="16sp"
+	      android:textColor="@color/black"
+
+	      android:text="3.	以代金券和充值获赠金额支付的乘车费用，恕不能开具发票。"
+	      />
+	      <TextView
+
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:layout_marginLeft="10dip"
+	      android:layout_marginRight="10dip"
+	      android:layout_marginTop="10dip"
+	      android:textSize="16sp"
+	      android:textColor="@color/black"
+	
+	      android:text="4.	您可以通过手机应用端里的“发票”选项，提交发票要求。"
+	      />
+	      <TextView
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:layout_marginLeft="10dip"
+	      android:layout_marginRight="10dip"
+	      android:layout_marginTop="10dip"
+	      android:textSize="16sp"
+	      android:textColor="@color/black"
+
+	      android:text="5.	我们将在收到您的要求后5个工作日内寄出发票，开票金额达200元将免费邮寄。"
+	      />
+</LinearLayout>
+</ScrollView>
+</LinearLayout>

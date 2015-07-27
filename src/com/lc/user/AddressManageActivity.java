@@ -3,29 +3,39 @@ package com.lc.user;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
+
 import com.lc.innercity.AddressActivity;
 import com.lc.innercity.GroupAdapter;
 import com.lc.net.AddAddressNet;
+import com.lc.net.DelAddressNet;
 import com.lc.net.GetAddressNet;
 import com.lc.specialcar.R;
 import com.lc.utils.ExitApplication;
 import com.lc.utils.Global;
 import com.lc.utils.MySharePreference;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.ContextMenu;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.View.OnClickListener;
+import android.view.View.OnCreateContextMenuListener;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 
 public class AddressManageActivity extends Activity implements OnClickListener {
 	TextView tvTitle,righttext;
@@ -37,6 +47,7 @@ public class AddressManageActivity extends Activity implements OnClickListener {
 	private List<HashMap<String , Object>> groups1;
 	AddAddressNet addaddressnet = new AddAddressNet();
 	GetAddressNet getaddressnet = new GetAddressNet();
+	DelAddressNet deladdressnet = new DelAddressNet();
 	@Override  
     protected void onCreate(Bundle savedInstanceState) {  
         super.onCreate(savedInstanceState);  
@@ -61,6 +72,18 @@ public class AddressManageActivity extends Activity implements OnClickListener {
         groups1 = new ArrayList<HashMap<String , Object>>();  
         groupAdapter = new GroupAdapter(this, groups1);  
         lv.setAdapter(groupAdapter);
+        lv.setOnCreateContextMenuListener(new OnCreateContextMenuListener(){
+			@Override
+			public void onCreateContextMenu(ContextMenu menu, View arg1,
+					ContextMenuInfo arg2) {
+				// TODO Auto-generated method stub
+				menu.setHeaderTitle("删除选中地址");
+			    // add context menu item
+			    menu.add(0, 1, Menu.NONE, "删除");
+			    menu.add(0, 2, Menu.NONE, "取消");
+			}
+			 
+		 });
         getaddressnet.setHandler(mHandler);
         getaddressnet.setDevice(Global.DEVICE);
         getaddressnet.setAuthn(MySharePreference.getStringValue(getApplication(), MySharePreference.AUTHN));
@@ -129,6 +152,16 @@ public class AddressManageActivity extends Activity implements OnClickListener {
 						}      	
 		            break;
 	                }
+		            case Global.DELADDRESS:{
+		            	try {
+		            		parseDelADDRESS((String)msg.obj);
+							
+						} catch (Exception e) {
+							
+							e.printStackTrace();
+						}      	
+		            break;
+	                }
 	            }
 	    }};
 	    private void parseJSON(String str)throws Exception{  
@@ -141,6 +174,7 @@ public class AddressManageActivity extends Activity implements OnClickListener {
 	        } 
 	   }
 	    private void parseADDRESS(String str)throws Exception{ 
+	    	System.out.println(str);
 	    	 JSONObject jsonobj = new JSONObject(str); 
 	         JSONArray jsonarray = jsonobj.getJSONArray("Data");
 	         for(int x=0;x<jsonarray.length();x++){
@@ -153,4 +187,37 @@ public class AddressManageActivity extends Activity implements OnClickListener {
 	 			 groupAdapter.notifyDataSetChanged();
 	         }
 	    }
+	    private void parseDelADDRESS(String str)throws Exception{ 
+	    	JSONObject jsonobj = new JSONObject(str); 
+	    	int result = jsonobj.getInt("ResultCode");
+	   	    if(result==Global.SUCCESS){
+	   	      groupAdapter.notifyDataSetChanged();
+	        }else{
+	          Toast.makeText(AddressManageActivity.this,jsonobj.getString("Message"), Toast.LENGTH_LONG).show();
+	        } 
+	    }
+	  //长按菜单响应函数  
+	    @Override  
+	    public boolean onContextItemSelected(MenuItem item) {  
+	    	 // 得到当前被选中的item信息
+	        AdapterContextMenuInfo menuInfo = (AdapterContextMenuInfo) item.getMenuInfo(); 
+	        switch(item.getItemId()) {
+	        case 1:
+	             // do something
+	        	 int postion = menuInfo.position;
+	        	 String commAddressId = groups1.get(postion).get("groupItem")+"";
+	        	 groups1.remove(postion);
+	        	 deladdressnet.setHandler(mHandler);
+	        	 deladdressnet.setDevice(Global.DEVICE);
+	        	 deladdressnet.setCommAddressId(commAddressId);
+	        	 deladdressnet.setAuthn(MySharePreference.getStringValue(getApplication(), MySharePreference.AUTHN));
+	        	 deladdressnet.getCodeFromServer();
+	        	 //System.out.println("Item id="+menuInfo.position);  
+	             
+	         break;
+	        default:
+	            return super.onContextItemSelected(item);
+	        }
+	        return true;
+	    }  
 }

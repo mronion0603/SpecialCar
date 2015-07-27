@@ -508,12 +508,15 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int wheel_val=0x7f0200a7;
     }
     public static final class id {
+        public static final int Address=0x7f09012c;
         public static final int AddressEnd=0x7f09001b;
         public static final int AddressManage=0x7f0900a9;
         public static final int AddressStart=0x7f090016;
         public static final int AirportAddress=0x7f0900ef;
         public static final int ArrowHead=0x7f0900b5;
         public static final int CarIcon=0x7f09003a;
+        public static final int Company=0x7f09012a;
+        public static final int Content=0x7f090129;
         public static final int CurNum=0x7f090040;
         public static final int Demand=0x7f09001f;
         public static final int Divider1=0x7f09003e;
@@ -526,13 +529,15 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int Itinerary=0x7f0900a6;
         public static final int Login1=0x7f090102;
         public static final int Login2=0x7f090103;
+        public static final int MaxNum=0x7f09012e;
         public static final int Message=0x7f0900a8;
         public static final int MessageDate=0x7f090100;
         public static final int MessageTitle=0x7f0900fd;
         public static final int Money=0x7f0900ff;
         public static final int MoneyType=0x7f0900fe;
         public static final int Name=0x7f09000d;
-        public static final int NextStep=0x7f090129;
+        public static final int NextStep=0x7f09012f;
+        public static final int Num=0x7f09012d;
         public static final int OrderAddress=0x7f09010a;
         public static final int OrderDate=0x7f090109;
         public static final int OrderEndAddress=0x7f09010b;
@@ -553,7 +558,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int Wait=0x7f090094;
         public static final int account=0x7f0900a0;
         public static final int account_arrow=0x7f09009f;
-        public static final int action_settings=0x7f090133;
+        public static final int action_settings=0x7f090139;
         public static final int address=0x7f090036;
         public static final int adv_pager=0x7f090050;
         public static final int airport=0x7f0900f0;
@@ -639,18 +644,18 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int getoffaddress=0x7f090017;
         public static final int groupItem=0x7f09007c;
         public static final int groupItem2=0x7f09007b;
-        public static final int guide1=0x7f09012b;
-        public static final int guide2=0x7f09012c;
+        public static final int guide1=0x7f090131;
+        public static final int guide2=0x7f090132;
         public static final int hour=0x7f0900f9;
         public static final int icon=0x7f090128;
         public static final int im1=0x7f0900dd;
         public static final int im2=0x7f0900e0;
         public static final int im3=0x7f0900e2;
         public static final int imageView=0x7f090005;
-        public static final int imageView1=0x7f09012e;
-        public static final int imageView2=0x7f09012f;
-        public static final int imageView3=0x7f090130;
-        public static final int imageView4=0x7f090131;
+        public static final int imageView1=0x7f090134;
+        public static final int imageView2=0x7f090135;
+        public static final int imageView3=0x7f090136;
+        public static final int imageView4=0x7f090137;
         public static final int img=0x7f0900b1;
         public static final int inputCode=0x7f09011d;
         public static final int intercity=0x7f09005a;
@@ -710,6 +715,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int pay=0x7f0900e7;
         public static final int personbg=0x7f09009a;
         public static final int phone=0x7f090087;
+        public static final int phonenumber=0x7f09012b;
         public static final int place_adress=0x7f0900ae;
         public static final int place_list=0x7f09002f;
         public static final int place_name=0x7f0900ad;
@@ -764,7 +770,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int startMoney=0x7f090118;
         public static final int startaddress=0x7f090014;
         public static final int telphone=0x7f0900ed;
-        public static final int text=0x7f090132;
+        public static final int text=0x7f090138;
         public static final int time2_monthday=0x7f0900f8;
         public static final int time2_weekday=0x7f0900f7;
         public static final int time_picker=0x7f090061;
@@ -772,7 +778,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int timelong=0x7f0900c9;
         public static final int tipTextView=0x7f0900b2;
         public static final int title=0x7f090099;
-        public static final int title1=0x7f09012a;
+        public static final int title1=0x7f090130;
         public static final int titlebar=0x7f0900e9;
         public static final int to=0x7f09004b;
         public static final int topButton=0x7f0900b4;
@@ -815,7 +821,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int usecardate3=0x7f0900fb;
         public static final int user_name=0x7f09009c;
         public static final int viewGroup=0x7f090051;
-        public static final int xinlang=0x7f09012d;
+        public static final int xinlang=0x7f090133;
     }
     public static final class layout {
         public static final int activity_innercity_bill=0x7f030000;
@@ -901,10 +907,11 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int userinfo_modify=0x7f030050;
         public static final int userinfo_more=0x7f030051;
         public static final int userinfo_receipt=0x7f030052;
-        public static final int userinfo_register=0x7f030053;
-        public static final int userinfo_service=0x7f030054;
-        public static final int userinfo_share=0x7f030055;
-        public static final int wheel_text_item=0x7f030056;
+        public static final int userinfo_receipthelp=0x7f030053;
+        public static final int userinfo_register=0x7f030054;
+        public static final int userinfo_service=0x7f030055;
+        public static final int userinfo_share=0x7f030056;
+        public static final int wheel_text_item=0x7f030057;
     }
     public static final class menu {
         public static final int main=0x7f0a0000;

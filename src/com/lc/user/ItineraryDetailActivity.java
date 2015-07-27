@@ -60,7 +60,7 @@ public class ItineraryDetailActivity extends Activity implements OnClickListener
 	    	serTypeId= extras.getString("SerTypeId");
 	    	carTypeId= extras.getString("CarTypeId");
 	    	flightNum= extras.getString("FlightNum");
-	    	airport= extras.getString("Airport");
+	    	//airport= extras.getString("Airport");
 	    	endAddress= extras.getString("EndAddress");
 	    	useCarTime= extras.getString("UseCarTime");
 	    	carSum= extras.getString("CarSum");

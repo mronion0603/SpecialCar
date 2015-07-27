@@ -397,7 +397,7 @@ public class GetActivity extends Activity implements OnClickListener {
 			 ivSearch.setClickable(true);
 			 finish();
         }else{
-           ivSearch.setProgress(50);
+           ivSearch.setProgress(-1);
            ivSearch.setClickable(true);
            Toast.makeText(GetActivity.this,jsonobj.getString("Message"), Toast.LENGTH_LONG).show();
         } 
