@@ -2,12 +2,16 @@ package com.lc.user;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
+
 import com.lc.net.GetMessageNet;
 import com.lc.specialcar.R;
 import com.lc.utils.ExitApplication;
 import com.lc.utils.Global;
+import com.lc.utils.MySharePreference;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
@@ -68,6 +72,8 @@ public class MessageActivity extends Activity implements OnClickListener {
 	}
 	void getData(){
 		getMessageNet.setHandler(mhandler);
+		getMessageNet.setDevice(Global.DEVICE);
+		getMessageNet.setAuthn(MySharePreference.getStringValue(getApplication(), MySharePreference.AUTHN));
 		getMessageNet.getDataFromServer();
 		/*
 		for(int i=0;i<5;i++){
@@ -95,6 +101,7 @@ public class MessageActivity extends Activity implements OnClickListener {
             }
     }};
     private void parseJSON(String str)throws Exception{  
+    	System.out.println(str);
     	addData(str,"Data"); 
     }
     
@@ -104,7 +111,7 @@ public class MessageActivity extends Activity implements OnClickListener {
         for(int x=0;x<jsonarray.length();x++){
         	JSONObject jsonobj2 = (JSONObject)jsonarray.get(x);
         	 HashMap<String , Object> map = new HashMap<String , Object>();
-        	 map.put("MessageTitle",jsonobj2.getString("context"));
+        	 map.put("MessageTitle",jsonobj2.getString("content"));
 			 map.put("MessageDate",jsonobj2.getString("sendTime"));
 			 listItem.add(map);
         }

@@ -117,7 +117,42 @@
 	     
 	    
 	    </RelativeLayout>   
+	    <ImageView
+	      android:layout_width="fill_parent"
+	      android:layout_height="1dip"
+	      android:background="@color/user_divider3"
+	    />
+	    <RelativeLayout 
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content" 
+	    android:paddingTop="10dip"
+	    android:paddingBottom="10dip"
+	    android:id="@+id/usecardate4"
+	    android:background="@color/white"
+	    >
 	   
+	     <TextView
+	      android:id="@+id/date2"
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:layout_marginLeft="20dip"
+	      android:textSize="18sp"
+	      android:textColor="@color/black"
+	      android:layout_centerVertical="true"
+	      android:text="检查更新"
+	    />
+	     <ImageView
+	      android:id="@+id/arrow2"
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:layout_marginRight="20dip"
+	      android:background="@drawable/arrows_2"
+	      android:layout_alignParentRight="true"
+	      android:layout_centerVertical="true"
+	     />
+	     
+	    
+	    </RelativeLayout>   
     
 	    <RelativeLayout 
 	    android:layout_width="fill_parent"

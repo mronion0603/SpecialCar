@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/empty_cart_view"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" 
@@ -33,19 +34,23 @@
 	    android:layout_width="fill_parent"
 	    android:layout_height="fill_parent" 
 	    >
-        <Button
-          android:id="@+id/Search"
-	      android:layout_width="fill_parent"
-	      android:layout_height="50dip"
-	      android:layout_marginLeft="10dip"
-	      android:layout_marginRight="10dip"
-	      android:layout_centerHorizontal="true"
-	      android:layout_alignParentBottom="true"
-	      android:background="@drawable/btn2"
-	      android:text="提交"
-	      android:textColor="@color/white"
-	      android:layout_marginBottom="50dip"
-	      />
+        <com.lc.progressbutton.CircularProgressButton
+        android:id="@+id/Search"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="10dip"
+	    android:layout_marginRight="10dip"
+	    android:layout_marginBottom="50dip"
+	    android:layout_centerHorizontal="true"
+	    android:layout_alignParentBottom="true"
+        android:textColor="@color/cpb_white"
+        android:textSize="18sp"
+        app:cpb_textComplete="提交成功"
+        app:cpb_textError="错误"
+        app:cpb_textIdle="提交失败" 
+        app:cpb_selectorIdle="@drawable/idle_state_selector"
+        app:cpb_selectorComplete="@drawable/complete_state_selector"
+        app:cpb_selectorError="@drawable/error_state_selector"/>
         </RelativeLayout>
    
 </LinearLayout>

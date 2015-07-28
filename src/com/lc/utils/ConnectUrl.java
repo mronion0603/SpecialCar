@@ -34,4 +34,7 @@ public class ConnectUrl {
  public static String addReceipt= commonurl+"addBill";	
  public static String getMaxReceipt= commonurl+"selBillMoney";	
  public static String delAddress= commonurl+"delAddress";
+ public static String addFeedback = commonurl+"opinion";
+ public static String getupdate = commonurl+"checkVersion";
+ public static String getcard = commonurl+"getCivilCardInfo";
 }

@@ -37,4 +37,7 @@ public class Global {
   public static final int ADDRECEIPT=224;
   public static final int GETMAXRECEIPT=225;
   public static final int DELADDRESS=226;
+  public static final int ADDFEEDBACK=227;
+  public static final int GETUPDATE=228;
+  public static final int GETCARD=229;
 }

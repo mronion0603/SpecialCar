@@ -23,6 +23,8 @@ import com.lc.specialcar.R;
 import com.lc.user.AddressManageActivity;
 import com.lc.user.AndroidShare;
 import com.lc.user.BalanceActivity;
+import com.lc.user.Card2Activity;
+import com.lc.user.CardActivity;
 import com.lc.user.DiscountActivity;
 import com.lc.user.ItineraryActivity;
 import com.lc.user.MessageActivity;
@@ -49,7 +51,7 @@ public class LeftFragment extends Fragment implements OnClickListener{
 	private View messageView;
 	private View shareView;
 	private View moreView;
-	private TextView card;
+	private TextView card,cardconnect;
 	private TextView tvname;
 	private TextView tvmoney,tvbalance;
 	private View view;
@@ -99,7 +101,7 @@ public class LeftFragment extends Fragment implements OnClickListener{
 		messageView.setOnClickListener(this);
 		shareView.setOnClickListener(this);
 		moreView.setOnClickListener(this);
-		
+		cardconnect = (TextView)view.findViewById(R.id.card_connect);
 		card = (TextView)view.findViewById(R.id.tvCard);
 		tvname = (TextView)view.findViewById(R.id.user_name);
 		tvmoney = (TextView)view.findViewById(R.id.tvToday);
@@ -107,6 +109,7 @@ public class LeftFragment extends Fragment implements OnClickListener{
   		if(MySharePreference.getStringValue(getActivity(), MySharePreference.USER_TYPE).equals("1")){
   		   card.setText("公务卡");
   		   tvmoney.setText("对公结算");
+  		   cardconnect.setVisibility(View.GONE);
   		}else{
   		   card.setText("信用卡");
   		   tvmoney.setText("余额");
@@ -214,9 +217,18 @@ public class LeftFragment extends Fragment implements OnClickListener{
 			intent.putExtra("account", strbalance);
 			startActivity(intent);
 		}break;
-		case R.id.tvLastlist:// 往期列表
-			//newContent = new LastListFragment();
-			//title = getString(R.string.lastList);
+		case R.id.tvLastlist:// 公务卡/信用卡
+			if(card.getText().toString().equals("公务卡")){
+				Intent intent = new Intent();
+				//intent.putExtra(name, value);
+			    intent.setClass(getActivity(), CardActivity.class);
+			    startActivity(intent);
+			}else{
+				Intent intent = new Intent();
+				//intent.putExtra(name, value);
+			    intent.setClass(getActivity(), Card2Activity.class);
+			    startActivity(intent);
+			}
 			break;
 		case R.id.discount: // 优惠券
 		{	
@@ -243,7 +255,7 @@ public class LeftFragment extends Fragment implements OnClickListener{
 			intent.setClass(this.getActivity().getApplicationContext(), MessageActivity.class);
 			startActivity(intent);
 		}	break;
-		case R.id.AddressManage: // 设置
+		case R.id.AddressManage: //设置
 		{	
 			Intent intent = new Intent();
 			intent.setClass(this.getActivity().getApplicationContext(), AddressManageActivity.class);
@@ -251,9 +263,6 @@ public class LeftFragment extends Fragment implements OnClickListener{
 		}	break;
 		case R.id.tvShare: // 分享
 		{	
-			//Intent intent = new Intent();
-			//intent.setClass(this.getActivity().getApplicationContext(), ShareActivity.class);
-			//startActivity(intent);
 			AndroidShare as = new AndroidShare(view.getContext(),"很好用的专车app ---来自 春泰","");
 			as.show();
 		}	break;

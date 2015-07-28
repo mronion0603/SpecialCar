@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
+
 import com.lc.utils.ConnectUrl;
 import com.lc.utils.Global;
 
@@ -16,7 +18,8 @@ public class GetMessageNet {
 	private Handler handler;
 	private boolean isRunning = false;
 	String result = "网络连接错误！";
-	
+	String authn = "";
+	String device = "";
 	public GetMessageNet(){
 		
 	}
@@ -24,7 +27,12 @@ public class GetMessageNet {
 		this.handler = handler;
 	}
 	
-	
+	public void setDevice(String device){
+		this.device = device;
+	}
+	public void setAuthn(String authn){
+		this.authn = authn;
+	}
 	public void getDataFromServer(){
 		isRunning = true;
 		Thread connectThread; //声明一个子线程
@@ -49,7 +57,8 @@ public class GetMessageNet {
 	                		urlConnection.connect();
 	                		DataOutputStream outputStream = new DataOutputStream(urlConnection.getOutputStream());
 	                		
-	                		String content = " ";
+	                		String content ="authn=" + URLEncoder.encode(authn, "UTF-8")
+	                				+"&device=" + URLEncoder.encode(device, "UTF-8");
 	                		
 	                		outputStream.writeBytes(content);
 	                		outputStream.flush();
