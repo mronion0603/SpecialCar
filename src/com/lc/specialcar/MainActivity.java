@@ -75,6 +75,7 @@ public class MainActivity extends SlidingFragmentActivity implements OnClickList
  	boolean isFirstLoc = true;// 是否首次定位
     String getcity ="";
     BaiduCityNet baiduCityNet = new BaiduCityNet();
+    double lat,lont;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
@@ -445,6 +446,10 @@ public class MainActivity extends SlidingFragmentActivity implements OnClickList
 				    baiduCityNet.setHandler(mHandler);
 				    baiduCityNet.setLocation(locationstr);
 				    baiduCityNet.getCodeFromServer();
+				    
+				    MySharePreference.editStringValue(getApplication(), MySharePreference.LONT, String.valueOf(location.getLongitude()));
+				    MySharePreference.editStringValue(getApplication(), MySharePreference.LAT, String.valueOf(location.getLatitude()));
+				    
 				}
 		    }	
 			public void onReceivePoi(BDLocation poiLocation) {

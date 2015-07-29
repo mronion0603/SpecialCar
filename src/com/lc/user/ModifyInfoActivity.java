@@ -18,6 +18,7 @@ import android.view.Window;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
@@ -32,6 +33,7 @@ public class ModifyInfoActivity extends Activity implements OnClickListener {
 	 RadioGroup group;
 	 String name="",email="",gender="女";
 	 ModifyUserInfoNet modifyUserInfoNet = new ModifyUserInfoNet();
+	 private ProgressBar pro; 
 	@Override  
     protected void onCreate(Bundle savedInstanceState) {  
         super.onCreate(savedInstanceState);  
@@ -41,6 +43,9 @@ public class ModifyInfoActivity extends Activity implements OnClickListener {
 	}
 	void init(){
 		ExitApplication.getInstance().addActivity(this);
+		pro = (ProgressBar)findViewById(R.id.progress2); 
+		pro.setProgress(0);  
+		pro.setIndeterminate(true);
 		righttext = (TextView) findViewById(R.id.righttext);
 	    righttext.setVisibility(View.VISIBLE);
 		righttext.setOnClickListener(this);
@@ -65,22 +70,30 @@ public class ModifyInfoActivity extends Activity implements OnClickListener {
 		case R.id.righttext:
 			name = etName.getText().toString();
 			email = etEmail.getText().toString();
-			int radioButtonId = group.getCheckedRadioButtonId();
-	        //根据ID获取RadioButton的实例
-	        RadioButton rb = (RadioButton)ModifyInfoActivity.this.findViewById(radioButtonId);
-	        modifyUserInfoNet.setHandler(mHandler);
-	        modifyUserInfoNet.setAuth(MySharePreference.getStringValue(getApplication(), MySharePreference.AUTHN));
-	        modifyUserInfoNet.setEmail(email);
-	        modifyUserInfoNet.setDevice(Global.DEVICE);
-	        modifyUserInfoNet.setUsername(name);
-	        //更新文本内容，以符合选中项
-	        if(rb.getText().equals("男")){
-	        	gender="男";
-	        }else{
-	        	gender="女";
-	        }
-	        modifyUserInfoNet.setGender(gender);
-	        modifyUserInfoNet.getDataFromServer();
+			if(name==null|name.length()<=0){
+				 Toast.makeText(ModifyInfoActivity.this,"姓名不能为空", Toast.LENGTH_LONG).show();
+			}else if(email==null|email.length()<=0){
+				 Toast.makeText(ModifyInfoActivity.this,"邮箱不能为空", Toast.LENGTH_LONG).show();
+			}else{
+				righttext.setClickable(false);
+				pro.setVisibility(View.VISIBLE); 
+				int radioButtonId = group.getCheckedRadioButtonId();
+		        //根据ID获取RadioButton的实例
+		        RadioButton rb = (RadioButton)ModifyInfoActivity.this.findViewById(radioButtonId);
+		        modifyUserInfoNet.setHandler(mHandler);
+		        modifyUserInfoNet.setAuth(MySharePreference.getStringValue(getApplication(), MySharePreference.AUTHN));
+		        modifyUserInfoNet.setEmail(email);
+		        modifyUserInfoNet.setDevice(Global.DEVICE);
+		        modifyUserInfoNet.setUsername(name);
+		        //更新文本内容，以符合选中项
+		        if(rb.getText().equals("男")){
+		        	gender="男";
+		        }else{
+		        	gender="女";
+		        }
+		        modifyUserInfoNet.setGender(gender);
+		        modifyUserInfoNet.getDataFromServer();
+			}
 			break;
 		default:
 			break;
@@ -113,8 +126,9 @@ public class ModifyInfoActivity extends Activity implements OnClickListener {
            setResult(RESULT_OK, intent); 
    	       finish();
         }else{
+           righttext.setClickable(true);
            Toast.makeText(ModifyInfoActivity.this,jsonobj.getString("Message"), Toast.LENGTH_LONG).show();
         } 
-   	   
+   	    pro.setVisibility(View.GONE); 
     }
 }

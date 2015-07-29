@@ -84,7 +84,7 @@ public class CardActivity extends Activity implements OnClickListener {
 	   	    if(result==Global.SUCCESS){
 	   	    	JSONObject jsonobj2 = jsonobj.getJSONObject("Data");
 	   	    	tv1.setText(jsonobj2.getString("company"));
-	   	    	//tv2.setText(jsonobj.getString("company"));
+	   	    	tv2.setText(jsonobj2.getString("deptName"));
 	        }else{
 	          Toast.makeText(CardActivity.this,"已是最新版本，不需要更新", Toast.LENGTH_LONG).show();
 	        } 

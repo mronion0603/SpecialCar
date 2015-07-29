@@ -118,15 +118,6 @@
 	      android:background="@color/user_divider3"
 	    />
 	    
-	    <ImageView
-	      android:layout_width="fill_parent"
-	      android:layout_height="20dip"
-	    />
-	     <ImageView
-	      android:layout_width="fill_parent"
-	      android:layout_height="1dip"
-	      android:background="@color/user_divider3"
-	    />
 	        <RelativeLayout 
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content" 
@@ -211,12 +202,7 @@
 	      android:layout_height="1dip"
 	      android:background="@color/user_divider3"
 	      />
-	     <ImageView
-	      android:layout_width="fill_parent"
-	      android:layout_height="1dip"
-	      android:layout_marginTop="20dip"
-	      android:background="@color/user_divider3"
-	    />
+	    
 	     <RelativeLayout 
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content" 
@@ -323,15 +309,6 @@
 	      android:layout_height="1dip"
 	      android:background="@color/user_divider3"
 	    />
-	     <ImageView
-	      android:layout_width="fill_parent"
-	      android:layout_height="20dip"
-	     />
-	     <ImageView
-	      android:layout_width="fill_parent"
-	      android:layout_height="1dip"
-	      android:background="@color/user_divider3"
-	    /> 
 	     <RelativeLayout 
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content" 
@@ -342,7 +319,7 @@
 	    >
 	    <ImageView
 	      android:id="@+id/moresaftyim5"
-	      android:layout_width="wrap_content"
+	      android:layout_width="23dip"
 	      android:layout_height="wrap_content"
 	      android:layout_marginLeft="20dip"
 	      android:background="@drawable/city_register_car2"  
@@ -413,7 +390,7 @@
 	    >
 	    <ImageView
 	      android:id="@+id/moresaftyim6"
-	      android:layout_width="wrap_content"
+	      android:layout_width="23dip"
 	      android:layout_height="wrap_content"
 	      android:layout_marginLeft="20dip"
 	      android:background="@drawable/discount"  

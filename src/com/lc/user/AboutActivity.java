@@ -5,9 +5,12 @@ import com.lc.specialcar.R;
 import com.lc.utils.ExitApplication;
 
 
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -25,7 +28,7 @@ import android.widget.TextView;
 
 public class AboutActivity extends Activity implements OnClickListener {
 	public static final int DIAL_PHONE = 1;
-	TextView tvTitle;
+	TextView tvTitle,tvversion;
     ImageView ivleft;
     private RelativeLayout rls;
     private RelativeLayout rlphone;
@@ -46,13 +49,14 @@ public class AboutActivity extends Activity implements OnClickListener {
 		ExitApplication.getInstance().addActivity(this);
 		tvTitle = (TextView) findViewById(R.id.topTv);
 		tvTitle.setText("关于我们");
-		
+		tvversion= (TextView) findViewById(R.id.version);
 		rls = (RelativeLayout) findViewById(R.id.rlslidemenu);
 		rls.setOnClickListener(this);
 		ivleft = (ImageView) findViewById(R.id.ArrowHead);
 		ivleft.setVisibility(View.VISIBLE);
 		rlphone= (RelativeLayout) findViewById(R.id.callphone);
 		rlphone.setOnClickListener(this);
+		tvversion.setText(getVersion());
 	}
 	@Override
 	public void onClick(View v) {
@@ -97,4 +101,19 @@ public class AboutActivity extends Activity implements OnClickListener {
 	                }
 	            }
 	        }};
+	        /**
+		      * 获取版本号
+		      * @return 当前应用的版本号
+		      */
+		     public String getVersion() {
+		         try {
+		             PackageManager manager = this.getPackageManager();
+		             PackageInfo info = manager.getPackageInfo(this.getPackageName(), 0);
+		             String version = info.versionName;
+		            return version;
+		        } catch (Exception e) {
+		            e.printStackTrace();
+		            return "找不到版本号";
+		       }
+		    }
 }

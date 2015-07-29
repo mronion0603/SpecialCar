@@ -123,6 +123,7 @@
 	    android:id="@+id/moresafty"
 	    android:background="@color/white"
 	    >
+                
 	    <ImageView
 	      android:id="@+id/moresaftyim"
 	      android:layout_width="15dip"
@@ -138,7 +139,6 @@
 	      android:layout_height="wrap_content"
 	      android:layout_marginLeft="20dip"
 	      android:textSize="18sp"
-	
 	      android:textColor="@color/black"
 	      android:layout_centerVertical="true"
 	      android:text="邮箱"
@@ -165,8 +165,18 @@
 	      android:layout_alignParentRight="true"
 	      android:layout_centerVertical="true"
 	     />
-	   
 	    </RelativeLayout>
-	    
-	   
+	    <ProgressBar     
+	    android:id="@+id/progress2"    
+	    style="?android:attr/progressBarStyleLarge"    
+	    android:layout_width="wrap_content"    
+	    android:layout_height="wrap_content"    
+	    android:max="100"     
+	    android:progress="50"     
+	    android:secondaryProgress="70"    
+	    android:layout_marginTop="10dip"
+	    android:layout_gravity="center"
+	    android:gravity="center" 
+	    android:visibility="gone"
+	    /> 
 </LinearLayout>

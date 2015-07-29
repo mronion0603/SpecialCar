@@ -5,6 +5,18 @@
     android:orientation="vertical" >
 
     <include layout="@layout/main_head" />
+     <ProgressBar     
+	    android:id="@+id/progress2"    
+	    style="?android:attr/progressBarStyleLarge"    
+	    android:layout_width="wrap_content"    
+	    android:layout_height="wrap_content"    
+	    android:max="100"     
+	    android:progress="50"     
+	    android:secondaryProgress="70"    
+	    android:layout_marginTop="50dip"
+	    android:layout_gravity="center"
+	    android:gravity="center" 
+	    /> 
      <ListView
         android:id="@+id/listview"
         android:layout_width = "fill_parent"

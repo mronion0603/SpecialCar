@@ -23,6 +23,7 @@ import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
@@ -38,6 +39,7 @@ public class ItineraryActivity extends Activity implements OnClickListener {
   	ArrayList<HashMap<String,Object>> listItem = new ArrayList<HashMap<String,Object>>();
   	GetOrderNet getOrderNet = new GetOrderNet();
   	SimpleAdapter listItemAdapter;
+  	private ProgressBar pro;   
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
@@ -50,6 +52,10 @@ public class ItineraryActivity extends Activity implements OnClickListener {
 
 	public void init(){
 		ExitApplication.getInstance().addActivity(this);
+		pro = (ProgressBar)findViewById(R.id.progress2); 
+		pro.setProgress(0);  
+		pro.setIndeterminate(true);
+		
 		tvTitle = (TextView) findViewById(R.id.topTv);
 		tvTitle.setText("行程");
 
@@ -148,7 +154,7 @@ public class ItineraryActivity extends Activity implements OnClickListener {
             }
     }};
     private void parseJSON(String str)throws Exception{  
-    	System.out.println(str);
+    	//System.out.println(str);
 		JSONObject jsonobj = new JSONObject(str);
 		int result = jsonobj.getInt("ResultCode");
 		if (result == Global.SUCCESS) {
@@ -214,6 +220,7 @@ public class ItineraryActivity extends Activity implements OnClickListener {
 		} else {
 
 		}
+		pro.setVisibility(View.GONE); 
     }
 	@Override
 	public void onClick(View v) {

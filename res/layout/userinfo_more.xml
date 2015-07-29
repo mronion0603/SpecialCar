@@ -161,7 +161,7 @@
 	     <RelativeLayout 
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content" 
-	    android:layout_centerInParent="true"
+	    android:layout_marginTop="10dip"
 	    >
 	      <ImageView
           android:id="@+id/icon"
@@ -187,7 +187,7 @@
 	      android:layout_height="50dip"
 	      android:layout_marginLeft="10dip"
 	      android:layout_marginRight="10dip"
-	      android:layout_marginBottom="30dip"
+	      android:layout_marginBottom="10dip"
 	      android:layout_alignParentBottom="true"
 	      android:background="@drawable/hover"
 	      android:text="退出登录"

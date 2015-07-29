@@ -135,16 +135,23 @@ public class InnerCityHomeActivity extends Activity implements OnClickListener {
         mBaiduMap = mMapView.getMap();
 		// 开启定位图层
 		mBaiduMap.setMyLocationEnabled(true);
-		   LatLng cenpt = new LatLng(30.511876,114.405751); 
-	        //定义地图状态
-	        MapStatus mMapStatus = new MapStatus.Builder()
-	        .target(cenpt)
-	        .zoom(12)
-	        .build();
-	        //定义MapStatusUpdate对象，以便描述地图状态将要发生的变化
-	        MapStatusUpdate mMapStatusUpdate = MapStatusUpdateFactory.newMapStatus(mMapStatus);
-	        //改变地图状态
-	        mBaiduMap.setMapStatus(mMapStatusUpdate);
+		String latstr = MySharePreference.getStringValue(getApplication(), MySharePreference.LAT);
+		String lontstr = MySharePreference.getStringValue(getApplication(), MySharePreference.LONT);
+	    double lat = 30.511876;   double lont = 114.405751;
+	    if(latstr!=null){
+	    	lat = Double.parseDouble(latstr);
+	    	lont = Double.parseDouble(lontstr);
+	    }
+		LatLng cenpt = new LatLng(lat,lont); 
+	    //定义地图状态
+	    MapStatus mMapStatus = new MapStatus.Builder()
+	    .target(cenpt)
+	    .zoom(16)
+	    .build();
+	    //定义MapStatusUpdate对象，以便描述地图状态将要发生的变化
+	    MapStatusUpdate mMapStatusUpdate = MapStatusUpdateFactory.newMapStatus(mMapStatus);
+	    //改变地图状态
+	    mBaiduMap.setMapStatus(mMapStatusUpdate);
 	        
 		// 定位初始化
 		mLocClient = new LocationClient(this);
@@ -177,6 +184,18 @@ public class InnerCityHomeActivity extends Activity implements OnClickListener {
         getaddressnet.setDevice(Global.DEVICE);
         getaddressnet.setAuthn(MySharePreference.getStringValue(getApplication(), MySharePreference.AUTHN));
         getaddressnet.getCodeFromServer();
+        
+        LatLng centerLL = new LatLng(lat,lont);  
+	     // 发起反地理编码检索  
+       mGeoCoder.reverseGeoCode((new ReverseGeoCodeOption())  
+               .location(centerLL));  
+          getDriverNet.setHandler(mHandler);
+			getDriverNet.setLongitude(String.valueOf(centerLL.longitude));
+			getDriverNet.setLatitude(String.valueOf(centerLL.latitude));
+			getDriverNet.setDevice(Global.DEVICE);
+			getDriverNet.setAuthn(MySharePreference.getStringValue(
+					getApplication(), MySharePreference.AUTHN));
+			getDriverNet.getDataFromServer();
 	}
 	
 	@Override  

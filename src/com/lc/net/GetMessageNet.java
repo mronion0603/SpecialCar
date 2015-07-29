@@ -20,13 +20,16 @@ public class GetMessageNet {
 	String result = "网络连接错误！";
 	String authn = "";
 	String device = "";
+	int page = 0;
 	public GetMessageNet(){
 		
 	}
 	public void setHandler(Handler handler){
 		this.handler = handler;
 	}
-	
+	public void setPage(int page){
+		this.page = page;
+	}
 	public void setDevice(String device){
 		this.device = device;
 	}
@@ -58,7 +61,8 @@ public class GetMessageNet {
 	                		DataOutputStream outputStream = new DataOutputStream(urlConnection.getOutputStream());
 	                		
 	                		String content ="authn=" + URLEncoder.encode(authn, "UTF-8")
-	                				+"&device=" + URLEncoder.encode(device, "UTF-8");
+	                				+"&device=" + URLEncoder.encode(device, "UTF-8")
+	                				+"&page=" + page;
 	                		
 	                		outputStream.writeBytes(content);
 	                		outputStream.flush();

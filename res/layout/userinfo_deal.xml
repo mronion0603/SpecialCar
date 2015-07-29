@@ -1,0 +1,155 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" 
+    android:background="@color/bg_color"
+    android:orientation="vertical"
+    >
+
+
+    <include layout="@layout/main_head" />
+    <ScrollView 
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+     >
+    <LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+      android:orientation="vertical"
+     >
+	    
+	     <TextView
+	     android:id="@+id/moresaftyim"
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:layout_marginLeft="10dip"
+	      android:layout_marginRight="10dip"
+	      android:textSize="16sp"
+	      android:textColor="@color/black"
+	      android:textStyle="bold"
+	      android:text="特别提示："
+	    />      
+	    <TextView
+
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:layout_marginLeft="10dip"
+	      android:layout_marginRight="10dip"
+	      android:textSize="16sp"
+	      android:textColor="@color/black"
+	      android:text="客户在同意授权书前应完整、仔细地阅读本授权书，客户勾选同
+意将被视为完全理解并接受以下全部授权书条款。客户在春泰专
+车信息平台（APP或网页）上勾选同意本支付授权书，即成为本
+支付授权书之授权人，该授权即刻发生效力。
+"
+	    />     
+	      <TextView
+
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:layout_marginTop="10dip"
+	      android:layout_marginLeft="10dip"
+	      android:layout_marginRight="10dip"
+	      android:textSize="16sp"
+	      android:textColor="@color/black"
+	      android:text="一、授权人兹授权春泰专车信息平台（以下简称“乙方”）自授
+权人之春泰专车账户或授权人指定信用卡直接扣款，以支付
+    在使用服务所应支付之服务费用。"
+	    />        
+	    <TextView
+
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:layout_marginLeft="10dip"
+	      android:layout_marginRight="10dip"
+	      android:textSize="16sp"
+	      android:textColor="@color/black"
+	      android:text="二、授权人成功使用用车服务后，乙方将依照春泰专车信息平台
+   （APP或网页）上公布的收费规则计算授权人应支付之服务费
+    用，并根据本授权书第九条规定的方式通知授权人。
+"
+	    />       
+	    <TextView
+
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:layout_marginLeft="10dip"
+	      android:layout_marginRight="10dip"
+	      android:textSize="16sp"
+	      android:textColor="@color/black"
+	      android:text="三、授权人同意，乙方为验证指定信用卡之目的，可以从指定信
+    用卡中扣款人民币1元，验证成功后，被扣取款项（ 即人民币
+    1元）将返还至授权人春泰专车账户，到帐时间以春泰专车
+    信息平台系统记录的入账时间为准。
+"
+	    />        
+	    <TextView
+
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:layout_marginLeft="10dip"
+	      android:layout_marginRight="10dip"
+	      android:textSize="16sp"
+	      android:textColor="@color/black"
+	      android:text="四、信用卡授权人应向乙方提供真实姓名、身份证号码、信用卡
+号码、发卡银行等信息。信用卡持有人需与授权人为同一人，
+且其信用卡应在有效期内。 
+
+"
+	    />    
+	        <TextView
+
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:layout_marginLeft="10dip"
+	      android:layout_marginRight="10dip"
+	      android:textSize="16sp"
+	      android:textColor="@color/black"
+	      android:text="五、乙方有权委托第三方从上述指定账户或信用卡扣款。
+"
+	    />     
+	     <TextView
+
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:layout_marginLeft="10dip"
+	      android:layout_marginRight="10dip"
+	      android:textSize="16sp"
+	      android:textColor="@color/black"
+	      android:text="六、除另有约定外，授权人通过春泰专车信息平台（APP或网页）
+    解除其信用卡和其春泰专车账户之间的关联时，本授权书的
+    效力自动终止。
+
+"
+	    />     
+	    <TextView
+
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:layout_marginLeft="10dip"
+	      android:layout_marginRight="10dip"
+	      android:textSize="16sp"
+	      android:textColor="@color/black"
+	      android:text="七、授权人若变更卡号、停止使用信用卡或信用卡有效期限及相
+    关资料变更，应及时通知乙方并变更资料，因授权人未及时
+    通知导致的任何损失均应由授权人承担。
+
+"
+	    />     
+    <TextView
+
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:layout_marginLeft="10dip"
+	      android:layout_marginRight="10dip"
+	      android:textSize="16sp"
+	      android:textColor="@color/black"
+	      android:text="八、如因指定信用卡过期、挂失、无效、被盗用、被往来银行拒
+    绝等，以致信用卡请款失败，授权人就用车服务产生的付款
+    义务不受影响，授权人应及时以其他方式履行其付款义务。
+
+
+"
+	    />     
+</LinearLayout>
+</ScrollView>
+</LinearLayout>

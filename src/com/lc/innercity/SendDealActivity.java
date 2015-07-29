@@ -123,11 +123,18 @@ public class SendDealActivity extends Activity implements OnClickListener {
         mBaiduMap = mMapView.getMap();
 		// 开启定位图层
 		mBaiduMap.setMyLocationEnabled(true);
-        LatLng cenpt = new LatLng(30.511876,114.405751); 
+		String latstr = MySharePreference.getStringValue(getApplication(), MySharePreference.LAT);
+		String lontstr = MySharePreference.getStringValue(getApplication(), MySharePreference.LONT);
+	    double lat = 30.511876;   double lont = 114.405751;
+	    if(latstr!=null){
+	    	lat = Double.parseDouble(latstr);
+	    	lont = Double.parseDouble(lontstr);
+	    }
+        LatLng cenpt = new LatLng(lat,lont); 
         //定义地图状态
         MapStatus mMapStatus = new MapStatus.Builder()
         .target(cenpt)
-        .zoom(12)
+        .zoom(16)
         .build();
         //定义MapStatusUpdate对象，以便描述地图状态将要发生的变化
         MapStatusUpdate mMapStatusUpdate = MapStatusUpdateFactory.newMapStatus(mMapStatus);

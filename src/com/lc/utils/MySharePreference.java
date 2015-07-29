@@ -16,6 +16,8 @@ public class MySharePreference {
 	 public static final String GENDER = "gender";
 	 public static final String UUID = "uuid";
 	 public static final String CITY = "city";
+	 public static final String LAT = "lat";
+	 public static final String LONT = "lont";
 	 private static SharedPreferences getSharedPreferences(Context context,
 	            boolean isPersonal) {
 	        if (isPersonal) {

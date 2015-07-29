@@ -22,7 +22,7 @@
 	   
 	     <TextView
 	      android:id="@+id/morenotifyim"
-	      android:layout_width="wrap_content"
+	      android:layout_width="80dip"
 	      android:layout_height="wrap_content"
 	      android:layout_marginLeft="20dip"
 	      android:textSize="18sp"
@@ -60,7 +60,7 @@
 	   
 	     <TextView
 	      android:id="@+id/date"
-	      android:layout_width="wrap_content"
+	      android:layout_width="80dip"
 	      android:layout_height="wrap_content"
 	      android:layout_marginLeft="20dip"
 	      android:textSize="18sp"

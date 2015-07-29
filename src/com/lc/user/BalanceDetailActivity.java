@@ -1,9 +1,6 @@
 package com.lc.user;
 
-import java.text.ParsePosition;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 
 import org.json.JSONArray;
@@ -16,7 +13,6 @@ import com.lc.utils.MySharePreference;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -25,6 +21,7 @@ import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
@@ -39,6 +36,7 @@ public class BalanceDetailActivity extends Activity implements OnClickListener {
     private ListView listview;
   	ArrayList<HashMap<String,Object>> listItem = new ArrayList<HashMap<String,Object>>();
   	GetAccountNet getAccountNet = new GetAccountNet();
+ 	private ProgressBar pro; 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
@@ -53,7 +51,9 @@ public class BalanceDetailActivity extends Activity implements OnClickListener {
 	public void init(){
 		tvTitle = (TextView) findViewById(R.id.topTv);
 		tvTitle.setText("余额明细");
-
+		pro = (ProgressBar)findViewById(R.id.progress2); 
+		pro.setProgress(0);  
+		pro.setIndeterminate(true);
 		rls = (RelativeLayout) findViewById(R.id.rlslidemenu);
 		rls.setOnClickListener(this);
 		ivleft = (ImageView) findViewById(R.id.ArrowHead);
@@ -64,15 +64,12 @@ public class BalanceDetailActivity extends Activity implements OnClickListener {
 				new String[]{"MessageTitle","MessageDate","Money","MoneyType"},
 				new int[]{R.id.MessageTitle,R.id.MessageDate,R.id.Money,R.id.MoneyType});
 		listview.setDividerHeight(1);
-		
 		listview.setAdapter(listItemAdapter);
 		listview.setOnItemClickListener(new OnItemClickListener(){
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
-				//Intent intent = new Intent();
-				//intent.setClass(getApplication(), ItineraryDetailActivity.class);
-				//startActivity(intent);
+	
 			}
 			
 		});
@@ -82,15 +79,6 @@ public class BalanceDetailActivity extends Activity implements OnClickListener {
 		getAccountNet.setDevice(Global.DEVICE);
 		getAccountNet.setAuthn(MySharePreference.getStringValue(getApplication(), MySharePreference.AUTHN));
 		getAccountNet.getCodeFromServer();
-		/*
-		for(int i=0;i<5;i++){
-		     HashMap<String , Object> map = new HashMap<String , Object>();
-			 map.put("MessageTitle", "13123123");
-			 map.put("MessageDate", "2015-5-5 10:00");
-			 map.put("Money", "¥120");
-			 listItem.add(map);
-		}
-		*/
 	}
 	
 	@SuppressLint("HandlerLeak")
@@ -146,8 +134,9 @@ public class BalanceDetailActivity extends Activity implements OnClickListener {
 				listItem.add(map);
 			}
 		} else {
-
+			
 		}
+		pro.setVisibility(View.GONE); 
     }
     
 	@Override

@@ -11,6 +11,8 @@ import com.lc.utils.MySharePreference;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -22,10 +24,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class Card2Activity extends Activity implements OnClickListener {
-	TextView tvTitle,tv1,tv2;
+	TextView tvTitle,tv1,tv2,tvdeal;
     ImageView ivleft;
     private RelativeLayout rls;
     GetCardNet getCardNet = new GetCardNet();
+    
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
@@ -42,8 +45,9 @@ public class Card2Activity extends Activity implements OnClickListener {
 		rls.setOnClickListener(this);
 		ivleft = (ImageView) findViewById(R.id.ArrowHead);
 		ivleft.setVisibility(View.VISIBLE);
-		
-		
+		tvdeal = (TextView) findViewById(R.id.deal);
+		tvdeal.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG ); //下划线
+		tvdeal.setOnClickListener(this);
 	}
 	@Override
 	public void onClick(View v) {
@@ -52,7 +56,11 @@ public class Card2Activity extends Activity implements OnClickListener {
 		case R.id.rlslidemenu:
 			finish();
 			break;
-		
+		case R.id.deal:{
+		Intent intent = new Intent();
+		intent.setClass(getApplication(), DealActivity.class );
+		startActivity(intent);
+		}break;
 		default:
 			break;
 		}
