@@ -47,7 +47,7 @@
         android:textSize="18sp"
         app:cpb_textComplete="提交成功"
         app:cpb_textError="错误"
-        app:cpb_textIdle="提交失败" 
+        app:cpb_textIdle="提交" 
         app:cpb_selectorIdle="@drawable/idle_state_selector"
         app:cpb_selectorComplete="@drawable/complete_state_selector"
         app:cpb_selectorError="@drawable/error_state_selector"/>

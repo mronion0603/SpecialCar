@@ -20,12 +20,15 @@ public class GetOrderNet {
 	String result = "网络连接错误！";
 	String authn = "";
 	String device= "";
-	
+	int page= 0;
 	public GetOrderNet(){
 		
 	}
 	public void setHandler(Handler handler){
 		this.handler = handler;
+	}
+	public void setPage(int page){
+		this.page = page;
 	}
 	public void setDevice(String device){
 		this.device = device;
@@ -59,12 +62,15 @@ public class GetOrderNet {
 	                		DataOutputStream outputStream = new DataOutputStream(urlConnection.getOutputStream());
 	                		
 	                		String content ="authn=" + URLEncoder.encode(authn, "UTF-8")
-	                				+"&device=" + URLEncoder.encode(device, "UTF-8");
+	                				+"&device=" + URLEncoder.encode(device, "UTF-8")
+	                				+"&page=" + page
+	                				;
 	                		outputStream.writeBytes(content);
 	                		outputStream.flush();
 	                		outputStream.close();
 	                		
 	                		int responseCode =urlConnection.getResponseCode();
+	                		System.out.println(responseCode);
 	                		if ( responseCode== 200) { 
 	                		InputStream in = urlConnection.getInputStream();  
 	                		result = read(in);

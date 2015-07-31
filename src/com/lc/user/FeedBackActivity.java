@@ -98,7 +98,7 @@ public class FeedBackActivity extends Activity implements OnClickListener {
 	   	      finish();
 	        }else{
 	          submit.setClickable(true);
-		      submit.setProgress(-1);	
+		      submit.setProgress(0);	
 	          Toast.makeText(FeedBackActivity.this,jsonobj.getString("Message"), Toast.LENGTH_LONG).show();
 	        } 
 	   }

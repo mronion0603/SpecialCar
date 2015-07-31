@@ -334,6 +334,7 @@
 	    android:paddingBottom="10dip"
 	    android:id="@+id/rldiscount"
 	    android:background="@color/white"
+	    	    android:visibility="gone"
 	    >
 	    <ImageView
 	      android:id="@+id/moresaftyim6"

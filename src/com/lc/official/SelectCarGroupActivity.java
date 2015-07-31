@@ -329,7 +329,7 @@ public class SelectCarGroupActivity extends Activity implements OnClickListener 
 					map.put("inTime", jsonobj2.getString("inTime"));
 					map.put("officalMoney", jsonobj2.getString("officalMoney"));
 				    list.add(map);
-				}
+				}/*
 				BitmapUtils bitmapUtils = new BitmapUtils(SelectCarGroupActivity.this);
 				car1.setScaleType(ScaleType.FIT_XY);//铺满
 				car2.setScaleType(ScaleType.FIT_XY);
@@ -337,6 +337,7 @@ public class SelectCarGroupActivity extends Activity implements OnClickListener 
 			    bitmapUtils.display(car1, ConnectUrl.commonurl0+list.get(0).get("carImg"));
 			    bitmapUtils.display(car2, ConnectUrl.commonurl0+list.get(1).get("carImg"));
 			    bitmapUtils.display(car3, ConnectUrl.commonurl0+list.get(2).get("carImg"));
+				*/
 				type1.setText("经济型");
 				type2.setText("普通型");
 				type3.setText("商务型");

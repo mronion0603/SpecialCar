@@ -30,12 +30,12 @@ public class ItineraryDetailActivity extends Activity implements OnClickListener
     private RelativeLayout rls;
     private LinearLayout llextend;
     String orderStatus="", orderNum="", startTime="", startAddress="",
-    	   serTypeId="", carTypeId="", flightNum="", airport="",
+    	   serTypeId="", carTypeId="", airport="",
     	   endAddress="", useCarTime="", carSum="",riderName="",
     	   riderPhone="",comment="",mileage="",time="",realMoney="",
     	   carNum="",carType="",driverName="",driverImg="",
-           mileageMoney="",bascMoney="",timeMoney="",vouMoney="",
-        		   asssScore="";
+           mileageMoney="",bascMoney="",timeMoney="",
+        		   asssScore="",R_BMoney="",stopCarMoney="";
     Button bt;
     TextView tvdriverName,tvcar,tvcarnumber,tvOrderStatus,tvriderName,tvorderNum,tvusecarTime,tvstartAddress,
              tvendAddress,tvmile,tvtimelong,tvstartMoney,tvtimefee,tvlongfee,tvdiscount,tvrealmoney;
@@ -59,7 +59,7 @@ public class ItineraryDetailActivity extends Activity implements OnClickListener
 	    	startAddress= extras.getString("StartAddress");
 	    	serTypeId= extras.getString("SerTypeId");
 	    	carTypeId= extras.getString("CarTypeId");
-	    	flightNum= extras.getString("FlightNum");
+	    	R_BMoney= extras.getString("R_BMoney");
 	    	//airport= extras.getString("Airport");
 	    	endAddress= extras.getString("EndAddress");
 	    	useCarTime= extras.getString("UseCarTime");
@@ -139,7 +139,7 @@ public class ItineraryDetailActivity extends Activity implements OnClickListener
         tvstartMoney.setText(bascMoney);
         tvtimefee.setText(timeMoney);
         tvlongfee.setText(mileageMoney);
-        tvdiscount.setText(vouMoney);
+        tvdiscount.setText(R_BMoney);
         tvrealmoney.setText(realMoney);
         
         BitmapUtils bitmapUtils = new BitmapUtils(ItineraryDetailActivity.this);
@@ -163,12 +163,22 @@ public class ItineraryDetailActivity extends Activity implements OnClickListener
 				startActivity(intent);
 			}
 			if(bt.getText().toString().equals("取消")){
+				Intent intent =new Intent();
+				intent.setClass(getApplication(), CommentActivity.class);
+				intent.putExtra("OrderNum", orderNum);
+				startActivity(intent);
 				/*
 				cancelInnerNet.setHandler(mHandler);
 				cancelInnerNet.setOrderNum(getOrderNum);
 				cancelInnerNet.setAuthn(MySharePreference.getStringValue(getApplication(), MySharePreference.AUTHN));
 				cancelInnerNet.getDataFromServer();
 			    */
+			}
+			if(bt.getText().toString().equals("去评价")){
+				Intent intent =new Intent();
+				intent.setClass(getApplication(), CommentActivity.class);
+				intent.putExtra("OrderNum", orderNum);
+				startActivity(intent);
 			}
 		}break;
 			

@@ -1,15 +1,10 @@
 package com.lc.user;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import cn.trinea.android.common.view.DropDownListView;
-
 import com.lc.net.GetMessageNet;
 import com.lc.specialcar.R;
 import com.lc.utils.ExitApplication;
@@ -18,7 +13,6 @@ import com.lc.utils.MySharePreference;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -32,12 +26,10 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Toast;
-import cn.trinea.android.common.view.DropDownListView.OnDropDownListener;
 public class MessageActivity extends Activity implements OnClickListener {
-	 private String[]             mStrings            = {"Aaaaaa", "Bbbbbb", "Cccccc", "Dddddd", "Eeeeee", "Ffffff",
-	            "Gggggg", "Hhhhhh", "Iiiiii", "Jjjjjj", "Kkkkkk", "Llllll", "Mmmmmm", "Nnnnnn",};
-    TextView tvTitle;
-    ImageView ivleft;
+	public final static int PAGESIZE = 8;
+    TextView tvTitle,textbg;
+    ImageView ivleft,imgbg;
     private RelativeLayout rls;
     private DropDownListView listview;
   	ArrayList<HashMap<String,Object>> listItem = new ArrayList<HashMap<String,Object>>();
@@ -58,7 +50,8 @@ public class MessageActivity extends Activity implements OnClickListener {
 		pro = (ProgressBar)findViewById(R.id.progress2); 
 		pro.setProgress(0);  
 		pro.setIndeterminate(true);
-		
+		textbg = (TextView) findViewById(R.id.tvbg);
+		imgbg = (ImageView) findViewById(R.id.imgbg);
 		tvTitle = (TextView) findViewById(R.id.topTv);
 		tvTitle.setText("消息首页");
 
@@ -67,6 +60,7 @@ public class MessageActivity extends Activity implements OnClickListener {
 		ivleft = (ImageView) findViewById(R.id.ArrowHead);
 		ivleft.setVisibility(View.VISIBLE);
 		listview=(DropDownListView)findViewById(R.id.listview);
+		listview.setVisibility(View.GONE);
 		getData();
 		listItemAdapter = new SimpleAdapter(this,listItem,R.layout.userinfo_message_listitem , 
 				new String[]{"MessageTitle","MessageDate"},
@@ -132,14 +126,18 @@ public class MessageActivity extends Activity implements OnClickListener {
  		 if (result == Global.SUCCESS) {
 	         JSONArray jsonarray = jsonobj.getJSONArray("Data");
 	         if(jsonarray.length()>0){
+	     	 listview.setVisibility(View.VISIBLE);
 	         for(int x=0;x<jsonarray.length();x++){
-	         	JSONObject jsonobj2 = (JSONObject)jsonarray.get(x);
+	         	 JSONObject jsonobj2 = (JSONObject)jsonarray.get(x);
 	         	 HashMap<String , Object> map = new HashMap<String , Object>();
 	         	 map.put("MessageTitle",jsonobj2.getString("content"));
 	 			 map.put("MessageDate",jsonobj2.getString("sendTime"));
-	 			 listItem.add(map);
-	 			 listview.onBottomComplete();
-             }
+	 			 listItem.add(map);	
+             } 
+	         if(listItem.size()<PAGESIZE){
+					listview.setHasMore(false);//禁掉下拉刷新	
+				}
+	         listview.onBottomComplete();
 	         }else{
 	        	 //禁掉下拉刷新
 	        	 listview.setHasMore(false);
@@ -148,6 +146,10 @@ public class MessageActivity extends Activity implements OnClickListener {
 	     }else{
         	Toast.makeText(getApplication(),jsonobj.getString("Message") , Toast.LENGTH_SHORT).show();
          }
+ 		 if(listItem.size()==0){
+ 			imgbg.setVisibility(View.VISIBLE);
+ 			textbg.setVisibility(View.VISIBLE);
+ 		 }
          pro.setVisibility(View.GONE);  
     }
     
@@ -163,43 +165,6 @@ public class MessageActivity extends Activity implements OnClickListener {
 		default:
 			break;
 		}
-	}
-	
- 
-	 private class GetDataTask extends AsyncTask<Void, Void, String[]> {  
-		  
-	        private boolean isDropDown;  
-	  
-	        public GetDataTask(boolean isDropDown){  
-	            this.isDropDown = isDropDown;  
-	        }  
-	  
-	        @Override  
-	        protected String[] doInBackground(Void... params) {  
-	            try {  
-	                Thread.sleep(1000);  
-	            } catch (InterruptedException e) {  
-	                ;  
-	            }  
-	            return mStrings;  
-	        }  
-	  
-	        @Override  
-	        protected void onPostExecute(String[] result) {  
-	  
-	            if (isDropDown) {  
-	                //listItems.addFirst("Added after drop down");  
-	                //adapter.notifyDataSetChanged();  
-	  
-	                // should call onDropDownComplete function of DropDownListView at end of drop down complete.  
-	                SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd HH:mm:ss");  
-	                listview.onDropDownComplete("更新于"
-	                                            + dateFormat.format(new Date()));  
-	            } 
-	  
-	            super.onPostExecute(result);  
-	        }  
-	    
 	}  
 
 }

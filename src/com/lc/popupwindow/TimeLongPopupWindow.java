@@ -38,7 +38,7 @@ public class TimeLongPopupWindow extends PopupWindow {
 		mMenuView = inflater.inflate(R.layout.time3_layout, null);
 		
 		hours2 = (WheelView) mMenuView.findViewById(R.id.hour);
-	    hourAdapter = new NumericWheelAdapter(context, 0, 23);
+	    hourAdapter = new NumericWheelAdapter(context, 1, 30);
 		hourAdapter.setItemResource(R.layout.wheel_text_item);
 		hourAdapter.setItemTextResource(R.id.text);
 		hours2.setViewAdapter(hourAdapter);

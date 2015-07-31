@@ -32,14 +32,15 @@ import android.view.View.OnClickListener;
 import android.view.View.OnCreateContextMenuListener;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 
 public class AddressManageActivity extends Activity implements OnClickListener {
-	TextView tvTitle,righttext;
-	ImageView ivleft;
+	TextView tvTitle,righttext,textbg;
+	ImageView ivleft,imgbg;
 	public static final int REQUSET = 1;
 	private RelativeLayout rls;
 	ListView lv;
@@ -48,6 +49,7 @@ public class AddressManageActivity extends Activity implements OnClickListener {
 	AddAddressNet addaddressnet = new AddAddressNet();
 	GetAddressNet getaddressnet = new GetAddressNet();
 	DelAddressNet deladdressnet = new DelAddressNet();
+	private ProgressBar pro;   
 	@Override  
     protected void onCreate(Bundle savedInstanceState) {  
         super.onCreate(savedInstanceState);  
@@ -56,7 +58,12 @@ public class AddressManageActivity extends Activity implements OnClickListener {
         init();
 	}
 	void init(){
+		pro = (ProgressBar)findViewById(R.id.progress2); 
+		pro.setProgress(0);  
+		pro.setIndeterminate(true);
 		ExitApplication.getInstance().addActivity(this);
+		textbg = (TextView) findViewById(R.id.tvbg);
+		imgbg = (ImageView) findViewById(R.id.imgbg);
 		righttext = (TextView) findViewById(R.id.righttext);
 		righttext.setVisibility(View.VISIBLE);
 		righttext.setText("添加");
@@ -68,6 +75,7 @@ public class AddressManageActivity extends Activity implements OnClickListener {
 		ivleft = (ImageView) findViewById(R.id.ArrowHead);
 		ivleft.setVisibility(View.VISIBLE);
         lv = (ListView) findViewById(R.id.lvGroup); 
+        lv.setVisibility(View.GONE);
         // 加载数据  
         groups1 = new ArrayList<HashMap<String , Object>>();  
         groupAdapter = new GroupAdapter(this, groups1);  
@@ -113,12 +121,13 @@ public class AddressManageActivity extends Activity implements OnClickListener {
         	  double lat,lont;
         	  Bundle extras = data.getExtras();
               if(extras != null){
+            	  pro.setVisibility(View.VISIBLE);
             	  address = extras.getString("address");
             	  lat =extras.getDouble("latidute");
             	  lont =extras.getDouble("longitude");
-            	  HashMap<String , Object> map = new HashMap<String , Object>();
- 	 			  map.put("address",address);
-            	  groups1.add(map);
+            	  // HashMap<String , Object> map = new HashMap<String , Object>();
+ 	 			  // map.put("address",address);
+            	  //groups1.add(map);
             	  addaddressnet.setHandler(mHandler);
             	  addaddressnet.setDevice(Global.DEVICE);
             	  addaddressnet.setAuth(MySharePreference.getStringValue(getApplication(), MySharePreference.AUTHN));
@@ -168,7 +177,12 @@ public class AddressManageActivity extends Activity implements OnClickListener {
 	    	JSONObject jsonobj = new JSONObject(str); 
 	    	int result = jsonobj.getInt("ResultCode");
 	   	    if(result==Global.SUCCESS){
-	   	      groupAdapter.notifyDataSetChanged();
+	   	    	groups1.clear();
+	   	    	getaddressnet.setHandler(mHandler);
+	   	        getaddressnet.setDevice(Global.DEVICE);
+	   	        getaddressnet.setAuthn(MySharePreference.getStringValue(getApplication(), MySharePreference.AUTHN));
+	   	        getaddressnet.getCodeFromServer();
+	   	      //groupAdapter.notifyDataSetChanged();
 	        }else{
 	          Toast.makeText(AddressManageActivity.this,jsonobj.getString("Message"), Toast.LENGTH_LONG).show();
 	        } 
@@ -177,15 +191,23 @@ public class AddressManageActivity extends Activity implements OnClickListener {
 	    	System.out.println(str);
 	    	 JSONObject jsonobj = new JSONObject(str); 
 	         JSONArray jsonarray = jsonobj.getJSONArray("Data");
-	         for(int x=0;x<jsonarray.length();x++){
-	        	 JSONObject jsonobj2 = (JSONObject)jsonarray.get(x); 
-	         	 HashMap<String , Object> map = new HashMap<String , Object>();
-	 			 map.put("groupItem",jsonobj2.getString("commAddressId"));
-	 			 map.put("userId",jsonobj2.getString("userId"));
-	 			 map.put("address",jsonobj2.getString("address"));
-	 			 groups1.add(map);
-	 			 groupAdapter.notifyDataSetChanged();
+	         if(jsonarray.length()>0){
+		     	 lv.setVisibility(View.VISIBLE);
+		         for(int x=0;x<jsonarray.length();x++){
+		        	 JSONObject jsonobj2 = (JSONObject)jsonarray.get(x); 
+		         	 HashMap<String , Object> map = new HashMap<String , Object>();
+		 			 map.put("groupItem",jsonobj2.getString("commAddressId"));
+		 			 map.put("userId",jsonobj2.getString("userId"));
+		 			 map.put("address",jsonobj2.getString("address"));
+		 			 groups1.add(map);
+		 			 groupAdapter.notifyDataSetChanged();
+		         }
 	         }
+	         if(groups1.size()==0){
+	  			imgbg.setVisibility(View.VISIBLE);
+	  			textbg.setVisibility(View.VISIBLE);
+	  		 }
+	         pro.setVisibility(View.GONE); 
 	    }
 	    private void parseDelADDRESS(String str)throws Exception{ 
 	    	JSONObject jsonobj = new JSONObject(str); 

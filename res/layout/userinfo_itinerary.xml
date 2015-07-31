@@ -1,4 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:listViewAttr="http://schemas.android.com/apk/res/com.lc.specialcar"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_color"
@@ -17,9 +18,34 @@
 	    android:layout_gravity="center"
 	    android:gravity="center" 
 	    /> 
-     <ListView
+	     <ImageView     
+	    android:id="@+id/imgbg"    
+	    android:layout_width="wrap_content"    
+	    android:layout_height="wrap_content"    
+	    android:layout_marginTop="80dip"
+	    android:layout_gravity="center"
+	    android:gravity="center"
+	    android:background="@drawable/bg02"
+	    android:visibility="gone"
+	    /> 
+	     <TextView     
+	    android:id="@+id/tvbg"    
+	    android:layout_width="wrap_content"    
+	    android:layout_height="wrap_content"    
+	    android:layout_gravity="center"
+	    android:gravity="center"
+	    android:text="暂无行程"
+	    android:textSize="18sp"
+	    android:textColor="@color/black2"
+	    android:visibility="gone"
+	    /> 
+     <cn.trinea.android.common.view.DropDownListView
         android:id="@+id/listview"
         android:layout_width = "fill_parent"
         android:layout_height = "wrap_content"   
+        android:drawSelectorOnTop="false"
+        listViewAttr:isAutoLoadOnBottom="true"
+        listViewAttr:isDropDownStyle="false"
+        listViewAttr:isOnBottomStyle="true"
      />
 </LinearLayout>

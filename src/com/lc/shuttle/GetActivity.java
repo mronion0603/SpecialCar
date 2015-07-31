@@ -184,8 +184,6 @@ public class GetActivity extends Activity implements OnClickListener {
 			String strbill = feeRule.getText().toString();
 			if(startTime.equals("请输入接机时间")){
 				Toast.makeText(getApplication(), "请输入接机时间", Toast.LENGTH_SHORT).show();
-			}else if(flightstr.equals("")){
-				Toast.makeText(getApplication(), "请输入航班号", Toast.LENGTH_SHORT).show();
 			}else if(airportstr.equals("请输入机场")){
 				Toast.makeText(getApplication(), "请输入机场", Toast.LENGTH_SHORT).show();
 			}else if(endaddressstr.equals("请输入下车地点")|endaddressstr.equals("获取地址失败")

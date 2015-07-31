@@ -31,9 +31,11 @@ public class ModifyInfoActivity extends Activity implements OnClickListener {
 	 EditText etName,etEmail;
 	 private RelativeLayout rls;
 	 RadioGroup group;
+	 RadioButton bt1,bt2;
 	 String name="",email="",gender="女";
 	 ModifyUserInfoNet modifyUserInfoNet = new ModifyUserInfoNet();
 	 private ProgressBar pro; 
+	 
 	@Override  
     protected void onCreate(Bundle savedInstanceState) {  
         super.onCreate(savedInstanceState);  
@@ -59,7 +61,24 @@ public class ModifyInfoActivity extends Activity implements OnClickListener {
 		etName = (EditText) findViewById(R.id.Name);
 		etEmail = (EditText) findViewById(R.id.Email);
 		group = (RadioGroup)this.findViewById(R.id.radioGroup);
-		
+		bt1 = (RadioButton)this.findViewById(R.id.radioFemale);
+		bt2 = (RadioButton)this.findViewById(R.id.radioMale);
+		String username = MySharePreference.getStringValue(getApplication(), MySharePreference.USERNAME);
+		if(username!=null){
+			etName.setText( username);
+		}
+		String email = MySharePreference.getStringValue(getApplication(), MySharePreference.EMAIL);
+		if(email!=null){
+			etEmail.setText(email);
+		}
+		String gender = MySharePreference.getStringValue(getApplication(), MySharePreference.GENDER);
+		if(gender!=null){
+			if(gender.equals("女")){
+				bt1.setChecked(true);
+			}else{
+				bt2.setChecked(true);
+			}
+		}
 	}
 	@Override
 	public void onClick(View v) {

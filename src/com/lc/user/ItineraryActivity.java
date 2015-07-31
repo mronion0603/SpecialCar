@@ -6,6 +6,8 @@ import java.util.HashMap;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import cn.trinea.android.common.view.DropDownListView;
+
 import com.lc.net.GetOrderNet;
 import com.lc.specialcar.R;
 import com.lc.utils.ExitApplication;
@@ -22,24 +24,24 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
-
 public class ItineraryActivity extends Activity implements OnClickListener {
-	
-    TextView tvTitle;
-    ImageView ivleft;
+	public final static int PAGESIZE = 8;
+    TextView tvTitle,textbg;
+    ImageView ivleft,imgbg;
     private RelativeLayout rls;
-    private ListView listview;
+    private DropDownListView listview;
   	ArrayList<HashMap<String,Object>> listItem = new ArrayList<HashMap<String,Object>>();
   	GetOrderNet getOrderNet = new GetOrderNet();
   	SimpleAdapter listItemAdapter;
   	private ProgressBar pro;   
+  	public int moreDataCount= 1;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
@@ -55,7 +57,8 @@ public class ItineraryActivity extends Activity implements OnClickListener {
 		pro = (ProgressBar)findViewById(R.id.progress2); 
 		pro.setProgress(0);  
 		pro.setIndeterminate(true);
-		
+		textbg = (TextView) findViewById(R.id.tvbg);
+		imgbg = (ImageView) findViewById(R.id.imgbg);
 		tvTitle = (TextView) findViewById(R.id.topTv);
 		tvTitle.setText("行程");
 
@@ -63,7 +66,8 @@ public class ItineraryActivity extends Activity implements OnClickListener {
 		rls.setOnClickListener(this);
 		ivleft = (ImageView) findViewById(R.id.ArrowHead);
 		ivleft.setVisibility(View.VISIBLE);
-		listview=(ListView)findViewById(R.id.listview);
+		listview=(DropDownListView)findViewById(R.id.listview);
+		 listview.setVisibility(View.GONE);
 		getData();
 		listItemAdapter = new SimpleAdapter(this,listItem,R.layout.userinfo_itinerary_listitem , 
 				new String[]{"OrderStatus","OrderDate","SerTypeId","OrderAddress","EndAddress"},
@@ -71,6 +75,16 @@ public class ItineraryActivity extends Activity implements OnClickListener {
 		listview.setDividerHeight(20);
 		
 		listview.setAdapter(listItemAdapter);
+		listview.setOnBottomListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            	 moreDataCount++;
+            	 getOrderNet.setDevice(Global.DEVICE);
+            	 getOrderNet.setPage(moreDataCount);
+            	 getOrderNet.setAuthn(MySharePreference.getStringValue(getApplication(), MySharePreference.AUTHN));
+            	 getOrderNet.getCodeFromServer();
+            }
+        });
 		listview.setOnItemClickListener(new OnItemClickListener(){
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
@@ -85,8 +99,8 @@ public class ItineraryActivity extends Activity implements OnClickListener {
 				intent.putExtra("StartAddress", (String)listItem.get(arg2).get("OrderAddress"));
 				intent.putExtra("SerTypeId", (String)listItem.get(arg2).get("SerTypeId"));
 				intent.putExtra("CarTypeId", (String)listItem.get(arg2).get("CarTypeId"));
-				intent.putExtra("FlightNum", (String)listItem.get(arg2).get("FlightNum"));
-				//intent.putExtra("Airport", (String)listItem.get(arg2).get("Airport"));
+				intent.putExtra("R_BMoney", (String)listItem.get(arg2).get("R_BMoney"));
+				intent.putExtra("stopCarMoney", (String)listItem.get(arg2).get("stopCarMoney"));
 				intent.putExtra("EndAddress", (String)listItem.get(arg2).get("EndAddress"));
 				intent.putExtra("UseCarTime", (String)listItem.get(arg2).get("UseCarTime"));
 				intent.putExtra("CarSum", (String)listItem.get(arg2).get("CarSum"));
@@ -104,7 +118,7 @@ public class ItineraryActivity extends Activity implements OnClickListener {
 				intent.putExtra("mileageMoney", (String)listItem.get(arg2).get("mileageMoney"));
 				intent.putExtra("bascMoney", (String)listItem.get(arg2).get("bascMoney"));
 				intent.putExtra("timeMoney", (String)listItem.get(arg2).get("timeMoney"));
-				intent.putExtra("vouMoney", (String)listItem.get(arg2).get("vouMoney"));
+				//intent.putExtra("vouMoney", (String)listItem.get(arg2).get("vouMoney"));
 				intent.putExtra("asssScore", (String)listItem.get(arg2).get("asssScore"));
 				startActivity(intent);
 			}else{
@@ -124,18 +138,9 @@ public class ItineraryActivity extends Activity implements OnClickListener {
 	void getData(){
 		getOrderNet.setHandler(mhandler);
 		getOrderNet.setDevice(Global.DEVICE);
+		getOrderNet.setPage(moreDataCount);
 		getOrderNet.setAuthn(MySharePreference.getStringValue(getApplication(), MySharePreference.AUTHN));
 		getOrderNet.getCodeFromServer();
-		/*
-		for(int i=0;i<5;i++){
-		     HashMap<String , Object> map = new HashMap<String , Object>();
-			 map.put("OrderStatus","已完成");
-			 map.put("OrderNumber", "20002313123");
-			 map.put("OrderDate", "2015-5-5 10:00");
-			 map.put("OrderAddress","汉口火车站");
-			 listItem.add(map);
-		}
-		*/
 	}
 	@SuppressLint("HandlerLeak")
 	public Handler mhandler= new Handler() {
@@ -155,10 +160,14 @@ public class ItineraryActivity extends Activity implements OnClickListener {
     }};
     private void parseJSON(String str)throws Exception{  
     	//System.out.println(str);
+    	//System.out.println("******listItem: "+listItem.size());
 		JSONObject jsonobj = new JSONObject(str);
 		int result = jsonobj.getInt("ResultCode");
 		if (result == Global.SUCCESS) {
 			JSONArray jsonarray = jsonobj.getJSONArray("Data");
+			if(jsonarray.length()>0){
+				 listview.setVisibility(View.VISIBLE);
+					//System.out.println("******listItem: "+listItem.size());
 			for (int x = 0; x < jsonarray.length(); x++) {
 				JSONObject jsonobj2 = (JSONObject) jsonarray.get(x);
 				HashMap<String, Object> map = new HashMap<String, Object>();
@@ -177,7 +186,7 @@ public class ItineraryActivity extends Activity implements OnClickListener {
 				map.put("OrderNumber", jsonobj2.getString("orderNum"));
 				map.put("OrderDate", jsonobj2.getString("startTime"));
 				map.put("OrderAddress", jsonobj2.getString("startAddress"));
-				String getSerTypeId = jsonobj2.getString("SerTypeId");
+				String getSerTypeId = jsonobj2.getString("serTypeId");
 				if(getSerTypeId.equals("1")){
 				   map.put("SerTypeId", "接机");
 				}else if(getSerTypeId.equals("2")){
@@ -190,7 +199,7 @@ public class ItineraryActivity extends Activity implements OnClickListener {
 					map.put("SerTypeId", "城际约租");
 				}
 				map.put("CarTypeId", jsonobj2.getString("carTypeId"));
-				map.put("FlightNum", jsonobj2.getString("flightNum"));
+				//map.put("FlightNum", jsonobj2.getString("flightNum"));
 				//map.put("Airport", jsonobj2.getString("airport"));
 				map.put("EndAddress", jsonobj2.getString("endAddress"));
 				map.put("UseCarTime", jsonobj2.getString("useCarTime"));
@@ -209,7 +218,9 @@ public class ItineraryActivity extends Activity implements OnClickListener {
 				map.put("mileageMoney", jsonobj2.getString("mileageMoney"));
 				map.put("bascMoney", jsonobj2.getString("bascMoney"));
 				map.put("timeMoney", jsonobj2.getString("timeMoney"));
-				map.put("vouMoney", jsonobj2.getString("vouMoney"));
+				//map.put("vouMoney", jsonobj2.getString("vouMoney"));
+				map.put("R_BMoney", jsonobj2.getString("R_BMoney"));
+				map.put("stopCarMoney", jsonobj2.getString("stopCarMoney"));
 				map.put("asssScore", jsonobj2.getString("assessScore"));
 				map.put("slongitude", jsonobj2.getString("slongitude"));
 				map.put("slatitude", jsonobj2.getString("slatitude"));
@@ -217,9 +228,23 @@ public class ItineraryActivity extends Activity implements OnClickListener {
 				map.put("elatitude", jsonobj2.getString("elatitude"));
 				listItem.add(map);
 			}
+			
+			if(listItem.size()<PAGESIZE){
+				listview.setHasMore(false);//禁掉下拉刷新	
+			}
+			listview.onBottomComplete();
+			}else{
+				//禁掉下拉刷新
+	        	 listview.setHasMore(false);
+	        	 listview.onBottomComplete();
+			}
 		} else {
-
+			Toast.makeText(getApplication(),jsonobj.getString("Message") , Toast.LENGTH_SHORT).show();
 		}
+		if(listItem.size()==0){
+ 			imgbg.setVisibility(View.VISIBLE);
+ 			textbg.setVisibility(View.VISIBLE);
+ 		 }
 		pro.setVisibility(View.GONE); 
     }
 	@Override

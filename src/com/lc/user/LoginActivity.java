@@ -32,6 +32,7 @@ import android.widget.Toast;
 
 @SuppressLint("HandlerLeak")
 public class LoginActivity extends Activity {
+	public final static int COUNTTIME= 60;
 	//private TextView title;
 	private TextView backbt;
 	private Button getCode;
@@ -41,7 +42,7 @@ public class LoginActivity extends Activity {
 	private String getCodeStr="";
 
 	private Timer timer = new Timer(); 
-	private int recLen=30;
+	private int recLen=60;
 	private boolean startTimer = false;
 	GetCode getCodeNet;
 	LoginNet loginNet;
@@ -77,7 +78,7 @@ public class LoginActivity extends Activity {
 				if(phoneNum.length()<=0){
 					Toast.makeText(LoginActivity.this, "手机号不能为空", Toast.LENGTH_SHORT).show();
 				}else {
-					recLen=30;
+					recLen=COUNTTIME;
 					if(!startTimer){
 					timer.schedule(task, 1000, 1000);       // timeTask  
 					}
@@ -167,7 +168,7 @@ public class LoginActivity extends Activity {
 		     				startActivity(intent);
 		    				finish();
 		                 }else{
-		                	nextStep.setProgress(-1);
+		                	nextStep.setProgress(0);
 		                	nextStep.setClickable(true);
 		                    Toast.makeText(LoginActivity.this, jsonobj.getString("Message"), Toast.LENGTH_LONG).show();
 		                 } 

@@ -1,13 +1,19 @@
 package com.lc.innercity;
 
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import com.lc.net.CancelInnerNet;
 import com.lc.specialcar.R;
-import com.lc.utils.ButtonEffect;
 import com.lc.utils.ExitApplication;
+import com.lc.utils.Global;
+import com.lc.utils.MySharePreference;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -15,12 +21,15 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class CancelOrderActivity extends Activity implements OnClickListener {
     TextView tvTitle,righttext;
     ImageView ivleft;
     private RelativeLayout rls;
+    String orderNum="";
+    CancelInnerNet cancelInnerNet = new CancelInnerNet();
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
@@ -30,6 +39,10 @@ public class CancelOrderActivity extends Activity implements OnClickListener {
 	}
 
 	public void init(){
+		Bundle extras = getIntent().getExtras();
+	    if(extras != null){
+	    	orderNum = extras.getString("OrderNum");
+	    }
 		ExitApplication.getInstance().addActivity(this);
 		tvTitle = (TextView) findViewById(R.id.topTv);
 		tvTitle.setText("取消订单");
@@ -53,7 +66,11 @@ public class CancelOrderActivity extends Activity implements OnClickListener {
 			finish();
 			break;
 		case R.id.righttext:
-			finish();
+			cancelInnerNet.setHandler(mHandler);
+			cancelInnerNet.setOrderNum(orderNum);
+			cancelInnerNet.setAuthn(MySharePreference.getStringValue(getApplication(), MySharePreference.AUTHN));
+			cancelInnerNet.getDataFromServer();
+			//finish();
 			//Intent intent = new Intent();
 			//intent.setClass(CancelOrderActivity.this,BillingRuleActivity.class);
 			//startActivity(intent);
@@ -65,6 +82,26 @@ public class CancelOrderActivity extends Activity implements OnClickListener {
 		}
 	}
 	
-	 
-	   
+	private Handler mHandler = new Handler() {
+        public void handleMessage(android.os.Message msg) {
+            switch(msg.what) {
+            case Global.CANCEL_INNER:{
+            	JSONObject jsonobj;
+				try {
+					jsonobj = new JSONObject((String)msg.obj);
+					int result = jsonobj.getInt("ResultCode");
+	           	    if(result==Global.SUCCESS){
+	   				  finish();
+	                }else{
+	                   Toast.makeText(CancelOrderActivity.this, jsonobj.getString("Message"), Toast.LENGTH_LONG).show();
+	                } 
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}  
+                
+       	
+                break;
+                }
+            }}
+            };
 }

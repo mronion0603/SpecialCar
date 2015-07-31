@@ -5,6 +5,28 @@
     android:orientation="vertical"
      >  
       <include layout="@layout/main_head" />
+     
+	     <ImageView     
+	    android:id="@+id/imgbg"    
+	    android:layout_width="wrap_content"    
+	    android:layout_height="wrap_content"    
+	    android:layout_marginTop="80dip"
+	    android:layout_gravity="center"
+	    android:gravity="center"
+	    android:background="@drawable/bg03"
+	    android:visibility="gone"
+	    /> 
+	     <TextView     
+	    android:id="@+id/tvbg"    
+	    android:layout_width="wrap_content"    
+	    android:layout_height="wrap_content"    
+	    android:layout_gravity="center"
+	    android:gravity="center"
+	    android:text="暂无地址"
+	    android:textSize="18sp"
+	    android:textColor="@color/black2"
+	    android:visibility="gone"
+	    /> 
       <ListView  
         android:id="@+id/lvGroup"  
         android:layout_width="fill_parent"  
@@ -13,5 +35,16 @@
       
         android:layout_marginBottom="20dip"
        />
-      
+       <ProgressBar     
+	    android:id="@+id/progress2"    
+	    style="?android:attr/progressBarStyleLarge"    
+	    android:layout_width="wrap_content"    
+	    android:layout_height="wrap_content"    
+	    android:max="100"     
+	    android:progress="50"     
+	    android:secondaryProgress="70"    
+	    android:layout_marginTop="5dip"
+	    android:layout_gravity="center"
+	    android:gravity="center" 
+	    /> 
 </LinearLayout>  

@@ -20,7 +20,7 @@ public class GetAccountNet {
 	String result = "网络连接错误！";
 	String authn = "";
 	String device= "";
-	
+	int page= 0;
 	public GetAccountNet(){
 		
 	}
@@ -29,6 +29,9 @@ public class GetAccountNet {
 	}
 	public void setDevice(String device){
 		this.device = device;
+	}
+	public void setPage(int page){
+		this.page = page;
 	}
 	public void setAuthn(String authn){
 		this.authn = authn;
@@ -59,7 +62,8 @@ public class GetAccountNet {
 	                		DataOutputStream outputStream = new DataOutputStream(urlConnection.getOutputStream());
 	                		
 	                		String content ="authn=" + URLEncoder.encode(authn, "UTF-8")
-	                				+"&device=" + URLEncoder.encode(device, "UTF-8");
+	                				+"&device=" + URLEncoder.encode(device, "UTF-8")
+	                				+"&page=" + page;
 	                		outputStream.writeBytes(content);
 	                		outputStream.flush();
 	                		outputStream.close();

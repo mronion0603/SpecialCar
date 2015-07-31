@@ -10,12 +10,10 @@ import org.json.JSONObject;
 
 import com.lc.net.GetCarNet;
 import com.lc.specialcar.R;
-import com.lc.utils.ConnectUrl;
 import com.lc.utils.ExitApplication;
 import com.lc.utils.Global;
 import com.lc.utils.MyDialog;
 import com.lc.utils.MySharePreference;
-import com.lidroid.xutils.BitmapUtils;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -30,10 +28,8 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.Gallery;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,35 +40,36 @@ import android.widget.AdapterView.OnItemSelectedListener;
 @SuppressWarnings("deprecation")
 public class SelectCarActivity extends Activity implements OnClickListener {
 	    TextView tvTitle,textright;
-	    ImageView ivleft,ivCarbg;
+	    ImageView ivleft;
 	    private RelativeLayout rls;
 	    private Gallery mGallery;
-	    Button bttype;
-	    TextView tv1,tv2,tv3;
+	    TextView tv1,tv2,tv3,tvtype,tvtype2;
 	    List<HashMap<String,String>> list =new ArrayList<HashMap<String,String>>();
 	    GetCarNet getcarnet = new GetCarNet();
 	    int currentposition = 0;
 	    Dialog dia;
-	 
+	    String type="经济";
+	    int [] imgs = {R.drawable.fee_car1,R.drawable.fee_car2,R.drawable.fee_car3}; 
 		//private ProgressBar pb; 
 		@Override
 		public void onCreate(Bundle savedInstanceState) {
 			requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
 			super.onCreate(savedInstanceState);
-			setContentView(R.layout.activity_innercity_bill);
+			setContentView(R.layout.innercity_selectcar);
 			init();
 		}
 		public void init(){
 			
 			ExitApplication.getInstance().addActivity(this);
 			//pb = (ProgressBar)findViewById(R.id.progress); 
-			bttype= (Button) findViewById(R.id.Type);
+			tvtype2 = (TextView) findViewById(R.id.type2);
+			tvtype = (TextView) findViewById(R.id.type);
 			tv1 = (TextView) findViewById(R.id.tv1);
 			tv2 = (TextView) findViewById(R.id.tv2);
 			tv3 = (TextView) findViewById(R.id.tv3);
 			mGallery = (Gallery) findViewById(R.id.gallery);
 			tvTitle = (TextView) findViewById(R.id.topTv);
-			tvTitle.setText("费用明细");
+			tvTitle.setText("选择车型");
 			textright = (TextView) findViewById(R.id.righttext);
 			textright.setVisibility(View.VISIBLE);
 			textright.setText("确定");
@@ -81,7 +78,7 @@ public class SelectCarActivity extends Activity implements OnClickListener {
 			rls.setOnClickListener(this);
 			ivleft = (ImageView) findViewById(R.id.ArrowHead);
 			ivleft.setVisibility(View.VISIBLE);
-			ivCarbg = (ImageView) findViewById(R.id.imageView);
+			//ivCarbg = (ImageView) findViewById(R.id.imageView);
 					
 			//initCarType();
 			getcarnet.setHandler(mHandler);
@@ -101,10 +98,10 @@ public class SelectCarActivity extends Activity implements OnClickListener {
 			mGallery.setOnItemClickListener(new OnItemClickListener() {
 				  public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 					    //ivCarbg.setBackgroundResource(mImageResourceIds[arg2]);
-					    BitmapUtils bitmapUtils = new BitmapUtils(SelectCarActivity.this);
+					  //  BitmapUtils bitmapUtils = new BitmapUtils(SelectCarActivity.this);
 				    	// 加载网络图片
-					    String str = list.get(arg2).get("carImg")+"";
-				    	bitmapUtils.display(ivCarbg, ConnectUrl.commonurl0+str);
+					  //  String str = list.get(arg2).get("carImg")+"";
+				    //	bitmapUtils.display(ivCarbg, ConnectUrl.commonurl0+str);
 				      }
 				    });
 			mGallery.setSelection(list.size()/2);
@@ -113,19 +110,26 @@ public class SelectCarActivity extends Activity implements OnClickListener {
 				public void onItemSelected(AdapterView<?> parent, View view,
 						int position, long id) {
 					currentposition = position;
-					 BitmapUtils bitmapUtils = new BitmapUtils(SelectCarActivity.this);
+					// BitmapUtils bitmapUtils = new BitmapUtils(SelectCarActivity.this);
 				    	// 加载网络图片
-					    String str = list.get(position).get("carImg")+"";
-				    	bitmapUtils.display(ivCarbg, ConnectUrl.commonurl0+str);
+					    //String str = list.get(position).get("carImg")+"";
+				    	//bitmapUtils.display(ivCarbg, ConnectUrl.commonurl0+str);
 				    	
 					//ivCarbg.setBackgroundResource(mImageResourceIds[position]);
 					String type = list.get(position).get("carTypeId");
-					if(type.equals("1"))
-					bttype.setText("经济");
-					else if(type.equals("2"))
-					bttype.setText("普通");
-					else
-					bttype.setText("商务");
+					String type2 = "";
+					if(type.equals("1")){
+						type="经济";
+						type2="帕萨特 凯美瑞或类似5座车型";
+					}else if(type.equals("2")){
+						type="普通";
+						type2="别克GL8或类似6座车型";
+					}else{
+						type="商务";
+						type2="奥迪A6 宝马系列或类似5座车型";
+					}
+					tvtype.setText(type);
+					tvtype2.setText(type2);
 					//bttype.setText(list.get(position).get("carDesc"));
 					tv1.setText(list.get(position).get("bascMoney")+"元/起步价");
 					tv2.setText(list.get(position).get("mileageMoney")+"元/公里");
@@ -190,7 +194,7 @@ public class SelectCarActivity extends Activity implements OnClickListener {
 		    
 				Intent intent = new Intent();
 				
-				intent.putExtra("strtype",bttype.getText().toString());
+				intent.putExtra("strtype",type);
 			    intent.putExtra("type", (String)list.get(currentposition).get("carTypeId"));
 			    intent.putExtra("bascMoney", (String)list.get(currentposition).get("bascMoney"));
 			    intent.putExtra("mileageMoney", (String)list.get(currentposition).get("mileageMoney"));
@@ -238,14 +242,14 @@ public class SelectCarActivity extends Activity implements OnClickListener {
 		    public View getView(int position, View convertView, ViewGroup parent) {
 		        ImageView imageView = new ImageView(mContext);
 		       // imageView.setImageResource(mImageResourceIds[position]);
-		        imageView.setLayoutParams(new Gallery.LayoutParams(300, 400));
+		        //imageView.setLayoutParams(new Gallery.LayoutParams(300, 400));
 		        imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
 		        
-		        BitmapUtils bitmapUtils = new BitmapUtils(SelectCarActivity.this);
+		        //BitmapUtils bitmapUtils = new BitmapUtils(SelectCarActivity.this);
 		    	// 加载网络图片
-			    String str = list.get(position).get("carImg")+"";
-		    	bitmapUtils.display(imageView, ConnectUrl.commonurl0+str);
-		    	
+			    //String str = list.get(position).get("carImg")+"";
+		    	//bitmapUtils.display(imageView, ConnectUrl.commonurl0+str);
+		    	imageView.setBackgroundResource(imgs[position]);
 		        return imageView;
 		    }
 		}

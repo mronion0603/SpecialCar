@@ -212,14 +212,17 @@ public class SendDealActivity extends Activity implements OnClickListener {
 	        contactWindow.showAsDropDown(originview, 0, 0); 
 		}	break;
 		case R.id.righttext:
+			/*
 			cancelInnerNet.setHandler(mHandler);
 			cancelInnerNet.setOrderNum(getOrderNum);
 			cancelInnerNet.setAuthn(MySharePreference.getStringValue(getApplication(), MySharePreference.AUTHN));
 			cancelInnerNet.getDataFromServer();
-			finish();
-			//Intent intent = new Intent();
-			//intent.setClass(SendDealActivity.this,CancelOrderActivity.class);
-			//startActivity(intent);
+			*/
+			//finish();
+			Intent intent = new Intent();
+			intent.setClass(SendDealActivity.this,CancelOrderActivity.class);
+			intent.putExtra("OrderNum", getOrderNum);
+			startActivity(intent);
 			
 			break;
 		default:

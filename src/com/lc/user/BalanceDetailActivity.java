@@ -6,6 +6,8 @@ import java.util.HashMap;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import cn.trinea.android.common.view.DropDownListView;
+
 import com.lc.net.GetAccountNet;
 import com.lc.specialcar.R;
 import com.lc.utils.Global;
@@ -20,7 +22,6 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.SimpleAdapter;
@@ -29,23 +30,22 @@ import android.widget.AdapterView.OnItemClickListener;
 
 
 public class BalanceDetailActivity extends Activity implements OnClickListener {
+	public final static int PAGESIZE = 8;
 	SimpleAdapter listItemAdapter;
     TextView tvTitle;
     ImageView ivleft;
     private RelativeLayout rls;
-    private ListView listview;
+    private DropDownListView listview;
   	ArrayList<HashMap<String,Object>> listItem = new ArrayList<HashMap<String,Object>>();
   	GetAccountNet getAccountNet = new GetAccountNet();
  	private ProgressBar pro; 
+	public int moreDataCount= 1;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
 		super.onCreate(savedInstanceState);
-
 		setContentView(R.layout.userinfo_balancedetail);
 		init();
-		
-		
 	}
 
 	public void init(){
@@ -58,13 +58,24 @@ public class BalanceDetailActivity extends Activity implements OnClickListener {
 		rls.setOnClickListener(this);
 		ivleft = (ImageView) findViewById(R.id.ArrowHead);
 		ivleft.setVisibility(View.VISIBLE);
-		listview=(ListView)findViewById(R.id.listview);
+		listview=(DropDownListView)findViewById(R.id.listview);
+		 listview.setVisibility(View.GONE);
 		getData();
 		listItemAdapter = new SimpleAdapter(this,listItem,R.layout.userinfo_balancedetail_listitem , 
 				new String[]{"MessageTitle","MessageDate","Money","MoneyType"},
 				new int[]{R.id.MessageTitle,R.id.MessageDate,R.id.Money,R.id.MoneyType});
-		listview.setDividerHeight(1);
+		listview.setDividerHeight(20);
 		listview.setAdapter(listItemAdapter);
+		listview.setOnBottomListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            	 moreDataCount++;
+            	 getAccountNet.setDevice(Global.DEVICE);
+            	 getAccountNet.setPage(moreDataCount);
+            	 getAccountNet.setAuthn(MySharePreference.getStringValue(getApplication(), MySharePreference.AUTHN));
+            	 getAccountNet.getCodeFromServer();
+            }
+        });
 		listview.setOnItemClickListener(new OnItemClickListener(){
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
@@ -77,6 +88,7 @@ public class BalanceDetailActivity extends Activity implements OnClickListener {
 	void getData(){
 		getAccountNet.setHandler(mhandler);
 		getAccountNet.setDevice(Global.DEVICE);
+		getAccountNet.setPage(moreDataCount);
 		getAccountNet.setAuthn(MySharePreference.getStringValue(getApplication(), MySharePreference.AUTHN));
 		getAccountNet.getCodeFromServer();
 	}
@@ -104,6 +116,8 @@ public class BalanceDetailActivity extends Activity implements OnClickListener {
 		int result = jsonobj.getInt("ResultCode");
 		if (result == Global.SUCCESS) {
 			JSONArray jsonarray = jsonobj.getJSONArray("Data");
+			if(jsonarray.length()>0){
+		    listview.setVisibility(View.VISIBLE);
 			for (int x = 0; x < jsonarray.length(); x++) {
 				JSONObject jsonobj2 = (JSONObject) jsonarray.get(x);
 				HashMap<String, Object> map = new HashMap<String, Object>();
@@ -133,6 +147,15 @@ public class BalanceDetailActivity extends Activity implements OnClickListener {
 				}
 				listItem.add(map);
 			}
+			if(listItem.size()<PAGESIZE){
+				listview.setHasMore(false);//禁掉下拉刷新	
+			}
+			listview.onBottomComplete();
+			}else{
+	        	 //禁掉下拉刷新
+	        	 listview.setHasMore(false);
+	        	 listview.onBottomComplete();
+	         }
 		} else {
 			
 		}

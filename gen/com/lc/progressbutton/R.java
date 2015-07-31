@@ -42,11 +42,11 @@ public final class R {
 		public static final int cpb_stroke_width = 0x7f060002;
 	}
 	public static final class drawable {
-		public static final int cpb_background = 0x7f020028;
-		public static final int ic_launcher = 0x7f02004d;
+		public static final int cpb_background = 0x7f02002b;
+		public static final int ic_launcher = 0x7f020053;
 	}
 	public static final class id {
-		public static final int action_settings = 0x7f09013c;
+		public static final int action_settings = 0x7f090141;
 	}
 	public static final class layout {
 		public static final int activity_main = 0x7f03000b;

@@ -272,6 +272,8 @@ public class AndroidShare extends Dialog implements AdapterView.OnItemClickListe
 		}
         }catch (ActivityNotFoundException  e){
             Toast.makeText(context, "您的手机没有安装新浪微博客户端或微博版本过低", Toast.LENGTH_LONG).show();
+        }catch(Exception  e){
+            Toast.makeText(context, "您的手机系统版本过低，暂不支持此功能", Toast.LENGTH_LONG).show();
         } 
 	}
 

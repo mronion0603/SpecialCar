@@ -17,6 +17,7 @@
 	    android:paddingBottom="10dip"
 	    android:id="@+id/Duration"
 	    android:background="@color/white"
+	    	    android:visibility="gone"
 	    >
 	    <ImageView
 	      android:id="@+id/date2"
@@ -63,6 +64,7 @@
 	      android:layout_width="fill_parent"
 	      android:layout_height="1dip"
 	      android:background="@color/user_divider3"
+	       android:visibility="gone"
 	    />
 	    <RelativeLayout 
 	    android:layout_width="fill_parent"
@@ -387,6 +389,7 @@
 	    android:paddingBottom="10dip"
 	    android:id="@+id/rldiscount"
 	    android:background="@color/white"
+	    android:visibility="gone"
 	    >
 	    <ImageView
 	      android:id="@+id/moresaftyim6"

@@ -2,6 +2,8 @@ package com.lc.shuttle;
 
 
 
+import com.lc.innercity.BillingRuleActivity;
+import com.lc.innercity.CarInfoActivity;
 import com.lc.specialcar.R;
 import com.lc.utils.ExitApplication;
 
@@ -25,7 +27,7 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
 		private Intent iHome;
 		private Intent iCatalog;
 		 ImageView ivleft;
-		 TextView tvTitle;
+		 TextView tvTitle,righttext;
 		 private RelativeLayout rls;
 		@Override
 		protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,10 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
 			requestWindowFeature(Window.FEATURE_NO_TITLE);
 	        setContentView(R.layout.shuttle_home);
 	        ExitApplication.getInstance().addActivity(this);
+	        righttext = (TextView) findViewById(R.id.righttext);
+			righttext.setVisibility(View.VISIBLE);
+			righttext.setOnClickListener(this);
+			righttext.setText("费用明细");
 	        mainTab=(RadioGroup)findViewById(R.id.main_tab);
 	        mainTab.setOnCheckedChangeListener(this);
 	        tvTitle = (TextView) findViewById(R.id.topTv);
@@ -71,6 +77,11 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
 			case R.id.rlslidemenu:
 				finish();
 				break;
+			case R.id.righttext:
+			{	Intent intent = new Intent();
+				intent.setClass(ShuttleHomeActivity.this,BillingRuleActivity.class);
+				startActivity(intent);
+			}	break;
 			default:
 				break;
 			}

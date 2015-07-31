@@ -39,7 +39,6 @@
 	      android:textSize="18sp"
 	      android:textColor="@color/black"
 	      android:layout_marginBottom="10dip"
-	      android:text="王师傅"
 	      android:textStyle="bold"
 	     />
 	      <RatingBar
@@ -47,7 +46,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="17dip" 
                 android:layout_marginLeft="10dip"
-                
+                android:isIndicator="true"
                 style="@style/foodRatingBar"
                />
 	     </LinearLayout>
@@ -356,7 +355,7 @@
 	            android:textSize="14sp" 
 	            android:textColor="@color/black"
 	            android:layout_marginLeft="10dip"
-	            android:text="远途费"
+	            android:text="路桥费"
 	            />
 	            <TextView
 	            android:id="@+id/longfee"
