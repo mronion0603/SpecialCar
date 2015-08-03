@@ -1,6 +1,5 @@
 package com.lc.specialcar;
 
-import cn.jpush.android.api.InstrumentedActivity;
 import cn.jpush.android.api.JPushInterface;
 
 import com.lc.utils.MySharePreference;
@@ -8,8 +7,6 @@ import com.lc.utils.MySharePreference;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;

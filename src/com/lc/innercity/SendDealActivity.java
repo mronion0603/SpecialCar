@@ -39,7 +39,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class SendDealActivity extends Activity implements OnClickListener {
-	
+	public final static int CANCEL=1;
     TextView tvTitle,righttext,tvdrivername,tvcarnum;
     ImageView ivleft,sendbg,ivcontactdriver;
     CircularImage ivdriverimg;
@@ -222,7 +222,7 @@ public class SendDealActivity extends Activity implements OnClickListener {
 			Intent intent = new Intent();
 			intent.setClass(SendDealActivity.this,CancelOrderActivity.class);
 			intent.putExtra("OrderNum", getOrderNum);
-			startActivity(intent);
+			startActivityForResult(intent,CANCEL);
 			
 			break;
 		default:
@@ -351,4 +351,12 @@ public class SendDealActivity extends Activity implements OnClickListener {
 	            });  
 	        }  
 	    };  
+	    @Override  
+	    protected void onActivityResult(int requestCode, int resultCode, Intent data) {  
+	        super.onActivityResult(requestCode, resultCode, data);  
+	        if (requestCode == CANCEL && resultCode == RESULT_OK) {        	 
+	            	 //System.out.println("*****");
+	            	 finish();
+	        }  
+	 }
 }

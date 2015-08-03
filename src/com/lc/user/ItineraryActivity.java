@@ -33,6 +33,7 @@ import android.widget.AdapterView.OnItemClickListener;
 
 public class ItineraryActivity extends Activity implements OnClickListener {
 	public final static int PAGESIZE = 8;
+	public final static int CANCELTO = 2;
     TextView tvTitle,textbg;
     ImageView ivleft,imgbg;
     private RelativeLayout rls;
@@ -118,9 +119,9 @@ public class ItineraryActivity extends Activity implements OnClickListener {
 				intent.putExtra("mileageMoney", (String)listItem.get(arg2).get("mileageMoney"));
 				intent.putExtra("bascMoney", (String)listItem.get(arg2).get("bascMoney"));
 				intent.putExtra("timeMoney", (String)listItem.get(arg2).get("timeMoney"));
-				//intent.putExtra("vouMoney", (String)listItem.get(arg2).get("vouMoney"));
+				intent.putExtra("assessType", (String)listItem.get(arg2).get("assessType"));
 				intent.putExtra("asssScore", (String)listItem.get(arg2).get("asssScore"));
-				startActivity(intent);
+				startActivityForResult(intent,CANCELTO);
 			}else{
 				Intent intent = new Intent();
 				intent.setClass(getApplication(), ServiceMapActivity.class);
@@ -159,7 +160,7 @@ public class ItineraryActivity extends Activity implements OnClickListener {
             }
     }};
     private void parseJSON(String str)throws Exception{  
-    	//System.out.println(str);
+    	System.out.println(str);
     	//System.out.println("******listItem: "+listItem.size());
 		JSONObject jsonobj = new JSONObject(str);
 		int result = jsonobj.getInt("ResultCode");
@@ -226,6 +227,7 @@ public class ItineraryActivity extends Activity implements OnClickListener {
 				map.put("slatitude", jsonobj2.getString("slatitude"));
 				map.put("elongitude", jsonobj2.getString("elongitude"));
 				map.put("elatitude", jsonobj2.getString("elatitude"));
+				map.put("assessType", jsonobj2.getString("assessType"));
 				listItem.add(map);
 			}
 			
@@ -259,5 +261,11 @@ public class ItineraryActivity extends Activity implements OnClickListener {
 		}
 	}
 	
- 
+	@Override  
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {  
+        super.onActivityResult(requestCode, resultCode, data);  
+        if (requestCode == CANCELTO && resultCode == RESULT_OK) {
+            	 finish();            
+        }  
+ }
 }

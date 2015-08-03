@@ -12,6 +12,7 @@ import com.lc.utils.MySharePreference;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -66,6 +67,8 @@ public class CommentActivity extends Activity implements OnClickListener {
 				tvscore.setText(String.valueOf(rb.getRating())+"分");
 			}
 		});
+		float score = 5.0f;
+		rb.setRating(score);
 	}
 	@Override
 	public void onClick(View v) {
@@ -112,6 +115,8 @@ public class CommentActivity extends Activity implements OnClickListener {
 	    	int result = jsonobj.getInt("ResultCode");
 	   	    if(result==Global.SUCCESS){
 	   	      Toast.makeText(CommentActivity.this,"提交成功", Toast.LENGTH_LONG).show();
+	   	      Intent intent = new Intent();
+    	      setResult(RESULT_OK, intent); 
 	   	      finish();
 	        }else{
 	          submit.setClickable(true);

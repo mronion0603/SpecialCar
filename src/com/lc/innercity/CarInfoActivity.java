@@ -57,6 +57,7 @@ import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
 public class CarInfoActivity extends Activity implements OnClickListener {
+	public final static int CANCEL=7;
 	public static final int REQUSET_NAMEPHONE = 1;
 	public static final int REQUSET_ADDRESS = 2;
 	public static final int REQUSET_ADDRESS2 = 3;
@@ -576,6 +577,7 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 	            	  
 	              }
 	        }  
+	       
 	        if (requestCode == REQUSET_ADDRESS2 && resultCode == RESULT_OK) {
 	        	String address ="";
 	        	  Bundle extras = data.getExtras();

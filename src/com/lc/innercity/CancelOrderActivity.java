@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -30,6 +31,7 @@ public class CancelOrderActivity extends Activity implements OnClickListener {
     private RelativeLayout rls;
     String orderNum="";
     CancelInnerNet cancelInnerNet = new CancelInnerNet();
+    EditText etreason;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
@@ -46,6 +48,7 @@ public class CancelOrderActivity extends Activity implements OnClickListener {
 		ExitApplication.getInstance().addActivity(this);
 		tvTitle = (TextView) findViewById(R.id.topTv);
 		tvTitle.setText("取消订单");
+		etreason= (EditText) findViewById(R.id.feedbackET);
 		righttext = (TextView) findViewById(R.id.righttext);
 		righttext.setVisibility(View.VISIBLE);
 		righttext.setText("提交");
@@ -69,14 +72,10 @@ public class CancelOrderActivity extends Activity implements OnClickListener {
 			cancelInnerNet.setHandler(mHandler);
 			cancelInnerNet.setOrderNum(orderNum);
 			cancelInnerNet.setAuthn(MySharePreference.getStringValue(getApplication(), MySharePreference.AUTHN));
+			cancelInnerNet.setReason(etreason.getText().toString());
 			cancelInnerNet.getDataFromServer();
-			//finish();
-			//Intent intent = new Intent();
-			//intent.setClass(CancelOrderActivity.this,BillingRuleActivity.class);
-			//startActivity(intent);
 			break;
-		
-			
+	
 		default:
 			break;
 		}
@@ -91,7 +90,10 @@ public class CancelOrderActivity extends Activity implements OnClickListener {
 					jsonobj = new JSONObject((String)msg.obj);
 					int result = jsonobj.getInt("ResultCode");
 	           	    if(result==Global.SUCCESS){
-	   				  finish();
+	           	      Toast.makeText(CancelOrderActivity.this, "取消订单成功", Toast.LENGTH_LONG).show();
+	           	      Intent intent = new Intent();
+	           	      setResult(RESULT_OK, intent); 
+	           	      finish();
 	                }else{
 	                   Toast.makeText(CancelOrderActivity.this, jsonobj.getString("Message"), Toast.LENGTH_LONG).show();
 	                } 

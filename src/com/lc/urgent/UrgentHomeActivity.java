@@ -72,16 +72,16 @@ public class UrgentHomeActivity extends Activity implements OnClickListener {
 			//startActivity(intent);
 			break;
 		case R.id.usecardate:
-		{	contactWindow = new ContactWindow(UrgentHomeActivity.this,itemOnClick,"123456");
+		{	contactWindow = new ContactWindow(UrgentHomeActivity.this,itemOnClick,"4000849488");
 		    contactWindow.showAsDropDown(originview, 0, 0); 
 		}	break;
         case R.id.usecardate2:
         {	
-        	contactWindow = new ContactWindow(UrgentHomeActivity.this,itemOnClick,"1232411");
+        	contactWindow = new ContactWindow(UrgentHomeActivity.this,itemOnClick,"4000849488");
 		    contactWindow.showAsDropDown(originview, 0, 0); 
         }	break;
         case R.id.usecardate3:
-        {	contactWindow = new ContactWindow(UrgentHomeActivity.this,itemOnClick,"62234234");
+        {	contactWindow = new ContactWindow(UrgentHomeActivity.this,itemOnClick,"4000849488");
 	        contactWindow.showAsDropDown(originview, 0, 0); 
         }	break;	
 		default:

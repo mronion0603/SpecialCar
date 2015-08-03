@@ -19,6 +19,7 @@ public class CancelInnerNet {
 	private boolean isRunning = false;
 	String result = "网络连接错误！";
 	String authn = "";
+	String comment = "";
 	String orderNum = "";
 	public CancelInnerNet(){
 		
@@ -28,6 +29,9 @@ public class CancelInnerNet {
 	}
 	public void setOrderNum(String orderNum){
 		this.orderNum = orderNum;
+	}
+	public void setReason(String comment){
+		this.comment = comment;
 	}
 	public void setAuthn(String authn){
 		this.authn = authn;
@@ -60,6 +64,7 @@ public class CancelInnerNet {
 	                		String content ="authn=" + URLEncoder.encode(authn, "UTF-8")
 	                				+"&orderNum=" + URLEncoder.encode(orderNum, "UTF-8")
 	                				+"&device=" + URLEncoder.encode(Global.DEVICE, "UTF-8")
+	                				+"&comment=" + URLEncoder.encode(comment, "UTF-8")
 	                				;
 	                		
 	                		outputStream.writeBytes(content);

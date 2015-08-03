@@ -1,11 +1,10 @@
 package com.lc.user;
 
-import com.lc.net.CancelInnerNet;
+import com.lc.innercity.CancelOrderActivity;
 import com.lc.specialcar.R;
 import com.lc.utils.CircularImage;
 import com.lc.utils.ConnectUrl;
 import com.lc.utils.ExitApplication;
-import com.lc.utils.MySharePreference;
 import com.lidroid.xutils.BitmapUtils;
 
 import android.app.Activity;
@@ -23,6 +22,8 @@ import android.widget.TextView;
 
 
 public class ItineraryDetailActivity extends Activity implements OnClickListener {
+	public final static int CANCEL=1;
+	public final static int COMMENT=2;
 	RatingBar rb;
     TextView tvTitle;
     ImageView ivleft;
@@ -34,11 +35,11 @@ public class ItineraryDetailActivity extends Activity implements OnClickListener
     	   endAddress="", useCarTime="", carSum="",riderName="",
     	   riderPhone="",comment="",mileage="",time="",realMoney="",
     	   carNum="",carType="",driverName="",driverImg="",
-           mileageMoney="",bascMoney="",timeMoney="",
+           mileageMoney="",bascMoney="",timeMoney="",assessType="",
         		   asssScore="",R_BMoney="",stopCarMoney="";
     Button bt;
     TextView tvdriverName,tvcar,tvcarnumber,tvOrderStatus,tvriderName,tvorderNum,tvusecarTime,tvstartAddress,
-             tvendAddress,tvmile,tvtimelong,tvstartMoney,tvtimefee,tvlongfee,tvdiscount,tvrealmoney;
+             tvendAddress,tvmile,tvtimelong,tvstartMoney,tvtimefee,tvlongfee,tvstopcar,tvrealmoney;
     //CancelInnerNet cancelInnerNet = new CancelInnerNet();
     @Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -60,7 +61,7 @@ public class ItineraryDetailActivity extends Activity implements OnClickListener
 	    	serTypeId= extras.getString("SerTypeId");
 	    	carTypeId= extras.getString("CarTypeId");
 	    	R_BMoney= extras.getString("R_BMoney");
-	    	//airport= extras.getString("Airport");
+	    	assessType= extras.getString("assessType");
 	    	endAddress= extras.getString("EndAddress");
 	    	useCarTime= extras.getString("UseCarTime");
 	    	carSum= extras.getString("CarSum");
@@ -78,7 +79,7 @@ public class ItineraryDetailActivity extends Activity implements OnClickListener
 	    	mileageMoney= extras.getString("mileageMoney");
 	    	bascMoney= extras.getString("bascMoney");
 	    	timeMoney= extras.getString("timeMoney");
-	    	vouMoney= extras.getString("vouMoney");
+	    	stopCarMoney= extras.getString("stopCarMoney");
 	    	asssScore= extras.getString("asssScore");
 	    }
 		ExitApplication.getInstance().addActivity(this);
@@ -107,7 +108,7 @@ public class ItineraryDetailActivity extends Activity implements OnClickListener
         tvstartMoney=(TextView) findViewById(R.id.startMoney);
         tvtimefee=(TextView) findViewById(R.id.timefee);
         tvlongfee=(TextView) findViewById(R.id.longfee);
-        tvdiscount=(TextView) findViewById(R.id.discount);
+        tvstopcar=(TextView) findViewById(R.id.discount);
         tvrealmoney=(TextView) findViewById(R.id.realmoney);
         if(orderStatus.equals("待服务")){
         	llextend.setVisibility(View.GONE);
@@ -118,6 +119,9 @@ public class ItineraryDetailActivity extends Activity implements OnClickListener
         }else if(orderStatus.equals("已完成")){
         	llextend.setVisibility(View.VISIBLE);
         	bt.setText("去评价");
+        	if(assessType.equals("1")){
+        		bt.setVisibility(View.GONE);
+        	}
         }else if(orderStatus.equals("取消")){
         	llextend.setVisibility(View.VISIBLE);
         }else if(orderStatus.equals("服务中")){
@@ -138,8 +142,8 @@ public class ItineraryDetailActivity extends Activity implements OnClickListener
         tvtimelong.setText(time);
         tvstartMoney.setText(bascMoney);
         tvtimefee.setText(timeMoney);
-        tvlongfee.setText(mileageMoney);
-        tvdiscount.setText(R_BMoney);
+        tvlongfee.setText(R_BMoney);
+        tvstopcar.setText(stopCarMoney);
         tvrealmoney.setText(realMoney);
         
         BitmapUtils bitmapUtils = new BitmapUtils(ItineraryDetailActivity.this);
@@ -164,21 +168,16 @@ public class ItineraryDetailActivity extends Activity implements OnClickListener
 			}
 			if(bt.getText().toString().equals("取消")){
 				Intent intent =new Intent();
-				intent.setClass(getApplication(), CommentActivity.class);
+				intent.setClass(getApplication(), CancelOrderActivity.class);
 				intent.putExtra("OrderNum", orderNum);
-				startActivity(intent);
-				/*
-				cancelInnerNet.setHandler(mHandler);
-				cancelInnerNet.setOrderNum(getOrderNum);
-				cancelInnerNet.setAuthn(MySharePreference.getStringValue(getApplication(), MySharePreference.AUTHN));
-				cancelInnerNet.getDataFromServer();
-			    */
+				startActivityForResult(intent,CANCEL);
+				
 			}
 			if(bt.getText().toString().equals("去评价")){
 				Intent intent =new Intent();
 				intent.setClass(getApplication(), CommentActivity.class);
 				intent.putExtra("OrderNum", orderNum);
-				startActivity(intent);
+				startActivityForResult(intent,COMMENT);
 			}
 		}break;
 			
@@ -187,5 +186,18 @@ public class ItineraryDetailActivity extends Activity implements OnClickListener
 		}
 	}
 	
- 
+	 @Override  
+	    protected void onActivityResult(int requestCode, int resultCode, Intent data) {  
+	        super.onActivityResult(requestCode, resultCode, data);  
+	        if (requestCode == CANCEL && resultCode == RESULT_OK) { 
+	        	     Intent intent = new Intent();
+         	         setResult(RESULT_OK, intent); 
+	            	 finish();
+	        }  
+	        if (requestCode == COMMENT && resultCode == RESULT_OK) { 
+       	     Intent intent = new Intent();
+    	         setResult(RESULT_OK, intent); 
+           	 finish();
+       }  
+	 }
 }
