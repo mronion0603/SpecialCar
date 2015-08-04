@@ -85,7 +85,7 @@ public class Login2Activity extends Activity {
 		            	 JSONObject jsonobj = new JSONObject((String)msg.obj);  
 		                 int result = jsonobj.getInt("ResultCode");
 		            	 if(result==Global.SUCCESS){
-		            		nextStep.setProgress(100);
+		            		//nextStep.setProgress(100);
 		            		String getauthn = jsonobj.getJSONObject("Data").getString("authn");
 		            		MySharePreference.editStringValue(getApplication(),MySharePreference.PHONE,phoneNum);
 		            		MySharePreference.editStringValue(getApplication(),MySharePreference.AUTHN,getauthn);
@@ -97,7 +97,7 @@ public class Login2Activity extends Activity {
 		     				startActivity(intent);
 		    				finish();
 		                 }else{
-		                	nextStep.setProgress(-1);
+		                	nextStep.setProgress(0);
 		                	nextStep.setClickable(true);
 		                    Toast.makeText(Login2Activity.this, jsonobj.getString("Message"), Toast.LENGTH_LONG).show();
 		                 } 

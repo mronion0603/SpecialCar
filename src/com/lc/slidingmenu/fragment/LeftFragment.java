@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.lc.intercity.InterCityHomeActivity;
 import com.lc.net.GetBalanceNet;
 import com.lc.net.GetInfoNet;
+import com.lc.slidingmenu.view.CircleImageView;
 import com.lc.specialcar.MainActivity;
 import com.lc.specialcar.R;
 import com.lc.user.AddressManageActivity;
@@ -58,6 +59,7 @@ public class LeftFragment extends Fragment implements OnClickListener{
 	GetInfoNet getInfoNet = new GetInfoNet();
 	GetBalanceNet getBalanceNet = new GetBalanceNet();
 	String strbalance="";
+	CircleImageView profile;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -79,7 +81,7 @@ public class LeftFragment extends Fragment implements OnClickListener{
 	
 	
 	public void findViews(View view) {
-		
+	
 		userinfo = view.findViewById(R.id.personbg);
 		balanceView = view.findViewById(R.id.officeaccount);
 		lastListView = view.findViewById(R.id.tvLastlist);
@@ -106,6 +108,7 @@ public class LeftFragment extends Fragment implements OnClickListener{
 		tvname = (TextView)view.findViewById(R.id.user_name);
 		tvmoney = (TextView)view.findViewById(R.id.tvToday);
 		tvbalance = (TextView)view.findViewById(R.id.account);
+		profile = (CircleImageView)view.findViewById(R.id.profile_image);
   		if(MySharePreference.getStringValue(getActivity(), MySharePreference.USER_TYPE).equals("1")){
   		   card.setText("公务卡");
   		   tvmoney.setText("对公结算");
@@ -123,6 +126,18 @@ public class LeftFragment extends Fragment implements OnClickListener{
 		getBalanceNet.setDevice(Global.DEVICE);
 		getBalanceNet.setAuthn(MySharePreference.getStringValue(getActivity(), MySharePreference.AUTHN));
 		getBalanceNet.getCodeFromServer();
+		//System.out.println(MySharePreference.getStringValue(getActivity(), MySharePreference.GENDER));
+		 String gender = MySharePreference.getStringValue(getActivity(), MySharePreference.GENDER);
+		if(gender==null){
+			profile.setImageResource(R.drawable.men);
+			//System.out.println(MySharePreference.getStringValue(getActivity(), MySharePreference.GENDER));
+		}else{
+			if(gender.equals("女")){
+			profile.setImageResource(R.drawable.women);
+			}else{
+				profile.setImageResource(R.drawable.men);
+			}
+		}
 	}
 	
 	@SuppressLint("HandlerLeak")
@@ -299,10 +314,16 @@ public class LeftFragment extends Fragment implements OnClickListener{
         super.onActivityResult(requestCode, resultCode, data);  
         if (requestCode == InterCityHomeActivity.REQUSET && resultCode == Activity.RESULT_OK) {
         	  String name ="";
+        	  //String gender = "";
         	  Bundle extras = data.getExtras();
               if(extras != null){
             	  name = extras.getString("name");
             	  tvname.setText(name);
+            	  if(MySharePreference.getStringValue(getActivity(), MySharePreference.GENDER).equals("女")){
+          			profile.setImageResource(R.drawable.women);
+	          	  }else{
+	          		profile.setImageResource(R.drawable.men);
+	          	  }
               }
         }  
        

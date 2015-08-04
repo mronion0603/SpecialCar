@@ -124,6 +124,7 @@ public class ItineraryDetailActivity extends Activity implements OnClickListener
         	}
         }else if(orderStatus.equals("取消")){
         	llextend.setVisibility(View.VISIBLE);
+        	bt.setVisibility(View.GONE);
         }else if(orderStatus.equals("服务中")){
         	llextend.setVisibility(View.GONE);
         	bt.setVisibility(View.GONE);
@@ -169,6 +170,9 @@ public class ItineraryDetailActivity extends Activity implements OnClickListener
 			if(bt.getText().toString().equals("取消")){
 				Intent intent =new Intent();
 				intent.setClass(getApplication(), CancelOrderActivity.class);
+				if(serTypeId.equals("城际约租")){
+					intent.putExtra("SerTypeId", serTypeId);
+				}
 				intent.putExtra("OrderNum", orderNum);
 				startActivityForResult(intent,CANCEL);
 				
@@ -195,9 +199,9 @@ public class ItineraryDetailActivity extends Activity implements OnClickListener
 	            	 finish();
 	        }  
 	        if (requestCode == COMMENT && resultCode == RESULT_OK) { 
-       	     Intent intent = new Intent();
+       	         Intent intent = new Intent();
     	         setResult(RESULT_OK, intent); 
-           	 finish();
+           	     finish();
        }  
 	 }
 }

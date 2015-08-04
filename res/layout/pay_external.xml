@@ -90,7 +90,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:onClick="pay"
-            android:text="支付"
+            android:text="立即充值"
             android:textColor="@color/white"
             android:background="@drawable/btn2"
             tools:ignore="HardcodedText" />

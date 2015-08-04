@@ -156,7 +156,7 @@ public class LoginActivity extends Activity {
 		                 int result = jsonobj.getInt("ResultCode");
 		                 //System.out.println((String)msg.obj);
 		            	 if(result==Global.SUCCESS){
-		            		nextStep.setProgress(100);
+		            		//nextStep.setProgress(100);
 		            		String getauthn = jsonobj.getJSONObject("Data").getString("authn");
 		            		MySharePreference.editStringValue(getApplication(),MySharePreference.PHONE,phoneNum);
 		            		MySharePreference.editStringValue(getApplication(),MySharePreference.AUTHN,getauthn);

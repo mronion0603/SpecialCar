@@ -46,7 +46,7 @@ public class AndroidShare extends Dialog implements AdapterView.OnItemClickListe
 	private LinearLayout mLayout;
 	private GridView mGridView;
 	private float mDensity;
-	private String msgText = "很好用的专车app ---来自 春泰";
+	private String msgText = "湖北省公务用车软件";
 	private String mImgPath;
 	private int mScreenOrientation;
 	private List<ShareItem> mListData;

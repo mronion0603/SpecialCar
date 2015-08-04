@@ -107,7 +107,7 @@
 	    android:layout_height="wrap_content" 
 	    android:paddingTop="10dip"
 	    android:paddingBottom="10dip"
-	    android:id="@+id/AirportAddress"
+	    android:id="@+id/wxpay"
 	    android:background="@color/white"
 	    >
 	    <ImageView

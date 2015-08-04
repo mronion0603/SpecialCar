@@ -13,7 +13,6 @@
             android:layout_height="120dp"
             android:layout_gravity="center"
             android:gravity="center_vertical"
-            android:src="@drawable/register_car"
             app:border_color="@color/text_green"
             app:border_width="1dp" 
             android:layout_marginBottom="50dip"

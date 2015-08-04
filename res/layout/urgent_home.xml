@@ -17,10 +17,21 @@
      <ImageView
 	      android:layout_centerHorizontal="true"
 	      android:layout_width="wrap_content"
-	      android:layout_height="wrap_content"
+	      android:layout_height="150dip"
 	      android:background="@drawable/img_car"  
 	    />
      </RelativeLayout>
+        <TextView
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:textSize="16sp"
+	      android:textColor="@color/black"
+          android:layout_marginBottom="10dip"
+          android:layout_marginLeft="10dip"
+	      android:text="应急电话"
+	      android:textStyle="bold"
+	      android:layout_marginTop="10dip"
+	    />
         <RelativeLayout 
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content" 
@@ -42,10 +53,10 @@
 	      android:layout_width="wrap_content"
 	      android:layout_height="wrap_content"
 	      android:layout_marginLeft="20dip"
-	      android:textSize="18sp"
+	      android:textSize="16sp"
 	      android:textColor="@color/black"
 	      android:layout_centerVertical="true"
-	      android:text="武汉应急专线1"
+	      android:text="400-0849-488"
 	    />
 	     
 	    </RelativeLayout>  
@@ -72,10 +83,10 @@
 	      android:layout_width="wrap_content"
 	      android:layout_height="wrap_content"
 	      android:layout_marginLeft="20dip"
-	      android:textSize="18sp"
+	      android:textSize="16sp"
 	      android:textColor="@color/black"
 	      android:layout_centerVertical="true"
-	      android:text="武汉应急专线2"
+	      android:text="400-0849-488"
 	    />
 	     
 	    </RelativeLayout>  
@@ -101,20 +112,22 @@
 	      android:layout_width="wrap_content"
 	      android:layout_height="wrap_content"
 	      android:layout_marginLeft="20dip"
-	      android:textSize="18sp"
+	      android:textSize="16sp"
 	      android:textColor="@color/black"
 	      android:layout_centerVertical="true"
-	      android:text="武汉应急专线3"
+	      android:text="400-0849-488"
 	    />
 	     
 	    </RelativeLayout>  
 	      <TextView
 	      android:layout_width="wrap_content"
 	      android:layout_height="wrap_content"
-	      android:textSize="18sp"
+	      android:textSize="16sp"
 	      android:textColor="@color/black"
           android:layout_marginBottom="10dip"
+          android:layout_marginLeft="10dip"
 	      android:text="服务申明"
+	      android:textStyle="bold"
 	      android:layout_marginTop="10dip"
 	    />
 	    <RelativeLayout 
@@ -129,7 +142,7 @@
 	       <TextView
 	      android:layout_width="wrap_content"
 	      android:layout_height="wrap_content"
-	      android:textSize="16sp"
+	      android:textSize="14sp"
 	      android:textColor="@color/black2"
 	      android:layout_gravity="center"
 	      android:layout_marginLeft="20dip"

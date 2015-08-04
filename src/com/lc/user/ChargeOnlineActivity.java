@@ -21,6 +21,7 @@ import com.lc.pay.PayActivity;
 import com.lc.specialcar.R;
 import com.lc.utils.ButtonEffect;
 import com.lc.utils.ExitApplication;
+import com.weixin.paydemo.WXPayActivity;
 
 import android.app.Activity;
 import android.content.Context;
@@ -60,7 +61,7 @@ public class ChargeOnlineActivity extends Activity implements OnClickListener {
     TextView feeRule,txdate;
     EditText et;
    // Button ivSearch;
-    private RelativeLayout rlalipay,rldate,rlmodifyname,rlstartaddress;
+    private RelativeLayout rlalipay,rlwx,rlmodifyname,rlstartaddress;
     private ImageView imAddress;
 
 	//RadioGroup group;
@@ -79,7 +80,8 @@ public class ChargeOnlineActivity extends Activity implements OnClickListener {
 		et=(EditText)findViewById(R.id.txdate2);
 		rlalipay=(RelativeLayout)findViewById(R.id.rlalipay);
 		rlalipay.setOnClickListener(this);
-		
+		rlwx=(RelativeLayout)findViewById(R.id.wxpay);
+		rlwx.setOnClickListener(this);
 	}
 	@Override
 	public void onClick(View v) {
@@ -95,11 +97,27 @@ public class ChargeOnlineActivity extends Activity implements OnClickListener {
 			intent.putExtra("type", "new");
 			intent.putExtra("itemname", "充值");
 			intent.putExtra("itemprice",money);
-			intent.putExtra("itemcontent","春泰专车账号充值");
+			intent.putExtra("itemcontent","公务专车账号充值");
 			intent.putExtra("serviceid","12");
 			startActivity(intent);
 			}
 		}	break;
+		case R.id.wxpay:
+		{
+			String money = et.getText().toString();
+			if(money==null|money.length()<=0){
+				Toast.makeText(getApplication(), "请输入充值金额", Toast.LENGTH_SHORT).show();
+			}else{
+			Intent intent = new Intent(ChargeOnlineActivity.this,WXPayActivity.class);
+			intent.putExtra("type", "new");
+			intent.putExtra("itemname", "充值");
+			intent.putExtra("itemprice",money);
+			intent.putExtra("itemcontent","公务专车账号充值");
+			intent.putExtra("serviceid","12");
+			startActivity(intent);
+			}
+		}	break;
+		
 		
 		default:
 			break;

@@ -98,6 +98,66 @@ public class CancelInnerNet {
 		connectThread.start();
 	}
 
+	public void getCancelCityServer(){
+		isRunning = true;
+		Thread connectThread; //声明一个子线程
+		 connectThread = new Thread(new Runnable() {
+	        	
+	            @Override
+	              public void run() {       
+	                while (isRunning) {
+					  try {
+						//Thread.currentThread().sleep(10);
+	         		    String strurl =ConnectUrl.cancelCity;
+	                	URL url = null;
+	                	try{
+	                		url = new URL(strurl);
+	                		HttpURLConnection urlConnection = (HttpURLConnection)url.openConnection();
+	                		urlConnection.setDoOutput(true);
+	                		urlConnection.setDoInput(true);
+	                		urlConnection.setRequestMethod("POST");
+	                		urlConnection.setUseCaches(false);
+	                		
+	                		urlConnection.setRequestProperty("Mime-Type", "application/x-www-form-urlencoded");
+	                		urlConnection.connect();
+	                		DataOutputStream outputStream = new DataOutputStream(urlConnection.getOutputStream());
+	                		
+	                		String content ="authn=" + URLEncoder.encode(authn, "UTF-8")
+	                				+"&orderNum=" + URLEncoder.encode(orderNum, "UTF-8")
+	                				+"&device=" + URLEncoder.encode(Global.DEVICE, "UTF-8")
+	                				+"&comment=" + URLEncoder.encode(comment, "UTF-8")
+	                				;
+	                		
+	                		outputStream.writeBytes(content);
+	                		outputStream.flush();
+	                		outputStream.close();
+	                		
+	                		int responseCode =urlConnection.getResponseCode();
+	                		if ( responseCode== 200) { 
+	                		InputStream in = urlConnection.getInputStream();  
+	                		result = read(in);
+	                		System.out.println(result);
+	                		}
+	                		urlConnection.disconnect();
+	                
+	                	}catch (Exception e) {
+	        				// TODO: handle exception
+	                		e.printStackTrace();
+	        			}	
+	                	 Message msg = new Message();
+	                     msg.obj  = result;
+	                     msg.what = Global.CANCEL_INNER;
+	                     handler.sendMessage(msg); 	     
+	            	     isRunning = false;
+					 } catch (Exception e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+				     }
+	               }
+	            }
+	        });
+		connectThread.start();
+	}
 	 private String read(InputStream in) throws IOException {  
          byte[] data;  
          ByteArrayOutputStream bout = new ByteArrayOutputStream();  

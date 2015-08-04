@@ -40,6 +40,7 @@
 		<uses-permission android:name="android.permission.READ_CONTACTS"/> 
 		<!-- 拨打电话权限 --> 
 		<uses-permission android:name="android.permission.CALL_PHONE"/>  
+		 <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -238,7 +239,22 @@
         <activity
             android:name="com.lc.shuttle.SendActivity"
             android:label="@string/app_name" />
-        
+        <activity
+            android:name="com.weixin.paydemo.WXPayActivity"
+            android:launchMode="singleTop"
+            android:exported="true"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:scheme="wx7800df458c86b63e"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.lc.specialcar.wxapi.WXPayEntryActivity"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:label="@string/app_name" />
         
         
         <!-- Required -->
@@ -319,6 +335,13 @@
         <!-- Required. AppKey copied from Portal -->
          <meta-data android:name="JPUSH_APPKEY" android:value="594513c14ce48a376f9644ea"/> 
         
+         
+           <receiver
+            android:name="net.sourceforge.simcpux.AppRegister">
+            <intent-filter>
+                <action android:name="com.tencent.mm.plugin.openapi.Intent.ACTION_REFRESH_WXAPP" />
+            </intent-filter>
+           </receiver>
     </application>
 
 </manifest>

@@ -38,4 +38,5 @@ public class ConnectUrl {
  public static String getupdate = commonurl+"checkVersion";
  public static String getcard = commonurl+"getCivilCardInfo";
  public static String addscore = commonurl+"assess";
+ public static String cancelCity = commonurl+"cancleCJOrder";
 }

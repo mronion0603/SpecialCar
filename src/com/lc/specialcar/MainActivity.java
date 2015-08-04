@@ -5,7 +5,6 @@ package com.lc.specialcar;
 
 import java.util.Set;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import cn.jpush.android.api.JPushInterface;
@@ -18,7 +17,6 @@ import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.map.BitmapDescriptor;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
-import com.lc.innercity.CarInfoActivity;
 import com.lc.innercity.InnerCityHomeActivity;
 import com.lc.intercity.InterCityHomeActivity;
 import com.lc.net.BaiduCityNet;
@@ -53,7 +51,7 @@ import android.widget.Toast;
 
 public class MainActivity extends SlidingFragmentActivity implements OnClickListener, OnPageChangeListener {
 	private static final int MSG_SET_ALIAS = 1001;
-	private RelativeLayout rlslidemenu;
+	private RelativeLayout rlslidemenu,rliti;
 	private Fragment mContent;
 	private TextView topTextView;
 	private ImageView ivOffice,ivPlane,ivInterCity,ivUrgency,ivCity, ivRight,ivleft;
@@ -104,9 +102,12 @@ public class MainActivity extends SlidingFragmentActivity implements OnClickList
 		ivleft = (ImageView) findViewById(R.id.topButton);
 		ivleft.setVisibility(View.VISIBLE);
 		topTextView = (TextView) findViewById(R.id.topTv);
+		rliti = (RelativeLayout) findViewById(R.id.rlitinerary);
+		rliti.setVisibility(View.VISIBLE);
+		rliti.setOnClickListener(this);
 		ivRight = (ImageView) findViewById(R.id.topButton2);
 		ivRight.setVisibility(View.VISIBLE);
-		ivRight.setOnClickListener(this);
+		//ivRight.setOnClickListener(this);
 		ivOffice = (ImageView) findViewById(R.id.office);
 		ivOffice.setOnClickListener(this);
 		ivPlane = (ImageView) findViewById(R.id.plane);
@@ -234,7 +235,7 @@ public class MainActivity extends SlidingFragmentActivity implements OnClickList
 		case R.id.rlslidemenu:
 			toggle();
 			break;
-		case R.id.topButton2:
+		case R.id.rlitinerary:
 			{Intent intent = new Intent();
 			 intent.setClass(MainActivity.this, ItineraryActivity.class);
 			 startActivity(intent);

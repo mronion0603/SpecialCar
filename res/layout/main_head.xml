@@ -37,6 +37,13 @@
         android:textColor="@color/white"
         android:textSize="20sp"
         />
+    <RelativeLayout
+    android:id="@+id/rlitinerary"
+    android:layout_width="50dip"
+    android:layout_height="50dip"
+    android:layout_alignParentRight="true"
+    android:visibility="gone"
+    >
        <ImageView
         android:id="@+id/topButton2"
         android:layout_width="wrap_content"
@@ -47,6 +54,7 @@
         android:src="@drawable/home_title_order"
         android:visibility="gone"
        />
+</RelativeLayout>
         <ImageView
         android:id="@+id/topButton3"
         android:layout_width="wrap_content"

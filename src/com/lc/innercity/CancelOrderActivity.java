@@ -17,7 +17,6 @@ import android.os.Handler;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -32,6 +31,7 @@ public class CancelOrderActivity extends Activity implements OnClickListener {
     String orderNum="";
     CancelInnerNet cancelInnerNet = new CancelInnerNet();
     EditText etreason;
+    String serTypeId="市内约租";
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
@@ -44,6 +44,9 @@ public class CancelOrderActivity extends Activity implements OnClickListener {
 		Bundle extras = getIntent().getExtras();
 	    if(extras != null){
 	    	orderNum = extras.getString("OrderNum");
+	    	if(extras.containsKey("SerTypeId")){
+	    		serTypeId = extras.getString("SerTypeId");
+	    	}
 	    }
 		ExitApplication.getInstance().addActivity(this);
 		tvTitle = (TextView) findViewById(R.id.topTv);
@@ -73,9 +76,12 @@ public class CancelOrderActivity extends Activity implements OnClickListener {
 			cancelInnerNet.setOrderNum(orderNum);
 			cancelInnerNet.setAuthn(MySharePreference.getStringValue(getApplication(), MySharePreference.AUTHN));
 			cancelInnerNet.setReason(etreason.getText().toString());
-			cancelInnerNet.getDataFromServer();
+			if(serTypeId.equals("城际约租")){
+				cancelInnerNet.getCancelCityServer();
+			}else{
+			    cancelInnerNet.getDataFromServer();
+			}
 			break;
-	
 		default:
 			break;
 		}
