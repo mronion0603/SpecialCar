@@ -5,76 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
     <include layout="@layout/main_head" />
-    <RelativeLayout 
+    <WebView 
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="20dip"
-     >
-    
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="250dip"
-        android:layout_height="200dip"    
-        android:layout_centerHorizontal="true"
+    android:layout_height="match_parent"
+    android:id="@+id/webView"
     />
-     <Button
-        android:id="@+id/Type"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"   
-        android:background="@drawable/fee"
-        android:layout_marginLeft="10dip"
-        android:layout_marginTop="20dip"
-        
-    />
-    </RelativeLayout>
-    <TextView
-        android:id="@+id/tv1"
-        android:layout_marginTop="20dip"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"    
-        android:layout_gravity="center"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-    />
-     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"    
-        android:layout_gravity="center"
-        android:text="+"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-    />
-      <TextView
-           android:id="@+id/tv2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"    
-        android:layout_gravity="center"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-    />
-       <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"    
-        android:layout_gravity="center"
-        android:text="+"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-    />
-      <TextView
-        android:id="@+id/tv3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"    
-        android:layout_gravity="center"
-        android:textColor="@color/black"
-        android:layout_marginBottom="20dip"
-        android:textSize="18sp"
-    />
-    <Gallery
-        android:id="@+id/gallery"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:spacing="10dp"
-        android:layout_marginTop="5dp"    >
-    </Gallery>
     
 </LinearLayout>

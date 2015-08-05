@@ -9,12 +9,6 @@ import java.util.Random;
 
 import org.json.JSONObject;
 
-
-
-
-
-
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -25,7 +19,6 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
 import android.view.View.OnClickListener;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -33,6 +26,7 @@ import android.widget.Toast;
 
 import com.alipay.sdk.app.PayTask;
 import com.lc.net.AddOrderNet;
+import com.lc.progressbutton.CircularProgressButton;
 import com.lc.specialcar.R;
 import com.lc.utils.ExitApplication;
 import com.lc.utils.Global;
@@ -85,7 +79,7 @@ public class PayActivity extends FragmentActivity {
 					//startActivity(intent);
 					Toast.makeText(PayActivity.this, "支付成功",
 							Toast.LENGTH_SHORT).show();
-					//finish();
+					finish();
 				} else {
 					// 判断resultStatus 为非“9000”则代表可能支付失败
 					// “8000” 代表支付结果因为支付渠道原因或者系统原因还在等待支付结果确认，最终交易是否成功以服务端异步通知为准（小概率状态）
@@ -96,7 +90,8 @@ public class PayActivity extends FragmentActivity {
 					} else {
 						Toast.makeText(PayActivity.this, "支付失败",
 								Toast.LENGTH_SHORT).show();
-
+						bt.setClickable(true);
+						bt.setProgress(0);
 					}
 				}
 				break;
@@ -128,9 +123,10 @@ public class PayActivity extends FragmentActivity {
          if(result==Global.SUCCESS){  
         	 JSONObject jsonobj2 =  (JSONObject) jsonobj.getJSONObject("Data");
         	 getOrderid  = jsonobj2.getString("orderNum");
-        	 System.out.println(getOrderid);
+        	 //System.out.println(getOrderid);
         	 //Toast.makeText(PayActivity.this, result, Toast.LENGTH_LONG).show();
         	 pro2.setVisibility(View.GONE); 
+        	 bt.setVisibility(View.VISIBLE); 
          }else{
         	 Toast.makeText(PayActivity.this, jsonobj.getString("Message"), Toast.LENGTH_LONG).show();
          }
@@ -142,6 +138,7 @@ public class PayActivity extends FragmentActivity {
 	private String getServiceid="";
 	private String getOrderid="";
 	private ProgressBar pro2;  
+	private CircularProgressButton bt;  
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -192,12 +189,17 @@ public class PayActivity extends FragmentActivity {
 		nameTV.setText(name);
 		priceTV.setText(price+"元");
 		contentTV.setText(content);
+		bt = (CircularProgressButton)findViewById(R.id.pay);
+		bt.setIndeterminateProgressMode(true);
+		bt.setVisibility(View.GONE);
 	}
 	/**
 	 * call alipay sdk pay. 调用SDK支付
 	 * 
 	 */
 	public void pay(View v) {
+		bt.setClickable(false);
+		bt.setProgress(50);
 		String orderInfo = getOrderInfo(name, content, price, getOrderid);
 		String sign = sign(orderInfo);
 		try {

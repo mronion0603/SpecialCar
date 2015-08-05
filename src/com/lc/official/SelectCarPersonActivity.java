@@ -13,12 +13,9 @@ import com.lc.net.GetCarNet;
 import com.lc.progressbutton.CircularProgressButton;
 import com.lc.specialcar.R;
 import com.lc.utils.ButtonEffect;
-import com.lc.utils.ConnectUrl;
 import com.lc.utils.ExitApplication;
 import com.lc.utils.Global;
 import com.lc.utils.MySharePreference;
-import com.lidroid.xutils.BitmapUtils;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
@@ -31,10 +28,9 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ImageView.ScaleType;
-
 
 public class SelectCarPersonActivity extends Activity implements OnClickListener {
+	public static final int SIGNUP =2;
     TextView tvTitle,righttext;
     ImageView ivleft,ivselect1,ivselect2,ivselect3,car1,car2,car3;;
     CircularProgressButton btsearch;
@@ -229,11 +225,11 @@ public class SelectCarPersonActivity extends Activity implements OnClickListener
 	   	    	Intent intent2 = new Intent();
 				intent2.setClass(SelectCarPersonActivity.this,SignUpActivity.class);
 				startActivity(intent2);
-				btsearch.setProgress(0);
+				//btsearch.setProgress(0);
 				btsearch.setClickable(true);
 				finish();
 	        }else{
-	           btsearch.setProgress(50);
+	           btsearch.setProgress(0);
 	           btsearch.setClickable(true);
 	           Toast.makeText(SelectCarPersonActivity.this,jsonobj.getString("Message"), Toast.LENGTH_LONG).show();
 	        } 

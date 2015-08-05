@@ -44,6 +44,7 @@ import android.widget.AdapterView.OnItemClickListener;
 public class CharteredCarActivity extends Activity implements OnClickListener {
 	public static final int REQUSET_NAMEPHONE = 1;
 	public static final int REQUSET_ADDRESS = 2;
+	public static final int SIGNUP =3;
     TextView tvTitle,tvname,tvphone,chooseaddress;
     Button ivSearch;
     ImageView ivleft,star;
@@ -221,7 +222,7 @@ public class CharteredCarActivity extends Activity implements OnClickListener {
       	    	Intent intent = new Intent();
     			intent.putExtra("title", "包车");
     			intent.setClass(getApplication(), SignUpActivity.class);
-    			startActivity(intent);
+    			startActivityForResult(intent,SIGNUP);
     			
            }else{
               Toast.makeText(CharteredCarActivity.this,jsonobj.getString("Message"), Toast.LENGTH_LONG).show();
@@ -251,5 +252,11 @@ public class CharteredCarActivity extends Activity implements OnClickListener {
             	  chooseaddress.setText(address);
               }
         }  
+        if (requestCode == SIGNUP && resultCode == RESULT_OK) {
+     	   Intent intent = new Intent();
+	       setResult(RESULT_OK, intent); 
+     	   finish();
+          
+     } 
     }  
 }

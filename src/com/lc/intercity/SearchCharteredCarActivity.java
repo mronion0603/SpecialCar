@@ -29,7 +29,7 @@ import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
 public class SearchCharteredCarActivity extends Activity implements OnClickListener {
-	
+	public static final int SIGNUP =2;
     TextView tvTitle,tvstart,tvend;
     
     ImageView ivleft;
@@ -94,7 +94,7 @@ public class SearchCharteredCarActivity extends Activity implements OnClickListe
 				intent.putExtra("TotalNum", totalNum);
 				intent.putExtra("PickUpArea", PickUpArea);
 				intent.putExtra("driverid", driverid);
-				startActivity(intent);
+				startActivityForResult(intent,SIGNUP);
 			}
 			
 		});
@@ -186,4 +186,13 @@ public class SearchCharteredCarActivity extends Activity implements OnClickListe
         	}
         }
     }
+    @Override  
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {  
+        super.onActivityResult(requestCode, resultCode, data);  
+       
+        if (requestCode == SIGNUP && resultCode == RESULT_OK) {
+        	   finish();
+             
+        } 
+    }  
 }

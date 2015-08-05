@@ -165,8 +165,8 @@
 	    >
 	      <ImageView
           android:id="@+id/icon"
-	      android:layout_width="wrap_content"
-	      android:layout_height="wrap_content"
+	      android:layout_width="150dip"
+	      android:layout_height="150dip"
 	      android:layout_margin="10dip"
 	      android:layout_centerHorizontal="true"
 	      android:background="@drawable/more_code"
@@ -177,7 +177,7 @@
 	      android:layout_height="wrap_content"
 	      android:layout_margin="10dip"
           android:layout_centerHorizontal="true"
-	      android:text="扫描二维码，关注春泰官方微信"
+	      android:text="扫描二维码，关注官方微信"
 	      android:textColor="@color/black2"
 	      />
 	      </RelativeLayout>

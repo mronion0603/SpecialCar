@@ -121,8 +121,16 @@ public class AddressManageActivity extends Activity implements OnClickListener {
         	  double lat,lont;
         	  Bundle extras = data.getExtras();
               if(extras != null){
-            	  pro.setVisibility(View.VISIBLE);
             	  address = extras.getString("address");
+            	  boolean flag = false;
+            	  for(int i=0;i<groups1.size();i++){
+            		  if(address.equals(groups1.get(i).get("address"))){
+            			  flag=true;
+            			  break;
+            		  }
+            	  }
+            	  if(!flag){
+                  pro.setVisibility(View.VISIBLE);
             	  lat =extras.getDouble("latidute");
             	  lont =extras.getDouble("longitude");
             	  // HashMap<String , Object> map = new HashMap<String , Object>();
@@ -135,6 +143,9 @@ public class AddressManageActivity extends Activity implements OnClickListener {
             	  addaddressnet.setLatidute(String.valueOf(lat));
             	  addaddressnet.setLongitude(String.valueOf(lont));
             	  addaddressnet.getDataFromServer();
+            	  }else{
+            		  Toast.makeText(getApplication(), "不能添加相同地址", Toast.LENGTH_SHORT).show();
+            	  }
               }   
         }  
     }  	

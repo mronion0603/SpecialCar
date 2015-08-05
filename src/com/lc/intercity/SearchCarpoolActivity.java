@@ -30,7 +30,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Toast;
 
 public class SearchCarpoolActivity extends Activity implements OnClickListener {
-	
+	public static final int SIGNUP =2;
     TextView tvTitle,tvstart,tvend;
     ImageView ivleft;
     private RelativeLayout rls;
@@ -92,7 +92,7 @@ public class SearchCarpoolActivity extends Activity implements OnClickListener {
 				intent.putExtra("TotalNum", totalNum);
 				intent.putExtra("PickUpArea", PickUpArea);
 				intent.putExtra("driverid", driverid);
-				startActivity(intent);
+				startActivityForResult(intent,SIGNUP);
 			}
 		});
 	
@@ -171,4 +171,13 @@ public class SearchCarpoolActivity extends Activity implements OnClickListener {
         	}
         }
     }
+    @Override  
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {  
+        super.onActivityResult(requestCode, resultCode, data);  
+       
+        if (requestCode == SIGNUP && resultCode == RESULT_OK) {
+        	   finish();
+             
+        } 
+    }  
 }

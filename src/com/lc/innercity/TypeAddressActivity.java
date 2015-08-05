@@ -40,16 +40,15 @@ public class TypeAddressActivity extends Activity implements OnClickListener {
     TextView tvTitle,righttext;
     EditText etaddress;
     ImageView ivleft;
-   // Button ivSearch;
+    //Button ivSearch;
     private RelativeLayout rls;
- 
     
-    // 地理编码  
+    //地理编码  
     GeoCoder mGeoCoder = null;
     List<PoiInfo> mInfoList;  
     PoiInfo mCurentInfo;  
     
- // 位置列表  
+    //位置列表  
     PlaceListAdapter mAdapter; 
     ListView mListView;  
     ImageView mSelectImg;
@@ -242,12 +241,10 @@ public class TypeAddressActivity extends Activity implements OnClickListener {
 			finish();
 			break;
 		case R.id.righttext:
-			Intent intent = new Intent();
-			intent.setClass(TypeAddressActivity.this,BillingRuleActivity.class);
-			startActivity(intent);
-			break;
-		
+			//Intent intent = new Intent();
 			
+			break;
+				
 		default:
 			break;
 		}

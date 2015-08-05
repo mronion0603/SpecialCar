@@ -4,6 +4,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.lc.innercity.SendDealActivity;
+import com.lc.specialcar.MainActivity;
+import com.lc.utils.Global;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -138,27 +140,28 @@ public class MyReceiver extends BroadcastReceiver {
 	}
 	//send msg to MainActivity
 	private void processCustomMessage(Context context, Bundle bundle) {
-		//String message = bundle.getString(JPushInterface.EXTRA_MESSAGE);
-		//String extras = bundle.getString(JPushInterface.EXTRA_EXTRA);
-		//System.out.println("message:"+message+" extras:"+extras);
-		
-		//if (SendDealActivity.isForeground) {
+		    //String message = bundle.getString(JPushInterface.EXTRA_MESSAGE);
+		    //String extras = bundle.getString(JPushInterface.EXTRA_EXTRA);
 			String message = bundle.getString(JPushInterface.EXTRA_MESSAGE);
-			//String extras = bundle.getString(JPushInterface.EXTRA_EXTRA);
-			Intent msgIntent = new Intent(SendDealActivity.MESSAGE_RECEIVED_ACTION);
-			msgIntent.putExtra(SendDealActivity.KEY_MESSAGE, message);
-			/*if (!ExampleUtil.isEmpty(extras)) {
-				try {
-					JSONObject extraJson = new JSONObject(extras);
-					if (null != extraJson && extraJson.length() > 0) {
-						msgIntent.putExtra(MainActivity.KEY_EXTRAS, extras);
-					}
-				} catch (JSONException e) {
+			JSONObject jsonobj;
+			try {
+				jsonobj = new JSONObject(message);
+				int result = jsonobj.getInt("ResultCode");
+				if (result == Global.SUCCESS) {
+					JSONObject jsonobj2 = jsonobj.getJSONObject("Data");
+					if(jsonobj2.getString("type").equals("0")){
+					  Intent msgIntent = new Intent(SendDealActivity.MESSAGE_RECEIVED_ACTION);
+					  msgIntent.putExtra(SendDealActivity.KEY_MESSAGE, message);
+					  context.sendBroadcast(msgIntent);
+				    }else if(jsonobj2.getString("type").equals("1")){
+				      Intent i = new Intent(context, MainActivity.class);
+				      context.startActivity(i);
+				    }
 				}
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-			*/
-			context.sendBroadcast(msgIntent);
-		//}
-		
+			
 	}
 }

@@ -15,7 +15,9 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
+import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.AdapterView.OnItemClickListener;
@@ -39,9 +41,10 @@ public class AddressPopupWindow extends PopupWindow {
 
          GroupAdapter groupAdapter = new GroupAdapter(context, groups2);  
          ListView lv_group1 = (ListView) mMenuView.findViewById(R.id.lvGroup);  
-         lv_group1.setAdapter(groupAdapter);  
+         lv_group1.setAdapter(groupAdapter); 
+         setListViewHeightBasedOnChildren(lv_group1);
          lv_group1.setOnItemClickListener(itemClickListener);  
-	
+         
 		//设置SelectPicPopupWindow的View
 		this.setContentView(mMenuView);
 		//设置SelectPicPopupWindow弹出窗体的宽
@@ -77,4 +80,39 @@ public class AddressPopupWindow extends PopupWindow {
 	public HashMap<String , Object> getMap(int index){
 		return groups3.get(index);
 	}
+	/**
+	* 动态设置ListView的高度
+	* @param listView
+	*/
+	public static void setListViewHeightBasedOnChildren(ListView listView) {
+	    if(listView == null) return;
+
+	    ListAdapter listAdapter = listView.getAdapter();
+	    if (listAdapter == null) {
+	        // pre-condition
+	        return;
+	    }
+
+	    int totalHeight = 0;
+	    for (int i = 0; i < listAdapter.getCount(); i++) {
+	        View listItem = listAdapter.getView(i, null, listView);
+	        listItem.measure(0, 0);
+	        totalHeight += listItem.getMeasuredHeight();
+	    }
+
+	    ViewGroup.LayoutParams params = listView.getLayoutParams();
+	    int finalheight = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+	    if(listAdapter.getCount()<4){
+	    	params.height = finalheight;
+	    }else{
+	    	double total = listAdapter.getCount();
+	    	double cur = 4;
+	    	double k = cur/total;
+	    	double final2 =(double)(finalheight*k);
+	    	params.height = (int)final2;
+	    }
+	    listView.setLayoutParams(params);
+	}
+
+
 }

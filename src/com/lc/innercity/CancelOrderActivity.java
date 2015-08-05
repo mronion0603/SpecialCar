@@ -77,6 +77,7 @@ public class CancelOrderActivity extends Activity implements OnClickListener {
 			cancelInnerNet.setAuthn(MySharePreference.getStringValue(getApplication(), MySharePreference.AUTHN));
 			cancelInnerNet.setReason(etreason.getText().toString());
 			if(serTypeId.equals("城际约租")){
+				System.out.println("ssss");
 				cancelInnerNet.getCancelCityServer();
 			}else{
 			    cancelInnerNet.getDataFromServer();

@@ -491,9 +491,7 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
     
-    <style name="DataSheetAnimation" parent="@android:style/Animation.Dialog">
-        <item name="android:windowEnterAnimation">@anim/push_up_in</item>
-    </style>
+  
     
     <style name="TitleText">
         <item name="android:layout_width">fill_parent</item>

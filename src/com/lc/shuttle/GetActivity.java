@@ -67,7 +67,7 @@ public class GetActivity extends Activity implements OnClickListener {
 	TimePopupWindow timepWindow;
 	GetAddressNet getaddressnet = new GetAddressNet();
 	private List<HashMap<String , Object>> groups1= new ArrayList<HashMap<String , Object>>();
-	String getCity="";
+	String getCity;
 	GetAirportNet getAirportNet = new GetAirportNet();
 	AddressPopupWindow airportWindow;
 	private List<HashMap<String , Object>> groups2= new ArrayList<HashMap<String , Object>>();
@@ -147,6 +147,7 @@ public class GetActivity extends Activity implements OnClickListener {
 	    getaddressnet.setDevice(Global.DEVICE);
 	    getaddressnet.setAuthn(MySharePreference.getStringValue(getApplication(), MySharePreference.AUTHN));
 	    getaddressnet.getCodeFromServer();
+	    if(getCity!=null){
 	    if(getCity.length()>=1){
 		    getAirportNet.setHandler(mHandler);
 		    getAirportNet.setDevice(Global.DEVICE);
@@ -155,6 +156,7 @@ public class GetActivity extends Activity implements OnClickListener {
 		    //System.out.println(getCity);
 		    getAirportNet.setCity(getCity);
 		    getAirportNet.getDataFromServer();
+	    }
 	    }
 	    String username = MySharePreference.getStringValue(getApplication(), MySharePreference.USERNAME);
 		if(username==null){

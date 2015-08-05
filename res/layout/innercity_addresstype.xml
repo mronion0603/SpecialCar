@@ -18,13 +18,14 @@
 	      android:id="@+id/date"
 	      android:layout_width="wrap_content"
 	      android:layout_height="wrap_content"
+	      android:layout_centerVertical="true"
 	      android:layout_marginLeft="10dip"
 	      android:background="@drawable/city_register_site2"  
 	    />
 	     <EditText
 	      android:id="@+id/etAddress"
 	      android:layout_toRightOf="@+id/date"
-	      android:layout_width="wrap_content"
+	      android:layout_width="250dip"
 	      android:layout_height="wrap_content"
 	      android:layout_marginLeft="20dip"
 	      android:textSize="18sp"

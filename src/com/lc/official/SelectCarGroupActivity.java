@@ -1,8 +1,5 @@
 package com.lc.official;
 
-
-
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -17,12 +14,9 @@ import com.lc.net.GetCarNet;
 import com.lc.progressbutton.CircularProgressButton;
 import com.lc.specialcar.R;
 import com.lc.utils.ButtonEffect;
-import com.lc.utils.ConnectUrl;
 import com.lc.utils.ExitApplication;
 import com.lc.utils.Global;
 import com.lc.utils.MySharePreference;
-import com.lidroid.xutils.BitmapUtils;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
@@ -36,8 +30,6 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ImageView.ScaleType;
-
 
 public class SelectCarGroupActivity extends Activity implements OnClickListener {
     TextView tvTitle,righttext;
@@ -302,11 +294,11 @@ public class SelectCarGroupActivity extends Activity implements OnClickListener 
 	   	    	Intent intent2 = new Intent();
 				intent2.setClass(SelectCarGroupActivity.this,SignUpActivity.class);
 				startActivity(intent2);
-				btsearch.setProgress(0);
+				//btsearch.setProgress(0);
 				btsearch.setClickable(true);
 				finish();
 	        }else{
-	        	btsearch.setProgress(50);
+	        	btsearch.setProgress(0);
 	        	btsearch.setClickable(true);
 	           Toast.makeText(SelectCarGroupActivity.this,jsonobj.getString("Message"), Toast.LENGTH_LONG).show();
 	        } 

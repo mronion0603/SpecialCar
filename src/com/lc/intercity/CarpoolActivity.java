@@ -1,13 +1,11 @@
 package com.lc.intercity;
 
-
 import org.json.JSONObject;
-
 import com.lc.innercity.GroupAdapter;
 import com.lc.innercity.ModifyNameActivity;
 import com.lc.net.AddCarPoolNet;
-import com.lc.net.NotifyDriverNet;
 import com.lc.popupwindow.AddressPopupWindow;
+import com.lc.progressbutton.CircularProgressButton;
 import com.lc.specialcar.R;
 import com.lc.utils.ButtonEffect;
 import com.lc.utils.ExitApplication;
@@ -22,7 +20,6 @@ import android.os.Handler;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -31,8 +28,9 @@ import android.widget.Toast;
 
 public class CarpoolActivity extends Activity implements OnClickListener {
 	public static final int REQUSET_NAMEPHONE = 1;
+	public static final int SIGNUP =2;
     TextView tvTitle,tvname,tvphone,tvcurtol;
-    Button ivSearch;
+    CircularProgressButton ivSearch;
     ImageView ivleft;
     private RelativeLayout rls,modify;
     TextView chooseaddress;
@@ -66,7 +64,8 @@ public class CarpoolActivity extends Activity implements OnClickListener {
 		tvphone = (TextView) findViewById(R.id.Phone);
 		tvTitle = (TextView) findViewById(R.id.topTv);
 		tvTitle.setText("拼车");
-		ivSearch = (Button) findViewById(R.id.Search);
+		ivSearch = (CircularProgressButton) findViewById(R.id.Search);
+		ivSearch.setIndeterminateProgressMode(true);
 		ivSearch.setOnClickListener(this);
 		ButtonEffect.setButtonStateChangeListener(ivSearch);
 		rls = (RelativeLayout) findViewById(R.id.rlslidemenu);
@@ -101,26 +100,31 @@ public class CarpoolActivity extends Activity implements OnClickListener {
 			break;
 		case R.id.Search:
 			if(etnumber.getText().toString().length()>0){
-			int rider = Integer.parseInt(etnumber.getText().toString());
-			if(rider+curnum<=totalnum){
-				addCarPoolNet.setHandler(mHandler);	
-				addCarPoolNet.setAuth(MySharePreference.getStringValue(getApplication(), MySharePreference.AUTHN));
-				addCarPoolNet.setDevice(Global.DEVICE);
-				addCarPoolNet.setCjridersum(etnumber.getText().toString());
-				addCarPoolNet.setOrderNum(getorderNum);			
-				addCarPoolNet.setRiderName(tvname.getText().toString());
-				if(tvphone.getText().toString().equals("本人")){
-				    addCarPoolNet.setRiderPhone(MySharePreference.getStringValue(getApplication(), MySharePreference.PHONE));
+				int rider = Integer.parseInt(etnumber.getText().toString());
+				if(rider<=0){
+					Toast.makeText(CarpoolActivity.this,"乘车人数必须至少为1人", Toast.LENGTH_LONG).show();
 				}else{
-					addCarPoolNet.setRiderPhone(tvphone.getText().toString());
+					if(rider+curnum<=totalnum){
+						ivSearch.setClickable(false);
+						ivSearch.setProgress(50);
+						addCarPoolNet.setHandler(mHandler);	
+						addCarPoolNet.setAuth(MySharePreference.getStringValue(getApplication(), MySharePreference.AUTHN));
+						addCarPoolNet.setDevice(Global.DEVICE);
+						addCarPoolNet.setCjridersum(rider+"");
+						addCarPoolNet.setOrderNum(getorderNum);			
+						addCarPoolNet.setRiderName(tvname.getText().toString());
+						if(tvphone.getText().toString().equals("本人")){
+						    addCarPoolNet.setRiderPhone(MySharePreference.getStringValue(getApplication(), MySharePreference.PHONE));
+						}else{
+							addCarPoolNet.setRiderPhone(tvphone.getText().toString());
+						}
+						addCarPoolNet.setServiceTypeId("5");
+						addCarPoolNet.setCpbStauts("1");
+						addCarPoolNet.getDataFromServer();			
+					}else{
+						Toast.makeText(CarpoolActivity.this,"超员啦", Toast.LENGTH_LONG).show();
+					}
 				}
-				addCarPoolNet.setServiceTypeId("5");
-				addCarPoolNet.setCpbStauts("1");
-				addCarPoolNet.getDataFromServer();
-				
-			}else{
-				Toast.makeText(CarpoolActivity.this,"超员啦", Toast.LENGTH_LONG).show();
-			}
 			}else{
 				Toast.makeText(CarpoolActivity.this,"请输入乘车人数", Toast.LENGTH_LONG).show();
 			}
@@ -160,12 +164,15 @@ public class CarpoolActivity extends Activity implements OnClickListener {
    	    	Intent intent = new Intent();
 			intent.putExtra("title", "拼车");
 			intent.setClass(getApplication(), SignUpActivity.class);
-			startActivity(intent);
+			startActivityForResult(intent,SIGNUP);
 			
         }else{
+        	ivSearch.setClickable(true);
+        	ivSearch.setProgress(0);
           Toast.makeText(CarpoolActivity.this,jsonobj.getString("Message"), Toast.LENGTH_LONG).show();
         } 
     }
+    
     private void parseNotify(String str)throws Exception{  
     	JSONObject jsonobj = new JSONObject(str); 
     	int result = jsonobj.getInt("ResultCode");
@@ -190,5 +197,11 @@ public class CarpoolActivity extends Activity implements OnClickListener {
             	  tvname.setText(name);
               }
         }  
+        if (requestCode == SIGNUP && resultCode == RESULT_OK) {
+        	   Intent intent = new Intent();
+	           setResult(RESULT_OK, intent); 
+        	   finish();
+             
+        } 
     }  
 }

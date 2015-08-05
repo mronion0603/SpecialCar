@@ -25,7 +25,6 @@ import com.baidu.mapapi.search.geocode.ReverseGeoCodeOption;
 import com.baidu.mapapi.search.geocode.ReverseGeoCodeResult;
 import com.lc.net.AddInnerNet;
 import com.lc.net.GetAddressNet;
-import com.lc.net.NotifyDriverInnerNet;
 import com.lc.net.RouteMatrixNet;
 import com.lc.popupwindow.AddressPopupWindow;
 import com.lc.popupwindow.TimePopupWindow;
@@ -338,7 +337,7 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 			 ivSearch.setClickable(true);
 			 finish();
         }else{
-           ivSearch.setProgress(50);
+           ivSearch.setProgress(0);
            ivSearch.setClickable(true);
            Toast.makeText(CarInfoActivity.this,jsonobj.getString("Message"), Toast.LENGTH_LONG).show();
         } 

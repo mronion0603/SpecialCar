@@ -3,7 +3,6 @@ package com.lc.shuttle;
 
 
 import com.lc.innercity.BillingRuleActivity;
-import com.lc.innercity.CarInfoActivity;
 import com.lc.specialcar.R;
 import com.lc.utils.ExitApplication;
 

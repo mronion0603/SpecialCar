@@ -194,6 +194,7 @@ public class InterCityHomeActivity extends Activity implements OnClickListener {
               if(extras != null){
             	  address = extras.getString("city");
             	  tvendaddress.setText(address);
+            	  tvendaddress.setTextColor(this.getResources().getColor(R.color.text_brown));
               }
         }  
     }  	
