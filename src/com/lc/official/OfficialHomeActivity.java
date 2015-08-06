@@ -411,8 +411,12 @@ public class OfficialHomeActivity extends Activity implements OnClickListener {
 	              if(extras != null){
 	            	  name = extras.getString("name");
 	            	  phone = extras.getString("phone");
-	            	  tvphone.setText(phone);
-	            	  tvname.setText(name);
+	            	  if(name.length()<=0||phone.length()<=0){
+	            		  
+	            	  }else{
+	            	   tvphone.setText(phone);
+	            	   tvname.setText(name);
+	            	  }
 	              }
 	        }  
 	        if (requestCode == REQUSET_ADDRESS && resultCode == RESULT_OK) {

@@ -169,7 +169,7 @@ public class SendActivity extends Activity implements OnClickListener {
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
 		case R.id.AirportAddress:{
-			airportWindow = new AddressPopupWindow(SendActivity.this,itemOnClick2,groups2);//实例化AddressPopupWindow
+			airportWindow = new AddressPopupWindow(SendActivity.this,itemOnClick2,groups2,"附近机场");//实例化AddressPopupWindow
 			airportWindow.showAsDropDown(originview, 0, 0); //显示窗口
 		}	break;
 		case R.id.Star:
@@ -319,11 +319,13 @@ public class SendActivity extends Activity implements OnClickListener {
 	            case Global.TIME_MESSAGE:{
 	            	String getdate = (String)msg.obj;
 	            	txdate.setText(getdate);
+	            	txdate.setTextColor(getResources().getColor(R.color.black));
 	            break;
                 }
 	            case Global.ADDRESS_END_MESSAGE:{
 	            	String getaddress = (String)msg.obj;
 	            	tvendaddress.setText(getaddress);
+	            	tvendaddress.setTextColor(getResources().getColor(R.color.black));
 	            	if(etAirport.getText().toString().equals("请输入机场")){
 	            		tvmoney.setText("");
 	            	}else{
@@ -352,6 +354,7 @@ public class SendActivity extends Activity implements OnClickListener {
 				}
 	            case Global.CHOOSECITY: {
 	            	etAirport.setText((String) msg.obj);
+	            	etAirport.setTextColor(getResources().getColor(R.color.black));
 	            	if(tvendaddress.getText().toString().equals("请输入上车地点")|tvendaddress.getText().toString().equals("获取地址失败")
 	            			|tvendaddress.getText().toString().equals("地址获取中...")){
 	            		tvmoney.setText("");
@@ -463,8 +466,12 @@ public class SendActivity extends Activity implements OnClickListener {
 	              if(extras != null){
 	            	  name = extras.getString("name");
 	            	  phone = extras.getString("phone");
-	            	  tvphone.setText(phone);
-	            	  tvname.setText(name);
+	            	  if(name.length()<=0||phone.length()<=0){
+	            		  
+	            	  }else{
+	            	   tvphone.setText(phone);
+	            	   tvname.setText(name);
+	            	  }
 	              }
 	        }  
 	        if (requestCode == REQUSET_ADDRESS && resultCode == RESULT_OK) {
@@ -475,6 +482,7 @@ public class SendActivity extends Activity implements OnClickListener {
 	            	  elat = extras.getDouble("latidute");
 	            	  elont = extras.getDouble("longitude");
 	            	  tvendaddress.setText(address);
+	            	  tvendaddress.setTextColor(getResources().getColor(R.color.black));
 	            	  if(etAirport.getText().toString().equals("请输入机场")){
 		            		tvmoney.setText("");
 		              }else{

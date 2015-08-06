@@ -143,7 +143,7 @@
 	      android:layout_height="wrap_content"
 	      android:layout_marginLeft="20dip"
 	      android:textSize="18sp"
-	      android:textColor="@color/black"
+	      android:textColor="@color/black2"
 	      android:layout_centerVertical="true"
 	      android:text="请输入机场"
 	    />
@@ -159,6 +159,12 @@
 	    </RelativeLayout>   
 	      <ImageView
 	      android:layout_width="fill_parent"
+	      android:layout_height="1dip"
+	      android:background="@color/user_divider3"
+	      />
+	      <ImageView
+	      android:layout_width="fill_parent"
+	      android:layout_marginTop="20dip"
 	      android:layout_height="1dip"
 	      android:background="@color/user_divider3"
 	      />
@@ -258,6 +264,12 @@
 	      android:layout_height="1dip"
 	      android:background="@color/user_divider3"
 	    />
+	    <ImageView
+	      android:layout_width="fill_parent"
+	      android:layout_marginTop="20dip"
+	      android:layout_height="1dip"
+	      android:background="@color/user_divider3"
+	      />
 	    <RelativeLayout 
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content" 
@@ -265,6 +277,7 @@
 	    android:paddingBottom="10dip"
 	    android:id="@+id/usecar"
 	    android:background="@color/white"
+	     android:visibility="gone"
 	    >
 	    <ImageView
 	      android:id="@+id/moresaftyim4"
@@ -310,6 +323,7 @@
 	      android:layout_width="fill_parent"
 	      android:layout_height="1dip"
 	      android:background="@color/user_divider3"
+	       android:visibility="gone"
 	    />
 	     <RelativeLayout 
 	    android:layout_width="fill_parent"

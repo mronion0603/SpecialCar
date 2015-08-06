@@ -37,7 +37,7 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
 	        righttext = (TextView) findViewById(R.id.righttext);
 			righttext.setVisibility(View.VISIBLE);
 			righttext.setOnClickListener(this);
-			righttext.setText("费用明细");
+			righttext.setText("计费规则");
 	        mainTab=(RadioGroup)findViewById(R.id.main_tab);
 	        mainTab.setOnCheckedChangeListener(this);
 	        tvTitle = (TextView) findViewById(R.id.topTv);

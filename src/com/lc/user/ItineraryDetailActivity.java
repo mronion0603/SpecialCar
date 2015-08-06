@@ -139,13 +139,13 @@ public class ItineraryDetailActivity extends Activity implements OnClickListener
 		tvusecarTime.setText(startTime);
 		tvstartAddress.setText(startAddress);
         tvendAddress.setText(endAddress);
-        tvmile.setText(mileage);
-        tvtimelong.setText(time);
-        tvstartMoney.setText(bascMoney);
-        tvtimefee.setText(timeMoney);
-        tvlongfee.setText(R_BMoney);
-        tvstopcar.setText(stopCarMoney);
-        tvrealmoney.setText(realMoney);
+        tvmile.setText(mileage+"公里");
+        tvtimelong.setText(time+"分钟");
+        tvstartMoney.setText(bascMoney+"元");
+        tvtimefee.setText(timeMoney+"元");
+        tvlongfee.setText(R_BMoney+"元");
+        tvstopcar.setText(stopCarMoney+"元");
+        tvrealmoney.setText(realMoney+"元");
         
         BitmapUtils bitmapUtils = new BitmapUtils(ItineraryDetailActivity.this);
     	bitmapUtils.display(imdriver, ConnectUrl.commonurl0+driverImg);

@@ -43,7 +43,7 @@ public class UrgentHomeActivity extends Activity implements OnClickListener {
 		originview = layoutInflater.inflate(R.layout.urgent_home, null); 
 		ExitApplication.getInstance().addActivity(this);
 		tvTitle = (TextView) findViewById(R.id.topTv);
-		tvTitle.setText("市内预约");
+		tvTitle.setText("应急用车");
 		righttext = (TextView) findViewById(R.id.righttext2);
 		righttext.setVisibility(View.VISIBLE);
 		righttext.setText("武汉");

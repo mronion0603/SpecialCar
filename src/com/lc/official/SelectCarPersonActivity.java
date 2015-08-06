@@ -269,9 +269,10 @@ public class SelectCarPersonActivity extends Activity implements OnClickListener
 				price1.setText("¥"+list.get(0).get("officalMoney"));
 				price2.setText("¥"+list.get(1).get("officalMoney"));
 				price3.setText("¥"+list.get(2).get("officalMoney"));
-				cardis1.setText(list.get(0).get("carDesc"));
-				cardis2.setText(list.get(1).get("carDesc"));
-				cardis3.setText(list.get(2).get("carDesc"));
+				
+				cardis1.setText("帕萨特 凯美瑞或类似5座车型");
+				cardis2.setText("别克GL8或类似6座车型");
+				cardis3.setText("奥迪A6 宝马系列或类似5座车型");
 				
 			}else{
 				 Toast.makeText(SelectCarPersonActivity.this,jsonobj.getString("Message"), Toast.LENGTH_LONG).show();

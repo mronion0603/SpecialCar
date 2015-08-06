@@ -238,6 +238,7 @@
 	      android:layout_width="fill_parent"
 	      android:layout_height="1dip"
 	      android:background="@color/user_divider3"
+	       android:visibility="gone"
 	    />
 	    <RelativeLayout 
 	    android:layout_width="fill_parent"
@@ -246,6 +247,7 @@
 	    android:paddingBottom="10dip"
 	    android:id="@+id/usecar"
 	    android:background="@color/white"
+	     android:visibility="gone"
 	    >
 	    <ImageView
 	      android:id="@+id/moresaftyim4"
@@ -291,12 +293,13 @@
 	      android:layout_width="fill_parent"
 	      android:layout_height="1dip"
 	      android:background="@color/user_divider3"
+	       android:visibility="gone"
 	    />
 	      <ImageView
 	      android:layout_width="fill_parent"
 	      android:layout_height="20dip"
-	  
-	    />
+	      android:visibility="gone"
+	     />
 	       <RadioGroup  
 	    android:id="@+id/radioGroup"
         android:gravity="center"  

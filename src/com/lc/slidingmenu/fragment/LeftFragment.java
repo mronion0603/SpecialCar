@@ -109,14 +109,14 @@ public class LeftFragment extends Fragment implements OnClickListener{
 		tvmoney = (TextView)view.findViewById(R.id.tvToday);
 		tvbalance = (TextView)view.findViewById(R.id.account);
 		profile = (CircleImageView)view.findViewById(R.id.profile_image);
-  		if(MySharePreference.getStringValue(getActivity(), MySharePreference.USER_TYPE).equals("1")){
-  		   card.setText("公务卡");
-  		   tvmoney.setText("对公结算");
-  		   cardconnect.setVisibility(View.GONE);
-  		}else{
-  		   card.setText("信用卡");
-  		   tvmoney.setText("余额");
-  		}
+  		//if(MySharePreference.getStringValue(getActivity(), MySharePreference.USER_TYPE).equals("1")){
+  		  // card.setText("公务卡");
+  		  // tvmoney.setText("对公结算");
+  		  // cardconnect.setVisibility(View.GONE);
+  		//}else{
+  		  // card.setText("信用卡");
+  		  // tvmoney.setText("余额");
+  		//}
   		getInfoNet.setHandler(mhandler);
 		getInfoNet.setDevice(Global.DEVICE);
 		getInfoNet.setAuthn(MySharePreference.getStringValue(getActivity(), MySharePreference.AUTHN));

@@ -365,7 +365,7 @@ public class AddressActivity extends Activity implements OnClickListener {
     	int result = jsonobj.getInt("ResultCode");
    	    if(result==Global.SUCCESS){
    	      //groupAdapter.notifyDataSetChanged();
-   	    	Toast.makeText(AddressActivity.this,jsonobj.getString("Message"), Toast.LENGTH_LONG).show();
+   	    	Toast.makeText(AddressActivity.this,"添加地址成功", Toast.LENGTH_LONG).show();
         }else{
           Toast.makeText(AddressActivity.this,jsonobj.getString("Message"), Toast.LENGTH_LONG).show();
         } 

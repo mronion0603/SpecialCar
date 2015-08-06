@@ -56,7 +56,7 @@ public class AboutActivity extends Activity implements OnClickListener {
 		ivleft.setVisibility(View.VISIBLE);
 		rlphone= (RelativeLayout) findViewById(R.id.callphone);
 		rlphone.setOnClickListener(this);
-		tvversion.setText(getVersion());
+		tvversion.setText("版本号 V"+getVersion());
 	}
 	@Override
 	public void onClick(View v) {

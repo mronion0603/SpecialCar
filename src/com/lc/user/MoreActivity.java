@@ -140,13 +140,13 @@ public class MoreActivity extends Activity implements OnClickListener {
 	    	JSONObject jsonobj = new JSONObject(str); 
 	    	int result = jsonobj.getInt("ResultCode");
 	   	    if(result==Global.SUCCESS){
-	   	     // Toast.makeText(MoreActivity.this,jsonobj.getString("Message"), Toast.LENGTH_LONG).show();
-	   	     // finish();
+	   	        // Toast.makeText(MoreActivity.this,jsonobj.getString("Message"), Toast.LENGTH_LONG).show();
+	   	        // finish();
 	   	    	JSONObject jsonobj2 = jsonobj.getJSONObject("Data");
 	   	    	String getdate = jsonobj2.getString("date");
 	   	    	 geturl = jsonobj2.getString("url");
 	   	    	String getversion = jsonobj2.getString("returnVersion");
-	   	   //对话框通知用户升级程序   
+	   	        //对话框通知用户升级程序   
 				showUpdataDialog(getdate,geturl,getversion);
 	   	    	
 	        }else{
@@ -186,6 +186,7 @@ public class MoreActivity extends Activity implements OnClickListener {
 	 		 //当点确定按钮时从服务器上下载 新的apk 然后安装   װ
 	 		builer.setPositiveButton("确定", new DialogInterface.OnClickListener() {
 	 			public void onClick(DialogInterface dialog, int which) {
+	 				rl4.setClickable(false);
 	 				downLoadApk();
 	 			}
 	 		});
@@ -218,12 +219,14 @@ public class MoreActivity extends Activity implements OnClickListener {
 		                Message msg = new Message();  
 		                msg.what = DOWN_ERROR;  
 		                mHandler.sendMessage(msg);  
+		                rl4.setClickable(true);
 		                e.printStackTrace();  
 		            }  
 		        }}.start();  
 		}  
 		//安装apk   
 		protected void installApk(File file) {  
+			 rl4.setClickable(true);
 		    Intent intent = new Intent();  
 		    //执行动作  
 		    intent.setAction(Intent.ACTION_VIEW);  

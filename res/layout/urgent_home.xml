@@ -11,7 +11,6 @@
 	    android:paddingTop="10dip"
 	    android:paddingBottom="10dip"
 	    android:layout_gravity="center"
-	    android:layout_marginBottom="10dip"
         android:background="@color/white"
 	    >
      <ImageView
@@ -27,7 +26,7 @@
 	      android:textSize="16sp"
 	      android:textColor="@color/black"
           android:layout_marginBottom="10dip"
-          android:layout_marginLeft="10dip"
+          android:layout_marginLeft="20dip"
 	      android:text="应急电话"
 	      android:textStyle="bold"
 	      android:layout_marginTop="10dip"
@@ -46,7 +45,7 @@
 	      android:layout_width="wrap_content"
 	      android:layout_height="wrap_content"
 	      android:layout_marginLeft="10dip"
-	      android:background="@drawable/phone"  
+	      android:background="@drawable/phone111"  
 	    />
 	     <TextView
 	      android:layout_toRightOf="@+id/date"
@@ -76,7 +75,7 @@
 	      android:layout_width="wrap_content"
 	      android:layout_height="wrap_content"
 	      android:layout_marginLeft="10dip"
-	      android:background="@drawable/phone"  
+	      android:background="@drawable/phone111"  
 	    />
 	     <TextView
 	      android:layout_toRightOf="@+id/date2"
@@ -105,7 +104,7 @@
 	      android:layout_width="wrap_content"
 	      android:layout_height="wrap_content"
 	      android:layout_marginLeft="10dip"
-	      android:background="@drawable/phone"  
+	      android:background="@drawable/phone111"  
 	    />
 	     <TextView
 	      android:layout_toRightOf="@+id/date3"
@@ -125,7 +124,7 @@
 	      android:textSize="16sp"
 	      android:textColor="@color/black"
           android:layout_marginBottom="10dip"
-          android:layout_marginLeft="10dip"
+          android:layout_marginLeft="20dip"
 	      android:text="服务申明"
 	      android:textStyle="bold"
 	      android:layout_marginTop="10dip"
@@ -147,7 +146,7 @@
 	      android:layout_gravity="center"
 	      android:layout_marginLeft="20dip"
 	      android:layout_marginRight="20dip"
-	      android:text="  这是应急专车服务相关规则这是应急专车服务相关规则这是应急专车服务相关规则这是应急专车服务相关规则这是应急专车服务相关规则这是应急专车服务相关规则这是应急专车服务相关规则这是应急专车服务相关规则"
+	      android:text="  这是应急专车服务相关规则这是应急专车服务相关规则这是应急专车服务相关规则这是应急专车服务相关规则这是应急专车服务相关规则这是应急专车服务相关规则"
 	     
 	    />
 	       </RelativeLayout>

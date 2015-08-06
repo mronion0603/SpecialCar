@@ -26,12 +26,12 @@ public final class R {
 	public static final class color {
 		public static final int cpb_blue = 0x7f050001;
 		public static final int cpb_blue_dark = 0x7f050002;
-		public static final int cpb_complete_state_selector = 0x7f050024;
-		public static final int cpb_error_state_selector = 0x7f050025;
+		public static final int cpb_complete_state_selector = 0x7f050025;
+		public static final int cpb_error_state_selector = 0x7f050026;
 		public static final int cpb_green = 0x7f050005;
 		public static final int cpb_green_dark = 0x7f050006;
 		public static final int cpb_grey = 0x7f050000;
-		public static final int cpb_idle_state_selector = 0x7f050026;
+		public static final int cpb_idle_state_selector = 0x7f050027;
 		public static final int cpb_red = 0x7f050003;
 		public static final int cpb_red_dark = 0x7f050004;
 		public static final int cpb_white = 0x7f050007;

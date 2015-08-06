@@ -27,7 +27,7 @@
 			    android:orientation="horizontal"
 		        >
 		        <TextView
-	            android:layout_width="120dip"
+	            android:layout_width="80dip"
 	            android:layout_height="wrap_content"
 	            android:textSize="14sp" 
 	            android:textColor="@color/black"
@@ -51,7 +51,7 @@
 		        >
 		        <TextView
 		        android:id="@+id/OrderType"
-	            android:layout_width="120dip"
+	            android:layout_width="80dip"
 	            android:layout_height="wrap_content"
 	            android:textSize="14sp" 
 	            android:textColor="@color/black"
@@ -74,7 +74,7 @@
 			    android:orientation="horizontal"
 		        >
 		        <TextView
-	            android:layout_width="120dip"
+	            android:layout_width="80dip"
 	            android:layout_height="wrap_content"
 	            android:textSize="14sp" 
 	            android:textColor="@color/black"
@@ -97,7 +97,7 @@
 			    android:orientation="horizontal"
 		        >
 		        <TextView
-	            android:layout_width="120dip"
+	            android:layout_width="80dip"
 	            android:layout_height="wrap_content"
 	            android:textSize="14sp" 
 	            android:textColor="@color/black"

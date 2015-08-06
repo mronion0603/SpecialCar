@@ -73,6 +73,7 @@
 	            android:layout_marginLeft="20dip"
 	            android:background="@color/white"
 	            android:hint="请输入信用卡卡号"
+	            android:textColorHint = "@color/hintcolor"    
 	            />
 	     </LinearLayout>
 	    

@@ -143,7 +143,7 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 		tvmoney = (TextView) findViewById(R.id.money2);
 		righttext = (TextView) findViewById(R.id.righttext);
 		tvtype = (TextView) findViewById(R.id.financialType);
-		//righttext.setVisibility(View.VISIBLE);
+		righttext.setVisibility(View.VISIBLE);
 		righttext.setText("计费规则");
 		righttext.setOnClickListener(this);
 		ivSearch = (CircularProgressButton) findViewById(R.id.Search);
@@ -551,8 +551,12 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 	              if(extras != null){
 	            	  name = extras.getString("name");
 	            	  phone = extras.getString("phone");
-	            	  tvphone.setText(phone);
-	            	  tvname.setText(name);
+	            	  if(name.length()<=0||phone.length()<=0){
+	            		  
+	            	  }else{
+	            	   tvphone.setText(phone);
+	            	   tvname.setText(name);
+	            	  }
 	              }
 	        }  
 	        if (requestCode == REQUSET_ADDRESS && resultCode == RESULT_OK) {

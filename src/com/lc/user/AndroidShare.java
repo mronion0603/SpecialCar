@@ -39,19 +39,19 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ImageView.ScaleType;
+
 
 @SuppressLint("NewApi")
 public class AndroidShare extends Dialog implements AdapterView.OnItemClickListener {
 	private LinearLayout mLayout;
 	private GridView mGridView;
 	private float mDensity;
-	private String msgText = "湖北省公务用车软件";
+	private String msgText = "湖北公务用车软件";
 	private String mImgPath;
 	private int mScreenOrientation;
 	private List<ShareItem> mListData;
 	private Handler mHandler = new Handler();
-    ImageView iv;
+    TextView iv;
 	private Runnable work = new Runnable() {
 		public void run() {
 			int orient = getScreenOrientation();
@@ -134,16 +134,19 @@ public class AndroidShare extends Dialog implements AdapterView.OnItemClickListe
 		params.leftMargin = ((int) (10.0F * this.mDensity));
 		params.rightMargin = ((int) (10.0F * this.mDensity));
 		this.mLayout.setLayoutParams(params);
-		this.mLayout.setBackgroundColor(Color.parseColor("#D9DEDF"));
+		this.mLayout.setBackgroundColor(Color.parseColor("#FFFFFF"));
 
-		this.iv = new ImageView(context);
-		this.iv.setScaleType(ImageView.ScaleType.CENTER);;
-		this.iv.setBackgroundResource(R.drawable.share_logo);
+		this.iv = new TextView(context);
+		//this.iv.setScaleType(ImageView.ScaleType.CENTER);;
+		//this.iv.setBackgroundResource(R.drawable.share_logo);
+		this.iv.setTextColor(context.getResources().getColor(R.color.black));
+		this.iv.setTextSize((int) (6.0F * this.mDensity));
+		this.iv.setText("分享到");
 		LinearLayout.LayoutParams params2 = new LinearLayout.LayoutParams(-1, -2);
-		params2.topMargin = ((int) (20.0F * this.mDensity));
-		params2.bottomMargin = ((int) (20.0F * this.mDensity));
-		params2.leftMargin = ((int) (30.0F * this.mDensity));
-		params2.rightMargin = ((int) (30.0F * this.mDensity));
+		params2.topMargin = ((int) (10.0F * this.mDensity));
+		params2.bottomMargin = ((int) (8.0F * this.mDensity));
+		params2.leftMargin = ((int) (15.0F * this.mDensity));
+		params2.rightMargin = ((int) (15.0F * this.mDensity));
 		this.iv.setLayoutParams(params2);
 		this.mLayout.addView(this.iv);
 		

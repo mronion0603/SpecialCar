@@ -16,7 +16,7 @@
     <color name="user_divider3">#d9d9d9</color>
     <color name="black2">#999999</color>
     <color name="up_divider">#e5e5e5</color>
-    
+    <color name="hintcolor">#CCC</color>
     <color name="lightgrey">#ff888888</color>
      <color name="blue">#ffccddff</color>
     <color name="grey">#58616d</color>

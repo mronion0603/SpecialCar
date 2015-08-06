@@ -23,7 +23,7 @@
             android:gravity="center_vertical"
             android:src="@drawable/men"
             app:border_color="@color/text_green"
-            app:border_width="1dp" />
+            app:border_width="0dp" />
 
         <TextView
             android:id="@+id/user_name"
@@ -60,7 +60,7 @@
         android:gravity="center_vertical"
         android:paddingLeft="20.0dip"
         android:paddingRight="10.0dip"
-        android:text="对公结算(余额)"
+        android:text="余额"
         android:textColor="@color/text_color"
         android:drawableLeft="@drawable/person_1"
         android:textSize="16.0sp" />
@@ -108,7 +108,7 @@
         android:gravity="center_vertical"
         android:paddingLeft="20.0dip"
         android:paddingRight="10.0dip"
-        android:text="公务卡(信用卡)"
+        android:text="信用卡"
         android:drawableLeft="@drawable/person_2"
         android:textColor="@color/text_color"
         android:textSize="16.0sp" />
