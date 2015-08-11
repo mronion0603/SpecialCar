@@ -5,7 +5,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" 
     android:orientation="vertical"
-    android:background="#ffefebe7">
+    android:background="@color/bg_color">
    <include layout="@layout/main_head" />
       
     <RelativeLayout
@@ -18,7 +18,7 @@
            <EditText
             android:id="@+id/feedbackET"
             android:hint="请提出您的宝贵建议"
-            
+            android:textColorHint="@color/hintcolor"
             android:layout_width="wrap_content"
             android:layout_height="200dip"
             android:gravity="top"

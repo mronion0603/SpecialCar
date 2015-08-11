@@ -43,7 +43,7 @@ public class AddressPopupWindow extends PopupWindow {
          GroupAdapter groupAdapter = new GroupAdapter(context, groups2);  
          ListView lv_group1 = (ListView) mMenuView.findViewById(R.id.lvGroup);  
          lv_group1.setAdapter(groupAdapter); 
-         setListViewHeightBasedOnChildren(lv_group1);
+         //setListViewHeightBasedOnChildren(lv_group1);
          lv_group1.setOnItemClickListener(itemClickListener);  
          TextView tv = (TextView) mMenuView.findViewById(R.id.tv);  
          tv.setText(title);

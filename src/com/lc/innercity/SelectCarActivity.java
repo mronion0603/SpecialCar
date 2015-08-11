@@ -22,6 +22,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Html;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
@@ -130,10 +131,15 @@ public class SelectCarActivity extends Activity implements OnClickListener {
 					}
 					tvtype.setText(type);
 					tvtype2.setText(type2);
-					//bttype.setText(list.get(position).get("carDesc"));
-					tv1.setText(list.get(position).get("bascMoney")+"元/起步价");
-					tv2.setText(list.get(position).get("mileageMoney")+"元/公里");
-					tv3.setText(list.get(position).get("timeMoney")+"元/分钟");
+					String basicmoney = "<font color='black'><b>" + list.get(position).get("bascMoney")+ "</b></font>"
+		                       +"<font color='#999999'><b>" + "元/起步价"+ "</b></font>";
+					String mileageMoney = "<font color='black'><b>" + list.get(position).get("mileageMoney")+ "</b></font>"
+		                       +"<font color='#999999'><b>" + "元/公里"+ "</b></font>";
+					String timeMoney = "<font color='black'><b>" + list.get(position).get("timeMoney")+ "</b></font>"
+		                       +"<font color='#999999'><b>" + "元/分钟"+ "</b></font>";
+					tv1.setText(Html.fromHtml(basicmoney));
+					tv2.setText(Html.fromHtml(mileageMoney));
+					tv3.setText(Html.fromHtml(timeMoney));
 				}
 
 				@Override

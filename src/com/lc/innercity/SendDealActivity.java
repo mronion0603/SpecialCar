@@ -67,6 +67,8 @@ public class SendDealActivity extends Activity implements OnClickListener {
 	BaiduMap mBaiduMap;
 	CancelInnerNet cancelInnerNet = new CancelInnerNet();
 	String getOrderNum="";
+	TextView tvmessage;
+	ImageView ivline;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
@@ -91,8 +93,10 @@ public class SendDealActivity extends Activity implements OnClickListener {
 		tvdrivername = (TextView) findViewById(R.id.drivername);
 		tvcarnum = (TextView) findViewById(R.id.carNum);
 		ivcontactdriver = (ImageView) findViewById(R.id.contactDriver);
+		ivline = (ImageView) findViewById(R.id.ivline);
 		ivcontactdriver.setOnClickListener(this);
 		ivdriverimg = (CircularImage) findViewById(R.id.driverimg);
+		tvmessage = (TextView) findViewById(R.id.message);
 		tvTitle = (TextView) findViewById(R.id.topTv);
 		tvTitle.setText("正在派单");
 		righttext = (TextView) findViewById(R.id.righttext);
@@ -160,30 +164,44 @@ public class SendDealActivity extends Activity implements OnClickListener {
 		public void onReceive(Context context, Intent intent) {
 			if (MESSAGE_RECEIVED_ACTION.equals(intent.getAction())) {
               String message = intent.getStringExtra(KEY_MESSAGE);
-              //String extras = intent.getStringExtra(KEY_EXTRAS);
-              StringBuilder showMsg = new StringBuilder();
-              showMsg.append(KEY_MESSAGE + " : " + message + "\n");
-              //if (!ExampleUtil.isEmpty(extras)) {
-              //	  showMsg.append(KEY_EXTRAS + " : " + extras + "\n");
-              // }
-              //setCostomMsg(showMsg.toString());
-              System.out.println("SendDeal:"+message);
-              timer.cancel();
-  	          if(animationDrawable!=null){
-  	           animationDrawable.stop();
-  			   animationDrawable =null; 
-  	          }
-              rlwait.setVisibility(View.GONE);
-              rldriver.setVisibility(View.VISIBLE);
+              
               try {
-				parseJSON(message);
-			  } catch (Exception e) {
-				e.printStackTrace();
-			  }
+            	int gettype = type(message);
+            	if(gettype==0){
+            		parseJSON(message);
+            		timer.cancel();
+         	        if(animationDrawable!=null){
+         	           animationDrawable.stop();
+         			   animationDrawable =null; 
+         	        }
+                    rlwait.setVisibility(View.GONE);
+                    rldriver.setVisibility(View.VISIBLE);
+                    ivline.setVisibility(View.VISIBLE);
+            	}else if(gettype==3){
+            		tvmessage.setText("您已上车，祝您旅途愉快!");
+            	}
+  				
+  			  } catch (Exception e) {
+  				e.printStackTrace();
+  			  }
+
 			}
 		}
 	}
-	
+	  private int type(String str)throws Exception{
+		   int gettype = -1;
+		   JSONObject jsonobj = new JSONObject(str);
+		   int result = jsonobj.getInt("ResultCode");
+			if (result == Global.SUCCESS) {
+				JSONObject jsonobj2 = jsonobj.getJSONObject("Data");
+				if(jsonobj2.getString("type").equals("0")){
+					gettype=0;
+				}else if(jsonobj2.getString("type").equals("3")){
+					gettype=3;
+				}
+			}
+			return gettype;
+	  }
 	  private void parseJSON(String str)throws Exception{  
 	    	System.out.println(str);
 			JSONObject jsonobj = new JSONObject(str);
@@ -212,12 +230,6 @@ public class SendDealActivity extends Activity implements OnClickListener {
 	        contactWindow.showAsDropDown(originview, 0, 0); 
 		}	break;
 		case R.id.righttext:
-			/*
-			cancelInnerNet.setHandler(mHandler);
-			cancelInnerNet.setOrderNum(getOrderNum);
-			cancelInnerNet.setAuthn(MySharePreference.getStringValue(getApplication(), MySharePreference.AUTHN));
-			cancelInnerNet.getDataFromServer();
-			*/
 			//finish();
 			Intent intent = new Intent();
 			intent.setClass(SendDealActivity.this,CancelOrderActivity.class);

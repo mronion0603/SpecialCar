@@ -3,6 +3,7 @@
     android:layout_width="fill_parent"  
     android:layout_height="fill_parent"  
     android:orientation="vertical"
+    android:background="@color/white"
      >  
       <include layout="@layout/main_head" />
      
@@ -24,7 +25,8 @@
 	    android:gravity="center"
 	    android:text="暂无地址"
 	    android:textSize="18sp"
-	    android:textColor="@color/black2"
+	    android:textColor="@color/nomessage"
+	    android:layout_marginTop="10dip"
 	    android:visibility="gone"
 	    /> 
       <ListView  

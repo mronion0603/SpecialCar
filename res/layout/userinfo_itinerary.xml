@@ -2,7 +2,7 @@
       xmlns:listViewAttr="http://schemas.android.com/apk/res/com.lc.specialcar"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_color"
+    android:background="@color/white"
     android:orientation="vertical" >
 
     <include layout="@layout/main_head" />
@@ -36,7 +36,8 @@
 	    android:gravity="center"
 	    android:text="暂无行程"
 	    android:textSize="18sp"
-	    android:textColor="@color/black2"
+	    android:layout_marginTop="10dip"
+	    android:textColor="@color/nomessage"
 	    android:visibility="gone"
 	    /> 
      <cn.trinea.android.common.view.DropDownListView

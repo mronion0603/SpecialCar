@@ -26,7 +26,7 @@
 	      android:textSize="16sp"
 	      android:textColor="@color/black"
 	      android:textStyle="bold"
-	      android:text="    在您完成本网用户注册之前，建议您仔细阅读本协议再进行注册。本协议在您接受注册时生效，将成为您和 春泰 之间具有法律意义的文件，您和春泰将同时受到本协议条款的约束。"
+	      android:text="    在您完成本网用户注册之前，建议您仔细阅读本协议再进行注册。本协议在您接受注册时生效，将成为您和 湖北公务用车 之间具有法律意义的文件，您和湖北公务用车将同时受到本协议条款的约束。"
 	    />
 	     
 	   
@@ -51,7 +51,7 @@
 	      android:layout_marginTop="10dip"
 	      android:textSize="16sp"
 	      android:textColor="@color/black"
-	      android:text="1.1“用户”是指按照春泰的要求完成注册的春泰用户。用户可以通过移动设备注册和网上注册成为春泰用户，享受春泰为用户提供的服务。"
+	      android:text="1.1“用户”是指按照湖北公务用车的要求完成注册的湖北公务用车用户。用户可以通过移动设备注册和网上注册成为湖北公务用车用户，享受湖北公务用车为用户提供的服务。"
 	      />
 	      <TextView
 
@@ -83,7 +83,7 @@
 	      android:layout_marginTop="10dip"
 	      android:textSize="16sp"
 	      android:textColor="@color/black"
-	      android:text="(1) 在完成注册、预订等相关程序且通信正常的情况下，享受春泰提供的用车信息服务；"
+	      android:text="(1) 在完成注册、预订等相关程序且通信正常的情况下，享受湖北公务用车提供的用车信息服务；"
 	      />
 	      <TextView
 	      android:layout_width="wrap_content"
@@ -113,7 +113,7 @@
 	      android:layout_marginTop="10dip"
 	      android:textSize="16sp"
 	      android:textColor="@color/black"
-	      android:text="(4) 春泰根据互联网和移动互联网平台规划随时增添的其它服务。"
+	      android:text="(4) 湖北公务用车根据互联网和移动互联网平台规划随时增添的其它服务。"
 	      />
 	      <TextView
 	      android:layout_width="wrap_content"
@@ -134,7 +134,7 @@
 	      android:layout_marginTop="10dip"
 	      android:textSize="16sp"
 	      android:textColor="@color/black"
-	      android:text="3.1 用户根据春泰用户注册的要求填写真实用户信息，并表示接受本协议后方可申请成为用户。如用户信息有任何变动，必须在四个工作日内更新。"
+	      android:text="3.1 用户根据湖北公务用车用户注册的要求填写真实用户信息，并表示接受本协议后方可申请成为用户。如用户信息有任何变动，必须在四个工作日内更新。"
 	      />
 	        <TextView
 	      android:layout_width="wrap_content"
@@ -155,7 +155,7 @@
 	      android:layout_marginTop="10dip"
 	      android:textSize="16sp"
 	      android:textColor="@color/black"
-	      android:text="4.1 用户的账号密码由用户自行妥善保管，无论基于何种目的，均禁止用户将其账号密码转让或出借于任何第三方使用。如用户发现其账号被他人非法使用，应当立即 通知春泰，因黑客行为、用户保管的疏忽导致用户账号密码被他人非法使用或用户将其账号密码转让或出借于任何第三方使用而导致的任何损失及一切法律后果均由 用户承担。"
+	      android:text="4.1 用户的账号密码由用户自行妥善保管，无论基于何种目的，均禁止用户将其账号密码转让或出借于任何第三方使用。如用户发现其账号被他人非法使用，应当立即 通知湖北公务用车，因黑客行为、用户保管的疏忽导致用户账号密码被他人非法使用或用户将其账号密码转让或出借于任何第三方使用而导致的任何损失及一切法律后果均由 用户承担。"
 	      />
 	         <TextView
 	      android:layout_width="wrap_content"
@@ -176,7 +176,7 @@
 	      android:layout_marginTop="10dip"
 	      android:textSize="16sp"
 	      android:textColor="@color/black"
-	      android:text="5.1 用户应当遵守有关法律法规，按照相关协议使用规则享受春泰提供的用车信息服务。不得从事以下行为，若发生下列行为，则用户应承担相应的法律责任。春泰 有权限制或取消其用户权限： "
+	      android:text="5.1 用户应当遵守有关法律法规，按照相关协议使用规则享受湖北公务用车提供的用车信息服务。不得从事以下行为，若发生下列行为，则用户应承担相应的法律责任。湖北公务用车 有权限制或取消其用户权限： "
 	      />
 	            <TextView
 	      android:layout_width="wrap_content"
@@ -206,7 +206,7 @@
 	      android:layout_marginTop="10dip"
 	      android:textSize="16sp"
 	      android:textColor="@color/black"
-	      android:text="(3) 利用任何方式方法危害春泰网站系统的安全；"
+	      android:text="(3) 利用任何方式方法危害湖北公务用车网站系统的安全；"
 	      />
 	                     <TextView
 	      android:layout_width="wrap_content"
@@ -216,7 +216,7 @@
 	      android:layout_marginTop="10dip"
 	      android:textSize="16sp"
 	      android:textColor="@color/black"
-	      android:text="(4) 为任何非法目的使用春泰； "
+	      android:text="(4) 为任何非法目的使用湖北公务用车； "
 	      />
 	                      <TextView
 	      android:layout_width="wrap_content"
@@ -226,7 +226,7 @@
 	      android:layout_marginTop="10dip"
 	      android:textSize="16sp"
 	      android:textColor="@color/black"
-	      android:text="(5) 在春泰网站上复制、发布任何形式的虚假信息，或复制、发布含有下列内容的信息： "
+	      android:text="(5) 在湖北公务用车网站上复制、发布任何形式的虚假信息，或复制、发布含有下列内容的信息： "
 	      />
 	                       <TextView
 	      android:layout_width="wrap_content"
@@ -317,7 +317,7 @@
 	      android:layout_marginTop="10dip"
 	      android:textSize="16sp"
 	      android:textColor="@color/black"
-	      android:text="6.1 鉴于网络服务的特殊性，用户授权春泰可随时变更、中断或终止部分或全部的网络服务（包括但不限于因春泰软硬件维护、不可抗力等原因），春泰均无需为此 向用户承担责任。 "
+	      android:text="6.1 鉴于网络服务的特殊性，用户授权湖北公务用车可随时变更、中断或终止部分或全部的网络服务（包括但不限于因湖北公务用车软硬件维护、不可抗力等原因），湖北公务用车均无需为此 向用户承担责任。 "
 	      />   
 	       <TextView
 	      android:layout_width="wrap_content"
@@ -327,7 +327,7 @@
 	      android:layout_marginTop="10dip"
 	      android:textSize="16sp"
 	      android:textColor="@color/black"
-	      android:text="6.2 如发生下列任何一种情形，春泰有权在通知用户后中断或终止向用户提供全部或部分网络服务而无需对用户或任何第三方承担任何责任："
+	      android:text="6.2 如发生下列任何一种情形，湖北公务用车有权在通知用户后中断或终止向用户提供全部或部分网络服务而无需对用户或任何第三方承担任何责任："
 	      />     
 	          <TextView
 	      android:layout_width="wrap_content"
@@ -368,7 +368,7 @@
 	      android:layout_marginTop="10dip"
 	      android:textSize="16sp"
 	      android:textColor="@color/black"
-	      android:text="7.1 春泰上所有内容，包括但不限于文本、图片、图形、音频、视频、档案、资料、软件设计，均由春泰或其关联公司依法拥有其知识产权，包括但不限于商标权、著 作权、商业秘密等。  "
+	      android:text="7.1 湖北公务用车上所有内容，包括但不限于文本、图片、图形、音频、视频、档案、资料、软件设计，均由湖北公务用车或其关联公司依法拥有其知识产权，包括但不限于商标权、著 作权、商业秘密等。  "
 	      />   
 	       <TextView
 	      android:layout_width="wrap_content"
@@ -378,7 +378,7 @@
 	      android:layout_marginTop="10dip"
 	      android:textSize="16sp"
 	      android:textColor="@color/black"
-	      android:text="7.2 未经春泰或其关联公司书面同意，任何人不得擅自使用、修改、复制、公开传播、散布、发行或公开发表上述内容。"
+	      android:text="7.2 未经湖北公务用车或其关联公司书面同意，任何人不得擅自使用、修改、复制、公开传播、散布、发行或公开发表上述内容。"
 	      />   
 	                    <TextView
 	      android:layout_width="wrap_content"
@@ -399,7 +399,7 @@
 	      android:layout_marginTop="10dip"
 	      android:textSize="16sp"
 	      android:textColor="@color/black"
-	      android:text="8.1 保护用户隐私是春泰的一项基本原则，春泰保证不对外公开或向第三方提供用户的注册资料以及用户在使用用车信息服务过程中储存在春泰的非公开内容，但 下列情况除外： "
+	      android:text="8.1 保护用户隐私是湖北公务用车的一项基本原则，湖北公务用车保证不对外公开或向第三方提供用户的注册资料以及用户在使用用车信息服务过程中储存在湖北公务用车的非公开内容，但 下列情况除外： "
 	      />   
 	       <TextView
 	      android:layout_width="wrap_content"
@@ -439,7 +439,7 @@
 	      android:layout_marginTop="10dip"
 	      android:textSize="16sp"
 	      android:textColor="@color/black"
-	      android:text="(4) 为维护春泰合法权益公开。"
+	      android:text="(4) 为维护湖北公务用车合法权益公开。"
 	      />      
 	        <TextView
 	      android:layout_width="wrap_content"
@@ -449,7 +449,7 @@
 	      android:layout_marginTop="10dip"
 	      android:textSize="16sp"
 	      android:textColor="@color/black"
-	      android:text="8.2 如春泰与第三方合作向用户提供相关用车信息服务，在此情况下，如该第三方同意承担与春泰同等的保护用户隐私的责任，则春泰有权将用户的注册资料等提供给第三方。"
+	      android:text="8.2 如湖北公务用车与第三方合作向用户提供相关用车信息服务，在此情况下，如该第三方同意承担与湖北公务用车同等的保护用户隐私的责任，则湖北公务用车有权将用户的注册资料等提供给第三方。"
 	      />    
 	       <TextView
 	      android:layout_width="wrap_content"
@@ -459,7 +459,7 @@
 	      android:layout_marginTop="10dip"
 	      android:textSize="16sp"
 	      android:textColor="@color/black"
-	      android:text="8.3 在不侵犯用户隐私的前提下，春泰有权对用户数据库进行商业利用。"
+	      android:text="8.3 在不侵犯用户隐私的前提下，湖北公务用车有权对用户数据库进行商业利用。"
 	      />      
 	        <TextView
 	      android:layout_width="wrap_content"
@@ -480,7 +480,7 @@
 	      android:layout_marginTop="10dip"
 	      android:textSize="16sp"
 	      android:textColor="@color/black"
-	      android:text="9.1 用户同意其使用春泰用车信息服务所存在的风险及后果将完全由其承担，春泰无需对用户承担任何责任。"
+	      android:text="9.1 用户同意其使用湖北公务用车用车信息服务所存在的风险及后果将完全由其承担，湖北公务用车无需对用户承担任何责任。"
 	      />   
 	       <TextView
 	      android:layout_width="wrap_content"
@@ -490,7 +490,7 @@
 	      android:layout_marginTop="10dip"
 	      android:textSize="16sp"
 	      android:textColor="@color/black"
-	      android:text="9.1 用户同意其使用春泰用车信息服务所存在的风险及后果将完全由其承担，春泰无需对用户承担任何责任。"
+	      android:text="9.1 用户同意其使用湖北公务用车用车信息服务所存在的风险及后果将完全由其承担，湖北公务用车无需对用户承担任何责任。"
 	      />         
 	       <TextView
 	      android:layout_width="wrap_content"
@@ -500,7 +500,7 @@
 	      android:layout_marginTop="10dip"
 	      android:textSize="16sp"
 	      android:textColor="@color/black"
-	      android:text="9.2 春泰对网络服务不作任何类型的担保，包括但不限于网络服务的及时性、安全性、准确性，对用户在任何情况下因使用或不能使用春泰网络服务所产生的直接的、 间接的风险及损失不承担任何责任。"
+	      android:text="9.2 湖北公务用车对网络服务不作任何类型的担保，包括但不限于网络服务的及时性、安全性、准确性，对用户在任何情况下因使用或不能使用湖北公务用车网络服务所产生的直接的、 间接的风险及损失不承担任何责任。"
 	      />    
 	       <TextView
 	      android:layout_width="wrap_content"
@@ -510,7 +510,7 @@
 	      android:layout_marginTop="10dip"
 	      android:textSize="16sp"
 	      android:textColor="@color/black"
-	      android:text="9.3 对于不可抗力、计算机病毒、黑客攻击、系统不稳定、用户所在位置、用户关机以及其他任何网络、技术、通信线路等原因造成的服务中断或不能满足用户要求的风 险，由用户自行承担，春泰不承担任何责任。"
+	      android:text="9.3 对于不可抗力、计算机病毒、黑客攻击、系统不稳定、用户所在位置、用户关机以及其他任何网络、技术、通信线路等原因造成的服务中断或不能满足用户要求的风 险，由用户自行承担，湖北公务用车不承担任何责任。"
 	      />   
 	       <TextView
 	      android:layout_width="wrap_content"
@@ -520,7 +520,7 @@
 	      android:layout_marginTop="10dip"
 	      android:textSize="16sp"
 	      android:textColor="@color/black"
-	      android:text="9.4 用户同意对于春泰向用户提供的下列产品或者服务的质量缺陷本身及其引发的任何损失，春泰无需承担任何责任："
+	      android:text="9.4 用户同意对于湖北公务用车向用户提供的下列产品或者服务的质量缺陷本身及其引发的任何损失，湖北公务用车无需承担任何责任："
 	      />     
 	       <TextView
 	      android:layout_width="wrap_content"
@@ -530,7 +530,7 @@
 	      android:layout_marginTop="10dip"
 	      android:textSize="16sp"
 	      android:textColor="@color/black"
-	      android:text="(1) 春泰向用户免费提供的各项网络服务；"
+	      android:text="(1) 湖北公务用车向用户免费提供的各项网络服务；"
 	      />   
 	        <TextView
 	      android:layout_width="wrap_content"
@@ -540,7 +540,7 @@
 	      android:layout_marginTop="10dip"
 	      android:textSize="16sp"
 	      android:textColor="@color/black"
-	      android:text="(2) 春泰向用户赠送的任何产品或者服务；"
+	      android:text="(2) 湖北公务用车向用户赠送的任何产品或者服务；"
 	      />          
 	        <TextView
 	      android:layout_width="wrap_content"
@@ -550,7 +550,7 @@
 	      android:layout_marginTop="10dip"
 	      android:textSize="16sp"
 	      android:textColor="@color/black"
-	      android:text="(3) 春泰向收费服务用户附赠的各种产品或服务。"
+	      android:text="(3) 湖北公务用车向收费服务用户附赠的各种产品或服务。"
 	      />      
 	      <TextView
 	      android:layout_width="wrap_content"
@@ -572,7 +572,7 @@
 	      android:layout_marginTop="10dip"
 	      android:textSize="16sp"
 	      android:textColor="@color/black"
-	      android:text="10.1 春泰有权随时修改本协议的任何条款，一旦本协议的内容发生变动，春泰会将修改之后的协议内容向用户公布。"
+	      android:text="10.1 湖北公务用车有权随时修改本协议的任何条款，一旦本协议的内容发生变动，湖北公务用车会将修改之后的协议内容向用户公布。"
 	      />     
 	        <TextView
 	      android:layout_width="wrap_content"
@@ -582,7 +582,7 @@
 	      android:layout_marginTop="10dip"
 	      android:textSize="16sp"
 	      android:textColor="@color/black"
-	      android:text="10.2 如果不同意春泰对本协议任何条款所作的修改，用户有权停止使用网络服务。如果用户继续使用网络服务，则视为用户接受春泰对本协议任何条款所作的修改。"
+	      android:text="10.2 如果不同意湖北公务用车对本协议任何条款所作的修改，用户有权停止使用网络服务。如果用户继续使用网络服务，则视为用户接受湖北公务用车对本协议任何条款所作的修改。"
 	      />    
 	          <TextView
 	      android:layout_width="wrap_content"
@@ -603,7 +603,7 @@
 	      android:layout_marginTop="10dip"
 	      android:textSize="16sp"
 	      android:textColor="@color/black"
-	      android:text="11.1 本协议项下春泰对用户所有的通知均可通过网页公告、电子邮件、手机短信、常规信件以及APP应用软件通知等方式进行。春泰可选择其中任何一种方式通知 用户，该通知于发送之日视为已送达用户，用户知悉并接受通知之内容。"
+	      android:text="11.1 本协议项下湖北公务用车对用户所有的通知均可通过网页公告、电子邮件、手机短信、常规信件以及APP应用软件通知等方式进行。湖北公务用车可选择其中任何一种方式通知 用户，该通知于发送之日视为已送达用户，用户知悉并接受通知之内容。"
 	      />  
 	         <TextView
 	      android:layout_width="wrap_content"
@@ -613,7 +613,7 @@
 	      android:layout_marginTop="10dip"
 	      android:textSize="16sp"
 	      android:textColor="@color/black"
-	      android:text="11.2 用户如有任何事宜需通知春泰，应当通过春泰对外正式公布的通信地址、传真号码、电子邮件地址等方式进行联系及送达。"
+	      android:text="11.2 用户如有任何事宜需通知湖北公务用车，应当通过湖北公务用车对外正式公布的通信地址、传真号码、电子邮件地址等方式进行联系及送达。"
 	      />                     
 	        <TextView
 	      android:layout_width="wrap_content"
@@ -623,7 +623,7 @@
 	      android:layout_marginTop="10dip"
 	      android:textSize="16sp"
 	      android:textColor="@color/black"
-	      android:text="11.3 用户在享受春泰各类服务的同时，同意接受春泰提供的各类信息服务，这些信息所涉及的内容包括以文字、图片、照片、音视频形式表现的各类用车服务信息、 宣传信息、促销信息、商业信息以及春泰合作伙伴的信息，该类信息的提供方式包括但不限于短信息、电子邮件、手机客户端推送。用户在春泰注册或预约春泰服 务时，即表明用户已同意接受此项服务。若用户不希望接收来自春泰的信息，则可通过电话方式联系春泰客户服务部门协助处理。"
+	      android:text="11.3 用户在享受湖北公务用车各类服务的同时，同意接受湖北公务用车提供的各类信息服务，这些信息所涉及的内容包括以文字、图片、照片、音视频形式表现的各类用车服务信息、 宣传信息、促销信息、商业信息以及湖北公务用车合作伙伴的信息，该类信息的提供方式包括但不限于短信息、电子邮件、手机客户端推送。用户在湖北公务用车注册或预约湖北公务用车服 务时，即表明用户已同意接受此项服务。若用户不希望接收来自湖北公务用车的信息，则可通过电话方式联系湖北公务用车客户服务部门协助处理。"
 	      />   
 	         <TextView
 	      android:layout_width="wrap_content"
@@ -654,7 +654,7 @@
 	      android:layout_marginTop="10dip"
 	      android:textSize="16sp"
 	      android:textColor="@color/black"
-	      android:text="12.2 就因本协议引起的任何争议，春泰与用户均有权向春泰所在地具有管辖权的人民法院提起诉讼。"
+	      android:text="12.2 就因本协议引起的任何争议，湖北公务用车与用户均有权向湖北公务用车所在地具有管辖权的人民法院提起诉讼。"
 	      />                                       
 </LinearLayout>
 </ScrollView>

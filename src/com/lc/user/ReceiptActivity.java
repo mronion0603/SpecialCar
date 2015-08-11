@@ -15,6 +15,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Html;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -146,7 +147,9 @@ public class ReceiptActivity extends Activity implements OnClickListener {
 	    	int result = jsonobj.getInt("ResultCode");
 	   	    if(result==Global.SUCCESS){
 	   	    	String money = jsonobj.getJSONObject("Data").getString("subMoney");
-	   	    	tvmax.setText(money+"元");
+	   	    	money = "<font color='text_brown'><b>" + money+ "</b></font>"
+	                       +"<font color='black'><b>" + "元"+ "</b></font>";
+	   	    	tvmax.setText(Html.fromHtml(money));
 	        }else{
 	         // Toast.makeText(ReceiptActivity.this,jsonobj.getString("Message"), Toast.LENGTH_LONG).show();
 	        } 

@@ -1,10 +1,10 @@
 package com.lc.jpush;
 
+
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import com.lc.innercity.SendDealActivity;
-import com.lc.specialcar.MainActivity;
+import com.lc.user.ItineraryDetailActivity;
 import com.lc.utils.Global;
 
 import android.content.BroadcastReceiver;
@@ -154,8 +154,58 @@ public class MyReceiver extends BroadcastReceiver {
 					  msgIntent.putExtra(SendDealActivity.KEY_MESSAGE, message);
 					  context.sendBroadcast(msgIntent);
 				    }else if(jsonobj2.getString("type").equals("1")){
-				      Intent i = new Intent(context, MainActivity.class);
-				      context.startActivity(i);
+				    	Intent intent = new Intent(context, ItineraryDetailActivity.class);
+				    	intent.putExtras(bundle);
+				    	/*
+    		        	intent.putExtra("OrderStatus", "已完成");
+    					intent.putExtra("OrderNum", jsonobj2.getString("orderNum"));
+    					intent.putExtra("StartTime", jsonobj2.getString("startTime"));
+    					intent.putExtra("StartAddress", jsonobj2.getString("startAddress"));
+    					String getSerTypeId = jsonobj2.getString("serTypeId");
+    					if(getSerTypeId.equals("1")){
+    						getSerTypeId= "接机";
+    					}else if(getSerTypeId.equals("2")){
+    						getSerTypeId= "送机";	
+    					}else if(getSerTypeId.equals("3")){
+    						getSerTypeId= "公务包车";
+    					}else if(getSerTypeId.equals("4")){
+    						getSerTypeId= "市内约租";
+    					}else{
+    						getSerTypeId= "城际约租";
+    					}
+    					intent.putExtra("SerTypeId", getSerTypeId);
+    					intent.putExtra("CarTypeId", jsonobj2.getString("carTypeId"));
+    					intent.putExtra("R_BMoney", jsonobj2.getString("R_BMoney"));
+    					intent.putExtra("stopCarMoney", jsonobj2.getString("stopCarMoney"));
+    					intent.putExtra("EndAddress", jsonobj2.getString("endAddress"));
+    					intent.putExtra("UseCarTime", jsonobj2.getString("useCarTime"));
+    					intent.putExtra("CarSum", jsonobj2.getString("carSum"));
+    					intent.putExtra("RiderName", jsonobj2.getString("riderName"));
+    					intent.putExtra("RiderPhone", jsonobj2.getString("riderPhone"));
+    					intent.putExtra("Comment", jsonobj2.getString("comment"));
+    					intent.putExtra("Mileage", jsonobj2.getString("mileage"));
+    					intent.putExtra("Time",  jsonobj2.getString("time"));
+    					intent.putExtra("RealMoney",  jsonobj2.getString("realMoney"));
+    					
+    					intent.putExtra("carNum", jsonobj2.getString("carNum"));
+    					intent.putExtra("carType", jsonobj2.getString("carType"));
+    					intent.putExtra("driverName", jsonobj2.getString("driverName"));
+    					intent.putExtra("driverImg", jsonobj2.getString("driverImg"));
+    					intent.putExtra("mileageMoney", jsonobj2.getString("mileageMoney"));
+    					intent.putExtra("bascMoney", jsonobj2.getString("bascMoney"));
+    					intent.putExtra("timeMoney",jsonobj2.getString("timeMoney"));
+    					intent.putExtra("assessType",  jsonobj2.getString("assessType"));
+    					intent.putExtra("asssScore", jsonobj2.getString("assessScore"));
+    		        	*/
+    		        	//i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				    	intent.putExtra("orderNum", jsonobj2.getString("orderNum"));
+				    	intent.putExtra("new", "new");
+    					intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP );
+    		        	context.startActivity(intent);
+				    } else if(jsonobj2.getString("type").equals("3")){
+				    	 Intent msgIntent = new Intent(SendDealActivity.MESSAGE_RECEIVED_ACTION);
+						 msgIntent.putExtra(SendDealActivity.KEY_MESSAGE, message);
+						 context.sendBroadcast(msgIntent);
 				    }
 				}
 			} catch (JSONException e) {

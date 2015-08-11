@@ -4,12 +4,14 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" 
     android:orientation="vertical"
-    android:background="#ffefebe7">
+    android:background="@color/bg_color">
     <include layout="@layout/main_head" />
     <RelativeLayout
     android:layout_width="fill_parent"
-    android:layout_height="200dip"
+    android:layout_height="wrap_content"
     android:background="@color/bg_color"
+    android:paddingTop="50dip"
+    android:paddingBottom="20dip"
     >
        
            <ImageView
@@ -40,6 +42,7 @@
             android:textColor="@color/black2"
             android:alpha="0.5"
             android:layout_marginTop="2dip"
+            android:layout_marginBottom="20dip"
             />
     </RelativeLayout>
     <RelativeLayout

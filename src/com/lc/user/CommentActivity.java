@@ -78,9 +78,9 @@ public class CommentActivity extends Activity implements OnClickListener {
 			break;
 		case R.id.Search:{
 			String content = etcontent.getText().toString();
-			if(content==null|content.length()<=0){
-			   Toast.makeText(CommentActivity.this,"内容不能为空", Toast.LENGTH_LONG).show();
-			}else{
+			//if(content==null|content.length()<=0){
+			//   Toast.makeText(CommentActivity.this,"内容不能为空", Toast.LENGTH_LONG).show();
+			//}else{
 			   submit.setClickable(false);
 			   submit.setProgress(50);	
 			   addCommentNet.setHandler(mHandler);
@@ -90,7 +90,7 @@ public class CommentActivity extends Activity implements OnClickListener {
 			   addCommentNet.setAuth(MySharePreference.getStringValue(getApplication(), MySharePreference.AUTHN));
 			   addCommentNet.setScore(String.valueOf(rb.getRating()));
 			   addCommentNet.getDataFromServer();
-			}
+			//}
 		}break;	
 		default:
 			break;

@@ -278,7 +278,7 @@ public class LeftFragment extends Fragment implements OnClickListener{
 		}	break;
 		case R.id.tvShare: // 分享
 		{	
-			AndroidShare as = new AndroidShare(view.getContext(),"很好用的专车app ---来自 春泰","");
+			AndroidShare as = new AndroidShare(view.getContext(),"湖北公务用车APP","");
 			as.show();
 		}	break;
 		case R.id.tvMore: // 分享

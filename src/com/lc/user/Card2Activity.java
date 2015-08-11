@@ -7,8 +7,6 @@ import com.lc.net.GetCardNet;
 import com.lc.specialcar.R;
 import com.lc.utils.ExitApplication;
 import com.lc.utils.Global;
-import com.lc.utils.MySharePreference;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;

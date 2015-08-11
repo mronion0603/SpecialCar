@@ -34,7 +34,7 @@
 	      android:layout_height="wrap_content"
 	      android:layout_marginLeft="20dip"
 	      android:textSize="18sp"
-	      android:textColor="@color/text_color"
+	      android:textColor="@color/hintcolor"
 	      android:layout_centerVertical="true"
 	      android:text="请输入送机时间"
 	    />
@@ -88,7 +88,7 @@
 	      android:layout_height="wrap_content"
 	      android:layout_marginLeft="20dip"
 	      android:textSize="18sp"
-	      android:textColor="@color/black2"
+	      android:textColor="@color/hintcolor"
 	      android:layout_centerVertical="true"
 	      android:text="请输入机场"
 	    />
@@ -136,7 +136,7 @@
 	      android:layout_height="wrap_content"
 	      android:layout_marginLeft="20dip"
 	      android:textSize="18sp"
-	      android:textColor="@color/black2"
+	      android:textColor="@color/hintcolor"
 	      android:layout_centerVertical="true"
 	      android:text="请输入上车地点"
 	    />

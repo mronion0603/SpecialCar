@@ -7,11 +7,11 @@
 
     <include layout="@layout/main_head" />
 
-	     <ImageView
-	      android:layout_width="fill_parent"
-	      android:layout_height="1dip"
-	      android:background="@color/user_divider3"
-	    />
+	<ImageView
+	android:layout_width="fill_parent"
+	android:layout_height="1dip"
+	android:background="@color/user_divider3"
+	/>
 	<RelativeLayout 
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content" 
@@ -103,6 +103,7 @@
 	            android:layout_marginLeft="20dip"
 	            android:background="@color/white"
 	            android:hint="请输入持卡人姓名"
+	             android:textColorHint = "@color/hintcolor"    
 	            />
 	     </LinearLayout>
 	      <ImageView
@@ -136,6 +137,7 @@
 	            android:layout_marginLeft="20dip"
 	            android:background="@color/white"
 	            android:hint="请输入证件号码"
+	             android:textColorHint = "@color/hintcolor"    
 	            />
 	     </LinearLayout>
 	 
@@ -165,6 +167,7 @@
 	            android:layout_marginLeft="20dip"
 	            android:background="@color/white"
 	            android:hint="请输卡片正面有效期"
+	             android:textColorHint = "@color/hintcolor"    
 	            />
 	     </LinearLayout>
 	      <ImageView
@@ -198,6 +201,7 @@
 	            android:layout_marginLeft="20dip"
 	            android:background="@color/white"
 	            android:hint="请输入背面CVV码"
+	             android:textColorHint = "@color/hintcolor"    
 	            />
 	     </LinearLayout>
 	     
@@ -227,6 +231,7 @@
 	            android:layout_marginLeft="20dip"
 	            android:background="@color/white"
 	            android:hint="请输入银行预留手机号"
+	             android:textColorHint = "@color/hintcolor"    
 	            />
 	     </LinearLayout>
 	      <ImageView
@@ -260,6 +265,7 @@
             android:paddingLeft="20dip"
             android:background="@color/white"
             android:layout_weight="2"
+             android:textColorHint = "@color/hintcolor"    
             />
             <TextView 
 	        android:id="@+id/getCode"

@@ -40,4 +40,5 @@ public class ConnectUrl {
  public static String addscore = commonurl+"assess";
  public static String cancelCity = commonurl+"cancelCJOrder";
  public static String bill = basic+"app/priceinfo.html";
+ public static String getitinerartdetail = commonurl+"selUserOrderInfo";
 }

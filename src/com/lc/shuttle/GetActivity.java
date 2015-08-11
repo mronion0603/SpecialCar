@@ -147,8 +147,9 @@ public class GetActivity extends Activity implements OnClickListener {
 	    getaddressnet.setDevice(Global.DEVICE);
 	    getaddressnet.setAuthn(MySharePreference.getStringValue(getApplication(), MySharePreference.AUTHN));
 	    getaddressnet.getCodeFromServer();
-	    if(getCity!=null){
-	    if(getCity.length()>=1){
+	    if(getCity==null||getCity.length()<=0){
+	    	
+	    }else{
 		    getAirportNet.setHandler(mHandler);
 		    getAirportNet.setDevice(Global.DEVICE);
 		    getAirportNet.setAuthn(MySharePreference.getStringValue(getApplication(), MySharePreference.AUTHN));
@@ -156,7 +157,6 @@ public class GetActivity extends Activity implements OnClickListener {
 		    //System.out.println(getCity);
 		    getAirportNet.setCity(getCity);
 		    getAirportNet.getDataFromServer();
-	    }
 	    }
 	    String username = MySharePreference.getStringValue(getApplication(), MySharePreference.USERNAME);
 		if(username==null){

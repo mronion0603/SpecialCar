@@ -119,7 +119,7 @@ public class LoginActivity extends Activity {
                     recLen--;  
                     getCode.setText(""+recLen);  
                     getCode.setClickable(false);
-                    getCode.setBackgroundResource(R.drawable.btn2);
+                    getCode.setBackgroundResource(R.drawable.rectangleright3);
                     if(recLen < 0){  
                         //timer.cancel();  
                         // timetv.setVisibility(View.GONE);  

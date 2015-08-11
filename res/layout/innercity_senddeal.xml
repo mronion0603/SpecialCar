@@ -22,6 +22,7 @@
             android:background="@drawable/order_wait_driver2"
 	     />
 	    <LinearLayout 
+	    android:id="@+id/ll"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content" 
 	    android:layout_toRightOf="@+id/driverimg"
@@ -69,7 +70,38 @@
 	      
 	     />
 	     
+	    <LinearLayout 
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content" 
+	    android:layout_marginTop="10dip"
+	    android:layout_below="@+id/ll"
+	    android:orientation="vertical" 
+	    >
+	      <ImageView
+	      android:layout_width="fill_parent"
+	      android:layout_height="1dip"
+	      android:layout_marginBottom="10dip"
+	      android:background="@color/user_divider3"
+	     />
+	     <TextView
+	      android:id="@+id/message"
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:layout_marginLeft="10dip"
+	      android:textSize="16sp"
+	      android:textColor="@color/black2"
+	      android:text="司机已接单，正在途中，请耐心等候！"
+	     />
+	      
+	    </LinearLayout>
 	    </RelativeLayout>  
+	    <ImageView
+	      android:layout_width="fill_parent"
+	      android:layout_height="2dip"
+	      android:id="@+id/ivline"
+	      android:background="@color/text_green"
+	      android:visibility="gone"
+	     />
         <RelativeLayout 
 	    android:layout_width="fill_parent"
 	    android:layout_height="fill_parent" 

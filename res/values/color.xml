@@ -8,12 +8,12 @@
     <color name="user_divider2">#e2e2e2</color>
     <color name="text_color">#808080</color>
     <color name="text_green">#29b43d</color>
-    <color name="bg_color">#eeeeee</color>
+    <color name="bg_color">#f7f7f7</color>
     <color name="text_brown">#e0aa35</color> 
     <color name="text_gray">#cccccc</color>
     <color name="title_gray">#f2f2f2</color>
     <color name="instructionbg">#FEFBEF</color>
-    <color name="user_divider3">#d9d9d9</color>
+    <color name="user_divider3">#e5e5e5</color>
     <color name="black2">#999999</color>
     <color name="up_divider">#e5e5e5</color>
     <color name="hintcolor">#CCC</color>
@@ -26,4 +26,5 @@
     <color name="lightransparent">#a0000000</color>
     <color name="transparent">#00000000</color>
     <color name="navpage">#FFE1E8EB</color>
+    <color name="nomessage">#666</color>
 </resources>
