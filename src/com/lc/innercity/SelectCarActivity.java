@@ -120,14 +120,15 @@ public class SelectCarActivity extends Activity implements OnClickListener {
 					String type = list.get(position).get("carTypeId");
 					String type2 = "";
 					if(type.equals("1")){
-						type="经济";
-						type2="帕萨特 凯美瑞或类似5座车型";
+						//type="经济";
+						type="舒适型";
+						type2="雪铁龙C5/标致508";
 					}else if(type.equals("2")){
-						type="普通";
-						type2="别克GL8或类似6座车型";
+						type="商务型";
+						type2="GL8";
 					}else{
-						type="商务";
-						type2="奥迪A6 宝马系列或类似5座车型";
+						type="通勤型";
+						type2="考斯特";
 					}
 					tvtype.setText(type);
 					tvtype2.setText(type2);

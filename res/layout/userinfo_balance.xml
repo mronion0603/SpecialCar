@@ -5,11 +5,15 @@
     android:orientation="vertical" >
 
     <include layout="@layout/main_head" />
-
+   <ImageView
+	      android:layout_width="fill_parent"
+	      android:layout_height="1dip"
+	      android:background="@color/user_divider3"
+	      android:layout_marginTop="10dip"
+	    />
     <RelativeLayout 
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content" 
-	    android:layout_marginTop="10dip"
 	    android:paddingTop="10dip"
 	    android:paddingBottom="10dip"
 	    android:id="@+id/moresafty"
@@ -58,7 +62,11 @@
 	      android:text="明细"
 	      />
 	    </RelativeLayout>
-	
+	    <ImageView
+	      android:layout_width="fill_parent"
+	      android:layout_height="1dip"
+	      android:background="@color/user_divider3"
+	    />
     
 	    <RelativeLayout 
 	    android:layout_width="fill_parent"

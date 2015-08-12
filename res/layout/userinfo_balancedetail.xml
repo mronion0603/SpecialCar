@@ -17,6 +17,28 @@
 	    android:layout_gravity="center"
 	    android:gravity="center" 
 	    /> 
+	     <ImageView     
+	    android:id="@+id/imgbg"    
+	    android:layout_width="wrap_content"    
+	    android:layout_height="wrap_content"    
+	    android:layout_marginTop="80dip"
+	    android:layout_gravity="center"
+	    android:gravity="center"
+	    android:background="@drawable/nobalance"
+	    android:visibility="gone"
+	    /> 
+	     <TextView     
+	    android:id="@+id/tvbg"    
+	    android:layout_width="wrap_content"    
+	    android:layout_height="wrap_content"    
+	    android:layout_gravity="center"
+	    android:gravity="center"
+	    android:text="暂无明细"
+	    android:textSize="18sp"
+	    android:layout_marginTop="10dip"
+	    android:textColor="@color/nomessage"
+	    android:visibility="gone"
+	    /> 
     <cn.trinea.android.common.view.DropDownListView
         android:id="@+id/listview"
         android:layout_width = "fill_parent"

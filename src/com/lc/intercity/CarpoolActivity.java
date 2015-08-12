@@ -35,7 +35,7 @@ public class CarpoolActivity extends Activity implements OnClickListener {
     private RelativeLayout rls,modify;
     TextView chooseaddress;
 	GroupAdapter groupAdapter;
-	EditText etnumber;
+	EditText etnumber,feedbackET;
 	//自定义的弹出框类
     AddressPopupWindow menuWindow;
     String getorderNum="",pickUpArea="";
@@ -76,6 +76,7 @@ public class CarpoolActivity extends Activity implements OnClickListener {
 		modify.setOnClickListener(this);
 		chooseaddress = (TextView) findViewById(R.id.address);
 		etnumber = (EditText) findViewById(R.id.number);
+		feedbackET= (EditText) findViewById(R.id.feedbackET);
 		tvcurtol = (TextView) findViewById(R.id.arrow2);
 		tvcurtol.setText(String.valueOf(curnum)+"/"+String.valueOf(totalnum));
 		chooseaddress.setText(pickUpArea);
@@ -120,6 +121,12 @@ public class CarpoolActivity extends Activity implements OnClickListener {
 						}
 						addCarPoolNet.setServiceTypeId("5");
 						addCarPoolNet.setCpbStauts("1");
+						String feedback = feedbackET.getText().toString();
+						if(feedback==null||feedback.length()<=0){
+						    addCarPoolNet.setcomment("");	
+						}else{
+							addCarPoolNet.setcomment(feedback);	
+						}
 						addCarPoolNet.getDataFromServer();			
 					}else{
 						Toast.makeText(CarpoolActivity.this,"超员啦", Toast.LENGTH_LONG).show();

@@ -32,6 +32,7 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -58,7 +59,7 @@ public class CharteredCarActivity extends Activity implements OnClickListener {
     private List<HashMap<String , Object>> groups1= new ArrayList<HashMap<String , Object>>();
     String getdriverid="";
     NotifyDriverNet notifyDriverNet = new NotifyDriverNet();
-    
+    EditText feedbackET;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
@@ -82,6 +83,7 @@ public class CharteredCarActivity extends Activity implements OnClickListener {
 		tvname = (TextView) findViewById(R.id.Name);
 		tvphone = (TextView) findViewById(R.id.Phone);
 		tvTitle = (TextView) findViewById(R.id.topTv);
+		feedbackET= (EditText) findViewById(R.id.feedbackET);
 		tvTitle.setText("包车");
 		ivSearch = (Button) findViewById(R.id.Search);
 		ivSearch.setOnClickListener(this);
@@ -141,6 +143,12 @@ public class CharteredCarActivity extends Activity implements OnClickListener {
 			   addCarPoolNet.setRiderPhone(MySharePreference.getStringValue(getApplication(), MySharePreference.PHONE));
 			}else{
 			   addCarPoolNet.setRiderPhone(tvphone.getText().toString());
+			}
+			String feedback = feedbackET.getText().toString();
+			if(feedback==null||feedback.length()<=0){
+			    addCarPoolNet.setcomment("");	
+			}else{
+				addCarPoolNet.setcomment(feedback);	
 			}
 			addCarPoolNet.setServiceTypeId("5");
 			addCarPoolNet.setCpbStauts("2");

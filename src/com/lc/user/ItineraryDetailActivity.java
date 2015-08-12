@@ -26,6 +26,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -53,6 +54,7 @@ public class ItineraryDetailActivity extends Activity implements OnClickListener
              tvendAddress,tvmile,tvtimelong,tvstartMoney,tvtimefee,tvlongfee,tvstopcar,tvrealmoney;
     //CancelInnerNet cancelInnerNet = new CancelInnerNet();
     GetDetailDNet getDetailDNet= new GetDetailDNet();
+	private ProgressBar pro; 
     @Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
@@ -64,6 +66,9 @@ public class ItineraryDetailActivity extends Activity implements OnClickListener
 	}
 
 	public void init(){
+		pro = (ProgressBar)findViewById(R.id.progress2); 
+		pro.setProgress(0);  
+		pro.setIndeterminate(true);
 		Bundle extras = getIntent().getExtras();
 	    if(extras != null){
 	    	if(extras.containsKey("new")){
@@ -74,6 +79,7 @@ public class ItineraryDetailActivity extends Activity implements OnClickListener
 	    		getDetailDNet.setAuthn(MySharePreference.getStringValue(getApplication(), MySharePreference.AUTHN));
 	    		getDetailDNet.getCodeFromServer();
 	    	}else{
+	    		pro.setVisibility(View.GONE);
 	    	orderStatus = extras.getString("OrderStatus");
 	    	orderNum = extras.getString("OrderNum");
 	    	startTime = extras.getString("StartTime");
@@ -191,6 +197,7 @@ public class ItineraryDetailActivity extends Activity implements OnClickListener
     }};
     private void parseJSON(String str)throws Exception{  
     	System.out.println(str);
+    	pro.setVisibility(View.GONE);
     	//System.out.println("******listItem: "+listItem.size());
 		JSONObject jsonobj = new JSONObject(str);
 		int result = jsonobj.getInt("ResultCode");

@@ -32,8 +32,9 @@ import android.widget.AdapterView.OnItemClickListener;
 public class BalanceDetailActivity extends Activity implements OnClickListener {
 	public final static int PAGESIZE = 8;
 	SimpleAdapter listItemAdapter;
-    TextView tvTitle;
+    TextView tvTitle,textbg;
     ImageView ivleft;
+    ImageView imgbg;
     private RelativeLayout rls;
     private DropDownListView listview;
   	ArrayList<HashMap<String,Object>> listItem = new ArrayList<HashMap<String,Object>>();
@@ -49,6 +50,8 @@ public class BalanceDetailActivity extends Activity implements OnClickListener {
 	}
 
 	public void init(){
+		textbg = (TextView) findViewById(R.id.tvbg);
+		imgbg = (ImageView) findViewById(R.id.imgbg);
 		tvTitle = (TextView) findViewById(R.id.topTv);
 		tvTitle.setText("余额明细");
 		pro = (ProgressBar)findViewById(R.id.progress2); 
@@ -159,6 +162,10 @@ public class BalanceDetailActivity extends Activity implements OnClickListener {
 		} else {
 			
 		}
+		if(listItem.size()==0){
+ 			imgbg.setVisibility(View.VISIBLE);
+ 			textbg.setVisibility(View.VISIBLE);
+ 		}
 		pro.setVisibility(View.GONE); 
     }
     

@@ -25,13 +25,16 @@ public class AddCarPoolNet {
 	String cjridersum = "";
 	String riderName = "";
 	String riderPhone = "";
-	
+	String comment = "";
 	String cpbStatus = "1";
 	public AddCarPoolNet(){
 		
 	}
 	public void setHandler(Handler handler){
 		this.handler = handler;
+	}
+	public void setcomment(String comment){
+		this.comment = comment;
 	}
 	public void setCpbStauts(String cpbStauts){
 		this.cpbStatus = cpbStauts;
@@ -89,8 +92,9 @@ public class AddCarPoolNet {
 	                				+"&riderName=" + URLEncoder.encode(riderName, "UTF-8")
 	                				+"&riderPhone=" + URLEncoder.encode(riderPhone, "UTF-8")
 	                				+"&cpbStatus=" + URLEncoder.encode(cpbStatus, "UTF-8")
+	                				+"&comment=" + URLEncoder.encode(comment, "UTF-8")
 	                				;
-	                		
+	                		System.out.println(content);
 	                		outputStream.writeBytes(content);
 	                		outputStream.flush();
 	                		outputStream.close();

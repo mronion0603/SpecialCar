@@ -1,12 +1,5 @@
 package com.lc.user;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Timer;
-
-import com.lc.innercity.AddressActivity;
-import com.lc.innercity.GroupAdapter;
-import com.lc.innercity.TypeAddressActivity;
 import com.lc.specialcar.R;
 import com.lc.utils.ExitApplication;
 
@@ -18,12 +11,8 @@ import android.view.Window;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-
-
 
 public class BalanceActivity extends Activity implements OnClickListener {
 	 TextView tvTitle,righttext,tvaccount;

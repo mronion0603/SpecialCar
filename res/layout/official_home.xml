@@ -300,6 +300,11 @@
 	      android:layout_height="20dip"
 	      android:visibility="gone"
 	     />
+	      <ImageView
+	      android:layout_width="fill_parent"
+	      android:layout_height="1dip"
+	      android:background="@color/user_divider3"
+	    /> 
 	       <RadioGroup  
 	    android:id="@+id/radioGroup"
         android:gravity="center"  
@@ -335,7 +340,11 @@
             />    
         
     </RadioGroup>  
-	    
+	    <ImageView
+	      android:layout_width="fill_parent"
+	      android:layout_height="1dip"
+	      android:background="@color/user_divider3"
+	    /> 
         <RelativeLayout 
 	    android:layout_width="fill_parent"
 	    android:layout_height="fill_parent" 

@@ -128,8 +128,7 @@ public class MainActivity extends SlidingFragmentActivity implements OnClickList
 		viewPager = (ViewPager) findViewById(R.id.adv_pager);
 		
 		//����ͼƬ��ԴID
-		imgIdArray = new int[]{R.drawable.home_ad, R.drawable.home_ad, R.drawable.home_ad, R.drawable.home_ad,
-				R.drawable.home_ad,R.drawable.home_ad};
+		imgIdArray = new int[]{R.drawable.home_ad, R.drawable.home_ad2, R.drawable.home_ad3,R.drawable.home_ad, R.drawable.home_ad2, R.drawable.home_ad3};
 			
 		//�������뵽ViewGroup��
 		tips = new ImageView[imgIdArray.length];

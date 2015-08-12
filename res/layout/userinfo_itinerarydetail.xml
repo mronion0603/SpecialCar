@@ -5,6 +5,16 @@
     android:orientation="vertical" >
 
     <include layout="@layout/main_head" />
+    <ScrollView 
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_color"
+    android:orientation="vertical" >
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_color"
+    android:orientation="vertical" >
     <RelativeLayout 
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content" 
@@ -16,6 +26,7 @@
 	    android:id="@+id/usecardate"
 	    android:background="@color/white"
 	    >
+
 	     <com.lc.utils.CircularImage
             android:id="@+id/driverImg"
 	        android:layout_width="60.0dip"
@@ -76,6 +87,16 @@
 	      android:layout_alignRight="@+id/car"
 	     />
 	     </RelativeLayout>
+	    <ProgressBar     
+	    android:id="@+id/progress2"    
+	    style="?android:attr/progressBarStyleLarge"    
+	    android:layout_width="wrap_content"    
+	    android:layout_height="wrap_content"    
+	    android:max="100"     
+	    android:progress="50"     
+	    android:secondaryProgress="70"    
+	    android:layout_centerInParent="true"
+	    /> 
 	    </RelativeLayout>  
 	    <LinearLayout 
 	    android:layout_width="match_parent"
@@ -443,22 +464,18 @@
 	            android:background="@color/user_divider3"
 	            />
 	     </LinearLayout>
-	    <RelativeLayout 
-	    android:layout_width="fill_parent"
-	    android:layout_height="fill_parent" 
-	    >
+	    
         <Button
           android:id="@+id/Search"
 	      android:layout_width="fill_parent"
 	      android:layout_height="50dip"
 	      android:layout_marginLeft="10dip"
 	      android:layout_marginRight="10dip"
-	      android:layout_centerHorizontal="true"
-	      android:layout_alignParentBottom="true"
+	      android:layout_marginTop="10dip"
 	      android:background="@drawable/btn2"
-	      android:text="马上预约"
 	      android:textColor="@color/white"
-	      android:layout_marginBottom="10dip"
 	      />
-        </RelativeLayout>
+    
+        </LinearLayout>
+        </ScrollView>
 </LinearLayout>

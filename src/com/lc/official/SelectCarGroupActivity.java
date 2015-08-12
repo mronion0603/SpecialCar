@@ -330,9 +330,9 @@ public class SelectCarGroupActivity extends Activity implements OnClickListener 
 			    bitmapUtils.display(car2, ConnectUrl.commonurl0+list.get(1).get("carImg"));
 			    bitmapUtils.display(car3, ConnectUrl.commonurl0+list.get(2).get("carImg"));
 				*/
-				type1.setText("经济型");
-				type2.setText("普通型");
-				type3.setText("商务型");
+				type1.setText("舒适型");
+				type2.setText("商务型");
+				type3.setText("通勤型");
 				price1.setText("¥"+list.get(0).get("officalMoney"));
 				price2.setText("¥"+list.get(1).get("officalMoney"));
 				price3.setText("¥"+list.get(2).get("officalMoney"));

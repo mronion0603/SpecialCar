@@ -13,6 +13,7 @@ import com.lc.innercity.CarDemandActivity;
 import com.lc.innercity.GroupAdapter;
 import com.lc.innercity.ModifyNameActivity;
 import com.lc.innercity.SelectCarActivity;
+import com.lc.innercity.SendDealActivity;
 import com.lc.intercity.SignUpActivity;
 import com.lc.net.AddShuttleNet;
 import com.lc.net.GetAddressNet;
@@ -393,7 +394,7 @@ public class GetActivity extends Activity implements OnClickListener {
     	int result = jsonobj.getInt("ResultCode");
    	    if(result==Global.SUCCESS){	
    	         Intent intent2 = new Intent();
-			 intent2.setClass(GetActivity.this,SignUpActivity.class);
+			 intent2.setClass(GetActivity.this,SendDealActivity.class);
 			 intent2.putExtra("orderNum", jsonobj.getJSONObject("Data").getString("orderNum"));
 			 startActivity(intent2);
 			 //ivSearch.setProgress(0);
