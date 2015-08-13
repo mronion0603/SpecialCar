@@ -121,14 +121,14 @@ public class SelectCarActivity extends Activity implements OnClickListener {
 					String type2 = "";
 					if(type.equals("1")){
 						//type="经济";
-						type="舒适型";
-						type2="雪铁龙C5/标致508";
+						type=getApplication().getString(R.string.type1);
+						type2=getApplication().getString(R.string.des1);
 					}else if(type.equals("2")){
-						type="商务型";
-						type2="GL8";
+						type=getApplication().getString(R.string.type2);
+						type2=getApplication().getString(R.string.des2);
 					}else{
-						type="通勤型";
-						type2="考斯特";
+						type=getApplication().getString(R.string.type3);
+						type2=getApplication().getString(R.string.des3);
 					}
 					tvtype.setText(type);
 					tvtype2.setText(type2);

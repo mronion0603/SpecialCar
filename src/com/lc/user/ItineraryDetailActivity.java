@@ -10,6 +10,8 @@ import com.lc.net.GetDetailDNet;
 import com.lc.specialcar.R;
 import com.lc.utils.CircularImage;
 import com.lc.utils.ConnectUrl;
+import com.lc.utils.DeleteDealApplication;
+import com.lc.utils.DeleteWXPayApplication;
 import com.lc.utils.ExitApplication;
 import com.lc.utils.Global;
 import com.lc.utils.MySharePreference;
@@ -66,6 +68,7 @@ public class ItineraryDetailActivity extends Activity implements OnClickListener
 	}
 
 	public void init(){
+		DeleteDealApplication.getInstance().addActivity(this);
 		pro = (ProgressBar)findViewById(R.id.progress2); 
 		pro.setProgress(0);  
 		pro.setIndeterminate(true);
@@ -306,7 +309,7 @@ public class ItineraryDetailActivity extends Activity implements OnClickListener
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
 		case R.id.rlslidemenu:
-		{	finish();
+		{	DeleteDealApplication.getInstance().exit();
 		}	break;
 		case R.id.Search:
 		{

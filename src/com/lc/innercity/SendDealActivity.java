@@ -16,6 +16,8 @@ import com.lc.popupwindow.ContactWindow;
 import com.lc.specialcar.R;
 import com.lc.utils.CircularImage;
 import com.lc.utils.ConnectUrl;
+import com.lc.utils.DeleteDealApplication;
+import com.lc.utils.DeleteWXPayApplication;
 import com.lc.utils.ExitApplication;
 import com.lc.utils.Global;
 import com.lc.utils.MySharePreference;
@@ -82,6 +84,7 @@ public class SendDealActivity extends Activity implements OnClickListener {
 	}
 
 	public void init(){
+		DeleteDealApplication.getInstance().addActivity(this);
 		Bundle extras = getIntent().getExtras();
 	    if(extras != null){
 	    	getOrderNum = extras.getString("orderNum");

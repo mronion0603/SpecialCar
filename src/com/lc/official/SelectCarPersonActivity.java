@@ -263,16 +263,16 @@ public class SelectCarPersonActivity extends Activity implements OnClickListener
 			    bitmapUtils.display(car2, ConnectUrl.commonurl0+list.get(1).get("carImg"));
 			    bitmapUtils.display(car3, ConnectUrl.commonurl0+list.get(2).get("carImg"));
 			    */
-				type1.setText("舒适型");
-				type2.setText("商务型");
-				type3.setText("通勤型");
+				type1.setText(getApplication().getString(R.string.type1));
+				type2.setText(getApplication().getString(R.string.type2));
+				type3.setText(getApplication().getString(R.string.type3));
 				price1.setText("¥"+list.get(0).get("officalMoney"));
 				price2.setText("¥"+list.get(1).get("officalMoney"));
 				price3.setText("¥"+list.get(2).get("officalMoney"));
 				
-				cardis1.setText("雪铁龙C5/标致508");
-				cardis2.setText("别克GL8");
-				cardis3.setText("考斯特");
+				cardis1.setText(getApplication().getString(R.string.des1));
+				cardis2.setText(getApplication().getString(R.string.des2));
+				cardis3.setText(getApplication().getString(R.string.des3));
 				
 			}else{
 				 Toast.makeText(SelectCarPersonActivity.this,jsonobj.getString("Message"), Toast.LENGTH_LONG).show();

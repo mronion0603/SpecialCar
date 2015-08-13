@@ -18,7 +18,13 @@
 	<string name="discount">¥120</string>
 	<string name="money">¥</string>
 	
-	 <string name="Upload">Upload</string>
+	<string name="type1">舒适型</string>
+	<string name="type2">商务型</string>
+	<string name="type3">通勤型</string>
+	<string name="des1">雪铁龙C5/标致508</string>
+	<string name="des2">GL8</string>
+	<string name="des3">考斯特</string>
+	<string name="Upload">Upload</string>
     <string name="Error">Error</string>
     <string name="Complete">Complete</string>
     <string name="IndeterminateProgressSample">Indeterminate Progress Sample</string>
