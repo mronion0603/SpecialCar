@@ -51,7 +51,8 @@ public class SelectCarActivity extends Activity implements OnClickListener {
 	    Dialog dia;
 	    String type="经济";
 	    int [] imgs = {R.drawable.fee_car1,R.drawable.fee_car2,R.drawable.fee_car3}; 
-		//private ProgressBar pb; 
+		boolean flag = false; 
+	    //private ProgressBar pb; 
 		@Override
 		public void onCreate(Bundle savedInstanceState) {
 			requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
@@ -79,9 +80,7 @@ public class SelectCarActivity extends Activity implements OnClickListener {
 			rls.setOnClickListener(this);
 			ivleft = (ImageView) findViewById(R.id.ArrowHead);
 			ivleft.setVisibility(View.VISIBLE);
-			//ivCarbg = (ImageView) findViewById(R.id.imageView);
-					
-			//initCarType();
+			
 			getcarnet.setHandler(mHandler);
 			getcarnet.setDevice(Global.DEVICE);
 			getcarnet.setAuthn(MySharePreference.getStringValue(getApplication(), MySharePreference.AUTHN));
@@ -168,7 +167,7 @@ public class SelectCarActivity extends Activity implements OnClickListener {
 		        }};
 		        
 	private void parseJSON(String str) throws Exception {
-		System.out.println("ss:"+str);
+		//System.out.println("ss:"+str);
 		JSONObject jsonobj = new JSONObject(str);
 		if (jsonobj.getInt("ResultCode") == Global.SUCCESS) {
 			JSONArray jsonarray = jsonobj.getJSONArray("Data");
@@ -184,7 +183,7 @@ public class SelectCarActivity extends Activity implements OnClickListener {
 				map.put("inMileage", jsonobj2.getString("inMileage"));
 			    list.add(map);
 			}
-		
+			flag = true;
 			initCarType();
 		}else{
 			 Toast.makeText(SelectCarActivity.this,jsonobj.getString("Message"), Toast.LENGTH_LONG).show();
@@ -200,13 +199,14 @@ public class SelectCarActivity extends Activity implements OnClickListener {
 			case R.id.righttext:
 		    
 				Intent intent = new Intent();
-				
-				intent.putExtra("strtype",type);
+				if(flag){
+				intent.putExtra("strtype",tvtype.getText().toString());
 			    intent.putExtra("type", (String)list.get(currentposition).get("carTypeId"));
 			    intent.putExtra("bascMoney", (String)list.get(currentposition).get("bascMoney"));
 			    intent.putExtra("mileageMoney", (String)list.get(currentposition).get("mileageMoney"));
 			    intent.putExtra("timeMoney", (String)list.get(currentposition).get("timeMoney"));
 			    setResult(RESULT_OK, intent); 
+				}
 				finish();
 				break;
 			case R.id.Search:

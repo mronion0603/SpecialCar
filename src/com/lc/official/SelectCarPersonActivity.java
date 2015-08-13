@@ -86,7 +86,7 @@ public class SelectCarPersonActivity extends Activity implements OnClickListener
 		tvTitle.setText("选择车型");
 		righttext = (TextView) findViewById(R.id.righttext);
 		righttext.setVisibility(View.VISIBLE);
-		righttext.setText("费用说明");
+		righttext.setText("计费规则");
 		righttext.setOnClickListener(this);
 		ivselect1 = (ImageView) findViewById(R.id.ivselect);
 		ivselect2 = (ImageView) findViewById(R.id.ivselect2);

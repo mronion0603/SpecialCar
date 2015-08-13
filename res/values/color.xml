@@ -27,4 +27,5 @@
     <color name="transparent">#00000000</color>
     <color name="navpage">#FFE1E8EB</color>
     <color name="nomessage">#666</color>
+    <color name="green_press">#22c95f</color>
 </resources>
