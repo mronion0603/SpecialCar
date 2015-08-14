@@ -128,7 +128,7 @@ public class MainActivity extends SlidingFragmentActivity implements OnClickList
 		viewPager = (ViewPager) findViewById(R.id.adv_pager);
 		
 		//����ͼƬ��ԴID
-		imgIdArray = new int[]{R.drawable.home_ad, R.drawable.home_ad2, R.drawable.home_ad3,R.drawable.home_ad, R.drawable.home_ad2, R.drawable.home_ad3};
+		imgIdArray = new int[]{R.drawable.home_ad, R.drawable.home_ad2, R.drawable.home_ad3};
 			
 		//�������뵽ViewGroup��
 		tips = new ImageView[imgIdArray.length];
@@ -304,8 +304,11 @@ public class MainActivity extends SlidingFragmentActivity implements OnClickList
 
 			@Override
 			public void destroyItem(View container, int position, Object object) {
-				((ViewPager)container).removeView(mImageViews[position % mImageViews.length]);
-				
+				 if(mImageViews.length>3){
+					   ((ViewPager)container).removeView(mImageViews[position % mImageViews.length]);
+					}else{
+						
+					}
 			}
 
 			/**
@@ -313,7 +316,11 @@ public class MainActivity extends SlidingFragmentActivity implements OnClickList
 			 */
 			@Override
 			public Object instantiateItem(View container, int position) {
-				((ViewPager)container).addView(mImageViews[position % mImageViews.length], 0);
+				   try {    
+			            ((ViewPager)container).addView(mImageViews[position % mImageViews.length], 0);  
+			        }catch(Exception e){  
+			            //handler something  
+			        }  
 				return mImageViews[position % mImageViews.length];
 			}
 			

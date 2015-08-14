@@ -197,10 +197,9 @@ public class SelectCarActivity extends Activity implements OnClickListener {
 				finish();
 				break;
 			case R.id.righttext:
-		    
 				Intent intent = new Intent();
 				if(flag){
-				intent.putExtra("strtype",tvtype.getText().toString());
+ 				intent.putExtra("strtype",tvtype.getText().toString());
 			    intent.putExtra("type", (String)list.get(currentposition).get("carTypeId"));
 			    intent.putExtra("bascMoney", (String)list.get(currentposition).get("bascMoney"));
 			    intent.putExtra("mileageMoney", (String)list.get(currentposition).get("mileageMoney"));

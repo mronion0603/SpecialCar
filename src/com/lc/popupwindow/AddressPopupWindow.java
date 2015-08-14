@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
+import android.view.WindowManager;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.PopupWindow;
@@ -89,7 +90,25 @@ public class AddressPopupWindow extends PopupWindow {
          ListView lv_group1 = (ListView) mMenuView.findViewById(R.id.lvGroup);  
          lv_group1.setAdapter(groupAdapter); 
          setListViewHeightBasedOnChildren(lv_group1);
+         /*
+         ViewGroup.LayoutParams params = lv_group1.getLayoutParams();
+         WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+         int height1 = wm.getDefaultDisplay().getHeight()/2 -50;
+         int height2= 0;
+         if(groupAdapter.getCount()>=1){
+        	View listItem = groupAdapter.getView(0, null, lv_group1);
+ 	        listItem.measure(0, 0);
+ 	        height2 = listItem.getMeasuredHeight()*groupAdapter.getCount();
+         }
+         if(height1>height2){
+        	 params.height = height2;
+         }else{
+        	 params.height = height1;
+         }
+         lv_group1.setLayoutParams(params);
+         */
          lv_group1.setOnItemClickListener(itemClickListener);  
+         
          
 		//设置SelectPicPopupWindow的View
 		this.setContentView(mMenuView);
