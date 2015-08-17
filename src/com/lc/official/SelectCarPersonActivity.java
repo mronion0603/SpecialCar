@@ -32,19 +32,21 @@ import android.widget.Toast;
 public class SelectCarPersonActivity extends Activity implements OnClickListener {
 	public static final int SIGNUP =2;
     TextView tvTitle,righttext;
-    ImageView ivleft,ivselect1,ivselect2,ivselect3,car1,car2,car3;;
+    ImageView ivleft,ivselect1,ivselect2,ivselect3,ivselect4,ivselect5,car1,car2,car3,car4,car5;
     CircularProgressButton btsearch;
     private RelativeLayout rls;
     private RelativeLayout select1;
     private RelativeLayout select2;
     private RelativeLayout select3;
-    boolean flag1,flag2,flag3;
+    private RelativeLayout select4;
+    private RelativeLayout select5;
+    boolean flag1,flag2,flag3,flag4,flag5;
     private AddOfficePersonNet addInnerNet = new AddOfficePersonNet();
     String getname="",getlat="",getlont="",getaddress="",getphone="",gettime="",gettimelong="0",getdemand="";
 	String cartype ="1";
 	GetCarNet getcarnet = new GetCarNet();
 	List<HashMap<String,String>> list =new ArrayList<HashMap<String,String>>();
-	TextView type1,type2,type3,price1,price2,price3,cardis1,cardis2,cardis3;
+	TextView type1,type2,type3,type4,type5,price1,price2,price3,price4,price5,cardis1,cardis2,cardis3,cardis4,cardis5;
     @Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
@@ -73,15 +75,23 @@ public class SelectCarPersonActivity extends Activity implements OnClickListener
 		car1 = (ImageView) findViewById(R.id.im1);
 		car2 = (ImageView) findViewById(R.id.im2);
 		car3 = (ImageView) findViewById(R.id.im3);
+		car4 = (ImageView) findViewById(R.id.im4);
+		car5 = (ImageView) findViewById(R.id.im5);
 		type1 = (TextView) findViewById(R.id.type1);
 		type2 = (TextView) findViewById(R.id.type2);
 		type3 = (TextView) findViewById(R.id.type3);
+		type4 = (TextView) findViewById(R.id.type4);
+		type5 = (TextView) findViewById(R.id.type5);
 		price1 = (TextView) findViewById(R.id.price1);
 		price2 = (TextView) findViewById(R.id.price2);
 		price3 = (TextView) findViewById(R.id.price3);
+		price4 = (TextView) findViewById(R.id.price4);
+		price5 = (TextView) findViewById(R.id.price5);
 		cardis1 = (TextView) findViewById(R.id.cardis1);
 		cardis2 = (TextView) findViewById(R.id.cardis2);
 		cardis3 = (TextView) findViewById(R.id.cardis3);
+		cardis4 = (TextView) findViewById(R.id.cardis4);
+		cardis5 = (TextView) findViewById(R.id.cardis5);
 		tvTitle = (TextView) findViewById(R.id.topTv);
 		tvTitle.setText("选择车型");
 		righttext = (TextView) findViewById(R.id.righttext);
@@ -91,6 +101,8 @@ public class SelectCarPersonActivity extends Activity implements OnClickListener
 		ivselect1 = (ImageView) findViewById(R.id.ivselect);
 		ivselect2 = (ImageView) findViewById(R.id.ivselect2);
 		ivselect3 = (ImageView) findViewById(R.id.ivselect3);
+		ivselect4 = (ImageView) findViewById(R.id.ivselect4);
+		ivselect5 = (ImageView) findViewById(R.id.ivselect5);
 		rls = (RelativeLayout) findViewById(R.id.rlslidemenu);
 		rls.setOnClickListener(this);
 		ivleft = (ImageView) findViewById(R.id.ArrowHead);
@@ -101,6 +113,10 @@ public class SelectCarPersonActivity extends Activity implements OnClickListener
 		select2.setOnClickListener(this);
 		select3 = (RelativeLayout) findViewById(R.id.select3);
 		select3.setOnClickListener(this);
+		select4 = (RelativeLayout) findViewById(R.id.select4);
+		select4.setOnClickListener(this);
+		select5 = (RelativeLayout) findViewById(R.id.select5);
+		select5.setOnClickListener(this);
 		btsearch = (CircularProgressButton) findViewById(R.id.Search);
 		btsearch.setIndeterminateProgressMode(true);
 		ButtonEffect.setButtonStateChangeListener(btsearch);
@@ -139,18 +155,24 @@ public class SelectCarPersonActivity extends Activity implements OnClickListener
             addInnerNet.setServiceTypeId("3");
             String gettype = "1";
             if(flag1){
-            addInnerNet.setRealMoney("120");
+            addInnerNet.setRealMoney(list.get(0).get("officalMoney"));
             gettype=list.get(0).get("carTypeId");
             }else if(flag2){
-            addInnerNet.setRealMoney("140");
+            addInnerNet.setRealMoney(list.get(1).get("officalMoney"));
             gettype=list.get(1).get("carTypeId");
             }else if(flag3){
-            addInnerNet.setRealMoney("160");
+            addInnerNet.setRealMoney(list.get(2).get("officalMoney"));
             gettype=list.get(2).get("carTypeId");
+            }else if(flag4){
+            addInnerNet.setRealMoney(list.get(3).get("officalMoney"));
+            gettype=list.get(3).get("carTypeId");
+            }else if(flag5){
+            addInnerNet.setRealMoney(list.get(4).get("officalMoney"));
+            gettype=list.get(4).get("carTypeId");
             }
+               
             addInnerNet.setUseCarTime(gettimelong);
             addInnerNet.setCartype(gettype);
-           
             addInnerNet.getDataFromServer();
 		}break;
 		case R.id.select1:
@@ -160,9 +182,13 @@ public class SelectCarPersonActivity extends Activity implements OnClickListener
 				ivselect1.setVisibility(View.VISIBLE);
 				ivselect2.setVisibility(View.GONE);
 				ivselect3.setVisibility(View.GONE);
+				ivselect4.setVisibility(View.GONE);
+				ivselect5.setVisibility(View.GONE);
 				flag1=true;
 				flag2=false;
 				flag3=false;
+				flag4=false;
+				flag5=false;
 			}
 			break;
 		case R.id.select2:
@@ -172,9 +198,13 @@ public class SelectCarPersonActivity extends Activity implements OnClickListener
 				ivselect2.setVisibility(View.VISIBLE);
 				ivselect3.setVisibility(View.GONE);
 				ivselect1.setVisibility(View.GONE);
+				ivselect4.setVisibility(View.GONE);
+				ivselect5.setVisibility(View.GONE);
 				flag2=true;
 				flag3=false;
 				flag1=false;
+				flag4=false;
+				flag5=false;
 			}
 			break;
 		case R.id.select3:
@@ -184,11 +214,47 @@ public class SelectCarPersonActivity extends Activity implements OnClickListener
 				ivselect3.setVisibility(View.VISIBLE);
 				ivselect1.setVisibility(View.GONE);
 				ivselect2.setVisibility(View.GONE);
+				ivselect4.setVisibility(View.GONE);
+				ivselect5.setVisibility(View.GONE);
 				flag3=true;
 				flag1=false;
 				flag2=false;
+				flag4=false;
+				flag5=false;
 			}
 			break;
+		case R.id.select4:
+			if(flag4){
+				
+			}else{
+				ivselect3.setVisibility(View.GONE);
+				ivselect1.setVisibility(View.GONE);
+				ivselect2.setVisibility(View.GONE);
+				ivselect4.setVisibility(View.VISIBLE);
+				ivselect5.setVisibility(View.GONE);
+				flag3=false;
+				flag1=false;
+				flag2=false;
+				flag4=true;
+				flag5=false;
+			}
+			break;
+			case R.id.select5:
+				if(flag5){
+					
+				}else{
+					ivselect3.setVisibility(View.GONE);
+					ivselect1.setVisibility(View.GONE);
+					ivselect2.setVisibility(View.GONE);
+					ivselect4.setVisibility(View.GONE);
+					ivselect5.setVisibility(View.VISIBLE);
+					flag3=false;
+					flag1=false;
+					flag2=false;
+					flag4=false;
+					flag5=true;
+				}
+				break;
 		default:
 			break;
 		}
@@ -218,7 +284,7 @@ public class SelectCarPersonActivity extends Activity implements OnClickListener
 	            }
 	    }};
 	    private void parseInner(String str)throws Exception{ 
-	    	//System.out.println("返回:"+str);
+	    	System.out.println(str);
 	    	JSONObject jsonobj = new JSONObject(str); 
 	    	int result = jsonobj.getInt("ResultCode");
 	   	    if(result==Global.SUCCESS){
@@ -266,14 +332,18 @@ public class SelectCarPersonActivity extends Activity implements OnClickListener
 				type1.setText(getApplication().getString(R.string.type1));
 				type2.setText(getApplication().getString(R.string.type2));
 				type3.setText(getApplication().getString(R.string.type3));
+				type4.setText(getApplication().getString(R.string.type4));
+				type5.setText(getApplication().getString(R.string.type5));
 				price1.setText("¥"+list.get(0).get("officalMoney"));
 				price2.setText("¥"+list.get(1).get("officalMoney"));
 				price3.setText("¥"+list.get(2).get("officalMoney"));
-				
+				price4.setText("¥"+list.get(3).get("officalMoney"));
+				price5.setText("¥"+list.get(4).get("officalMoney"));
 				cardis1.setText(getApplication().getString(R.string.des1));
 				cardis2.setText(getApplication().getString(R.string.des2));
 				cardis3.setText(getApplication().getString(R.string.des3));
-				
+				cardis4.setText(getApplication().getString(R.string.des4));
+				cardis5.setText(getApplication().getString(R.string.des5));
 			}else{
 				 Toast.makeText(SelectCarPersonActivity.this,jsonobj.getString("Message"), Toast.LENGTH_LONG).show();
 			}

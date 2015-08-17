@@ -8,6 +8,8 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
+import org.json.JSONObject;
+
 import kankan.wheel.widget.WheelView;
 import kankan.wheel.widget.adapters.AbstractWheelTextAdapter;
 import kankan.wheel.widget.adapters.NumericWheelAdapter;
@@ -17,15 +19,20 @@ import com.lc.innercity.BillingRuleActivity;
 import com.lc.innercity.CarDemandActivity;
 import com.lc.innercity.GroupAdapter;
 import com.lc.innercity.ModifyNameActivity;
+import com.lc.net.AddMoneyNet;
 import com.lc.specialcar.R;
 import com.lc.utils.ButtonEffect;
 import com.lc.utils.ExitApplication;
+import com.lc.utils.Global;
+import com.lc.utils.MySharePreference;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -36,6 +43,7 @@ import android.view.View.OnTouchListener;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.PopupWindow;
@@ -44,6 +52,7 @@ import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.PopupWindow.OnDismissListener;
 import android.widget.RadioGroup.OnCheckedChangeListener;
@@ -57,9 +66,9 @@ public class ChargeCardActivity extends Activity implements OnClickListener {
     TextView feeRule,txdate;
  
     Button ivSearch;
-    private RelativeLayout rlusecar,rldate,rlmodifyname,rlstartaddress;
+    private EditText etnumber,etpassword;
     private ImageView imAddress;
-
+    AddMoneyNet  addMoney = new AddMoneyNet();
 	//RadioGroup group;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -73,7 +82,8 @@ public class ChargeCardActivity extends Activity implements OnClickListener {
 
 	public void init(){
 		ExitApplication.getInstance().addActivity(this);
-	
+		etnumber = (EditText) findViewById(R.id.etNumber);
+		etpassword = (EditText) findViewById(R.id.code);
 		ivSearch = (Button) findViewById(R.id.Search);
 		ivSearch.setOnClickListener(this);
 	    ButtonEffect.setButtonStateChangeListener(ivSearch);
@@ -85,9 +95,14 @@ public class ChargeCardActivity extends Activity implements OnClickListener {
 		switch (v.getId()) {
 		
 		case R.id.Search:
-			Intent intent = new Intent();
-			intent.setClass(getApplication(), ChargeSuccessActivity.class);
-			startActivity(intent);
+			addMoney.setHandler(mHandler);
+			addMoney.setDevice(Global.DEVICE);
+			addMoney.setCardNum(etnumber.getText().toString());
+			addMoney.setPassword(etnumber.getText().toString());
+			addMoney.setAuth(MySharePreference.getStringValue(getApplication(), MySharePreference.AUTHN));
+			addMoney.getDataFromServer();
+			
+			
 			break;
 		
 		
@@ -96,8 +111,33 @@ public class ChargeCardActivity extends Activity implements OnClickListener {
 		}
 	}
 	
-	
+	 @SuppressLint("HandlerLeak")
+		private Handler mHandler = new Handler() {
+	        public void handleMessage(android.os.Message msg) {
+	            switch(msg.what) { 
+		            case Global.ADDMONEY:{
+		            	try {
+							parseJSON((String)msg.obj);
+						} catch (Exception e) {	
+							e.printStackTrace();
+						}      	
+		            break;
+	                }
+		           
+	            }
+	    }};
 	 
-	 
+	    private void parseJSON(String str)throws Exception{  
+	    	JSONObject jsonobj = new JSONObject(str); 
+	    	int result = jsonobj.getInt("ResultCode");
+	   	    if(result==Global.SUCCESS){
+	   	    	Intent intent = new Intent();
+				intent.setClass(getApplication(), ChargeSuccessActivity.class);
+				startActivity(intent);
+	   	        finish();
+	        }else{
+	          Toast.makeText(ChargeCardActivity.this,jsonobj.getString("Message"), Toast.LENGTH_LONG).show();
+	        } 
+	   }
 	
 }

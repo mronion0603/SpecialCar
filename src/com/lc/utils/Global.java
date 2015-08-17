@@ -42,4 +42,5 @@ public class Global {
   public static final int GETCARD=229;
   public static final int ADDSCORE=230;
   public static final int GETDETAILITINERARY=231;
+  public static final int ADDMONEY=232;
 }

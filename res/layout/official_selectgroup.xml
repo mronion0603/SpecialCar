@@ -6,6 +6,14 @@
     android:orientation="vertical" >
 
     <include layout="@layout/main_head" />
+    <ScrollView 
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
     <RelativeLayout 
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content" 
@@ -382,20 +390,245 @@
 		      android:layout_height="1dip"
 		      android:background="@color/user_divider3"
 		      />
+              
+              <RelativeLayout 
+		    android:id="@+id/select4"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content" 
+		    android:orientation="horizontal"
+		    android:background="@color/white"
+	
+		    android:paddingBottom="10dip"
+		    >
+		      <ImageView
+		       android:id="@+id/iv4"
+		      android:layout_width="120dip"
+		      android:layout_height="80dip"
+		      android:layout_marginLeft="10dip"
+		      android:background="@drawable/fee_car4"
+		      android:layout_marginTop="10dip"
+		      android:layout_marginBottom="10dip"
+		       />
+		        <LinearLayout 
+		             android:layout_marginTop="10dip"
+		            android:layout_toRightOf="@+id/iv4"
+			    android:layout_width="fill_parent"
+			    android:layout_height="wrap_content" 
+			    android:orientation="vertical"
+			    >
+			     <LinearLayout 
+			         
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content" 
+				    android:orientation="horizontal"
+				    android:layout_marginTop="10dip"
+				    android:layout_marginBottom="10dip"
+				    >
+				    <TextView
+		                android:id="@+id/type4"
+				      android:layout_width="wrap_content"
+				      android:layout_height="wrap_content"
+				      android:layout_marginLeft="10dip"
+				      android:textSize="18sp"
+				      android:textColor="@color/black"
+				  
+				    />
+				    <TextView
+		              android:id="@+id/price4"
+				      android:layout_width="90dip"
+				      android:layout_height="30dip"
+				      android:layout_marginLeft="10dip"
+				      android:textSize="18sp"
+				      android:textColor="@color/text_green"
+				      android:gravity="center"
+				  
+				    />
+				   
+			    </LinearLayout>
+			    <LinearLayout
+			        android:layout_width="fill_parent" 
+			        android:layout_height="wrap_content"
+			         android:layout_marginLeft="10dip"
+			        android:orientation="horizontal" >
+			        <TextView 
+			       
+			            android:layout_width="40dip"
+			            android:layout_height="30dip"
+			            android:textColor="@color/black2"
+			            android:layout_gravity="center"
+			            android:text="数量"
+			            android:textSize="16sp"
+			            android:gravity="center"
+			            android:layout_marginRight="5dip"
+			            />
+			       <Button 
+			            android:id="@+id/minus4"
+			            android:layout_width="30dip"
+			            android:layout_height="30dip"
+			            android:text="-"
+			            android:background="@drawable/rectangle2"
+			            android:layout_marginRight="5dip"
+			            android:layout_gravity="center"
+			            />
+			        <TextView 
+			            android:id="@+id/amount4"
+			            android:layout_width="40dip"
+			            android:layout_height="30dip"
+			            android:background="@drawable/rectangle2"
+			            android:layout_gravity="center"
+			            android:text="1"
+			            android:textSize="16sp"
+			            android:gravity="center"
+			            android:layout_marginRight="5dip"
+			            />
+			       <Button 
+			            android:id="@+id/plus4"
+			            android:layout_width="30dip"
+			            android:layout_height="30dip"
+			            android:text="+"
+			            android:background="@drawable/rectangle2"
+			            android:layout_gravity="center"
+			            />
+			       
+			     </LinearLayout>
+			    </LinearLayout>
+               <ImageView
+                android:id="@+id/ivselect4"
+		        android:layout_width="50dip"
+		        android:layout_height="50dip"
+		        android:background="@drawable/selectcar2"
+		        android:visibility="gone"
+		        android:layout_alignParentRight="true"
+		        android:layout_alignParentTop="true"
+                />
+              </RelativeLayout>   
+              
+               <ImageView
+		      android:layout_width="fill_parent"
+		      android:layout_height="1dip"
+		      android:background="@color/user_divider3"
+		      />
+              <RelativeLayout 
+		    android:id="@+id/select5"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content" 
+		    android:orientation="horizontal"
+		    android:background="@color/white"
+	
+		    android:paddingBottom="10dip"
+		    >
+		      <ImageView
+		       android:id="@+id/iv5"
+		      android:layout_width="120dip"
+		      android:layout_height="80dip"
+		      android:layout_marginLeft="10dip"
+		      android:background="@drawable/fee_car5"
+		      android:layout_marginTop="10dip"
+		      android:layout_marginBottom="10dip"
+		       />
+		        <LinearLayout 
+		             android:layout_marginTop="10dip"
+		            android:layout_toRightOf="@+id/iv5"
+			    android:layout_width="fill_parent"
+			    android:layout_height="wrap_content" 
+			    android:orientation="vertical"
+			    >
+			     <LinearLayout 
+			         
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content" 
+				    android:orientation="horizontal"
+				    android:layout_marginTop="10dip"
+				    android:layout_marginBottom="10dip"
+				    >
+				    <TextView
+		                android:id="@+id/type5"
+				      android:layout_width="wrap_content"
+				      android:layout_height="wrap_content"
+				      android:layout_marginLeft="10dip"
+				      android:textSize="18sp"
+				      android:textColor="@color/black"
+				  
+				    />
+				    <TextView
+		              android:id="@+id/price5"
+				      android:layout_width="90dip"
+				      android:layout_height="30dip"
+				      android:layout_marginLeft="10dip"
+				      android:textSize="18sp"
+				      android:textColor="@color/text_green"
+				      android:gravity="center"
+				  
+				    />
+				   
+			    </LinearLayout>
+			    <LinearLayout
+			        android:layout_width="fill_parent" 
+			        android:layout_height="wrap_content"
+			         android:layout_marginLeft="10dip"
+			        android:orientation="horizontal" >
+			        <TextView 
+			       
+			            android:layout_width="40dip"
+			            android:layout_height="30dip"
+			            android:textColor="@color/black2"
+			            android:layout_gravity="center"
+			            android:text="数量"
+			            android:textSize="16sp"
+			            android:gravity="center"
+			            android:layout_marginRight="5dip"
+			            />
+			       <Button 
+			            android:id="@+id/minus5"
+			            android:layout_width="30dip"
+			            android:layout_height="30dip"
+			            android:text="-"
+			            android:background="@drawable/rectangle2"
+			            android:layout_marginRight="5dip"
+			            android:layout_gravity="center"
+			            />
+			        <TextView 
+			            android:id="@+id/amount5"
+			            android:layout_width="40dip"
+			            android:layout_height="30dip"
+			            android:background="@drawable/rectangle2"
+			            android:layout_gravity="center"
+			            android:text="1"
+			            android:textSize="16sp"
+			            android:gravity="center"
+			            android:layout_marginRight="5dip"
+			            />
+			       <Button 
+			            android:id="@+id/plus5"
+			            android:layout_width="30dip"
+			            android:layout_height="30dip"
+			            android:text="+"
+			            android:background="@drawable/rectangle2"
+			            android:layout_gravity="center"
+			            />
+			       
+			     </LinearLayout>
+			    </LinearLayout>
+               <ImageView
+                android:id="@+id/ivselect5"
+		        android:layout_width="50dip"
+		        android:layout_height="50dip"
+		        android:background="@drawable/selectcar2"
+		        android:visibility="gone"
+		        android:layout_alignParentRight="true"
+		        android:layout_alignParentTop="true"
+                />
+              </RelativeLayout>   
        </LinearLayout>
-       <RelativeLayout 
-	    android:layout_width="fill_parent"
-	    android:layout_height="fill_parent" 
-	    >
+       
         <com.lc.progressbutton.CircularProgressButton
         android:id="@+id/Search"
         android:layout_width="fill_parent"
         android:layout_height="50dp"
+        android:layout_marginTop="10dip"
         android:layout_marginLeft="10dip"
 	    android:layout_marginRight="10dip"
-	    android:layout_marginBottom="50dip"
-	    android:layout_centerHorizontal="true"
-	    android:layout_alignParentBottom="true"
+	    android:layout_marginBottom="10dip"
         android:textColor="@color/cpb_white"
         android:textSize="18sp"
         app:cpb_textComplete="马上预约"
@@ -404,6 +637,6 @@
         app:cpb_selectorIdle="@drawable/idle_state_selector"
         app:cpb_selectorComplete="@drawable/complete_state_selector"
         app:cpb_selectorError="@drawable/error_state_selector"/>
-        </RelativeLayout>
-	  
+        </LinearLayout>
+	  </ScrollView>
 </LinearLayout>

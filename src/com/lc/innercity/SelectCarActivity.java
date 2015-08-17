@@ -104,7 +104,7 @@ public class SelectCarActivity extends Activity implements OnClickListener {
 				    //	bitmapUtils.display(ivCarbg, ConnectUrl.commonurl0+str);
 				      }
 				    });
-			mGallery.setSelection(list.size()/2);
+			mGallery.setSelection(3/2);
 			mGallery.setOnItemSelectedListener(new OnItemSelectedListener(){
 				@Override
 				public void onItemSelected(AdapterView<?> parent, View view,
@@ -231,7 +231,7 @@ public class SelectCarActivity extends Activity implements OnClickListener {
 		    
 		    //获取图片的个数
 		    public int getCount() {
-		        return list.size();
+		        return 3;
 		    }
 
 		    //获取图片在库中的位置

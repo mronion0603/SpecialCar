@@ -1,7 +1,12 @@
 package com.lc.intercity;
 import java.util.HashMap;
 import java.util.List;
+
+import com.lc.innercity.SendDealActivity;
 import com.lc.specialcar.R;
+import com.lc.utils.ConnectUrl;
+import com.lidroid.xutils.BitmapUtils;
+
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -85,7 +90,8 @@ public class CarpoolListViewAdapter extends BaseAdapter {
         listItemView.totalNum.setText( listItems.get(position).get("TotalNum")+"");  
         String getUsericon =listItems.get(position).get("CarIcon")+"";
         if(getUsericon.length()>0){
-	    	
+        	BitmapUtils bitmapUtils = new BitmapUtils(context);
+	        bitmapUtils.display(listItemView.carIcon, ConnectUrl.commonurl0+getUsericon);
 	    }else{
 	    	//listItemView.shopIcon.setImageResource(R.drawable.activities_shopicon);
 	    }

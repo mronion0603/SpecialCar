@@ -38,7 +38,7 @@ public class AgreementActivity extends Activity implements OnClickListener {
 	public void init(){
 		ExitApplication.getInstance().addActivity(this);
 		tvTitle = (TextView) findViewById(R.id.topTv);
-		tvTitle.setText("用户协议");
+		tvTitle.setText("相关协议");
 		
 		rls = (RelativeLayout) findViewById(R.id.rlslidemenu);
 		rls.setOnClickListener(this);

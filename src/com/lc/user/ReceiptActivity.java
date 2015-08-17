@@ -61,7 +61,7 @@ public class ReceiptActivity extends Activity implements OnClickListener {
 		ivleft.setVisibility(View.VISIBLE);
 		ivRight = (ImageView) findViewById(R.id.topButton3);
 		ivRight.setOnClickListener(this);
-		ivRight.setVisibility(View.VISIBLE);
+		//ivRight.setVisibility(View.VISIBLE);
 		etphone.setText(MySharePreference.getStringValue(getApplication(), MySharePreference.PHONE));
 		String username = MySharePreference.getStringValue(getApplication(), MySharePreference.USERNAME);
 		if(username!=null){
@@ -147,7 +147,7 @@ public class ReceiptActivity extends Activity implements OnClickListener {
 	    	int result = jsonobj.getInt("ResultCode");
 	   	    if(result==Global.SUCCESS){
 	   	    	String money = jsonobj.getJSONObject("Data").getString("subMoney");
-	   	    	money = "<font color='text_brown'><b>" + money+ "</b></font>"
+	   	    	money = "<font color='#e0aa35'><b>" + money+ "</b></font>"
 	                       +"<font color='black'><b>" + "元"+ "</b></font>";
 	   	    	tvmax.setText(Html.fromHtml(money));
 	        }else{

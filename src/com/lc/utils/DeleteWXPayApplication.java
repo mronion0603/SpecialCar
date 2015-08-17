@@ -31,7 +31,7 @@ public class DeleteWXPayApplication extends Application {
  {
   
    activity.finish();
-   activityList.remove(activity);
+   //activityList.remove(activity);
  }
  //System.exit(0);
  }

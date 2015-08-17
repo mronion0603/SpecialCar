@@ -155,7 +155,7 @@ public class SearchCarpoolActivity extends Activity implements OnClickListener {
         	String cpbstatus = ((JSONObject)jsonarray.get(x)).getString("cpbStatus");
         	if(cpbstatus.equals("1")|cpbstatus.equals("0")){
         	 HashMap<String , Object> map = new HashMap<String , Object>();
-			 map.put("CarIcon", "2");	
+			 map.put("CarIcon", ((JSONObject)jsonarray.get(x)).getString("carImg"));	
 			 map.put("orderNum",((JSONObject)jsonarray.get(x)).getString("orderNum"));
 			 map.put("driverid",((JSONObject)jsonarray.get(x)).getString("driverNum"));
 			 //map.put("groupItem3",((JSONObject)jsonarray.get(x)).getString("startAddress"));

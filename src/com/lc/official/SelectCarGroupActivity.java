@@ -33,21 +33,23 @@ import android.widget.Toast;
 
 public class SelectCarGroupActivity extends Activity implements OnClickListener {
     TextView tvTitle,righttext;
-    ImageView ivleft,ivselect1,ivselect2,ivselect3,car1,car2,car3;;
+    ImageView ivleft,ivselect1,ivselect2,ivselect3,ivselect4,ivselect5,car1,car2,car3,car4,car5;;
     private RelativeLayout rls;
     private RelativeLayout select1;
     private RelativeLayout select2;
     private RelativeLayout select3;
-    boolean flag1,flag2,flag3;
+    private RelativeLayout select4;
+    private RelativeLayout select5;
+    boolean flag1,flag2,flag3,flag4,flag5;
     CircularProgressButton btsearch;
-    private Button plus,minus,plus2,minus2,plus3,minus3;
-    private TextView amount,amount2,amount3;
+    private Button plus,minus,plus2,minus2,plus3,minus3,plus4,minus4,plus5,minus5;
+    private TextView amount,amount2,amount3,amount4,amount5;
     private AddOfficeNet addInnerNet = new AddOfficeNet();
 	String vMoneystr="0";	
 	String voucherNumstr="";
 	String getname="",getlat="",getlont="",getaddress="",getphone="",gettime="",gettimelong="0",getdemand="";
-	String economy="0",common="0",business="0";
-	TextView type1,type2,type3,price1,price2,price3;
+	String economy="0",common="0",business="0",tongqin1="0",tongqin2="0";
+	TextView type1,type2,type3,type4,type5,price1,price2,price3,price4,price5;
 	GetCarNet getcarnet = new GetCarNet();
 	List<HashMap<String,String>> list =new ArrayList<HashMap<String,String>>();
 	@Override
@@ -75,15 +77,23 @@ public class SelectCarGroupActivity extends Activity implements OnClickListener 
 		flag1 = true;
 		flag2 = false;
 		flag3 = false;
+		flag4 = false;
+		flag5 = false;
 		car1 = (ImageView) findViewById(R.id.iv1);
 		car2 = (ImageView) findViewById(R.id.iv2);
 		car3 = (ImageView) findViewById(R.id.iv3);
+		car4 = (ImageView) findViewById(R.id.iv4);
+		car5 = (ImageView) findViewById(R.id.iv5);
 		price1 = (TextView) findViewById(R.id.price1);
 		price2 = (TextView) findViewById(R.id.price2);
 		price3 = (TextView) findViewById(R.id.price3);
+		price4 = (TextView) findViewById(R.id.price4);
+		price5 = (TextView) findViewById(R.id.price5);
 		type1 = (TextView) findViewById(R.id.type1);
 		type2 = (TextView) findViewById(R.id.type2);
 		type3 = (TextView) findViewById(R.id.type3);
+		type4 = (TextView) findViewById(R.id.type4);
+		type5 = (TextView) findViewById(R.id.type5);
 		tvTitle = (TextView) findViewById(R.id.topTv);
 		tvTitle.setText("选择车型");
 		righttext = (TextView) findViewById(R.id.righttext);
@@ -93,6 +103,8 @@ public class SelectCarGroupActivity extends Activity implements OnClickListener 
 		ivselect1 = (ImageView) findViewById(R.id.ivselect);
 		ivselect2 = (ImageView) findViewById(R.id.ivselect2);
 		ivselect3 = (ImageView) findViewById(R.id.ivselect3);
+		ivselect4 = (ImageView) findViewById(R.id.ivselect4);
+		ivselect5 = (ImageView) findViewById(R.id.ivselect5);
 		rls = (RelativeLayout) findViewById(R.id.rlslidemenu);
 		rls.setOnClickListener(this);
 		ivleft = (ImageView) findViewById(R.id.ArrowHead);
@@ -103,6 +115,10 @@ public class SelectCarGroupActivity extends Activity implements OnClickListener 
 		select2.setOnClickListener(this);
 		select3 = (RelativeLayout) findViewById(R.id.select3);
 		select3.setOnClickListener(this);
+		select4 = (RelativeLayout) findViewById(R.id.select4);
+		select4.setOnClickListener(this);
+		select5 = (RelativeLayout) findViewById(R.id.select5);
+		select5.setOnClickListener(this);
 		btsearch = (CircularProgressButton) findViewById(R.id.Search);
 		ButtonEffect.setButtonStateChangeListener(btsearch);
 		btsearch.setIndeterminateProgressMode(true);
@@ -122,6 +138,16 @@ public class SelectCarGroupActivity extends Activity implements OnClickListener 
 		amount3 = (TextView)findViewById(R.id.amount3);
 		plus3.setOnClickListener(this);
 		minus3.setOnClickListener(this);
+		plus4 = (Button) findViewById(R.id.plus4);
+		minus4 = (Button) findViewById(R.id.minus4);
+		amount4 = (TextView)findViewById(R.id.amount4);
+		plus4.setOnClickListener(this);
+		minus4.setOnClickListener(this);
+		plus5 = (Button) findViewById(R.id.plus5);
+		minus5 = (Button) findViewById(R.id.minus5);
+		amount5 = (TextView)findViewById(R.id.amount5);
+		plus5.setOnClickListener(this);
+		minus5.setOnClickListener(this);
 		getcarnet.setHandler(mHandler);
 		getcarnet.setDevice(Global.DEVICE);
 		getcarnet.setAuthn(MySharePreference.getStringValue(getApplication(), MySharePreference.AUTHN));
@@ -167,6 +193,15 @@ public class SelectCarGroupActivity extends Activity implements OnClickListener 
             addInnerNet.setBusiness(amount3.getText().toString());
             else
             addInnerNet.setBusiness(business);
+            if(flag4)
+                addInnerNet.setVarnish19(amount4.getText().toString());
+                else
+                addInnerNet.setVarnish19(tongqin1);
+            if(flag5)
+                addInnerNet.setVarnish49(amount5.getText().toString());
+                else
+                addInnerNet.setVarnish49(tongqin2);
+            
             addInnerNet.setUseCarTime(gettimelong);
             addInnerNet.setCartype("1");
             addInnerNet.getDataFromServer();
@@ -197,6 +232,24 @@ public class SelectCarGroupActivity extends Activity implements OnClickListener 
 			}else{
 				ivselect3.setVisibility(View.VISIBLE);
 				flag3=true;	
+			}
+			break;
+		case R.id.select4:
+			if(flag4){
+				flag4=false;
+				ivselect4.setVisibility(View.GONE);
+			}else{
+				ivselect4.setVisibility(View.VISIBLE);
+				flag4=true;	
+			}
+			break;
+		case R.id.select5:
+			if(flag5){
+				flag5=false;
+				ivselect5.setVisibility(View.GONE);
+			}else{
+				ivselect5.setVisibility(View.VISIBLE);
+				flag5=true;	
 			}
 			break;
 		case R.id.plus:{
@@ -258,6 +311,46 @@ public class SelectCarGroupActivity extends Activity implements OnClickListener 
 				//minus.setImageResource(R.drawable.minus2);
 			}
 			amount3.setText(count2+"");}
+			break;
+        case R.id.plus4:{
+			String content = amount4.getText().toString();
+			int count = Integer.parseInt(content);
+			count++;
+			if(count>1){
+				//minus.setImageResource(R.drawable.minus);
+			}
+			amount4.setText(count+"");}
+			break;
+        case R.id.minus4:{
+        	String content2 = amount4.getText().toString();
+			int count2 = Integer.parseInt(content2);
+			if(count2>1){
+				count2--;
+			}
+			if(count2==1){
+				//minus.setImageResource(R.drawable.minus2);
+			}
+			amount4.setText(count2+"");}
+			break;
+        case R.id.plus5:{
+			String content = amount5.getText().toString();
+			int count = Integer.parseInt(content);
+			count++;
+			if(count>1){
+				//minus.setImageResource(R.drawable.minus);
+			}
+			amount5.setText(count+"");}
+			break;
+        case R.id.minus5:{
+        	String content2 = amount5.getText().toString();
+			int count2 = Integer.parseInt(content2);
+			if(count2>1){
+				count2--;
+			}
+			if(count2==1){
+				//minus.setImageResource(R.drawable.minus2);
+			}
+			amount5.setText(count2+"");}
 			break;
 		default:
 			break;
@@ -333,10 +426,13 @@ public class SelectCarGroupActivity extends Activity implements OnClickListener 
 				type1.setText(getApplication().getString(R.string.type1));
 				type2.setText(getApplication().getString(R.string.type2));
 				type3.setText(getApplication().getString(R.string.type3));
-				
+				type4.setText(getApplication().getString(R.string.type4));
+				type5.setText(getApplication().getString(R.string.type5));
 				price1.setText("¥"+list.get(0).get("officalMoney"));
 				price2.setText("¥"+list.get(1).get("officalMoney"));
 				price3.setText("¥"+list.get(2).get("officalMoney"));
+				price4.setText("¥"+list.get(3).get("officalMoney"));
+				price5.setText("¥"+list.get(4).get("officalMoney"));
 			}else{
 				 Toast.makeText(SelectCarGroupActivity.this,jsonobj.getString("Message"), Toast.LENGTH_LONG).show();
 			}

@@ -46,6 +46,8 @@ public class AddOfficeNet {
 	String common = "0";
 	String business = "0";
 	String useCarTime = "0";
+	String varnish19 = "0";
+	String varnish49 = "0";
 	public AddOfficeNet(){
 		
 	}
@@ -57,6 +59,12 @@ public class AddOfficeNet {
 	}
 	public void setCommon(String common){
 		this.common = common;
+	}
+	public void setVarnish19(String varnish19){
+		this.varnish19 = varnish19;
+	}
+	public void setVarnish49(String varnish49){
+		this.varnish49 = varnish49;
 	}
 	public void setBusiness(String business){
 		this.business = business;
@@ -174,8 +182,10 @@ public class AddOfficeNet {
 	                			+"&sLatitude=" + URLEncoder.encode(sLatitude, "UTF-8")
 	                				+"&realMoney=" + URLEncoder.encode(realMoney, "UTF-8")
 	                				+"&economy=" + URLEncoder.encode(economy, "UTF-8")
-	                				+"&common=" + URLEncoder.encode(common, "UTF-8")
+	                				+"&comfort=" + URLEncoder.encode(common, "UTF-8")
 	                				+"&business=" + URLEncoder.encode(business, "UTF-8")
+	                				+"&varnish19=" + URLEncoder.encode(varnish19, "UTF-8")
+	                				+"&varnish49=" + URLEncoder.encode(varnish49, "UTF-8")
 	                				+"&useCarTime=" + URLEncoder.encode(useCarTime, "UTF-8")
 	                				;
 	                		System.out.println(content);

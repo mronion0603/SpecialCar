@@ -41,4 +41,6 @@ public class ConnectUrl {
  public static String cancelCity = commonurl+"cancelCJOrder";
  public static String bill = basic+"app/priceinfo.html";
  public static String getitinerartdetail = commonurl+"selUserOrderInfo";
+ public static String addmoney = commonurl+"rechCard";
+
 }

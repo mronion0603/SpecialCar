@@ -171,6 +171,7 @@ public class AddressActivity extends Activity implements OnClickListener {
         	//carListItem.clear();
         	//getMyCarNet.getCarFromServer(); 
         	 // System.out.println("开始");
+        	/*
         	  String address ="";
         	  double lat,lng;
         	  Bundle extras = data.getExtras();
@@ -185,6 +186,24 @@ public class AddressActivity extends Activity implements OnClickListener {
 				  MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(ll);
 				  mBaiduMap.animateMapStatus(u);	
               }
+              */
+        	
+        	 String address ="";
+       	     double lat,lng;
+       	     Bundle extras = data.getExtras();
+             if(extras != null){
+           	  address = extras.getString("address");
+           	  lat= extras.getDouble("latitude");
+           	  lng= extras.getDouble("longitude");
+
+				  Intent intent = new Intent();
+			    
+			        intent.putExtra("address", address);
+			        intent.putExtra("latidute",lat);
+			        intent.putExtra("longitude", lont);
+			        setResult(RESULT_OK, intent); 
+					finish();
+             }
         }  
     }  
 	

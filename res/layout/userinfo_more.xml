@@ -31,7 +31,7 @@
 	      android:textSize="18sp"
 	      android:textColor="@color/black"
 	      android:layout_centerVertical="true"
-	      android:text="用户协议"
+	      android:text="相关协议"
 	    />
 	     <ImageView
 	      android:id="@+id/arrow2"

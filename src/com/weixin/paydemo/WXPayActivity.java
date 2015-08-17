@@ -95,6 +95,9 @@ public class WXPayActivity extends Activity {
 	
 	
 	public void init(){
+		 tvname = (TextView) findViewById(R.id.product_subject);
+	        tvcontent = (TextView) findViewById(R.id.product_content);
+	        tvprice = (TextView) findViewById(R.id.product_price);
 		DeleteWXPayApplication.getInstance().addActivity(this);
 		rls = (RelativeLayout) findViewById(R.id.rlslidemenu);
 		rls.setOnClickListener(new OnClickListener(){
@@ -113,6 +116,7 @@ public class WXPayActivity extends Activity {
 		Bundle extras = getIntent().getExtras();
         if(extras != null){
         	price = extras.getString("itemprice");
+        	tvprice.setText(price+"元");
         	double pricedb = Double.parseDouble(price);
         	pricedb = 100*pricedb;
         	int priceint = (int)pricedb;
@@ -131,12 +135,10 @@ public class WXPayActivity extends Activity {
         		 pro2.setVisibility(View.GONE); 
         	}
         }
-        tvname = (TextView) findViewById(R.id.product_subject);
-        tvcontent = (TextView) findViewById(R.id.product_content);
-        tvprice = (TextView) findViewById(R.id.product_price);
+       
         tvname.setText(name);
         tvcontent.setText(content);
-        tvprice.setText(price+"元");
+       
 	}
 	
 	private Handler mHandler = new Handler() {
