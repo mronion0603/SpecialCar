@@ -1,22 +1,17 @@
 package com.lc.user;
 
 import java.util.HashMap;
-
-import org.json.JSONArray;
 import org.json.JSONObject;
-
 import com.lc.innercity.CancelOrderActivity;
 import com.lc.net.GetDetailDNet;
 import com.lc.specialcar.R;
 import com.lc.utils.CircularImage;
 import com.lc.utils.ConnectUrl;
 import com.lc.utils.DeleteDealApplication;
-import com.lc.utils.DeleteWXPayApplication;
 import com.lc.utils.ExitApplication;
 import com.lc.utils.Global;
 import com.lc.utils.MySharePreference;
 import com.lidroid.xutils.BitmapUtils;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;

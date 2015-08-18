@@ -6,11 +6,23 @@
     android:orientation="vertical" >
 
     <include layout="@layout/main_head" />
+    <ProgressBar     
+	    android:id="@+id/progress"    
+	    style="?android:attr/progressBarStyleLarge"    
+	    android:layout_width="wrap_content"    
+	    android:layout_height="wrap_content"    
+	    android:max="100"     
+	    android:progress="50"     
+	    android:secondaryProgress="70"
+	    android:layout_marginTop="30dip"     
+	    android:layout_gravity="center"
+	    />  
     <ScrollView 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-    <LinearLayout 
+    <LinearLayout
+    android:id="@+id/ll1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >

@@ -17,6 +17,7 @@ import com.lc.utils.ButtonEffect;
 import com.lc.utils.ExitApplication;
 import com.lc.utils.Global;
 import com.lc.utils.MySharePreference;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
@@ -27,6 +28,8 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -52,6 +55,8 @@ public class SelectCarGroupActivity extends Activity implements OnClickListener 
 	TextView type1,type2,type3,type4,type5,price1,price2,price3,price4,price5;
 	GetCarNet getcarnet = new GetCarNet();
 	List<HashMap<String,String>> list =new ArrayList<HashMap<String,String>>();
+	private LinearLayout ll1;
+	private ProgressBar pb; 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
@@ -62,6 +67,11 @@ public class SelectCarGroupActivity extends Activity implements OnClickListener 
 
 	public void init(){
 		Bundle extras = getIntent().getExtras();
+		ll1 = (LinearLayout) findViewById(R.id.ll1);
+		ll1.setVisibility(View.GONE);
+		pb = (ProgressBar)findViewById(R.id.progress); 
+		pb.setProgress(0);  
+		pb.setIndeterminate(true);
 		if(extras != null){
 			getname = extras.getString("username");
 			getlat = extras.getString("sLatitude");
@@ -423,6 +433,9 @@ public class SelectCarGroupActivity extends Activity implements OnClickListener 
 			    bitmapUtils.display(car2, ConnectUrl.commonurl0+list.get(1).get("carImg"));
 			    bitmapUtils.display(car3, ConnectUrl.commonurl0+list.get(2).get("carImg"));
 				*/
+				pb.setVisibility(View.GONE);
+				ll1.setVisibility(View.VISIBLE);
+				
 				type1.setText(getApplication().getString(R.string.type1));
 				type2.setText(getApplication().getString(R.string.type2));
 				type3.setText(getApplication().getString(R.string.type3));

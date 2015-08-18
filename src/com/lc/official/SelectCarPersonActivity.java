@@ -16,6 +16,7 @@ import com.lc.utils.ButtonEffect;
 import com.lc.utils.ExitApplication;
 import com.lc.utils.Global;
 import com.lc.utils.MySharePreference;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
@@ -25,6 +26,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -47,7 +50,9 @@ public class SelectCarPersonActivity extends Activity implements OnClickListener
 	GetCarNet getcarnet = new GetCarNet();
 	List<HashMap<String,String>> list =new ArrayList<HashMap<String,String>>();
 	TextView type1,type2,type3,type4,type5,price1,price2,price3,price4,price5,cardis1,cardis2,cardis3,cardis4,cardis5;
-    @Override
+	private LinearLayout ll1;
+	private ProgressBar pb; 
+	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
 		super.onCreate(savedInstanceState);    
@@ -56,6 +61,11 @@ public class SelectCarPersonActivity extends Activity implements OnClickListener
 	}
 
 	public void init(){
+		ll1 = (LinearLayout) findViewById(R.id.ll1);
+		ll1.setVisibility(View.GONE);
+		pb = (ProgressBar)findViewById(R.id.progress); 
+		pb.setProgress(0);  
+		pb.setIndeterminate(true);
 		Bundle extras = getIntent().getExtras();
 		if(extras != null){
 			getname = extras.getString("username");
@@ -318,6 +328,8 @@ public class SelectCarPersonActivity extends Activity implements OnClickListener
 					map.put("inMileage", jsonobj2.getString("inMileage"));
 					map.put("inTime", jsonobj2.getString("inTime"));
 					map.put("officalMoney", jsonobj2.getString("officalMoney"));
+					map.put("overMileage", jsonobj2.getString("overMileage"));
+					map.put("overTime", jsonobj2.getString("overTime"));
 				    list.add(map);
 				}
 				/*
@@ -329,6 +341,9 @@ public class SelectCarPersonActivity extends Activity implements OnClickListener
 			    bitmapUtils.display(car2, ConnectUrl.commonurl0+list.get(1).get("carImg"));
 			    bitmapUtils.display(car3, ConnectUrl.commonurl0+list.get(2).get("carImg"));
 			    */
+				pb.setVisibility(View.GONE);
+				ll1.setVisibility(View.VISIBLE);
+				
 				type1.setText(getApplication().getString(R.string.type1));
 				type2.setText(getApplication().getString(R.string.type2));
 				type3.setText(getApplication().getString(R.string.type3));
@@ -339,11 +354,11 @@ public class SelectCarPersonActivity extends Activity implements OnClickListener
 				price3.setText("¥"+list.get(2).get("officalMoney"));
 				price4.setText("¥"+list.get(3).get("officalMoney"));
 				price5.setText("¥"+list.get(4).get("officalMoney"));
-				cardis1.setText(getApplication().getString(R.string.des1));
-				cardis2.setText(getApplication().getString(R.string.des2));
-				cardis3.setText(getApplication().getString(R.string.des3));
-				cardis4.setText(getApplication().getString(R.string.des4));
-				cardis5.setText(getApplication().getString(R.string.des5));
+				cardis1.setText("套餐包含1天100公里"+"\n"+"超出按¥"+list.get(0).get("overMileage")+"/分钟+¥"+list.get(0).get("overTime")+"/公里计费");
+				cardis2.setText("套餐包含1天100公里"+"\n"+"超出按¥"+list.get(1).get("overMileage")+"/分钟+¥"+list.get(1).get("overTime")+"/公里计费");
+				cardis3.setText("套餐包含1天100公里"+"\n"+"超出按¥"+list.get(2).get("overMileage")+"/分钟+¥"+list.get(2).get("overTime")+"/公里计费");
+				cardis4.setText("套餐包含1天100公里"+"\n"+"超出按¥"+list.get(3).get("overMileage")+"/分钟+¥"+list.get(3).get("overTime")+"/公里计费");
+				cardis5.setText("套餐包含1天100公里"+"\n"+"超出按¥"+list.get(4).get("overMileage")+"/分钟+¥"+list.get(4).get("overTime")+"/公里计费");
 			}else{
 				 Toast.makeText(SelectCarPersonActivity.this,jsonobj.getString("Message"), Toast.LENGTH_LONG).show();
 			}

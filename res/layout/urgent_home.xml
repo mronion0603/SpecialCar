@@ -55,7 +55,7 @@
 	      android:textSize="16sp"
 	      android:textColor="@color/black"
 	      android:layout_centerVertical="true"
-	      android:text="400-0849-488"
+	      android:text="02783664066"
 	    />
 	     
 	    </RelativeLayout>  
@@ -69,6 +69,7 @@
 	    android:layout_gravity="center"
 	     android:background="@color/white"
 	     android:layout_marginTop="1dip"
+	     android:visibility="gone"
 	    >
 	    <ImageView
 	      android:id="@+id/date2"
@@ -85,7 +86,7 @@
 	      android:textSize="16sp"
 	      android:textColor="@color/black"
 	      android:layout_centerVertical="true"
-	      android:text="400-0849-488"
+	      android:text="02783664066"
 	    />
 	     
 	    </RelativeLayout>  
@@ -98,6 +99,7 @@
 	    android:layout_gravity="center"
 	    android:background="@color/white"
 	    android:layout_marginTop="1dip"
+	     android:visibility="gone"
 	    >
 	    <ImageView
 	      android:id="@+id/date3"
