@@ -39,7 +39,7 @@
 	      android:layout_width="wrap_content"
 	      android:layout_height="wrap_content"
 	      android:layout_marginLeft="20dip"
-	      android:textSize="18sp"
+	      android:textSize="16sp"
 	      android:textColor="@color/black2"
 	      android:layout_centerVertical="true"
 	      android:text="选择车型"
@@ -90,19 +90,19 @@
 				    >
 				    <TextView
 		              android:id="@+id/type1"
-				      android:layout_width="wrap_content"
+				      android:layout_width="101dip"
 				      android:layout_height="wrap_content"
 				      android:layout_marginLeft="10dip"
-				      android:textSize="18sp"
+				      android:textSize="16sp"
 				      android:textColor="@color/black"
 				
 				    />
 				    <TextView
 		              android:id="@+id/price1"
-				      android:layout_width="90dip"
+				      android:layout_width="wrap_content"
 				      android:layout_height="30dip"
 				      android:layout_marginLeft="10dip"
-				      android:textSize="18sp"
+				      android:textSize="16sp"
 				      android:textColor="@color/text_green"
 				      android:gravity="center"
 				    
@@ -205,19 +205,19 @@
 				    >
 				    <TextView
 		              android:id="@+id/type2"
-				      android:layout_width="wrap_content"
+				      android:layout_width="101dip"
 				      android:layout_height="wrap_content"
 				      android:layout_marginLeft="10dip"
-				      android:textSize="18sp"
+				      android:textSize="16sp"
 				      android:textColor="@color/black"
 
 				    />
 				    <TextView
 		              android:id="@+id/price2"
-				      android:layout_width="90dip"
+				      android:layout_width="wrap_content"
 				      android:layout_height="30dip"
 				      android:layout_marginLeft="10dip"
-				      android:textSize="18sp"
+				      android:textSize="16sp"
 				      android:textColor="@color/text_green"
 				      android:gravity="center"
 			
@@ -321,19 +321,19 @@
 				    >
 				    <TextView
 		                android:id="@+id/type3"
-				      android:layout_width="wrap_content"
+				      android:layout_width="101dip"
 				      android:layout_height="wrap_content"
 				      android:layout_marginLeft="10dip"
-				      android:textSize="18sp"
+				      android:textSize="16sp"
 				      android:textColor="@color/black"
 				  
 				    />
 				    <TextView
 		              android:id="@+id/price3"
-				      android:layout_width="90dip"
+				      android:layout_width="wrap_content"
 				      android:layout_height="30dip"
 				      android:layout_marginLeft="10dip"
-				      android:textSize="18sp"
+				      android:textSize="16sp"
 				      android:textColor="@color/text_green"
 				      android:gravity="center"
 				  
@@ -438,19 +438,19 @@
 				    >
 				    <TextView
 		                android:id="@+id/type4"
-				      android:layout_width="wrap_content"
+				      android:layout_width="101dip"
 				      android:layout_height="wrap_content"
 				      android:layout_marginLeft="10dip"
-				      android:textSize="18sp"
+				      android:textSize="16sp"
 				      android:textColor="@color/black"
 				  
 				    />
 				    <TextView
 		              android:id="@+id/price4"
-				      android:layout_width="90dip"
+				      android:layout_width="wrap_content"
 				      android:layout_height="30dip"
 				      android:layout_marginLeft="10dip"
-				      android:textSize="18sp"
+				      android:textSize="16sp"
 				      android:textColor="@color/text_green"
 				      android:gravity="center"
 				  
@@ -555,19 +555,19 @@
 				    >
 				    <TextView
 		                android:id="@+id/type5"
-				      android:layout_width="wrap_content"
+				      android:layout_width="101dip"
 				      android:layout_height="wrap_content"
 				      android:layout_marginLeft="10dip"
-				      android:textSize="18sp"
+				      android:textSize="16sp"
 				      android:textColor="@color/black"
 				  
 				    />
 				    <TextView
 		              android:id="@+id/price5"
-				      android:layout_width="90dip"
+				      android:layout_width="wrap_content"
 				      android:layout_height="30dip"
 				      android:layout_marginLeft="10dip"
-				      android:textSize="18sp"
+				      android:textSize="16sp"
 				      android:textColor="@color/text_green"
 				      android:gravity="center"
 				  

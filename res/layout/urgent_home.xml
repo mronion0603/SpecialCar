@@ -86,7 +86,7 @@
 	      android:textSize="16sp"
 	      android:textColor="@color/black"
 	      android:layout_centerVertical="true"
-	      android:text="02783664066"
+	      android:text="@string/urgent"
 	    />
 	     
 	    </RelativeLayout>  

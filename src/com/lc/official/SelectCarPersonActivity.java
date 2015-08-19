@@ -6,6 +6,7 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.lc.innercity.BillingRuleActivity;
 import com.lc.innercity.SelectCarActivity;
 import com.lc.intercity.SignUpActivity;
 import com.lc.net.AddOfficePersonNet;
@@ -146,7 +147,7 @@ public class SelectCarPersonActivity extends Activity implements OnClickListener
 		case R.id.righttext:
 			//finish();
 			Intent intent = new Intent();
-			intent.setClass(SelectCarPersonActivity.this,SelectCarActivity.class);
+			intent.setClass(SelectCarPersonActivity.this,BillingRuleActivity.class);
 			startActivity(intent);
 			break;
 		case R.id.Search:{
@@ -327,7 +328,8 @@ public class SelectCarPersonActivity extends Activity implements OnClickListener
 					map.put("carImg", jsonobj2.getString("carImg"));
 					map.put("inMileage", jsonobj2.getString("inMileage"));
 					map.put("inTime", jsonobj2.getString("inTime"));
-					map.put("officalMoney", jsonobj2.getString("officalMoney"));
+					String officalmoney = jsonobj2.getString("officalMoney");	
+					map.put("officalMoney", (int)(Double.parseDouble(officalmoney))+"");
 					map.put("overMileage", jsonobj2.getString("overMileage"));
 					map.put("overTime", jsonobj2.getString("overTime"));
 				    list.add(map);

@@ -28,6 +28,11 @@
 	<string name="des3">GL8同级车型</string>
 	<string name="des4">环宇</string>
 	<string name="des5">宇通</string>
+	
+	<string name="website">http://www.gwycw.cn/</string>
+	<string name="aboutusphone">4000849488</string>
+	<string name="urgent">02783664066</string>
+	
 	<string name="Upload">Upload</string>
     <string name="Error">Error</string>
     <string name="Complete">Complete</string>

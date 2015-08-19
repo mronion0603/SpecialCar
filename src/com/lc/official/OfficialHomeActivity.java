@@ -427,6 +427,7 @@ public class OfficialHomeActivity extends Activity implements OnClickListener {
 	            	  lat = extras.getDouble("latidute");
 	            	  lont = extras.getDouble("longitude");
 	            	  tvaddress.setText(address);
+	            	  //System.out.println("address:"+address);
 	              }
 	        }  
 	        if (requestCode == REQUSET_DEMAND && resultCode == RESULT_OK) {

@@ -30,7 +30,7 @@ public class AboutActivity extends Activity implements OnClickListener {
 	public static final int DIAL_PHONE = 1;
 	TextView tvTitle,tvversion;
     ImageView ivleft;
-    private RelativeLayout rls;
+    private RelativeLayout rls,rl2;
     private RelativeLayout rlphone;
     ContactWindow contactWindow;
 	private View originview; 
@@ -52,6 +52,8 @@ public class AboutActivity extends Activity implements OnClickListener {
 		tvversion= (TextView) findViewById(R.id.version);
 		rls = (RelativeLayout) findViewById(R.id.rlslidemenu);
 		rls.setOnClickListener(this);
+		rl2 = (RelativeLayout) findViewById(R.id.rl2);
+		rl2.setOnClickListener(this);
 		ivleft = (ImageView) findViewById(R.id.ArrowHead);
 		ivleft.setVisibility(View.VISIBLE);
 		rlphone= (RelativeLayout) findViewById(R.id.callphone);
@@ -66,15 +68,20 @@ public class AboutActivity extends Activity implements OnClickListener {
 			finish();
 			break;
 		case R.id.callphone:
-			contactWindow = new ContactWindow(AboutActivity.this,itemOnClick,"4000849488");
+			contactWindow = new ContactWindow(AboutActivity.this,itemOnClick,this.getString(R.string.aboutusphone));
 		    contactWindow.showAsDropDown(originview, 0, 0); 
+			break;
+		case R.id.rl2:
+			Uri uri = Uri.parse(this.getString(R.string.website));    
+			Intent it = new Intent(Intent.ACTION_VIEW, uri);    
+			startActivity(it); 
 			break;
 		default:
 			break;
 		}
 	}
 	//为弹出窗口实现监听类
-		private OnClickListener itemOnClick = new OnClickListener() {
+    private OnClickListener itemOnClick = new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				switch (v.getId()) {

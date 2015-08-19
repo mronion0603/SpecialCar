@@ -192,17 +192,17 @@ public class AddressActivity extends Activity implements OnClickListener {
        	     double lat,lng;
        	     Bundle extras = data.getExtras();
              if(extras != null){
-           	  address = extras.getString("address");
-           	  lat= extras.getDouble("latitude");
-           	  lng= extras.getDouble("longitude");
-
-				  Intent intent = new Intent();
-			    
-			        intent.putExtra("address", address);
-			        intent.putExtra("latidute",lat);
-			        intent.putExtra("longitude", lont);
-			        setResult(RESULT_OK, intent); 
-					finish();
+           	    address = extras.getString("address");
+           	    lat= extras.getDouble("latitude");
+           	    lng= extras.getDouble("longitude");
+				
+					Intent intent = new Intent();
+					intent.putExtra("address", address);
+					intent.putExtra("latidute", lat);
+					intent.putExtra("longitude", lont);
+					setResult(RESULT_OK, intent);
+				
+				finish();
              }
         }  
     }  
@@ -347,12 +347,15 @@ public class AddressActivity extends Activity implements OnClickListener {
       	  addaddressnet.getDataFromServer();
 		}	break;
 		case R.id.righttext:
-		{   Intent intent = new Intent();
-	        String address =  curaddress.getText().toString();
+		{   
+			String address =  curaddress.getText().toString();
+			if (!address.equals("地址获取中...")) {
+			Intent intent = new Intent();
 	        intent.putExtra("address", address);
 	        intent.putExtra("latidute",lat);
 	        intent.putExtra("longitude", lont);
 	        setResult(RESULT_OK, intent); 
+			}
 			finish();
 		}	break;
 		case R.id.curaddress:

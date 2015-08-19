@@ -64,7 +64,7 @@
            <TextView
             android:id="@+id/moresite2"
             android:layout_toRightOf="@+id/moresite"
-            android:text="4000849488"
+            android:text="@string/aboutusphone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -85,6 +85,7 @@
     android:layout_width="fill_parent"
     android:layout_height="50dip"
     android:background="#ffffff"
+    android:id="@+id/rl2"
     >
        
            <TextView
@@ -100,7 +101,7 @@
           <TextView
             android:id="@+id/moresite3"
             android:layout_toRightOf="@+id/morescore"
-            android:text="www.ctzc.com"
+            android:text="@string/website"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"

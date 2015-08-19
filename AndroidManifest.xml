@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.lc.specialcar"
     android:versionCode="1"
-    android:versionName="1.16" >
+    android:versionName="1.17" >
 
     <uses-sdk
         android:minSdkVersion="16"
@@ -334,7 +334,7 @@
         <!-- 目前这个渠道统计功能的报表还未开放。-->
         <meta-data android:name="JPUSH_CHANNEL" android:value="developer-default"/>
         <!-- Required. AppKey copied from Portal -->
-         <meta-data android:name="JPUSH_APPKEY" android:value="594513c14ce48a376f9644ea"/> 
+         <meta-data android:name="JPUSH_APPKEY" android:value="11e313f043c205a71cafb2d2"/> 
         
          
            <receiver
