@@ -197,6 +197,7 @@ public class AddressManageActivity extends Activity implements OnClickListener {
 	        }else{
 	          Toast.makeText(AddressManageActivity.this,jsonobj.getString("Message"), Toast.LENGTH_LONG).show();
 	        } 
+	   	    
 	   }
 	    private void parseADDRESS(String str)throws Exception{ 
 	    	System.out.println(str);
@@ -217,6 +218,9 @@ public class AddressManageActivity extends Activity implements OnClickListener {
 	         if(groups1.size()==0){
 	  			imgbg.setVisibility(View.VISIBLE);
 	  			textbg.setVisibility(View.VISIBLE);
+	  		 }else{
+	  			imgbg.setVisibility(View.GONE);
+	  			textbg.setVisibility(View.GONE);
 	  		 }
 	         pro.setVisibility(View.GONE); 
 	    }

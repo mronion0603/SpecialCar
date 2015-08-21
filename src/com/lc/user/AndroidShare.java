@@ -46,7 +46,7 @@ public class AndroidShare extends Dialog implements AdapterView.OnItemClickListe
 	private LinearLayout mLayout;
 	private GridView mGridView;
 	private float mDensity;
-	private String msgText = "湖北公务用车APP";
+	private String msgText;
 	private String mImgPath;
 	private int mScreenOrientation;
 	private List<ShareItem> mListData;
@@ -109,6 +109,7 @@ public class AndroidShare extends Dialog implements AdapterView.OnItemClickListe
 	}
 
 	void init(Context context) {
+		//msgText = context.getResources().getString(R.string.sharecontent);
 		DisplayMetrics dm = new DisplayMetrics();
 		dm = context.getResources().getDisplayMetrics();
 		this.mDensity = dm.density;

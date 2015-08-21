@@ -64,11 +64,11 @@ public class ModifyInfoActivity extends Activity implements OnClickListener {
 		bt1 = (RadioButton)this.findViewById(R.id.radioFemale);
 		bt2 = (RadioButton)this.findViewById(R.id.radioMale);
 		String username = MySharePreference.getStringValue(getApplication(), MySharePreference.USERNAME);
-		if(username!=null){
+		if((username!=null)&&(username.length()>=1)){
 			etName.setText( username);
 		}
 		String email = MySharePreference.getStringValue(getApplication(), MySharePreference.EMAIL);
-		if(email!=null){
+		if(email!=null&&(email.length()>=1)){
 			etEmail.setText(email);
 		}
 		String gender = MySharePreference.getStringValue(getApplication(), MySharePreference.GENDER);

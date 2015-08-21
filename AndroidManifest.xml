@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.lc.specialcar"
     android:versionCode="1"
-    android:versionName="1.17" >
+    android:versionName="1.19" >
 
     <uses-sdk
         android:minSdkVersion="16"
@@ -12,16 +12,16 @@
     <permission android:name="com.lc.specialcar.permission.JPUSH_MESSAGE" android:protectionLevel="signature" />
     <!-- Required -->
     <uses-permission android:name="com.lc.specialcar.permission.JPUSH_MESSAGE" />
-        <uses-permission android:name="android.permission.WAKE_LOCK" />
-         <uses-permission android:name="app.home.carwash.permission.JPUSH_MESSAGE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="app.home.carwash.permission.JPUSH_MESSAGE" />
     <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
-       <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />   
-        <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" /> 
-          <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> 
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />   
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" /> 
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> 
         
 		<uses-permission android:name="android.permission.GET_ACCOUNTS" />  
 		<uses-permission android:name="android.permission.USE_CREDENTIALS" />  
@@ -343,6 +343,12 @@
                 <action android:name="com.tencent.mm.plugin.openapi.Intent.ACTION_REFRESH_WXAPP" />
             </intent-filter>
            </receiver>
+           
+           <receiver android:name="com.lc.utils.NetStateReceiver">  
+            <intent-filter>  
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>  
+            </intent-filter>  
+          </receiver>  
     </application>
 
 </manifest>

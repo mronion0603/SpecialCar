@@ -17,7 +17,7 @@
 	    android:paddingTop="10dip"
 	    android:paddingBottom="10dip"
 	    android:id="@+id/usecardate"
-	    android:background="@color/white"
+	    android:background="@drawable/common_background_selector"
 	    >
 	    <ImageView
 	      android:id="@+id/date"
@@ -71,7 +71,7 @@
 	    android:paddingTop="10dip"
 	    android:paddingBottom="10dip"
 	    android:id="@+id/AirportAddress"
-	    android:background="@color/white"
+	    android:background="@drawable/common_background_selector"
 	    >
 	    <ImageView
 	      android:id="@+id/date3"
@@ -119,7 +119,7 @@
 	    android:paddingTop="10dip"
 	    android:paddingBottom="10dip"
 	    android:id="@+id/startaddress"
-	    android:background="@color/white"
+	    android:background="@drawable/common_background_selector"
 	    >
 	    <ImageView
 	      android:id="@+id/date2"
@@ -162,7 +162,7 @@
 	    android:paddingTop="10dip"
 	    android:paddingBottom="10dip"
 	    android:id="@+id/rlmodifyname"
-	    android:background="@color/white"
+	   android:background="@drawable/common_background_selector"
 	    >
 	    <ImageView
 	      android:id="@+id/moresaftyim"
@@ -221,7 +221,7 @@
 	    android:paddingTop="10dip"
 	    android:paddingBottom="10dip"
 	    android:id="@+id/usecar"
-	    android:background="@color/white"
+	   android:background="@drawable/common_background_selector"
 	     android:visibility="gone"
 	    >
 	    <ImageView
@@ -277,7 +277,7 @@
 	    android:paddingTop="10dip"
 	    android:paddingBottom="10dip"
 	    android:id="@+id/selectcar"
-	    android:background="@color/white"
+	   android:background="@drawable/common_background_selector"
 	    >
 	    <ImageView
 	      android:id="@+id/moresaftyim5"
@@ -348,7 +348,7 @@
 	    android:paddingTop="10dip"
 	    android:paddingBottom="10dip"
 	    android:id="@+id/rldiscount"
-	    android:background="@color/white"
+	   android:background="@drawable/common_background_selector"
 	    	    android:visibility="gone"
 	    >
 	    <ImageView

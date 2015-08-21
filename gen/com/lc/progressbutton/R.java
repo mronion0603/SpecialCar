@@ -26,12 +26,12 @@ public final class R {
 	public static final class color {
 		public static final int cpb_blue = 0x7f050001;
 		public static final int cpb_blue_dark = 0x7f050002;
-		public static final int cpb_complete_state_selector = 0x7f050027;
-		public static final int cpb_error_state_selector = 0x7f050028;
+		public static final int cpb_complete_state_selector = 0x7f050028;
+		public static final int cpb_error_state_selector = 0x7f050029;
 		public static final int cpb_green = 0x7f050005;
 		public static final int cpb_green_dark = 0x7f050006;
 		public static final int cpb_grey = 0x7f050000;
-		public static final int cpb_idle_state_selector = 0x7f050029;
+		public static final int cpb_idle_state_selector = 0x7f05002a;
 		public static final int cpb_red = 0x7f050003;
 		public static final int cpb_red_dark = 0x7f050004;
 		public static final int cpb_white = 0x7f050007;
@@ -42,18 +42,18 @@ public final class R {
 		public static final int cpb_stroke_width = 0x7f060002;
 	}
 	public static final class drawable {
-		public static final int cpb_background = 0x7f020040;
-		public static final int ic_launcher = 0x7f02006f;
+		public static final int cpb_background = 0x7f02002f;
+		public static final int ic_launcher = 0x7f02005e;
 	}
 	public static final class id {
-		public static final int action_settings = 0x7f09019a;
+		public static final int action_settings = 0x7f09015f;
 	}
 	public static final class layout {
 		public static final int activity_main = 0x7f03000b;
-		public static final int fragment_main = 0x7f03001e;
+		public static final int fragment_main = 0x7f030017;
 	}
 	public static final class menu {
-		public static final int main = 0x7f0b0000;
+		public static final int main = 0x7f0a0000;
 	}
 	public static final class string {
 		public static final int action_settings = 0x7f07000c;

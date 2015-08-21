@@ -27,7 +27,7 @@
             android:layout_marginTop="10dip"
             android:layout_marginLeft="50dip"
             android:layout_marginRight="50dip"
-            android:text="高品质，差异化的公务商务出行"
+            android:text="高品质差异化的公务商务出行"
             android:textSize="18sp"
             android:textColor="@color/black2"
             />
@@ -55,7 +55,7 @@
         android:layout_width="fill_parent"
         android:layout_height="50dip"
         android:background="@drawable/rectangle_green"
-        android:text="普通用户"
+        android:text="商务用户"
         android:textColor="@color/black2"
         android:textSize="18sp"
         android:layout_marginTop="20dip"

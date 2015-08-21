@@ -14,7 +14,6 @@ import com.lc.innercity.GroupAdapter;
 import com.lc.innercity.ModifyNameActivity;
 import com.lc.innercity.SelectCarActivity;
 import com.lc.innercity.SendDealActivity;
-import com.lc.intercity.SignUpActivity;
 import com.lc.net.AddShuttleNet;
 import com.lc.net.GetAddressNet;
 import com.lc.net.GetAirportNet;
@@ -38,10 +37,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.text.Html;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnTouchListener;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -87,6 +84,7 @@ public class SendActivity extends Activity implements OnClickListener {
 	double basicmoney=13,pricedis=1.5,pricedura=0.24;
 	int duration=0, distance =0;
 	RouteMatrixNet routeMatrixNet = new RouteMatrixNet();
+	boolean mSwitch = false;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
@@ -128,16 +126,6 @@ public class SendActivity extends Activity implements OnClickListener {
 		//etflight= (EditText) findViewById(R.id.flightnum);
 		rldate = (RelativeLayout) findViewById(R.id.usecardate);
 		rldate.setOnClickListener(this);
-		rldate.setOnTouchListener(new OnTouchListener(){
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-				 if (event.getAction() == MotionEvent.ACTION_DOWN) { 
-					 timepWindow = new TimePopupWindow(SendActivity.this,itemsOnClick);
-					 timepWindow.showAsDropDown(originview, 0, 0); 		   
-			     }         
-			     return true; 
-			}
-	    }); 
 		txdate = (TextView) findViewById(R.id.txdate);
 		tvtype = (TextView) findViewById(R.id.financialType);
 		imAddress = (ImageView) findViewById(R.id.Star);
@@ -169,6 +157,10 @@ public class SendActivity extends Activity implements OnClickListener {
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
+		case R.id.usecardate:{
+			timepWindow = new TimePopupWindow(SendActivity.this,itemsOnClick);
+			timepWindow.showAsDropDown(originview, 0, 0); 		
+		}	break;
 		case R.id.AirportAddress:{
 			airportWindow = new AddressPopupWindow(SendActivity.this,itemOnClick2,groups2,"附近机场");//实例化AddressPopupWindow
 			airportWindow.showAsDropDown(originview, 0, 0); //显示窗口
@@ -176,6 +168,9 @@ public class SendActivity extends Activity implements OnClickListener {
 		case R.id.Star:
 		{	menuWindow = new AddressPopupWindow(SendActivity.this,itemOnClick,groups1);//实例化AddressPopupWindow
 			menuWindow.showAsDropDown(originview, 0, 0); //显示窗口
+			if(groups1.size()<=0 && mSwitch){
+				Toast.makeText(SendActivity.this,"暂无收藏地址,请到地址管理页面添加", Toast.LENGTH_LONG).show();
+			}
 		}	break;
 		case R.id.Search:{
 			
@@ -398,7 +393,7 @@ public class SendActivity extends Activity implements OnClickListener {
 			 ivSearch.setClickable(true);
 			 finish();
         }else{
-           ivSearch.setProgress(-1);
+           ivSearch.setProgress(0);
            ivSearch.setClickable(true);
            Toast.makeText(SendActivity.this,jsonobj.getString("Message"), Toast.LENGTH_LONG).show();
         } 
@@ -425,6 +420,8 @@ public class SendActivity extends Activity implements OnClickListener {
 	    groups1.clear();
 	    //System.out.println(str);
    	    JSONObject jsonobj = new JSONObject(str); 
+   	    if(jsonobj.has("Data")){
+	    	mSwitch = true;
         JSONArray jsonarray = jsonobj.getJSONArray("Data");
         for(int x=0;x<jsonarray.length();x++){
        	 JSONObject jsonobj2 = (JSONObject)jsonarray.get(x); 
@@ -437,6 +434,7 @@ public class SendActivity extends Activity implements OnClickListener {
 			 //System.out.println(map.toString());
 			 groups1.add(map);
         }
+   	    }
     }
     private void parseAIRPORT(String str)throws Exception{ 
     	//System.out.println(str);

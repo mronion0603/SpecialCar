@@ -14,7 +14,6 @@
     android:layout_marginTop="10dip"
     android:background="#ffffff"
     >
-       
            <EditText
             android:id="@+id/feedbackET"
             android:hint="请提出您的宝贵建议"

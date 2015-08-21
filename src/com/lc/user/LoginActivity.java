@@ -119,13 +119,13 @@ public class LoginActivity extends Activity {
                     recLen--;  
                     getCode.setText(""+recLen);  
                     getCode.setClickable(false);
-                    getCode.setBackgroundResource(R.drawable.rectangleright3);
+                    getCode.setBackgroundResource(R.drawable.rectangleright);
                     if(recLen < 0){  
                         //timer.cancel();  
                         // timetv.setVisibility(View.GONE);  
                         getCode.setText("获取验证码");
                         getCode.setClickable(true);
-                        getCode.setBackgroundResource(R.drawable.rectangleright);
+                        getCode.setBackgroundResource(R.drawable.rectangleright3);
                     }  
                 }  
             });  

@@ -8,6 +8,7 @@ import org.json.JSONObject;
 
 import com.lc.innercity.BillingRuleActivity;
 import com.lc.innercity.SelectCarActivity;
+import com.lc.innercity.SendDealActivity;
 import com.lc.intercity.SignUpActivity;
 import com.lc.net.AddOfficePersonNet;
 import com.lc.net.GetCarNet;
@@ -300,7 +301,7 @@ public class SelectCarPersonActivity extends Activity implements OnClickListener
 	    	int result = jsonobj.getInt("ResultCode");
 	   	    if(result==Global.SUCCESS){
 	   	    	Intent intent2 = new Intent();
-				intent2.setClass(SelectCarPersonActivity.this,SignUpActivity.class);
+				intent2.setClass(SelectCarPersonActivity.this,SendDealActivity.class);
 				startActivity(intent2);
 				//btsearch.setProgress(0);
 				btsearch.setClickable(true);

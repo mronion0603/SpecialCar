@@ -96,6 +96,7 @@ public class InnerCityHomeActivity extends Activity implements OnClickListener {
     double slat=0,slont =0;
     private View originview; 
     String driveridStr="";
+    boolean mSwitch = false;
     @Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
@@ -404,6 +405,9 @@ public class InnerCityHomeActivity extends Activity implements OnClickListener {
 		{	
 			menuWindow = new AddressPopupWindow(InnerCityHomeActivity.this,itemOnClick,groups1);//实例化AddressPopupWindow
 			menuWindow.showAsDropDown(originview, 0, 0); //显示窗口
+			if(groups1.size()<=0 && mSwitch){
+				Toast.makeText(InnerCityHomeActivity.this,"暂无收藏地址,请到地址管理页面添加", Toast.LENGTH_LONG).show();
+			}
 		}	break;	
 		default:
 			break;
@@ -530,21 +534,23 @@ public class InnerCityHomeActivity extends Activity implements OnClickListener {
     	    groups1.clear();
     	   // System.out.println(str);
        	    JSONObject jsonobj = new JSONObject(str); 
-            JSONArray jsonarray = jsonobj.getJSONArray("Data");
-            for(int x=0;x<jsonarray.length();x++){
-           	 JSONObject jsonobj2 = (JSONObject)jsonarray.get(x); 
-            	 HashMap<String , Object> map = new HashMap<String , Object>();
-    			 map.put("groupItem",jsonobj2.getString("commAddressId"));
-    			 map.put("userId",jsonobj2.getString("userId"));
-    			 map.put("address",jsonobj2.getString("address"));
-    			 map.put("longitude",jsonobj2.getString("longitude"));
-    			 map.put("latidute",jsonobj2.getString("latitude"));
-    			// System.out.println(map.toString());
-    			 groups1.add(map);
-            }
+       	    if(jsonobj.has("Data")){
+       	    	mSwitch = true;
+	            JSONArray jsonarray = jsonobj.getJSONArray("Data");
+	            for(int x=0;x<jsonarray.length();x++){
+	           	 JSONObject jsonobj2 = (JSONObject)jsonarray.get(x); 
+	            	 HashMap<String , Object> map = new HashMap<String , Object>();
+	    			 map.put("groupItem",jsonobj2.getString("commAddressId"));
+	    			 map.put("userId",jsonobj2.getString("userId"));
+	    			 map.put("address",jsonobj2.getString("address"));
+	    			 map.put("longitude",jsonobj2.getString("longitude"));
+	    			 map.put("latidute",jsonobj2.getString("latitude"));
+	    			 //System.out.println(map.toString());
+	    			 groups1.add(map);
+	            }
+       	    }
         }
         private void parseJSON(String str) throws Exception {
-        
         	//mBaiduMap.clear();
         	driveridStr="";
     		System.out.println(str);
@@ -573,7 +579,7 @@ public class InnerCityHomeActivity extends Activity implements OnClickListener {
 								.zIndex(9).draggable(true);
 					mBaiduMap.addOverlay(ooA);
 				}
-    			//mBaiduMap.
+    			
     		}else{
     			 //Toast.makeText(InnerCityHomeActivity.this,jsonobj.getString("Message"), Toast.LENGTH_LONG).show();
     		}

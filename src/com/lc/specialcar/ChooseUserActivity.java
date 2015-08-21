@@ -5,9 +5,12 @@ import com.lc.specialcar.R;
 import com.lc.user.Login2Activity;
 import com.lc.user.LoginActivity;
 import com.lc.utils.ExitApplication;
+import com.lc.utils.MyApplication;
 import com.lc.utils.MySharePreference;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -26,9 +29,21 @@ public class ChooseUserActivity extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);  
         setContentView(R.layout.userinfo_chooseuser); 
         init();
+       
 	}
 	public void init(){
 		ExitApplication.getInstance().addActivity(this);
+		Bundle extras = getIntent().getExtras();
+	    if(extras != null){
+	       if(extras.containsKey("getoff")){
+	    	   new AlertDialog.Builder(ChooseUserActivity.this)
+		    	 .setTitle("警告") 
+		    	 .setMessage("该账号在别的设备登录，您已被强制下线！")
+		    	 .setPositiveButton("确定",null)
+		    	 .show();
+	       } 
+	    }
+	    
 		login1 = (Button)findViewById(R.id.Login1);
 		login1.setOnClickListener(new OnClickListener(){
 			@Override

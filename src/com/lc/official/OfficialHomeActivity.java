@@ -32,6 +32,7 @@ import com.lc.net.GetAddressNet;
 import com.lc.popupwindow.AddressPopupWindow;
 import com.lc.popupwindow.TimeLongPopupWindow;
 import com.lc.popupwindow.TimePopupWindow;
+import com.lc.shuttle.SendActivity;
 import com.lc.specialcar.R;
 import com.lc.utils.ButtonEffect;
 import com.lc.utils.ExitApplication;
@@ -57,6 +58,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 
 @SuppressLint("SimpleDateFormat")
@@ -89,6 +91,7 @@ public class OfficialHomeActivity extends Activity implements OnClickListener {
     double lat=0,lont=0;
     String time="";
     String time3="";
+    boolean mSwitch = false;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
@@ -257,6 +260,9 @@ public class OfficialHomeActivity extends Activity implements OnClickListener {
 		case R.id.star:
 			menuWindow = new AddressPopupWindow(OfficialHomeActivity.this,itemOnClick,groups1);//实例化AddressPopupWindow
 			menuWindow.showAsDropDown(originview, 0, 0); 
+			if(groups1.size()<=0 && mSwitch){
+				Toast.makeText(OfficialHomeActivity.this,"暂无收藏地址,请到地址管理页面添加", Toast.LENGTH_LONG).show();
+			}
 			break;
 		
 		case R.id.Search:
@@ -386,6 +392,8 @@ public class OfficialHomeActivity extends Activity implements OnClickListener {
 	    groups1.clear();
 	   // System.out.println(str);
    	    JSONObject jsonobj = new JSONObject(str); 
+   	    if(jsonobj.has("Data")){
+	    	mSwitch = true;
         JSONArray jsonarray = jsonobj.getJSONArray("Data");
         for(int x=0;x<jsonarray.length();x++){
        	 JSONObject jsonobj2 = (JSONObject)jsonarray.get(x); 
@@ -394,10 +402,11 @@ public class OfficialHomeActivity extends Activity implements OnClickListener {
 			 map.put("userId",jsonobj2.getString("userId"));
 			 map.put("address",jsonobj2.getString("address"));
 			 map.put("longitude",jsonobj2.getString("longitude"));
-			 map.put("latidute",jsonobj2.getString("latidute"));
-			// System.out.println(map.toString());
+			 map.put("latidute",jsonobj2.getString("latitude"));
+			 //System.out.println(map.toString());
 			 groups1.add(map);
         }
+   	    }
    }
     
 		//重写的结果返回方法  
@@ -407,8 +416,8 @@ public class OfficialHomeActivity extends Activity implements OnClickListener {
 	        if (requestCode == REQUSET_NAMEPHONE && resultCode == RESULT_OK) {
 	        	String name ="";
 	        	String phone ="";
-	        	  Bundle extras = data.getExtras();
-	              if(extras != null){
+	        	Bundle extras = data.getExtras();
+	            if(extras != null){
 	            	  name = extras.getString("name");
 	            	  phone = extras.getString("phone");
 	            	  if(name.length()<=0||phone.length()<=0){
@@ -417,7 +426,7 @@ public class OfficialHomeActivity extends Activity implements OnClickListener {
 	            	   tvphone.setText(phone);
 	            	   tvname.setText(name);
 	            	  }
-	              }
+	           }
 	        }  
 	        if (requestCode == REQUSET_ADDRESS && resultCode == RESULT_OK) {
 	        	  String address ="";
@@ -483,8 +492,10 @@ public class OfficialHomeActivity extends Activity implements OnClickListener {
 	                	lat = mCurentInfo.location.latitude;
 						lont = mCurentInfo.location.longitude;
 	                	tvaddress.setText(mCurentInfo.address);
+	                	tvaddress.setTextColor(getApplication().getResources().getColor(R.color.black));
 	                }else{
-	                	tvaddress.setText("上车地");
+	                	tvaddress.setTextColor(getApplication().getResources().getColor(R.color.text_color));
+	                	tvaddress.setText("出发地");
 	                } 
 	            }  
 	        }  

@@ -92,6 +92,9 @@ public class ItineraryActivity extends Activity implements OnClickListener {
 					long arg3) {
 				String status = (String)listItem.get(arg2).get("OrderStatus");
 				if(!status.equals("服务中")){
+					if(!status.equals("取消")){
+						
+					
 				Intent intent = new Intent();
 				intent.setClass(getApplication(), ItineraryDetailActivity.class);
 				intent.putExtra("OrderStatus", status);
@@ -121,7 +124,9 @@ public class ItineraryActivity extends Activity implements OnClickListener {
 				intent.putExtra("timeMoney", (String)listItem.get(arg2).get("timeMoney"));
 				intent.putExtra("assessType", (String)listItem.get(arg2).get("assessType"));
 				intent.putExtra("asssScore", (String)listItem.get(arg2).get("asssScore"));
+				intent.putExtra("gender", (String)listItem.get(arg2).get("gender"));
 				startActivityForResult(intent,CANCELTO);
+					}
 			}else{
 				Intent intent = new Intent();
 				intent.setClass(getApplication(), ServiceMapActivity.class);
@@ -200,7 +205,7 @@ public class ItineraryActivity extends Activity implements OnClickListener {
 					map.put("SerTypeId", "城际约租");
 				}
 				map.put("CarTypeId", jsonobj2.getString("carTypeId"));
-				//map.put("FlightNum", jsonobj2.getString("flightNum"));
+				map.put("gender", jsonobj2.getString("gender"));
 				//map.put("Airport", jsonobj2.getString("airport"));
 				map.put("EndAddress", jsonobj2.getString("endAddress"));
 				map.put("UseCarTime", jsonobj2.getString("useCarTime"));

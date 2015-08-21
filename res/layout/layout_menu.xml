@@ -50,7 +50,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/officeaccount"
-  
+        android:background="@drawable/slide_background_selector"
         >
     <TextView
         android:id="@+id/tvToday"
@@ -102,6 +102,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="gone"
+        android:background="@drawable/slide_background_selector"
         >
     <TextView
         android:id="@+id/tvCard"
@@ -153,6 +154,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/discount"
         android:visibility="gone"
+        android:background="@drawable/slide_background_selector"
         >
     <TextView
         android:layout_width="match_parent"
@@ -189,6 +191,7 @@
         android:id="@+id/Itinerary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/slide_background_selector"
         >
     <TextView
         android:layout_width="match_parent"
@@ -225,6 +228,7 @@
         android:id="@+id/Receipt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/slide_background_selector"
         >
     <TextView
        
@@ -262,6 +266,7 @@
         android:id="@+id/Message"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/slide_background_selector"
         >
     <TextView
        
@@ -299,6 +304,7 @@
         android:id="@+id/AddressManage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/slide_background_selector"
         >
     <TextView
          
@@ -339,6 +345,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="gone"
+        android:background="@drawable/slide_background_selector"
         >
 	 <TextView
         android:id="@+id/tvInvite"
@@ -377,6 +384,7 @@
         android:id="@+id/tvShare"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/slide_background_selector"
         >
      <TextView
         android:layout_width="match_parent"
@@ -413,6 +421,7 @@
             android:id="@+id/tvMore"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/slide_background_selector"
         >
      <TextView
      

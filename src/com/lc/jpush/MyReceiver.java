@@ -3,12 +3,19 @@ package com.lc.jpush;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import com.lc.innercity.SendDealActivity;
+import com.lc.specialcar.ChooseUserActivity;
 import com.lc.user.ItineraryDetailActivity;
 import com.lc.utils.Global;
+import com.lc.utils.MyApplication;
+import com.lc.utils.MySharePreference;
 
+import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,7 +30,7 @@ import cn.jpush.android.api.JPushInterface;
  */
 public class MyReceiver extends BroadcastReceiver {
 	private static final String TAG = "JPush";
-
+	private  Context mcontext;
 	@Override
 	public void onReceive(Context context, Intent intent) {
         Bundle bundle = intent.getExtras();
@@ -140,6 +147,7 @@ public class MyReceiver extends BroadcastReceiver {
 	}
 	//send msg to MainActivity
 	private void processCustomMessage(Context context, Bundle bundle) {
+		     mcontext = context;
 		    //String message = bundle.getString(JPushInterface.EXTRA_MESSAGE);
 		    //String extras = bundle.getString(JPushInterface.EXTRA_EXTRA);
 			String message = bundle.getString(JPushInterface.EXTRA_MESSAGE);
@@ -206,6 +214,27 @@ public class MyReceiver extends BroadcastReceiver {
 				    	 Intent msgIntent = new Intent(SendDealActivity.MESSAGE_RECEIVED_ACTION);
 						 msgIntent.putExtra(SendDealActivity.KEY_MESSAGE, message);
 						 context.sendBroadcast(msgIntent);
+				    }else if(jsonobj2.getString("type").equals("4")){
+				    	/*
+				    	 new AlertDialog.Builder(mcontext)
+				    	 .setTitle("警告") 
+				    	 .setMessage("该账号在别的设备登录，您已下线！")
+				    	 .setPositiveButton("确定", new OnClickListener(){
+							@Override
+							public void onClick(DialogInterface arg0, int arg1) {
+								MySharePreference.clearPersonal(mcontext);
+								Intent intent = new Intent(mcontext, ChooseUserActivity.class);
+		    					intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP );
+		    					mcontext.startActivity(intent);
+							}
+				    	 })
+				    	 .show();
+                         */
+				    	MySharePreference.clearPersonal(mcontext);
+						Intent intent = new Intent(mcontext, ChooseUserActivity.class);
+    					intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP );
+    					intent.putExtra("getoff", "getoff");
+    					mcontext.startActivity(intent);
 				    }
 				}
 			} catch (JSONException e) {

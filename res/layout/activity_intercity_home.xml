@@ -17,7 +17,7 @@
 	    android:paddingTop="10dip"
 	    android:paddingBottom="10dip"
 	    android:id="@+id/moresafty"
-	    android:background="@color/white"
+	    android:background="@drawable/common_background_selector"
 	    >
 	    <ImageView
 	      android:id="@+id/moresaftyim"
@@ -68,7 +68,7 @@
 	    android:paddingTop="10dip"
 	    android:paddingBottom="10dip"
 	    android:id="@+id/morenotify"
-	    android:background="@color/white"
+	    android:background="@drawable/common_background_selector"
 	    >
 	    <ImageView
 	      android:id="@+id/morenotifyim"
@@ -131,7 +131,7 @@
 	    android:paddingTop="10dip"
 	    android:paddingBottom="10dip"
 	    android:id="@+id/usecardate"
-	    android:background="@color/white"
+	    android:background="@drawable/common_background_selector"
 	    >
 	    <ImageView
 	      android:id="@+id/date"

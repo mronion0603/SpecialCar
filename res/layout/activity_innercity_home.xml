@@ -14,7 +14,7 @@
 	    android:paddingTop="10dip"
 	    android:paddingBottom="10dip"
 	    android:id="@+id/usecardate"
-	    android:background="@color/white"
+	    android:background="@drawable/common_background_selector"
 	    android:alpha="0.7"
 	    >
 	    <ImageView
@@ -32,7 +32,7 @@
 	      android:layout_marginLeft="20dip"
 	      android:textSize="18sp"
 	      android:textColor="@color/black"
-	      android:background="@color/white"
+	      android:background="@drawable/common_background_selector"
 	      android:layout_centerVertical="true"
 	      android:text="地址获取中..."
 	    

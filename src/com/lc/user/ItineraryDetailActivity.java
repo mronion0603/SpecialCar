@@ -39,6 +39,7 @@ public class ItineraryDetailActivity extends Activity implements OnClickListener
     CircularImage imdriver;
     private RelativeLayout rls;
     private LinearLayout llextend;
+    String strgender="0";
     String orderStatus="", orderNum="", startTime="", startAddress="",
     	   serTypeId="", carTypeId="", airport="",
     	   endAddress="", useCarTime="", carSum="",riderName="",
@@ -105,6 +106,7 @@ public class ItineraryDetailActivity extends Activity implements OnClickListener
 	    	timeMoney= extras.getString("timeMoney");
 	    	stopCarMoney= extras.getString("stopCarMoney");
 	    	asssScore= extras.getString("asssScore");
+	    	strgender= extras.getString("gender");
 	    	}
 	    }
 		ExitApplication.getInstance().addActivity(this);
@@ -173,9 +175,17 @@ public class ItineraryDetailActivity extends Activity implements OnClickListener
         tvstopcar.setText(stopCarMoney+"元");
         tvrealmoney.setText(realMoney+"元");
         
+        if(strgender.equals("1")){
+        	imdriver.setBackgroundResource(R.drawable.women);
+		}else{
+			imdriver.setBackgroundResource(R.drawable.men);
+		}
+        /*
         BitmapUtils bitmapUtils = new BitmapUtils(ItineraryDetailActivity.this);
     	bitmapUtils.display(imdriver, ConnectUrl.commonurl0+driverImg);
-    	rb.setRating(Float.parseFloat(asssScore));
+    	*/
+        rb.setRating(Float.parseFloat(asssScore));
+    	
 	    }}
 	}
 	@SuppressLint("HandlerLeak")
@@ -292,9 +302,17 @@ public class ItineraryDetailActivity extends Activity implements OnClickListener
 			        tvstopcar.setText(stopCarMoney+"元");
 			        tvrealmoney.setText(realMoney+"元");
 			        
+			        if(jsonobj2.getString("gender").equals("0")){
+			        	imdriver.setBackgroundResource(R.drawable.men);
+					}else{
+						imdriver.setBackgroundResource(R.drawable.women);
+					}
+			        /*
 			        BitmapUtils bitmapUtils = new BitmapUtils(ItineraryDetailActivity.this);
 			    	bitmapUtils.display(imdriver, ConnectUrl.commonurl0+driverImg);
-			    	rb.setRating(Float.parseFloat(asssScore));
+			    	*/
+			        rb.setRating(Float.parseFloat(asssScore));
+			    	
 		} else {
 			Toast.makeText(getApplication(),jsonobj.getString("Message") , Toast.LENGTH_SHORT).show();
 		}

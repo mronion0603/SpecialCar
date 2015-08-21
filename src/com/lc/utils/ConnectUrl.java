@@ -43,5 +43,5 @@ public class ConnectUrl {
  public static String getitinerartdetail = commonurl+"selUserOrderInfo";
  public static String addmoney = commonurl+"rechCard";
  public static String agreement = basic+"app/info.html";
-
+ public static String exit = commonurl+"exit";
 }

@@ -133,7 +133,7 @@ public class LeftFragment extends Fragment implements OnClickListener{
 			//System.out.println(MySharePreference.getStringValue(getActivity(), MySharePreference.GENDER));
 		}else{
 			if(gender.equals("女")){
-			profile.setImageResource(R.drawable.women);
+			    profile.setImageResource(R.drawable.women);
 			}else{
 				profile.setImageResource(R.drawable.men);
 			}
@@ -278,7 +278,7 @@ public class LeftFragment extends Fragment implements OnClickListener{
 		}	break;
 		case R.id.tvShare: // 分享
 		{	
-			AndroidShare as = new AndroidShare(view.getContext(),"湖北公务用车APP","");
+			AndroidShare as = new AndroidShare(view.getContext(),view.getContext().getResources().getString(R.string.sharecontent),"");
 			as.show();
 		}	break;
 		case R.id.tvMore: // 分享

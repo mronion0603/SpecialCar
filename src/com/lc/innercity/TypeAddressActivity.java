@@ -15,6 +15,7 @@ import com.baidu.mapapi.search.geocode.ReverseGeoCodeOption;
 import com.baidu.mapapi.search.geocode.ReverseGeoCodeResult;
 import com.lc.specialcar.R;
 import com.lc.utils.ExitApplication;
+import com.lc.utils.MySharePreference;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -66,6 +67,13 @@ public class TypeAddressActivity extends Activity implements OnClickListener {
 	}
 
 	public void init(){
+		String getCity;
+		getCity = MySharePreference.getStringValue(getApplication(), MySharePreference.CITY);
+        if(getCity==null||getCity.length()<=0){
+	    	
+	    }else{
+	    	citystr = getCity;
+	    }
 		ExitApplication.getInstance().addActivity(this);
 		etaddress = (EditText) findViewById(R.id.etAddress);
 		etaddress.addTextChangedListener(new TextWatcher(){

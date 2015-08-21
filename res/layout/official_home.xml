@@ -18,7 +18,7 @@
 	    android:paddingTop="10dip"
 	    android:paddingBottom="10dip"
 	    android:id="@+id/usecardate"
-	    android:background="@color/white"
+	    android:background="@drawable/common_background_selector"
 	    >
 	    <ImageView
 	      android:id="@+id/date"
@@ -72,7 +72,7 @@
 	    android:paddingTop="10dip"
 	    android:paddingBottom="10dip"
 	    android:id="@+id/Duration"
-	    android:background="@color/white"
+	    android:background="@drawable/common_background_selector"
 	    >
 	    <ImageView
 	      android:id="@+id/date2"
@@ -135,7 +135,7 @@
 	    android:paddingTop="10dip"
 	    android:paddingBottom="10dip"
 	    android:id="@+id/startaddress"
-	    android:background="@color/white"
+	    android:background="@drawable/common_background_selector"
 	    >
 	    <ImageView
 	      android:id="@+id/date2"
@@ -152,7 +152,7 @@
 	      android:layout_height="wrap_content"
 	      android:layout_marginLeft="20dip"
 	      android:textSize="18sp"
-	      android:textColor="@color/black"
+	      android:textColor="@color/text_color"
 	      android:layout_centerVertical="true"
 	      android:text="出发地"
 	    />
@@ -183,7 +183,7 @@
 	    android:paddingTop="10dip"
 	    android:paddingBottom="10dip"
 	    android:id="@+id/rlmodifyname"
-	    android:background="@color/white"
+	    android:background="@drawable/common_background_selector"
 	    >
 	    <ImageView
 	      android:id="@+id/moresaftyim"
@@ -246,7 +246,7 @@
 	    android:paddingTop="10dip"
 	    android:paddingBottom="10dip"
 	    android:id="@+id/usecar"
-	    android:background="@color/white"
+	    android:background="@drawable/common_background_selector"
 	     android:visibility="gone"
 	    >
 	    <ImageView

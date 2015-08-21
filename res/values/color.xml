@@ -4,6 +4,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="black">#333333</color>
     <color name="user_bg">#C5C5C5</color>
+    <color name="user_bg2">#D5D5D5</color>
     <color name="user_divider1">#989898</color>
     <color name="user_divider2">#e2e2e2</color>
     <color name="text_color">#808080</color>

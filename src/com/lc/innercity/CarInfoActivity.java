@@ -98,6 +98,7 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 	//NotifyDriverInnerNet notifyDriverInnerNet = new NotifyDriverInnerNet();
 	String driveridStr="";
 	String vMoneystr="0";	String voucherNumstr="";
+	boolean mSwitch = false;
     @Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
@@ -367,9 +368,11 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 	    groups1.clear();
 	   // System.out.println(str);
    	    JSONObject jsonobj = new JSONObject(str); 
-        JSONArray jsonarray = jsonobj.getJSONArray("Data");
-        for(int x=0;x<jsonarray.length();x++){
-       	 JSONObject jsonobj2 = (JSONObject)jsonarray.get(x); 
+   	    if(jsonobj.has("Data")){
+	      mSwitch = true;
+          JSONArray jsonarray = jsonobj.getJSONArray("Data");
+          for(int x=0;x<jsonarray.length();x++){
+       	  JSONObject jsonobj2 = (JSONObject)jsonarray.get(x); 
         	 HashMap<String , Object> map = new HashMap<String , Object>();
 			 map.put("groupItem",jsonobj2.getString("commAddressId"));
 			 map.put("userId",jsonobj2.getString("userId"));
@@ -378,7 +381,8 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 			 map.put("latidute",jsonobj2.getString("latitude"));
 			// System.out.println(map.toString());
 			 groups1.add(map);
-        }
+          }
+   	    }
    }
 	@Override
 	public void onClick(View v) {
@@ -405,6 +409,9 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 		case R.id.star3:
 		{	menuWindow = new AddressPopupWindow(CarInfoActivity.this,itemOnClick2,groups1);
 			menuWindow.showAsDropDown(originview, 0, 0); //显示窗口
+			if(groups1.size()<=0 && mSwitch){
+				Toast.makeText(CarInfoActivity.this,"暂无收藏地址,请到地址管理页面添加", Toast.LENGTH_LONG).show();
+			}
 		}	break;
 		case R.id.Search:
 			

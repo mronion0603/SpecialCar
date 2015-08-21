@@ -1,8 +1,11 @@
 package com.lc.user;
 
 import java.io.File;
+
 import org.json.JSONObject;
+
 import com.lc.net.Download;
+import com.lc.net.ExitNet;
 import com.lc.net.UpdateNet;
 import com.lc.specialcar.ChooseUserActivity;
 import com.lc.specialcar.R;
@@ -10,6 +13,7 @@ import com.lc.utils.ButtonEffect;
 import com.lc.utils.ExitApplication;
 import com.lc.utils.Global;
 import com.lc.utils.MySharePreference;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -28,6 +32,7 @@ import android.view.Window;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,6 +47,8 @@ public class MoreActivity extends Activity implements OnClickListener {
     String geturl="";
    	private final int GET_UNDATAINFO_ERROR = 2;
    	private final int DOWN_ERROR = 4;
+   	ExitNet exitnet = new ExitNet();
+   	private ProgressBar pro; 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
@@ -52,6 +59,9 @@ public class MoreActivity extends Activity implements OnClickListener {
 	}
 
 	public void init(){
+		pro = (ProgressBar)findViewById(R.id.progress2); 
+		pro.setProgress(0);  
+		pro.setIndeterminate(true);
 		ExitApplication.getInstance().addActivity(this);
 		tvTitle = (TextView) findViewById(R.id.topTv);
 		tvTitle.setText("更多");
@@ -78,36 +88,42 @@ public class MoreActivity extends Activity implements OnClickListener {
 		case R.id.rlslidemenu:
 			finish();
 			break;
-		case R.id.morenotify:
-		{	
+		case R.id.morenotify: {
 			Intent intent = new Intent();
 			intent.setClass(getApplication(), AgreementActivity.class);
 			startActivity(intent);
-		}	break;
-		case R.id.usecardate:
-		{	Intent intent = new Intent();
-		    intent.setClass(getApplication(), AboutActivity.class);
-		    startActivity(intent);
-		}	break;
-		case R.id.usecardate2:
-		{	Intent intent = new Intent();
-	        intent.setClass(getApplication(), FeedBackActivity.class);
-	        startActivity(intent);
-		}	break;
-		case R.id.usecardate4:
-		{	
+		}
+			break;
+		case R.id.usecardate: {
+			Intent intent = new Intent();
+			intent.setClass(getApplication(), AboutActivity.class);
+			startActivity(intent);
+		}
+			break;
+		case R.id.usecardate2: {
+			Intent intent = new Intent();
+			intent.setClass(getApplication(), FeedBackActivity.class);
+			startActivity(intent);
+		}
+			break;
+		case R.id.usecardate4: {
 			updateNet.setHandler(mHandler);
 			updateNet.setDevice(Global.DEVICE);
 			updateNet.setVersion(getVersion());
-			updateNet.setAuthn(MySharePreference.getStringValue(getApplication(), MySharePreference.AUTHN));
+			updateNet.setAuthn(MySharePreference.getStringValue(
+					getApplication(), MySharePreference.AUTHN));
 			updateNet.getDataFromServer();
-		}	break;
-		case R.id.Search:
-			MySharePreference.clearPersonal(getApplication());
-			finish();
-			Intent intent = new Intent();
-			intent.setClass(getApplicationContext(), ChooseUserActivity.class);
-			startActivity(intent);
+		}
+			break;
+		case R.id.Search: {
+			ivSearch.setClickable(false);
+			pro.setVisibility(View.VISIBLE);
+			exitnet.setHandler(mHandler);
+			exitnet.setDevice(Global.DEVICE);
+			exitnet.setAuthn(MySharePreference.getStringValue(getApplication(),
+					MySharePreference.AUTHN));
+			exitnet.getCodeFromServer();
+		}
 			break;
 		default:
 			break;
@@ -133,8 +149,32 @@ public class MoreActivity extends Activity implements OnClickListener {
 						//服务器超时   
 			            Toast.makeText(getApplicationContext(), "获取服务器更新信息失败", Toast.LENGTH_SHORT).show(); 
 						break;
+		            case Global.EXIT:{
+		            	try{
+							parseExit((String)msg.obj);
+						} catch (Exception e) {	
+							e.printStackTrace();
+						}      	
+		            break;
+	                }
 	            }
 	    }};
+	    private void parseExit(String str)throws Exception{  
+	    	//System.out.println(str);
+	    	pro.setVisibility(View.GONE);
+	    	ivSearch.setClickable(true);
+	    	JSONObject jsonobj = new JSONObject(str); 
+	    	int result = jsonobj.getInt("ResultCode");
+	   	    if(result==Global.SUCCESS){
+	   	    	MySharePreference.clearPersonal(getApplication());
+				finish();
+				Intent intent = new Intent();
+				intent.setClass(getApplicationContext(), ChooseUserActivity.class);
+				startActivity(intent);	
+	        }else{
+	            Toast.makeText(MoreActivity.this,jsonobj.getString("Message"), Toast.LENGTH_LONG).show();
+	        } 
+	   }
 	    private void parseJSON(String str)throws Exception{  
 	    	System.out.println(str);
 	    	JSONObject jsonobj = new JSONObject(str); 
