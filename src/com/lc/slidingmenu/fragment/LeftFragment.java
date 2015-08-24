@@ -1,6 +1,9 @@
 package com.lc.slidingmenu.fragment;
 
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+
 import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
@@ -42,6 +45,7 @@ import com.lc.utils.MySharePreference;
  */
 public class LeftFragment extends Fragment implements OnClickListener{
 	public static final int REQUSET = 1;
+	public static final int PAY = 2;
 	private View userinfo;
 	private View balanceView;
 	private View lastListView;
@@ -68,6 +72,12 @@ public class LeftFragment extends Fragment implements OnClickListener{
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
+	}
+	
+	@Override
+	public void onResume() {
+		super.onResume();
+		System.out.println("onResume");
 	}
 	
 	@Override
@@ -172,7 +182,12 @@ public class LeftFragment extends Fragment implements OnClickListener{
    	    	JSONObject jsonobj2 = jsonobj.getJSONObject("Data");
    	        //String username = MySharePreference.getStringValue(getActivity(), MySharePreference.USERNAME);  
    	    	strbalance = jsonobj2.getString("balance");
-   	    	tvbalance.setText("￥"+jsonobj2.getString("balance"));
+   	    	MySharePreference.editStringValue(getActivity(), MySharePreference.BALANCE, strbalance);
+   	    	double balance = Double.parseDouble(strbalance);
+   	    	BigDecimal bd = new BigDecimal(balance);
+   	    	bd = bd.setScale(2,BigDecimal.ROUND_HALF_UP);  
+   	    	//DecimalFormat df = new DecimalFormat("###.00");  
+   	    	tvbalance.setText("￥"+bd);
         }else{
           
         } 
@@ -230,7 +245,7 @@ public class LeftFragment extends Fragment implements OnClickListener{
 			Intent intent = new Intent();
 			intent.setClass(this.getActivity().getApplicationContext(), BalanceActivity.class);
 			intent.putExtra("account", strbalance);
-			startActivity(intent);
+			startActivityForResult(intent, PAY);  
 		}break;
 		case R.id.tvLastlist:// 公务卡/信用卡
 			if(card.getText().toString().equals("公务卡")){
@@ -312,7 +327,7 @@ public class LeftFragment extends Fragment implements OnClickListener{
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {  
         super.onActivityResult(requestCode, resultCode, data);  
-        if (requestCode == InterCityHomeActivity.REQUSET && resultCode == Activity.RESULT_OK) {
+        if (requestCode == REQUSET && resultCode == Activity.RESULT_OK) {
         	  String name ="";
         	  //String gender = "";
         	  Bundle extras = data.getExtras();
@@ -326,6 +341,11 @@ public class LeftFragment extends Fragment implements OnClickListener{
 	          	  }
               }
         }  
-       
+        if (requestCode == PAY && resultCode == Activity.RESULT_OK) {
+        	getBalanceNet.setHandler(mhandler);
+    		getBalanceNet.setDevice(Global.DEVICE);
+    		getBalanceNet.setAuthn(MySharePreference.getStringValue(getActivity(), MySharePreference.AUTHN));
+    		getBalanceNet.getCodeFromServer();
+        }  
     }  	
 }

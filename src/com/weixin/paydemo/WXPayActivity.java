@@ -32,6 +32,7 @@ import android.widget.Toast;
 import com.lc.net.AddOrderNet;
 import com.lc.progressbutton.CircularProgressButton;
 import com.lc.specialcar.R;
+import com.lc.utils.ConnectUrl;
 import com.lc.utils.DeleteWXPayApplication;
 import com.lc.utils.Global;
 import com.lc.utils.MySharePreference;
@@ -326,7 +327,7 @@ public class WXPayActivity extends Activity {
 			packageParams.add(new BasicNameValuePair("body", content));
 			packageParams.add(new BasicNameValuePair("mch_id", Constants.MCH_ID));
 			packageParams.add(new BasicNameValuePair("nonce_str", nonceStr));
-			packageParams.add(new BasicNameValuePair("notify_url", "http://112.74.82.102/specialCar/weChatpay"));
+			packageParams.add(new BasicNameValuePair("notify_url", ConnectUrl.basic+"specialCar/weChatpay"));
 			packageParams.add(new BasicNameValuePair("out_trade_no",getOrderid));
 			packageParams.add(new BasicNameValuePair("spbill_create_ip","127.0.0.1"));
 			packageParams.add(new BasicNameValuePair("total_fee", price));

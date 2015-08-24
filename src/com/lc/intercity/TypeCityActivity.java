@@ -281,13 +281,14 @@ public class TypeCityActivity extends Activity implements OnClickListener {
     
     void addData(String str,String key)throws Exception{
         JSONObject jsonobj = new JSONObject(str); 
+        if(jsonobj.has(key)){
         JSONArray jsonarray = jsonobj.getJSONArray(key);
         for(int x=0;x<jsonarray.length();x++){
         	 HashMap<String , Object> map = new HashMap<String , Object>();
 			 map.put("groupItem",jsonarray.get(x));
 			 listItem.add(map);
         }
-       
+        }
     }
     
     /**

@@ -36,6 +36,7 @@ import com.lc.net.GetDriverNet;
 import com.lc.popupwindow.AddressPopupWindow;
 import com.lc.specialcar.R;
 import com.lc.utils.ButtonEffect;
+import com.lc.utils.DeleteDealApplication;
 import com.lc.utils.ExitApplication;
 import com.lc.utils.Global;
 import com.lc.utils.MySharePreference;
@@ -111,7 +112,8 @@ public class InnerCityHomeActivity extends Activity implements OnClickListener {
 
 	public void init(){
 		LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);  
-		originview = layoutInflater.inflate(R.layout.activity_innercity_home, null);  
+		originview = layoutInflater.inflate(R.layout.activity_innercity_home, null); 
+		DeleteDealApplication.getInstance().addActivity(this);
 		ExitApplication.getInstance().addActivity(this);
 		ivSearch = (Button) findViewById(R.id.Search);
 		ivSearch.setOnClickListener(this);
@@ -139,10 +141,15 @@ public class InnerCityHomeActivity extends Activity implements OnClickListener {
 		String latstr = MySharePreference.getStringValue(getApplication(), MySharePreference.LAT);
 		String lontstr = MySharePreference.getStringValue(getApplication(), MySharePreference.LONT);
 	    double lat = 30.511876;   double lont = 114.405751;
+	    
 	    if(latstr!=null){
 	    	lat = Double.parseDouble(latstr);
 	    	lont = Double.parseDouble(lontstr);
 	    }
+	    
+	    //lat = 114.426207;
+	    //lont = 30.486193;
+
 		LatLng cenpt = new LatLng(lat,lont); 
 	    //定义地图状态
 	    MapStatus mMapStatus = new MapStatus.Builder()
@@ -155,6 +162,7 @@ public class InnerCityHomeActivity extends Activity implements OnClickListener {
 	    mBaiduMap.setMapStatus(mMapStatusUpdate);
 	        
 		// 定位初始化
+	    
 		mLocClient = new LocationClient(this);
 		mLocClient.registerLocationListener(myListener);
 		LocationClientOption option = new LocationClientOption();
@@ -191,8 +199,8 @@ public class InnerCityHomeActivity extends Activity implements OnClickListener {
        mGeoCoder.reverseGeoCode((new ReverseGeoCodeOption())  
                .location(centerLL));  
           getDriverNet.setHandler(mHandler);
-			getDriverNet.setLongitude(String.valueOf(centerLL.longitude));
-			getDriverNet.setLatitude(String.valueOf(centerLL.latitude));
+			getDriverNet.setLongitude(String.valueOf(lont));
+			getDriverNet.setLatitude(String.valueOf(lat));
 			getDriverNet.setDevice(Global.DEVICE);
 			getDriverNet.setAuthn(MySharePreference.getStringValue(
 					getApplication(), MySharePreference.AUTHN));
@@ -480,6 +488,7 @@ public class InnerCityHomeActivity extends Activity implements OnClickListener {
 				if (isFirstLoc) {
 					
 					//System.out.println(String.valueOf(location.getLatitude())+","+String.valueOf(location.getLongitude()));
+					
 					getDriverNet.setHandler(mHandler);
 					getDriverNet.setLongitude(String.valueOf(location.getLongitude()));
 					getDriverNet.setLatitude(String.valueOf(location.getLatitude()));
@@ -487,6 +496,7 @@ public class InnerCityHomeActivity extends Activity implements OnClickListener {
 					getDriverNet.setAuthn(MySharePreference.getStringValue(
 							getApplication(), MySharePreference.AUTHN));
 					getDriverNet.getDataFromServer();
+					
 					isFirstLoc = false;
 					
 					LatLng ll = new LatLng(location.getLatitude(),
@@ -560,7 +570,7 @@ public class InnerCityHomeActivity extends Activity implements OnClickListener {
     			for (int x = 0; x < jsonarray.length(); x++) {
     				JSONObject jsonobj2 = (JSONObject) jsonarray.get(x);
     				HashMap<String, String> map = new HashMap<String, String>();
-    				map.put("carType", jsonobj2.getString("carType"));
+    				//map.put("carType", jsonobj2.getString("carType"));
     				map.put("driverName", jsonobj2.getString("driverName"));
     				map.put("phoneNum", jsonobj2.getString("phoneNum"));
     				map.put("longitude", jsonobj2.getString("longitude"));

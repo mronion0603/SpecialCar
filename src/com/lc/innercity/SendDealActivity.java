@@ -13,6 +13,7 @@ import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.model.LatLng;
 import com.lc.net.CancelInnerNet;
 import com.lc.popupwindow.ContactWindow;
+import com.lc.specialcar.ChooseUserActivity;
 import com.lc.specialcar.R;
 import com.lc.utils.CircularImage;
 import com.lc.utils.ConnectUrl;
@@ -24,8 +25,11 @@ import com.lc.utils.MySharePreference;
 import com.lidroid.xutils.BitmapUtils;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.drawable.AnimationDrawable;
@@ -39,6 +43,7 @@ import android.view.Window;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class SendDealActivity extends Activity implements OnClickListener {
 	public final static int CANCEL=1;
@@ -111,10 +116,11 @@ public class SendDealActivity extends Activity implements OnClickListener {
 		//ButtonEffect.setButtonStateChangeListener(ivSearch);
 		rls = (RelativeLayout) findViewById(R.id.rlslidemenu);
 		rls.setOnClickListener(this);
+		rls.setClickable(false);
 		rlwait = (RelativeLayout) findViewById(R.id.rlwait);
 		rldriver = (RelativeLayout) findViewById(R.id.usecar);
 		ivleft = (ImageView) findViewById(R.id.ArrowHead);
-		ivleft.setVisibility(View.VISIBLE);
+		//ivleft.setVisibility(View.VISIBLE);
 		sendbg = (ImageView) findViewById(R.id.sendbg);
 		sendbg.setImageResource(R.anim.breath);
 		animationDrawable = (AnimationDrawable) sendbg.getDrawable();
@@ -182,6 +188,8 @@ public class SendDealActivity extends Activity implements OnClickListener {
                     ivline.setVisibility(View.VISIBLE);
             	}else if(gettype==3){
             		tvmessage.setText("您已上车，祝您旅途愉快!");
+            		ivleft.setVisibility(View.VISIBLE);
+            		rls.setClickable(true);
             	}
   				
   			  } catch (Exception e) {
@@ -379,4 +387,22 @@ public class SendDealActivity extends Activity implements OnClickListener {
 	            	 finish();
 	        }  
 	 }
+	    
+	    @Override  
+	    public void onBackPressed() {  
+	    	new AlertDialog.Builder(SendDealActivity.this)
+	    	 .setTitle("提示") 
+	    	 .setMessage("取消订单？")
+	    	 .setPositiveButton("是",new DialogInterface.OnClickListener(){
+				@Override
+				public void onClick(DialogInterface arg0, int arg1) {
+					Intent intent = new Intent();
+					intent.setClass(SendDealActivity.this,CancelOrderActivity.class);
+					intent.putExtra("OrderNum", getOrderNum);
+					startActivityForResult(intent,CANCEL);
+				}
+	    	 })
+	    	 .setNegativeButton("否", null)
+	    	 .show();
+	    }  
 }

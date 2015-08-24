@@ -189,6 +189,12 @@ public class SendActivity extends Activity implements OnClickListener {
 			}else if(strbill==null|strbill.length()<=0){
 				Toast.makeText(getApplication(), "请选择车型", Toast.LENGTH_SHORT).show();
 			}else{
+				String strbalance = MySharePreference.getStringValue(getApplication(),MySharePreference.BALANCE );
+			    double doubalance = Double.parseDouble(strbalance);
+			    double est = estimate(basicmoney,pricedis,pricedura);
+				if(doubalance-est<0){
+					Toast.makeText(getApplication(), "对不起您余额不足，请充值！", Toast.LENGTH_SHORT).show();
+				}else{
 			ivSearch.setClickable(false);
 			ivSearch.setProgress(50);
 			addShuttleNet.setHandler(mHandler);
@@ -220,7 +226,7 @@ public class SendActivity extends Activity implements OnClickListener {
             addShuttleNet.setServiceTypeId("2");
             addShuttleNet.getDataFromServer();
 			}
-			
+			}
 		}	break;
 		case R.id.usecar:
 			Intent intent3 = new Intent();

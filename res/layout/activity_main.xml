@@ -48,23 +48,23 @@
      >
       <ImageView
          android:id="@+id/plane"
-         android:layout_width="150dip"
-         android:layout_height="150dip"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
          android:background="@drawable/home_plane_selector"
          android:layout_margin="5dip"
       />
       <ImageView
          android:id="@+id/city"
-         android:layout_width="150dip"
-         android:layout_height="150dip"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
          android:background="@drawable/home_city_selector"
          android:layout_toRightOf="@+id/plane"
          android:layout_margin="5dip"
       />
        <ImageView
          android:id="@+id/office"
-         android:layout_width="150dip"
-         android:layout_height="150dip"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
          android:background="@drawable/home_office_selector"
          android:layout_below="@+id/plane"
          android:layout_marginLeft="5dip"
@@ -73,8 +73,8 @@
       />
         <ImageView
          android:id="@+id/urgency"
-         android:layout_width="150dip"
-         android:layout_height="150dip"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
          android:background="@drawable/home_urgency_selector"
          android:layout_toRightOf="@+id/plane"
          android:layout_below="@+id/plane"
@@ -92,8 +92,8 @@
 	     >
           <ImageView
 	         android:id="@+id/ivshadow"
-	         android:layout_width="150dip"
-	         android:layout_height="150dip"
+	         android:layout_width="wrap_content"
+	         android:layout_height="wrap_content"
 	         android:background="@drawable/home_shadow_left"
 	         android:layout_marginLeft="5dip"
              android:layout_marginRight="5dip"
@@ -101,8 +101,8 @@
 	      />
 	      <ImageView
 	         android:id="@+id/ivshadow2"
-	         android:layout_width="150dip"
-	         android:layout_height="150dip"
+	         android:layout_width="wrap_content"
+	         android:layout_height="wrap_content"
 	         android:background="@drawable/home_shadow_right"
 	         android:layout_toRightOf="@+id/ivshadow"
 	         android:layout_marginLeft="5dip"
@@ -111,8 +111,8 @@
         </RelativeLayout>
        <ImageView
          android:id="@+id/intercity"
-         android:layout_width="170dip"
-         android:layout_height="170dip"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
          android:layout_centerInParent="true"
          android:background="@drawable/home_intercity_selector"
       />

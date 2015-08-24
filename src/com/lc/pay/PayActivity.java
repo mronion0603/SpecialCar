@@ -28,6 +28,7 @@ import com.alipay.sdk.app.PayTask;
 import com.lc.net.AddOrderNet;
 import com.lc.progressbutton.CircularProgressButton;
 import com.lc.specialcar.R;
+import com.lc.utils.ConnectUrl;
 import com.lc.utils.ExitApplication;
 import com.lc.utils.Global;
 import com.lc.utils.MySharePreference;
@@ -74,11 +75,13 @@ public class PayActivity extends FragmentActivity {
 
 				// 判断resultStatus 为“9000”则代表支付成功，具体状态码代表含义可参考接口文档
 				if (TextUtils.equals(resultStatus, "9000")) {
-					//Intent intent = new Intent();
+					
 					//intent.setClass(PayActivity.this, PayOrdActivity.class);
 					//startActivity(intent);
 					Toast.makeText(PayActivity.this, "支付成功",
 							Toast.LENGTH_SHORT).show();
+					Intent intent = new Intent();
+					setResult(RESULT_OK, intent); 
 					finish();
 				} else {
 					// 判断resultStatus 为非“9000”则代表可能支付失败
@@ -290,7 +293,7 @@ public class PayActivity extends FragmentActivity {
 		orderInfo += "&total_fee=" + "\"" + price + "\"";
 
 		// 服务器异步通知页面路径
-		orderInfo += "&notify_url=" + "\"" + "http://120.24.172.238:8080/specialCar/alipay"
+		orderInfo += "&notify_url=" + "\"" + ConnectUrl.basic+"specialCar/alipay"
 				+ "\"";
 
 		// 接口名称， 固定值

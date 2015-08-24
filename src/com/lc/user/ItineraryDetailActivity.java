@@ -365,7 +365,7 @@ public class ItineraryDetailActivity extends Activity implements OnClickListener
 	        if (requestCode == COMMENT && resultCode == RESULT_OK) { 
        	         Intent intent = new Intent();
     	         setResult(RESULT_OK, intent); 
-           	     finish();
+    	         DeleteDealApplication.getInstance().addActivity(this);
        }  
 	 }
 }

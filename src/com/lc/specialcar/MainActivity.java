@@ -32,10 +32,12 @@ import com.lc.utils.MySharePreference;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.NotificationCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.annotation.SuppressLint;
+import android.app.NotificationManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -80,6 +82,10 @@ public class MainActivity extends SlidingFragmentActivity implements OnClickList
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
+		//NotificationManager mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);  
+		//NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this);  
+		//mBuilder.
+		
 		initSlidingMenu(savedInstanceState);
         init();
 		initViewPager();
@@ -234,10 +240,10 @@ public class MainActivity extends SlidingFragmentActivity implements OnClickList
 		case R.id.rlslidemenu:
 			toggle();
 			break;
-		case R.id.rlitinerary:
-			{Intent intent = new Intent();
-			 intent.setClass(MainActivity.this, ItineraryActivity.class);
-			 startActivity(intent);
+		case R.id.rlitinerary:{
+			Intent intent = new Intent();
+			intent.setClass(MainActivity.this, ItineraryActivity.class);
+			startActivity(intent);
 			}	break;
 		case R.id.intercity:
 			Intent intent = new Intent();

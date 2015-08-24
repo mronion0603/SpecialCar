@@ -1,9 +1,11 @@
 package com.lc.user;
 
+import com.lc.specialcar.ChooseUserActivity;
 import com.lc.specialcar.R;
 import com.lc.utils.ExitApplication;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -15,6 +17,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class BalanceActivity extends Activity implements OnClickListener {
+	public final static int PAY=1;
 	 TextView tvTitle,righttext,tvaccount;
 	 ImageView ivleft;
 	 
@@ -34,6 +37,12 @@ public class BalanceActivity extends Activity implements OnClickListener {
 		Bundle extras = getIntent().getExtras();
 	    if(extras != null){
 	    	getBalance = extras.getString("account");
+		    if(extras.containsKey("back")){
+		    	System.out.println("***BalanceActivity");
+		    	Intent intent = new Intent();
+				setResult(RESULT_OK, intent); 
+	            finish();   
+		    } 
 	    }
 		ExitApplication.getInstance().addActivity(this);
 		tvaccount = (TextView) findViewById(R.id.account);
@@ -66,10 +75,21 @@ public class BalanceActivity extends Activity implements OnClickListener {
 		case R.id.Search:
 			Intent intent2 = new Intent();
 			intent2.setClass(getApplication(), ChargeActivity.class);
-			startActivity(intent2);
+			startActivityForResult(intent2,PAY);
 			break;
 		default:
 			break;
 		}
 	}
+	
+	@Override  
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {  
+        super.onActivityResult(requestCode, resultCode, data);  
+        if (requestCode == PAY && resultCode == RESULT_OK) {        	 
+            System.out.println("*****");
+        	Intent intent = new Intent();
+			setResult(RESULT_OK, intent); 
+            finish();
+        }  
+    }
 }

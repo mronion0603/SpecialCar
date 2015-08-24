@@ -190,38 +190,44 @@ public class GetActivity extends Activity implements OnClickListener {
 			}else if(strbill==null|strbill.length()<=0){
 				Toast.makeText(getApplication(), "请选择车型", Toast.LENGTH_SHORT).show();
 			}else{
-			ivSearch.setClickable(false);
-			ivSearch.setProgress(50);
-			addShuttleNet.setHandler(mHandler);
-			addShuttleNet.setAuthn(MySharePreference.getStringValue(getApplication(), MySharePreference.AUTHN));
-			addShuttleNet.setDevice(Global.DEVICE);
-			addShuttleNet.setCartype(type);
-			addShuttleNet.setFlightnum(flightstr);
-            if(tvdemand.getText().toString()!=null)
-            	addShuttleNet.setComment(tvdemand.getText().toString());
-            addShuttleNet.seteLatitude(String.valueOf(elat));
-            addShuttleNet.seteLongitude(String.valueOf(elont));
-            addShuttleNet.setEndAddress(tvendaddress.getText().toString());
-            addShuttleNet.setLongFootMoney("");
-            addShuttleNet.setMileage(String.valueOf(distance));
-            addShuttleNet.setRealMoney(String.valueOf(estimate(basicmoney,pricedis,pricedura)));
-            addShuttleNet.setRiderName(tvname.getText().toString());
-            if(tvphone.getText().toString().equals("本人")){
-            	addShuttleNet.setRiderPhone(MySharePreference.getStringValue(getApplication(), MySharePreference.PHONE));
-            }else{
-            	addShuttleNet.setRiderPhone(tvphone.getText().toString());
-            }
-            addShuttleNet.setsLatitude(String.valueOf(slat));
-            addShuttleNet.setsLongitude(String.valueOf(slont));
-            addShuttleNet.setStartAddress(airportstr);
-            addShuttleNet.setStartTime(txdate.getText().toString());
-            //System.out.println("vMoneystr:"+vMoneystr+" voucherNumstr:"+voucherNumstr);
-            addShuttleNet.setVoucherMoney(vMoneystr);
-            addShuttleNet.setVoucherNum(voucherNumstr);
-            addShuttleNet.setServiceTypeId("1");
-            addShuttleNet.getDataFromServer();
+				String strbalance = MySharePreference.getStringValue(getApplication(),MySharePreference.BALANCE );
+			    double doubalance = Double.parseDouble(strbalance);
+			    double est = estimate(basicmoney,pricedis,pricedura);
+				if(doubalance-est<0){
+					Toast.makeText(getApplication(), "对不起您余额不足，请充值！", Toast.LENGTH_SHORT).show();
+				}else{
+				ivSearch.setClickable(false);
+				ivSearch.setProgress(50);
+				addShuttleNet.setHandler(mHandler);
+				addShuttleNet.setAuthn(MySharePreference.getStringValue(getApplication(), MySharePreference.AUTHN));
+				addShuttleNet.setDevice(Global.DEVICE);
+				addShuttleNet.setCartype(type);
+				addShuttleNet.setFlightnum(flightstr);
+	            if(tvdemand.getText().toString()!=null)
+	            	addShuttleNet.setComment(tvdemand.getText().toString());
+	            addShuttleNet.seteLatitude(String.valueOf(elat));
+	            addShuttleNet.seteLongitude(String.valueOf(elont));
+	            addShuttleNet.setEndAddress(tvendaddress.getText().toString());
+	            addShuttleNet.setLongFootMoney("");
+	            addShuttleNet.setMileage(String.valueOf(distance));
+	            addShuttleNet.setRealMoney(String.valueOf(estimate(basicmoney,pricedis,pricedura)));
+	            addShuttleNet.setRiderName(tvname.getText().toString());
+	            if(tvphone.getText().toString().equals("本人")){
+	            	addShuttleNet.setRiderPhone(MySharePreference.getStringValue(getApplication(), MySharePreference.PHONE));
+	            }else{
+	            	addShuttleNet.setRiderPhone(tvphone.getText().toString());
+	            }
+	            addShuttleNet.setsLatitude(String.valueOf(slat));
+	            addShuttleNet.setsLongitude(String.valueOf(slont));
+	            addShuttleNet.setStartAddress(airportstr);
+	            addShuttleNet.setStartTime(txdate.getText().toString());
+	            //System.out.println("vMoneystr:"+vMoneystr+" voucherNumstr:"+voucherNumstr);
+	            addShuttleNet.setVoucherMoney(vMoneystr);
+	            addShuttleNet.setVoucherNum(voucherNumstr);
+	            addShuttleNet.setServiceTypeId("1");
+	            addShuttleNet.getDataFromServer();
+			    }
 			}
-			
 		}	break;
 		case R.id.usecar:
 			Intent intent3 = new Intent();

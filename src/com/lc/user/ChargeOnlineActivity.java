@@ -57,7 +57,7 @@ import android.widget.Toast;
 
 
 public class ChargeOnlineActivity extends Activity implements OnClickListener {
-	
+	public final static int PAY=1;
     TextView feeRule,txdate;
     EditText et;
    // Button ivSearch;
@@ -99,7 +99,7 @@ public class ChargeOnlineActivity extends Activity implements OnClickListener {
 			intent.putExtra("itemprice",money);
 			intent.putExtra("itemcontent","公务专车账号充值");
 			intent.putExtra("serviceid","12");
-			startActivity(intent);
+			startActivityForResult(intent,PAY);
 			}
 		}	break;
 		case R.id.wxpay:
@@ -124,7 +124,19 @@ public class ChargeOnlineActivity extends Activity implements OnClickListener {
 		}
 	}
 	
-	
+	@Override  
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {  
+        super.onActivityResult(requestCode, resultCode, data);  
+        if (requestCode == PAY && resultCode == RESULT_OK) {        	 
+            System.out.println("***ChargeOnlineActivity");
+        	//Intent intent = new Intent();
+        	//intent.setClass(getApplication(), BalanceActivity.class);
+        	//intent.putExtra("back", "back");
+            //startActivity(intent);
+        	this.getParent().setResult(RESULT_OK);  
+        	finish();
+        }  
+ }
 	 
 	 
 	

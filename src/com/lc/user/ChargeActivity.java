@@ -126,6 +126,8 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
 			// TODO Auto-generated method stub
 			switch (v.getId()) {
 			case R.id.rlslidemenu:
+				Intent intent = new Intent();
+	    	    setResult(RESULT_OK, intent); 
 				finish();
 				break;
 			default:
@@ -147,4 +149,5 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
 		    }
 		}
 
+		
 	}

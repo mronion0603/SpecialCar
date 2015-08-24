@@ -152,40 +152,49 @@ public class SelectCarPersonActivity extends Activity implements OnClickListener
 			startActivity(intent);
 			break;
 		case R.id.Search:{
-			btsearch.setClickable(false);
-			btsearch.setProgress(50);
-			addInnerNet.setHandler(mHandler);
-			addInnerNet.setAuthn(MySharePreference.getStringValue(getApplication(), MySharePreference.AUTHN));
-            addInnerNet.setDevice(Global.DEVICE);
-            addInnerNet.setComment(getdemand);
-            addInnerNet.setRiderName(getname);  
-            addInnerNet.setRiderPhone(getphone);
-            addInnerNet.setsLatitude(getlat);
-            addInnerNet.setsLongitude(getlont);
-            addInnerNet.setStartAddress(getaddress);
-            addInnerNet.setStartTime(gettime);
-            addInnerNet.setServiceTypeId("3");
-            String gettype = "1";
+			String gettype = "1";
+            String realmoney = "0";
             if(flag1){
-            addInnerNet.setRealMoney(list.get(0).get("officalMoney"));
-            gettype=list.get(0).get("carTypeId");
+            	realmoney=list.get(0).get("officalMoney");
+                gettype=list.get(0).get("carTypeId");
             }else if(flag2){
-            addInnerNet.setRealMoney(list.get(1).get("officalMoney"));
-            gettype=list.get(1).get("carTypeId");
+            	realmoney=list.get(1).get("officalMoney");
+                gettype=list.get(1).get("carTypeId");
             }else if(flag3){
-            addInnerNet.setRealMoney(list.get(2).get("officalMoney"));
-            gettype=list.get(2).get("carTypeId");
+            	realmoney=list.get(2).get("officalMoney");
+                gettype=list.get(2).get("carTypeId");
             }else if(flag4){
-            addInnerNet.setRealMoney(list.get(3).get("officalMoney"));
-            gettype=list.get(3).get("carTypeId");
+            	realmoney=list.get(3).get("officalMoney");
+                gettype=list.get(3).get("carTypeId");
             }else if(flag5){
-            addInnerNet.setRealMoney(list.get(4).get("officalMoney"));
-            gettype=list.get(4).get("carTypeId");
+            	realmoney=list.get(4).get("officalMoney");
+                gettype=list.get(4).get("carTypeId");
             }
-               
-            addInnerNet.setUseCarTime(gettimelong);
-            addInnerNet.setCartype(gettype);
-            addInnerNet.getDataFromServer();
+            String strbalance = MySharePreference.getStringValue(getApplication(),MySharePreference.BALANCE );
+		    double doubalance = Double.parseDouble(strbalance);
+		    double est = Double.parseDouble(realmoney);
+		    if(doubalance-est<0){
+				Toast.makeText(getApplication(), "对不起您余额不足，请充值！", Toast.LENGTH_SHORT).show();
+			}else{
+				btsearch.setClickable(false);
+				btsearch.setProgress(50);
+				addInnerNet.setHandler(mHandler);
+				addInnerNet.setAuthn(MySharePreference.getStringValue(getApplication(), MySharePreference.AUTHN));
+	            addInnerNet.setDevice(Global.DEVICE);
+	            addInnerNet.setComment(getdemand);
+	            addInnerNet.setRiderName(getname);  
+	            addInnerNet.setRiderPhone(getphone);
+	            addInnerNet.setsLatitude(getlat);
+	            addInnerNet.setsLongitude(getlont);
+	            addInnerNet.setStartAddress(getaddress);
+	            addInnerNet.setStartTime(gettime);
+	            addInnerNet.setServiceTypeId("3");
+	            
+	            addInnerNet.setRealMoney(realmoney);
+	            addInnerNet.setUseCarTime(gettimelong);
+	            addInnerNet.setCartype(gettype);
+	            addInnerNet.getDataFromServer();
+            }
 		}break;
 		case R.id.select1:
 			if(flag1){
