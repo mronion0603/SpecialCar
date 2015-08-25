@@ -35,7 +35,6 @@ public class UrgentHomeActivity extends Activity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.urgent_home);
 		init();
-		
 	}
 
 	public void init(){

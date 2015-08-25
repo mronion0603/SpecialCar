@@ -139,7 +139,7 @@ public class ReceiptActivity extends Activity implements OnClickListener {
 	        }else{
 	          Toast.makeText(ReceiptActivity.this,jsonobj.getString("Message"), Toast.LENGTH_LONG).show();
 	          confirm.setClickable(true);
-	          confirm.setProgress(-1);
+	          confirm.setProgress(0);
 	        } 
 	   }
 	    private void parseMax(String str)throws Exception{ 

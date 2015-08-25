@@ -68,7 +68,8 @@ public class ModifyInfoActivity extends Activity implements OnClickListener {
 			etName.setText( username);
 		}
 		String email = MySharePreference.getStringValue(getApplication(), MySharePreference.EMAIL);
-		if(email!=null&&(email.length()>=1)){
+		//System.out.println(email.length());
+		if(email!=null&&(email.length()>=1)&&(!email.equals("null"))){
 			etEmail.setText(email);
 		}
 		String gender = MySharePreference.getStringValue(getApplication(), MySharePreference.GENDER);

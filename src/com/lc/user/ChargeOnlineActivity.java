@@ -20,6 +20,7 @@ import com.lc.innercity.ModifyNameActivity;
 import com.lc.pay.PayActivity;
 import com.lc.specialcar.R;
 import com.lc.utils.ButtonEffect;
+import com.lc.utils.DeleteWXPayApplication;
 import com.lc.utils.ExitApplication;
 import com.weixin.paydemo.WXPayActivity;
 
@@ -77,6 +78,7 @@ public class ChargeOnlineActivity extends Activity implements OnClickListener {
 
 	public void init(){
 		ExitApplication.getInstance().addActivity(this);
+		//DeleteWXPayApplication.getInstance().addActivity(this);
 		et=(EditText)findViewById(R.id.txdate2);
 		rlalipay=(RelativeLayout)findViewById(R.id.rlalipay);
 		rlalipay.setOnClickListener(this);
@@ -122,6 +124,12 @@ public class ChargeOnlineActivity extends Activity implements OnClickListener {
 		default:
 			break;
 		}
+	}
+	
+	@Override 
+	public void onDestroy(){
+		super.onDestroy();
+		
 	}
 	
 	@Override  

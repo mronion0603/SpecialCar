@@ -20,6 +20,11 @@
 	      android:background="@drawable/img_car"  
 	    />
      </RelativeLayout>
+     <ImageView
+	      android:layout_width="fill_parent"
+	      android:layout_height="1dip"
+	      android:background="@color/user_divider3"
+	    />
         <TextView
 	      android:layout_width="wrap_content"
 	      android:layout_height="wrap_content"
@@ -30,6 +35,11 @@
 	      android:text="应急电话"
 	      android:textStyle="bold"
 	      android:layout_marginTop="10dip"
+	    />
+        <ImageView
+	      android:layout_width="fill_parent"
+	      android:layout_height="1dip"
+	      android:background="@color/user_divider3"
 	    />
         <RelativeLayout 
 	    android:layout_width="match_parent"
@@ -59,7 +69,11 @@
 	    />
 	     
 	    </RelativeLayout>  
-	     
+	     <ImageView
+	      android:layout_width="fill_parent"
+	      android:layout_height="1dip"
+	      android:background="@color/user_divider3"
+	    />
 	      <RelativeLayout 
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content" 
@@ -130,6 +144,11 @@
 	      android:text="服务申明"
 	      android:textStyle="bold"
 	      android:layout_marginTop="10dip"
+	    />
+	      <ImageView
+	      android:layout_width="fill_parent"
+	      android:layout_height="1dip"
+	      android:background="@color/user_divider3"
 	    />
 	    <RelativeLayout 
 	    android:layout_width="match_parent"

@@ -16,6 +16,7 @@ import org.json.JSONObject;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -382,6 +383,11 @@ public class WXPayActivity extends Activity {
 		msgApi.registerApp(Constants.APP_ID);
 		msgApi.sendReq(req);
 	}
-
+	@Override
+	public void onDestroy(){
+		super.onDestroy();
+	    
+	}
+	
 }
 
