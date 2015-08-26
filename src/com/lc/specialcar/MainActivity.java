@@ -185,7 +185,7 @@ public class MainActivity extends SlidingFragmentActivity implements OnClickList
 		// setContentView(R.layout.frag_right);
 		// getSupportFragmentManager().beginTransaction()
 		// .replace(R.id.right_frame, new RightFragment()).commit();
-
+        //
 		// 设置左侧滑动菜单
 		setBehindContentView(R.layout.menu_frame_left);
 		getSupportFragmentManager().beginTransaction()
