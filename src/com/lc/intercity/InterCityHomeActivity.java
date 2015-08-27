@@ -2,12 +2,20 @@ package com.lc.intercity;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import com.lc.innercity.BillingRuleActivity;
+import com.lc.net.InterCarPoolNet;
 import com.lc.popupwindow.DatePopupWindow;
+import com.lc.shuttle.ShuttleHomeActivity;
 import com.lc.specialcar.R;
 import com.lc.utils.ButtonEffect;
 import com.lc.utils.ExitApplication;
 import com.lc.utils.Global;
+import com.lc.utils.MySharePreference;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -31,7 +39,7 @@ import android.widget.Toast;
 public class InterCityHomeActivity extends Activity implements OnClickListener {
 	public static final int REQUSET = 1;
 	public static final int REQUSET2 = 2;
-    TextView tvTitle,tvstartaddress,tvendaddress,tvdate;
+    TextView tvTitle,tvstartaddress,tvendaddress,tvdate,righttext;
     ImageView ivSearch,ivleft;
     private RelativeLayout rls;
     private RelativeLayout endaddress,startaddress,choosedate;
@@ -39,6 +47,10 @@ public class InterCityHomeActivity extends Activity implements OnClickListener {
 	private View originview; 
 	DatePopupWindow timepWindow;
 	String requestdate="";
+	InterCarPoolNet interCarPoolNet = new InterCarPoolNet();
+	int flag = 0;
+	 String start;
+ 	  String end ;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
@@ -70,6 +82,10 @@ public class InterCityHomeActivity extends Activity implements OnClickListener {
 		ivleft = (ImageView) findViewById(R.id.ArrowHead);
 		ivleft.setVisibility(View.VISIBLE);
 		group = (RadioGroup)this.findViewById(R.id.radioGroup);  
+		righttext = (TextView) findViewById(R.id.righttext);
+		righttext.setVisibility(View.VISIBLE);
+		righttext.setOnClickListener(this);
+		righttext.setText("计费规则");
 		
 		SimpleDateFormat formatter =   new SimpleDateFormat("yyyy-MM-dd HH:mm"); 
 		SimpleDateFormat formatter2 =   new SimpleDateFormat("yyyy-MM-dd");  
@@ -135,6 +151,11 @@ public class InterCityHomeActivity extends Activity implements OnClickListener {
 		    startActivityForResult(intent, REQUSET2);  
 	    }
 			break;
+		case R.id.righttext:
+		{	Intent intent = new Intent();
+			intent.setClass(InterCityHomeActivity.this,BillingRuleActivity.class);
+			startActivity(intent);
+		}	break;
 		case R.id.Search:
 			  int radioButtonId = group.getCheckedRadioButtonId();
               //根据ID获取RadioButton的实例
@@ -142,6 +163,8 @@ public class InterCityHomeActivity extends Activity implements OnClickListener {
               //更新文本内容，以符合选中项
               String getstart = tvstartaddress.getText().toString();
           	  String getend = tvendaddress.getText().toString();
+          	  start = getstart;
+          	  end = getend;
               if(rb.getText().equals("拼车")){
             	
             	//String date = tvdate.getText().toString();
@@ -150,25 +173,31 @@ public class InterCityHomeActivity extends Activity implements OnClickListener {
             	if(getend.equals("输入目的地所在城市")||getend.length()<=0){
 					 Toast.makeText(InterCityHomeActivity.this, "请选择目的地城市", Toast.LENGTH_LONG).show();
 				}else{
-            	Intent intent = new Intent();
-				intent.setClass(InterCityHomeActivity.this, SearchCarpoolActivity.class);
-				intent.putExtra("device", Global.DEVICE);
-				intent.putExtra("startAddress", getstart);
-				intent.putExtra("endAddress", getend);
-				intent.putExtra("date", requestdate);
-				startActivity(intent);
+					
+					interCarPoolNet.setHandler(mhandler);
+					interCarPoolNet.setAuth(MySharePreference.getStringValue(getApplication(), MySharePreference.AUTHN));
+					interCarPoolNet.setDate(requestdate);
+					interCarPoolNet.setDevice(Global.DEVICE);
+					interCarPoolNet.setStartAddress(getstart);
+					interCarPoolNet.setEndAddress(getend);
+					interCarPoolNet.getDataFromServer();
+					flag = 0;
+            	
 				}
               }else{
             	if(getend.equals("输入目的地所在城市")||getend.length()<=0){
  					 Toast.makeText(InterCityHomeActivity.this, "请选择目的地城市", Toast.LENGTH_LONG).show();
  				}else{
-            	Intent intent = new Intent();
-  				intent.setClass(InterCityHomeActivity.this, SearchCharteredCarActivity.class);
-  				intent.putExtra("device", Global.DEVICE);
-				intent.putExtra("startAddress", getstart);
-				intent.putExtra("endAddress", getend);
-				intent.putExtra("date", requestdate);
-  				startActivity(intent);
+ 					
+ 					interCarPoolNet.setHandler(mhandler);
+ 					interCarPoolNet.setAuth(MySharePreference.getStringValue(getApplication(), MySharePreference.AUTHN));
+ 					interCarPoolNet.setDate(requestdate);
+ 					interCarPoolNet.setDevice( Global.DEVICE);
+ 					interCarPoolNet.setStartAddress(getstart);
+ 					interCarPoolNet.setEndAddress(getend);
+ 					interCarPoolNet.getDataFromServer();
+ 					flag = 1;
+            	
  				}
               }
 			break;
@@ -198,4 +227,51 @@ public class InterCityHomeActivity extends Activity implements OnClickListener {
               }
         }  
     }  	
+	
+	@SuppressLint("HandlerLeak")
+	public Handler mhandler= new Handler() {
+        public void handleMessage(android.os.Message msg) {
+            switch(msg.what) { 
+	            case Global.INTERCARPOOL:{
+	            		try {
+							parseJSON((String)msg.obj);
+						} catch (Exception e) {
+							
+							e.printStackTrace();
+						}      	
+	             break;
+                }
+            }
+    }};
+    private void parseJSON(String str)throws Exception{  
+    	System.out.println(str);
+    	JSONObject jsonobj = new JSONObject(str); 
+    	int result = jsonobj.getInt("ResultCode");
+   	    if(result==Global.SUCCESS){	
+         JSONArray jsonarray = jsonobj.getJSONArray("Data");
+         if(jsonarray.length()>0){
+        	 if(flag==0){
+        		 Intent intent = new Intent();
+ 				intent.setClass(InterCityHomeActivity.this, SearchCarpoolActivity.class);
+ 				intent.putExtra("device", Global.DEVICE);
+ 				intent.putExtra("startAddress", start);
+ 				intent.putExtra("endAddress", end);
+ 				intent.putExtra("date", requestdate);
+ 				startActivity(intent);
+        	 }else{
+        		 Intent intent = new Intent();
+   				intent.setClass(InterCityHomeActivity.this, SearchCharteredCarActivity.class);
+   				intent.putExtra("device", Global.DEVICE);
+ 				intent.putExtra("startAddress", start);
+ 				intent.putExtra("endAddress", end);
+ 				intent.putExtra("date", requestdate);
+   				startActivity(intent);
+        	 }
+         }else{
+        	 Toast.makeText(InterCityHomeActivity.this,"抱歉，当天无线路发布", Toast.LENGTH_LONG).show();
+         }
+        }else{
+           //Toast.makeText(InterCityHomeActivity.this,jsonobj.getString("Message"), Toast.LENGTH_LONG).show();
+        } 
+    }
 }

@@ -175,7 +175,7 @@ public class LeftFragment extends Fragment implements OnClickListener{
             }
     }};
     private void parseBalance(String str)throws Exception{  
-    	//System.out.println(str);
+    	System.out.println(str);
     	JSONObject jsonobj = new JSONObject(str); 
     	int result = jsonobj.getInt("ResultCode");
    	    if(result==Global.SUCCESS){

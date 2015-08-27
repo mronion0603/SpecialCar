@@ -31,6 +31,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.lc.net.AddOrderNet;
+import com.lc.net.AddWXOrderNet;
 import com.lc.progressbutton.CircularProgressButton;
 import com.lc.specialcar.R;
 import com.lc.utils.ConnectUrl;
@@ -55,7 +56,7 @@ public class WXPayActivity extends Activity {
 	Map<String,String> resultunifiedorder;
 	StringBuffer sb;
 	
-	private AddOrderNet addOrderNet=new AddOrderNet();
+	private AddWXOrderNet addOrderNet=new AddWXOrderNet();
 	//private String getAuthn="";
 	//private String getUserid="";
 	//private String getServiceid="";
@@ -116,8 +117,10 @@ public class WXPayActivity extends Activity {
 		pro2.setProgress(0);  
 		pro2.setIndeterminate(true);
 		Bundle extras = getIntent().getExtras();
+		String tempprice ="";
         if(extras != null){
         	price = extras.getString("itemprice");
+        	tempprice = price;
         	tvprice.setText(price+"元");
         	double pricedb = Double.parseDouble(price);
         	pricedb = 100*pricedb;
@@ -130,7 +133,7 @@ public class WXPayActivity extends Activity {
 	             addOrderNet.setHandler(mHandler);
 	             addOrderNet.setDevice(Global.DEVICE);
 		   		 addOrderNet.setAuthn(MySharePreference.getStringValue(getApplication(), MySharePreference.AUTHN));
-		   		 addOrderNet.setAddMoney(price);
+		   		 addOrderNet.setAddMoney(tempprice);
 		   		 addOrderNet.addOrderServer();
         	}else{
         		 getOrderid = extras.getString("orderid");

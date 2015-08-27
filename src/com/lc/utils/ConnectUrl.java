@@ -29,6 +29,7 @@ public class ConnectUrl {
  public static String getOrder = commonurl+"getOrder";
  public static String getAccount = commonurl+"getAccount";
  public static String getPayOrder = commonurl+"addAliPayMoney";
+ public static String getWXPayOrder = commonurl+"addWeChatPayMoney";
  public static String cancelInnerOrder = commonurl+"cancelSNOrder";
  public static String getAirport= commonurl+"selAirportByCity";	
  public static String addReceipt= commonurl+"addBill";	
