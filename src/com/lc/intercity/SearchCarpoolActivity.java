@@ -63,7 +63,7 @@ public class SearchCarpoolActivity extends Activity implements OnClickListener {
 	    }
 		ExitApplication.getInstance().addActivity(this);
 		tvTitle = (TextView) findViewById(R.id.topTv);
-		tvTitle.setText("查询");
+		tvTitle.setText("拼车");
 		
 		rls = (RelativeLayout) findViewById(R.id.rlslidemenu);
 		rls.setOnClickListener(this);

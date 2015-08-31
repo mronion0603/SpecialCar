@@ -187,7 +187,8 @@ public class SendDealActivity extends Activity implements OnClickListener {
                     rldriver.setVisibility(View.VISIBLE);
                     ivline.setVisibility(View.VISIBLE);
             	}else if(gettype==3){
-            		tvmessage.setText("您已上车，祝您旅途愉快!");
+            		tvmessage.setText("车辆已到达，祝您路途愉快!");
+            		righttext.setVisibility(View.GONE);
             		ivleft.setVisibility(View.VISIBLE);
             		rls.setClickable(true);
             	}

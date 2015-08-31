@@ -179,44 +179,91 @@ public class SelectCarGroupActivity extends Activity implements OnClickListener 
 			startActivity(intent);
 			break;
 		case R.id.Search:{	
-			btsearch.setClickable(false);
-			btsearch.setProgress(50);
-			addInnerNet.setHandler(mHandler);
-			addInnerNet.setAuthn(MySharePreference.getStringValue(getApplication(), MySharePreference.AUTHN));
-            addInnerNet.setDevice(Global.DEVICE);
-            addInnerNet.setComment(getdemand);
-            addInnerNet.setRiderName(getname);  
-            addInnerNet.setRiderPhone(getphone);
-            addInnerNet.setsLatitude(getlat);
-            addInnerNet.setsLongitude(getlont);
-            addInnerNet.setStartAddress(getaddress);
-            addInnerNet.setStartTime(gettime);
-            addInnerNet.setServiceTypeId("32");
-            if(flag1)
-            addInnerNet.setEconomy(amount.getText().toString());
-            else
-            addInnerNet.setEconomy(economy);
-            if(flag2)
-            addInnerNet.setCommon(amount2.getText().toString());
-            else
-            addInnerNet.setCommon(common);
-            if(flag3)
-            addInnerNet.setBusiness(amount3.getText().toString());
-            else
-            addInnerNet.setBusiness(business);
-            if(flag4)
-                addInnerNet.setVarnish19(amount4.getText().toString());
-                else
-                addInnerNet.setVarnish19(tongqin1);
-            if(flag5)
-                addInnerNet.setVarnish49(amount5.getText().toString());
-                else
-                addInnerNet.setVarnish49(tongqin2);
-            
-            addInnerNet.setUseCarTime(gettimelong);
-            addInnerNet.setCartype("1");
-            addInnerNet.getDataFromServer();
-			
+			String numEconomy,numEcommon,numBusiness,numTongqin1,numTongqin2;
+			if (flag1){
+				addInnerNet.setEconomy(amount.getText().toString());
+				numEconomy=amount.getText().toString();
+			}else{
+				addInnerNet.setEconomy(economy);
+				numEconomy=economy;
+			}
+			if (flag2){
+				numEcommon=amount2.getText().toString();
+				addInnerNet.setCommon(amount2.getText().toString());
+			}else{
+				numEcommon=common;
+				addInnerNet.setCommon(common);
+		    }
+		    if (flag3){
+		    	numBusiness=amount3.getText().toString();
+				addInnerNet.setBusiness(amount3.getText().toString());
+		    }else{
+		    	numBusiness=business;
+				addInnerNet.setBusiness(business);
+		    }
+		    if (flag4){
+		    	numTongqin1=amount4.getText().toString();
+				addInnerNet.setVarnish19(amount4.getText().toString());
+		    }else{
+		    	numTongqin1=tongqin1;
+				addInnerNet.setVarnish19(tongqin1);
+		    }
+		    if (flag5){
+		    	numTongqin2=amount5.getText().toString();
+				addInnerNet.setVarnish49(amount5.getText().toString());
+		    }else{
+		    	numTongqin2=tongqin2;
+				addInnerNet.setVarnish49(tongqin2);
+		    }
+		    double est=Double.parseDouble(numEconomy)*Double.parseDouble(list.get(0).get("officalMoney"))+
+		    		Double.parseDouble(numEcommon)*Double.parseDouble(list.get(1).get("officalMoney"))+
+		    		Double.parseDouble(numBusiness)*Double.parseDouble(list.get(2).get("officalMoney"))+
+		    		Double.parseDouble(numTongqin1)*Double.parseDouble(list.get(3).get("officalMoney"))+
+		    		Double.parseDouble(numTongqin2)*Double.parseDouble(list.get(4).get("officalMoney"));
+		    		
+		    String strbalance = MySharePreference.getStringValue(getApplication(),MySharePreference.BALANCE );
+		    double doubalance = Double.parseDouble(strbalance);
+		    if(MySharePreference.getStringValue(getApplication(), MySharePreference.USER_TYPE).equals("1")){
+		    	btsearch.setClickable(false);
+				btsearch.setProgress(50);
+				addInnerNet.setHandler(mHandler);
+				addInnerNet.setAuthn(MySharePreference.getStringValue(getApplication(), MySharePreference.AUTHN));
+	            addInnerNet.setDevice(Global.DEVICE);
+	            addInnerNet.setComment(getdemand);
+	            addInnerNet.setRiderName(getname);  
+	            addInnerNet.setRiderPhone(getphone);
+	            addInnerNet.setsLatitude(getlat);
+	            addInnerNet.setsLongitude(getlont);
+	            addInnerNet.setStartAddress(getaddress);
+	            addInnerNet.setStartTime(gettime);
+	            addInnerNet.setServiceTypeId("32");
+	            addInnerNet.setUseCarTime(gettimelong);
+	            addInnerNet.setCartype("1");
+	            addInnerNet.setRealMoney(String.valueOf(est));
+	            addInnerNet.getDataFromServer();
+		    }else{
+		    if(doubalance-est<0){
+				Toast.makeText(getApplication(), "对不起您余额不足，请充值！", Toast.LENGTH_SHORT).show();
+			}else{
+				btsearch.setClickable(false);
+				btsearch.setProgress(50);
+				addInnerNet.setHandler(mHandler);
+				addInnerNet.setAuthn(MySharePreference.getStringValue(getApplication(), MySharePreference.AUTHN));
+	            addInnerNet.setDevice(Global.DEVICE);
+	            addInnerNet.setComment(getdemand);
+	            addInnerNet.setRiderName(getname);  
+	            addInnerNet.setRiderPhone(getphone);
+	            addInnerNet.setsLatitude(getlat);
+	            addInnerNet.setsLongitude(getlont);
+	            addInnerNet.setStartAddress(getaddress);
+	            addInnerNet.setStartTime(gettime);
+	            addInnerNet.setServiceTypeId("32");
+	            addInnerNet.setUseCarTime(gettimelong);
+	            addInnerNet.setCartype("1");
+	            addInnerNet.setRealMoney(String.valueOf(est));
+	            addInnerNet.getDataFromServer();
+			}
+		    }
 		}	break;
 		case R.id.select1:
 			if(flag1){

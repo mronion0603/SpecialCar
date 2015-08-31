@@ -124,4 +124,6 @@ public class CommentActivity extends Activity implements OnClickListener {
 	          Toast.makeText(CommentActivity.this,jsonobj.getString("Message"), Toast.LENGTH_LONG).show();
 	        } 
 	   }
+	    
+	   
 }

@@ -428,6 +428,49 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 			}else if(strbill==null|strbill.length()<=0){
 				Toast.makeText(getApplication(), "请选择车型", Toast.LENGTH_SHORT).show();
 			}else{
+				System.out.println("type:"+MySharePreference.getStringValue(getApplication(), MySharePreference.USER_TYPE));
+				if(MySharePreference.getStringValue(getApplication(), MySharePreference.USER_TYPE).equals("1")){
+					ivSearch.setClickable(false);
+					ivSearch.setProgress(50);
+					addInnerNet.setHandler(mHandler);
+					addInnerNet.setAuthn(MySharePreference.getStringValue(getApplication(), MySharePreference.AUTHN));
+		            addInnerNet.setDevice(Global.DEVICE);
+		            addInnerNet.setCartype(type);
+		            addInnerNet.setBasicMoney(String.valueOf(basicmoney));
+		            if(tvdemand.getText().toString()!=null)
+		            addInnerNet.setComment(tvdemand.getText().toString());
+		            addInnerNet.seteLatitude(String.valueOf(dlat));
+		            addInnerNet.seteLongitude(String.valueOf(dlont));
+		            addInnerNet.setEndAddress(endaddress);
+		            addInnerNet.setLongFootMoney("");
+		            addInnerNet.setMileage(String.valueOf(distance));
+		            addInnerNet.setRealMoney(String.valueOf(estimate(basicmoney,pricedis,pricedura)));
+		            addInnerNet.setRiderName(tvname.getText().toString());
+		            addInnerNet.setDriverNum(driveridStr);
+		            if(tvphone.getText().toString().equals("本人")){
+		              addInnerNet.setRiderPhone(MySharePreference.getStringValue(getApplication(), MySharePreference.PHONE));
+		            }else{
+		              addInnerNet.setRiderPhone(tvphone.getText().toString());
+		            }
+		            addInnerNet.setsLatitude(String.valueOf(slat));
+		            addInnerNet.setsLongitude(String.valueOf(slont));
+		            addInnerNet.setStartAddress(startaddress);
+		            String startTime = tvdate.getText().toString();
+		            if(startTime.equals("现在")){
+		            	SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm"); 
+		            	
+		        		Date curDate = new Date(System.currentTimeMillis());//获取当前时间       
+		        		startTime  = formatter.format(curDate); 
+		        		addInnerNet.setStartTime(startTime);
+		            }else{
+
+		            	addInnerNet.setStartTime(getdate);
+		            }
+		            
+		            addInnerNet.setVoucherMoney(vMoneystr);
+		            addInnerNet.setVoucherNum(voucherNumstr);
+		            addInnerNet.getDataFromServer();
+				}else{
 				String strbalance = MySharePreference.getStringValue(getApplication(),MySharePreference.BALANCE );
 				double doubalance = Double.parseDouble(strbalance);
 				double est = estimate(basicmoney,pricedis,pricedura);
@@ -474,6 +517,7 @@ public class CarInfoActivity extends Activity implements OnClickListener {
 	            addInnerNet.setVoucherMoney(vMoneystr);
 	            addInnerNet.setVoucherNum(voucherNumstr);
 	            addInnerNet.getDataFromServer();
+				}
 				}
 			}
 			break;

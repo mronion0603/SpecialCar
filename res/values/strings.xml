@@ -23,9 +23,9 @@
 	<string name="type3">商务型</string>
 	<string name="type4">通勤型(17座)</string>
 	<string name="type5">通勤型(49座)</string>
-	<string name="des1">与408同级车型</string>
-	<string name="des2">C5同级车型</string>
-	<string name="des3">GL8同级车型</string>
+	<string name="des1">408或同级车型</string>
+	<string name="des2">C5或同级车型</string>
+	<string name="des3">GL8</string>
 	<string name="des4">环宇</string>
 	<string name="des5">宇通</string>
 	

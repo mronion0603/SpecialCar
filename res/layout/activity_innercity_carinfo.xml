@@ -180,7 +180,8 @@
 	     <TextView
 	      android:id="@+id/tvgetoff"
 	      android:layout_toRightOf="@+id/date3"
-	      android:layout_width="wrap_content"
+	      android:layout_width="250dip"
+	      android:singleLine="true"
 	      android:layout_height="wrap_content"
 	      android:layout_marginLeft="20dip"
 	      android:textSize="18sp"

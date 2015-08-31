@@ -69,6 +69,7 @@ public class GetMessageNet {
 	                		outputStream.close();
 	                		
 	                		int responseCode =urlConnection.getResponseCode();
+	                		System.out.println(responseCode);
 	                		if ( responseCode== 200) { 
 	                		InputStream in = urlConnection.getInputStream();  
 	                		result = read(in);

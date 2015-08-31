@@ -60,7 +60,7 @@ public class SearchCharteredCarActivity extends Activity implements OnClickListe
 	    }
 		ExitApplication.getInstance().addActivity(this);
 		tvTitle = (TextView) findViewById(R.id.topTv);
-		tvTitle.setText("查询");
+		tvTitle.setText("包车");
 		
 		rls = (RelativeLayout) findViewById(R.id.rlslidemenu);
 		rls.setOnClickListener(this);

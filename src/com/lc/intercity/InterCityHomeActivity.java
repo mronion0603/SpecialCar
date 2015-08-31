@@ -2,21 +2,16 @@ package com.lc.intercity;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import com.lc.innercity.BillingRuleActivity;
 import com.lc.net.InterCarPoolNet;
 import com.lc.popupwindow.DatePopupWindow;
-import com.lc.shuttle.ShuttleHomeActivity;
 import com.lc.specialcar.R;
 import com.lc.utils.ButtonEffect;
 import com.lc.utils.ExitApplication;
 import com.lc.utils.Global;
 import com.lc.utils.MySharePreference;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;

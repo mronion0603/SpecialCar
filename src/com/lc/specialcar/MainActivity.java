@@ -81,10 +81,6 @@ public class MainActivity extends SlidingFragmentActivity implements OnClickList
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
-		//NotificationManager mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);  
-		//NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this);  
-		//mBuilder.
 		
 		initSlidingMenu(savedInstanceState);
         init();

@@ -189,6 +189,38 @@ public class SendActivity extends Activity implements OnClickListener {
 			}else if(strbill==null|strbill.length()<=0){
 				Toast.makeText(getApplication(), "请选择车型", Toast.LENGTH_SHORT).show();
 			}else{
+				if(MySharePreference.getStringValue(getApplication(), MySharePreference.USER_TYPE).equals("1")){
+					ivSearch.setClickable(false);
+					ivSearch.setProgress(50);
+					addShuttleNet.setHandler(mHandler);
+					addShuttleNet.setAuthn(MySharePreference.getStringValue(getApplication(), MySharePreference.AUTHN));
+					addShuttleNet.setDevice(Global.DEVICE);
+					addShuttleNet.setCartype(type);
+					//addShuttleNet.setFlightnum(flightstr);
+		            if(tvdemand.getText().toString()!=null)
+		            	addShuttleNet.setComment(tvdemand.getText().toString());
+		            addShuttleNet.setsLatitude(String.valueOf(elat));
+		            addShuttleNet.setsLongitude(String.valueOf(elont));
+		            addShuttleNet.setStartAddress(tvendaddress.getText().toString());
+		            addShuttleNet.setLongFootMoney("");
+		            addShuttleNet.setMileage(String.valueOf(distance));
+		            addShuttleNet.setRealMoney(String.valueOf(estimate(basicmoney,pricedis,pricedura)));
+		            addShuttleNet.setRiderName(tvname.getText().toString());
+		            if(tvphone.getText().toString().equals("本人")){
+		            	addShuttleNet.setRiderPhone(MySharePreference.getStringValue(getApplication(), MySharePreference.PHONE));
+		            }else{
+		            	addShuttleNet.setRiderPhone(tvphone.getText().toString());
+		            }
+		            addShuttleNet.seteLatitude(String.valueOf(slat));
+		            addShuttleNet.seteLongitude(String.valueOf(slont));
+		            addShuttleNet.setEndAddress(airportstr);
+		            addShuttleNet.setStartTime(txdate.getText().toString());
+		            //System.out.println("vMoneystr:"+vMoneystr+" voucherNumstr:"+voucherNumstr);
+		            addShuttleNet.setVoucherMoney(vMoneystr);
+		            addShuttleNet.setVoucherNum(voucherNumstr);
+		            addShuttleNet.setServiceTypeId("2");
+		            addShuttleNet.getDataFromServer();
+				}else{
 				String strbalance = MySharePreference.getStringValue(getApplication(),MySharePreference.BALANCE );
 			    double doubalance = Double.parseDouble(strbalance);
 			    double est = estimate(basicmoney,pricedis,pricedura);
@@ -225,6 +257,7 @@ public class SendActivity extends Activity implements OnClickListener {
             addShuttleNet.setVoucherNum(voucherNumstr);
             addShuttleNet.setServiceTypeId("2");
             addShuttleNet.getDataFromServer();
+			}
 			}
 			}
 		}	break;

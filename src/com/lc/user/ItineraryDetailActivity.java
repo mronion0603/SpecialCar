@@ -64,7 +64,7 @@ public class ItineraryDetailActivity extends Activity implements OnClickListener
 	}
 
 	public void init(){
-		DeleteDealApplication.getInstance().addActivity(this);
+		//DeleteDealApplication.getInstance().addActivity(this);
 		pro = (ProgressBar)findViewById(R.id.progress2); 
 		pro.setProgress(0);  
 		pro.setIndeterminate(true);
@@ -322,7 +322,8 @@ public class ItineraryDetailActivity extends Activity implements OnClickListener
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
 		case R.id.rlslidemenu:
-		{	DeleteDealApplication.getInstance().exit();
+		{	finish();
+            DeleteDealApplication.getInstance().exit();
 		}	break;
 		case R.id.Search:
 		{
@@ -365,7 +366,8 @@ public class ItineraryDetailActivity extends Activity implements OnClickListener
 	        if (requestCode == COMMENT && resultCode == RESULT_OK) { 
        	         Intent intent = new Intent();
     	         setResult(RESULT_OK, intent); 
-    	         DeleteDealApplication.getInstance().addActivity(this);
+    	         finish();
+    	         DeleteDealApplication.getInstance().exit();
        }  
 	 }
 }

@@ -1,6 +1,11 @@
 package com.lc.user;
 
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 import org.json.JSONObject;
 
@@ -17,6 +22,8 @@ import com.lc.utils.MySharePreference;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.app.ProgressDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
@@ -25,6 +32,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
@@ -49,6 +57,8 @@ public class MoreActivity extends Activity implements OnClickListener {
    	private final int DOWN_ERROR = 4;
    	ExitNet exitnet = new ExitNet();
    	private ProgressBar pro; 
+   // private Notification notification;  
+   // private NotificationManager nManager;  
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
@@ -80,6 +90,8 @@ public class MoreActivity extends Activity implements OnClickListener {
 		rl3.setOnClickListener(this);
 		rl4 = (RelativeLayout) findViewById(R.id.usecardate4);
 		rl4.setOnClickListener(this);
+		
+		
 	}
 	@Override
 	public void onClick(View v) {
@@ -167,10 +179,10 @@ public class MoreActivity extends Activity implements OnClickListener {
 	    	int result = jsonobj.getInt("ResultCode");
 	   	    if(result==Global.SUCCESS){
 	   	    	MySharePreference.clearPersonal(getApplication());
-				finish();
 				Intent intent = new Intent();
 				intent.setClass(getApplicationContext(), ChooseUserActivity.class);
 				startActivity(intent);	
+				finish();
 	        }else{
 	            Toast.makeText(MoreActivity.this,jsonobj.getString("Message"), Toast.LENGTH_LONG).show();
 	        } 
@@ -247,11 +259,19 @@ public class MoreActivity extends Activity implements OnClickListener {
 		    pd.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);  
 		    pd.setMessage("正在下载更新");  
 		    pd.show();  
+		    
+		    //创建一个通知  
+	        //notification = new Notification(R.drawable.ic_launcher, "开始下载", System.currentTimeMillis());  
+	        //notification.setLatestEventInfo(this, "正在下载新版本", "", null);  
+	        //用NotificationManager的notify方法通知用户生成标题栏消息通知  
+	        //nManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);  
+	       // nManager.notify(100, notification);//id是应用中通知的唯一标识  
+	        
 		    new Thread(){  
 		        @Override  
 		        public void run() {  
 		            try {  
-		                File file = Download.getFileFromServer(geturl, pd);  
+		                File file = getFileFromServer(geturl, pd);  
 		                sleep(3000);  
 		                installApk(file);  
 		                pd.dismiss(); //结束掉进度条对话框  
@@ -274,4 +294,38 @@ public class MoreActivity extends Activity implements OnClickListener {
 		    intent.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");  
 		    startActivity(intent);  
 		}  
+		
+		
+		public File getFileFromServer(String path, ProgressDialog pd) throws Exception{
+			//如果相等的话表示当前的sdcard挂载在手机上并且是可用的
+			if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){
+				URL url = new URL(path);
+				HttpURLConnection conn =  (HttpURLConnection) url.openConnection();
+				conn.setConnectTimeout(5000);
+				//获取到文件的大小 
+				pd.setMax(conn.getContentLength());
+				InputStream is = conn.getInputStream();
+				File file = new File(Environment.getExternalStorageDirectory(), "updata.apk");
+				FileOutputStream fos = new FileOutputStream(file);
+				BufferedInputStream bis = new BufferedInputStream(is);
+				byte[] buffer = new byte[1024];
+				int len ;
+				int total=0;
+				while((len =bis.read(buffer))!=-1){
+					fos.write(buffer, 0, len);
+					total+= len;
+					//获取当前下载量
+					pd.setProgress(total);
+					//notification.setLatestEventInfo(this, "正在下载新版本", "已下载了"+(int)total*100/conn.getContentLength()+"%", null);  
+                    //nManager.notify(100, notification); 
+				}
+				fos.close();
+				bis.close();
+				is.close();
+				return file;
+			}
+			else{
+				return null;
+			}
+		}
 }

@@ -170,6 +170,26 @@ public class SelectCarPersonActivity extends Activity implements OnClickListener
             	realmoney=list.get(4).get("officalMoney");
                 gettype=list.get(4).get("carTypeId");
             }
+            if(MySharePreference.getStringValue(getApplication(), MySharePreference.USER_TYPE).equals("1")){
+            	btsearch.setClickable(false);
+				btsearch.setProgress(50);
+				addInnerNet.setHandler(mHandler);
+				addInnerNet.setAuthn(MySharePreference.getStringValue(getApplication(), MySharePreference.AUTHN));
+	            addInnerNet.setDevice(Global.DEVICE);
+	            addInnerNet.setComment(getdemand);
+	            addInnerNet.setRiderName(getname);  
+	            addInnerNet.setRiderPhone(getphone);
+	            addInnerNet.setsLatitude(getlat);
+	            addInnerNet.setsLongitude(getlont);
+	            addInnerNet.setStartAddress(getaddress);
+	            addInnerNet.setStartTime(gettime);
+	            addInnerNet.setServiceTypeId("3");
+	            
+	            addInnerNet.setRealMoney(realmoney);
+	            addInnerNet.setUseCarTime(gettimelong);
+	            addInnerNet.setCartype(gettype);
+	            addInnerNet.getDataFromServer();
+            }else{
             String strbalance = MySharePreference.getStringValue(getApplication(),MySharePreference.BALANCE );
 		    double doubalance = Double.parseDouble(strbalance);
 		    double est = Double.parseDouble(realmoney);
@@ -194,6 +214,7 @@ public class SelectCarPersonActivity extends Activity implements OnClickListener
 	            addInnerNet.setUseCarTime(gettimelong);
 	            addInnerNet.setCartype(gettype);
 	            addInnerNet.getDataFromServer();
+            }
             }
 		}break;
 		case R.id.select1:
@@ -366,11 +387,11 @@ public class SelectCarPersonActivity extends Activity implements OnClickListener
 				price3.setText("¥"+list.get(2).get("officalMoney"));
 				price4.setText("¥"+list.get(3).get("officalMoney"));
 				price5.setText("¥"+list.get(4).get("officalMoney"));
-				cardis1.setText("套餐包含1天100公里"+"\n"+"超出按¥"+list.get(0).get("overMileage")+"/分钟+¥"+list.get(0).get("overTime")+"/公里计费");
-				cardis2.setText("套餐包含1天100公里"+"\n"+"超出按¥"+list.get(1).get("overMileage")+"/分钟+¥"+list.get(1).get("overTime")+"/公里计费");
-				cardis3.setText("套餐包含1天100公里"+"\n"+"超出按¥"+list.get(2).get("overMileage")+"/分钟+¥"+list.get(2).get("overTime")+"/公里计费");
-				cardis4.setText("套餐包含1天100公里"+"\n"+"超出按¥"+list.get(3).get("overMileage")+"/分钟+¥"+list.get(3).get("overTime")+"/公里计费");
-				cardis5.setText("套餐包含1天100公里"+"\n"+"超出按¥"+list.get(4).get("overMileage")+"/分钟+¥"+list.get(4).get("overTime")+"/公里计费");
+				cardis1.setText("套餐包含1天100公里"+"\n"+"超出按¥"+list.get(0).get("overTime")+"/分钟+¥"+list.get(0).get("overMileage")+"/公里计费");
+				cardis2.setText("套餐包含1天100公里"+"\n"+"超出按¥"+list.get(1).get("overTime")+"/分钟+¥"+list.get(1).get("overMileage")+"/公里计费");
+				cardis3.setText("套餐包含1天100公里"+"\n"+"超出按¥"+list.get(2).get("overTime")+"/分钟+¥"+list.get(2).get("overMileage")+"/公里计费");
+				cardis4.setText("套餐包含1天100公里"+"\n"+"超出按¥"+list.get(3).get("overTime")+"/分钟+¥"+list.get(3).get("overMileage")+"/公里计费");
+				cardis5.setText("套餐包含1天100公里"+"\n"+"超出按¥"+list.get(4).get("overTime")+"/分钟+¥"+list.get(4).get("overMileage")+"/公里计费");
 			}else{
 				 Toast.makeText(SelectCarPersonActivity.this,jsonobj.getString("Message"), Toast.LENGTH_LONG).show();
 			}

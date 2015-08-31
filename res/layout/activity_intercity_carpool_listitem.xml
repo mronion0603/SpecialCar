@@ -20,7 +20,7 @@
             android:layout_marginTop="10dip"
             android:layout_marginBottom="10dip"
             android:layout_centerVertical="true"
-            android:background="@drawable/car_icon"
+            
             />
              <LinearLayout
 		    android:layout_width="fill_parent"
