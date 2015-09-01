@@ -19,7 +19,7 @@
 	        android:layout_width="75.0dip"
 	        android:layout_height="75.0dip"
 	        android:layout_marginLeft="10dip"
-            android:background="@drawable/order_wait_driver2"
+            android:background="@drawable/men"
 	     />
 	    <LinearLayout 
 	    android:id="@+id/ll"

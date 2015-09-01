@@ -39,6 +39,8 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -76,6 +78,7 @@ public class SendDealActivity extends Activity implements OnClickListener {
 	String getOrderNum="";
 	TextView tvmessage;
 	ImageView ivline;
+	boolean flag = true;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
@@ -131,6 +134,14 @@ public class SendDealActivity extends Activity implements OnClickListener {
 					animationDrawable.start(); // 启动动画
 				}
 			 });
+		AlphaAnimation aa2 = new AlphaAnimation(0.5f,1.0f); 
+        //渐变时间  
+		aa2.setRepeatCount(Animation.INFINITE);
+        aa2.setRepeatMode(Animation.REVERSE);
+        aa2.setDuration(500);  
+        //展示图片渐变动画  
+        findViewById(R.id.sendbg).startAnimation(aa2); 
+        
 		//获取地图控件引用  
         mMapView = (MapView) findViewById(R.id.bmapView);  
         mBaiduMap = mMapView.getMap();
@@ -189,6 +200,7 @@ public class SendDealActivity extends Activity implements OnClickListener {
             	}else if(gettype==3){
             		tvmessage.setText("车辆已到达，祝您路途愉快!");
             		righttext.setVisibility(View.GONE);
+            		flag = false;
             		ivleft.setVisibility(View.VISIBLE);
             		rls.setClickable(true);
             	}
@@ -391,6 +403,7 @@ public class SendDealActivity extends Activity implements OnClickListener {
 	    
 	    @Override  
 	    public void onBackPressed() {  
+	    	if(flag){
 	    	new AlertDialog.Builder(SendDealActivity.this)
 	    	 .setTitle("提示") 
 	    	 .setMessage("取消订单？")
@@ -405,5 +418,8 @@ public class SendDealActivity extends Activity implements OnClickListener {
 	    	 })
 	    	 .setNegativeButton("否", null)
 	    	 .show();
+	    	}else{
+	    		finish();
+	    	}
 	    }  
 }

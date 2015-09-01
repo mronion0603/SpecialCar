@@ -26,6 +26,7 @@ import com.lc.slidingmenu.fragment.LeftFragment;
 import com.lc.slidingmenu.fragment.RightFragment;
 import com.lc.urgent.UrgentHomeActivity;
 import com.lc.user.ItineraryActivity;
+import com.lc.utils.DensityUtil;
 import com.lc.utils.ExitApplication;
 import com.lc.utils.Global;
 import com.lc.utils.MySharePreference;
@@ -41,8 +42,10 @@ import android.app.NotificationManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
@@ -120,6 +123,33 @@ public class MainActivity extends SlidingFragmentActivity implements OnClickList
 		ivUrgency.setOnClickListener(this);
 		ivCity = (ImageView) findViewById(R.id.city);
 		ivCity.setOnClickListener(this);
+		
+		DisplayMetrics metric = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metric);
+        int width = metric.widthPixels;  // 屏幕宽度（像素）
+		LayoutParams lp; 
+		lp=ivPlane.getLayoutParams();
+		lp.width=(width-DensityUtil.dip2px(this, 10)*3)/2;
+		lp.height=lp.width; 
+		ivPlane.setLayoutParams(lp);
+		
+		LayoutParams lp2; 
+		lp2=ivCity.getLayoutParams();
+		lp2.width=(width-DensityUtil.dip2px(this, 10)*3)/2;
+		lp2.height=lp2.width; 
+		ivCity.setLayoutParams(lp2);
+		
+		LayoutParams lp3; 
+		lp3=ivOffice.getLayoutParams();
+		lp3.width=(width-DensityUtil.dip2px(this, 10)*3)/2;
+		lp3.height=lp3.width; 
+		ivOffice.setLayoutParams(lp3);
+		
+		LayoutParams lp4; 
+		lp4=ivUrgency.getLayoutParams();
+		lp4.width=(width-DensityUtil.dip2px(this, 10)*3)/2;
+		lp4.height=lp4.width; 
+		ivUrgency.setLayoutParams(lp4);
 		
 		// 调用 Handler 来异步设置别名
 		mHandler.sendMessage(mHandler.obtainMessage(MSG_SET_ALIAS, MySharePreference.getStringValue(getApplication(), MySharePreference.UUID)));

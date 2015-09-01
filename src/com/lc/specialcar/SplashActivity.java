@@ -4,6 +4,7 @@ import cn.jpush.android.api.JPushInterface;
 
 import com.lc.utils.MySharePreference;
 
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
@@ -11,6 +12,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.Window;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.widget.ImageView;
  
 /**
  * 
@@ -28,6 +32,14 @@ public class SplashActivity extends Activity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
         setContentView(R.layout.activity_splash);
+        
+        ImageView iv = (ImageView)findViewById(R.id.iv);
+        AlphaAnimation aa2 = new AlphaAnimation(0.1f,1.0f); 
+        //渐变时间  
+        aa2.setDuration(2000);  
+        //展示图片渐变动画  
+        findViewById(R.id.iv).startAnimation(aa2); 
+        
         boolean mFirst = isLogin();
         if(mFirst)
         	 mHandler.sendEmptyMessageDelayed(SWITCH_MAINACTIVITY,2000);
@@ -35,33 +47,6 @@ public class SplashActivity extends Activity {
         	 mHandler.sendEmptyMessageDelayed(SWITCH_LOGINACTIVITY,2000);
     }   
      
-    //****************************************************************
-    // 判断应用是否初次加载，读取SharedPreferences中的isfirst字段
-    //****************************************************************
-    /*
-    private boolean isFirstEnter(){
-    	 String isfirst = "false";
-    	 SharedPreferences sharedata3;    //记录是否接收推送
-         if(getSharedPreferences("common", 0)!=null){
-  		   sharedata3 = getSharedPreferences("common", 0); 
-  		   if(sharedata3.getString("isfirst",null)!=null){
-  		      isfirst = sharedata3.getString("isfirst", null);
-  		      System.out.println("isfirst:"+isfirst);
-  		   }
-  		}
-        if(isfirst.equals("false")){
-        	Editor sharedata2 = getSharedPreferences("common", 0).edit();  
-        	sharedata2.putString("isfirst","true");
-        	sharedata2.commit();
-        	System.out.println("isfirst:"+isfirst);
-        	return false;
-        }else{
-        	System.out.println("isfirst:"+isfirst);
-        	return true;
-        }
-       
-    }
-     */
     private boolean isLogin(){
    	 boolean islogin = false;
      if( MySharePreference.getStringValue(getApplication(), MySharePreference.PHONE)!=null){	   

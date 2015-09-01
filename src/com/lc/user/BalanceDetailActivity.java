@@ -1,12 +1,15 @@
 package com.lc.user;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import cn.trinea.android.common.view.DropDownListView;
+import cn.trinea.android.common.view.DropDownListView.OnDropDownListener;
 
 import com.lc.net.GetAccountNet;
 import com.lc.specialcar.R;
@@ -15,6 +18,7 @@ import com.lc.utils.MySharePreference;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -87,7 +91,9 @@ public class BalanceDetailActivity extends Activity implements OnClickListener {
 			}
 			
 		});
+		
 	}
+
 	void getData(){
 		getAccountNet.setHandler(mhandler);
 		getAccountNet.setDevice(Global.DEVICE);

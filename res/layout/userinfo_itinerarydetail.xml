@@ -33,7 +33,7 @@
 	        android:layout_height="60.0dip"
 	        android:layout_marginLeft="10dip"
             android:layout_centerVertical="true"
-            android:background="@drawable/order_wait_driver2"
+            android:background="@drawable/men"
 	     />
 	    <LinearLayout 
 	    android:layout_width="wrap_content"

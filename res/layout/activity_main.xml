@@ -42,7 +42,7 @@
     >
     <RelativeLayout
       android:id="@+id/rl1"
-      android:layout_width="wrap_content"
+      android:layout_width="fill_parent"
       android:layout_height="wrap_content"
       android:layout_centerInParent="true"
      >
@@ -51,7 +51,10 @@
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
          android:background="@drawable/home_plane_selector"
-         android:layout_margin="5dip"
+         android:layout_marginLeft="10dip"
+          android:layout_marginRight="10dip"
+          android:layout_marginTop="5dip"
+           android:layout_marginBottom="10dip"
       />
       <ImageView
          android:id="@+id/city"
@@ -59,7 +62,9 @@
          android:layout_height="wrap_content"
          android:background="@drawable/home_city_selector"
          android:layout_toRightOf="@+id/plane"
-         android:layout_margin="5dip"
+         android:layout_marginRight="10dip"
+         android:layout_marginTop="5dip"
+         android:layout_marginBottom="10dip"
       />
        <ImageView
          android:id="@+id/office"
@@ -67,9 +72,9 @@
          android:layout_height="wrap_content"
          android:background="@drawable/home_office_selector"
          android:layout_below="@+id/plane"
-         android:layout_marginLeft="5dip"
-         android:layout_marginRight="5dip"
-         android:layout_marginTop="5dip"
+         android:layout_marginLeft="10dip"
+         android:layout_marginRight="10dip"
+     
       />
         <ImageView
          android:id="@+id/urgency"
@@ -78,9 +83,9 @@
          android:background="@drawable/home_urgency_selector"
          android:layout_toRightOf="@+id/plane"
          android:layout_below="@+id/plane"
-         android:layout_marginLeft="5dip"
-         android:layout_marginRight="5dip"
-         android:layout_marginTop="5dip"
+         
+         android:layout_marginRight="10dip"
+        
       />
         </RelativeLayout>
         <RelativeLayout
