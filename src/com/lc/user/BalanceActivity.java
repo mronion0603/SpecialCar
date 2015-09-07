@@ -1,11 +1,9 @@
 package com.lc.user;
 
-import com.lc.specialcar.ChooseUserActivity;
 import com.lc.specialcar.R;
 import com.lc.utils.ExitApplication;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
