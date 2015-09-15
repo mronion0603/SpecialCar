@@ -9,7 +9,6 @@ import java.net.URL;
 
 import org.json.JSONObject;
 
-import com.lc.net.Download;
 import com.lc.net.ExitNet;
 import com.lc.net.UpdateNet;
 import com.lc.specialcar.ChooseUserActivity;
@@ -24,6 +23,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Notification;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
@@ -44,6 +44,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.RemoteViews;
 
 public class MoreActivity extends Activity implements OnClickListener {
 	TextView tvTitle;
@@ -57,8 +58,13 @@ public class MoreActivity extends Activity implements OnClickListener {
    	private final int DOWN_ERROR = 4;
    	ExitNet exitnet = new ExitNet();
    	private ProgressBar pro; 
-   // private Notification notification;  
-   // private NotificationManager nManager;  
+    //通知栏进度条
+    private NotificationManager mNotificationManager=null;
+    private Notification mNotification;
+    private final int NOTIFICATION = 10;
+    private final int NOTIFICATION_DOWNLOAD_SUCCESSS = 11;
+    int fileSize,downLoadFileSize;
+    int tempCurrentSize;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // 无标题
@@ -156,7 +162,8 @@ public class MoreActivity extends Activity implements OnClickListener {
 		            case DOWN_ERROR:
 						//下载apk失败  
 			            Toast.makeText(getApplicationContext(), "下载新版本失败", Toast.LENGTH_SHORT).show(); 
-						break;
+			            mNotificationManager.cancel(0);
+			            break;
 		            case GET_UNDATAINFO_ERROR:
 						//服务器超时   
 			            Toast.makeText(getApplicationContext(), "获取服务器更新信息失败", Toast.LENGTH_SHORT).show(); 
@@ -169,6 +176,19 @@ public class MoreActivity extends Activity implements OnClickListener {
 						}      	
 		            break;
 	                }
+		            case NOTIFICATION:{
+		            	 int result = downLoadFileSize * 100 / fileSize;
+		                 mNotification.contentView.setTextViewText(R.id.content_view_text1, result + "%");
+		                 mNotification.contentView.setProgressBar(R.id.content_view_progress, fileSize, downLoadFileSize, false);
+		                 mNotificationManager.notify(0, mNotification);  
+		                 //Log.e("size", "文件"+downLoadFileSize+":"+fileSize+":"+result);
+		                 break;
+		            }
+		            case NOTIFICATION_DOWNLOAD_SUCCESSS:{
+		            	//Toast.makeText(getApplicationContext(), "", Toast.LENGTH_SHORT).show(); 
+		            	mNotificationManager.cancel(0);
+		            	break;
+		            }
 	            }
 	    }};
 	    private void parseExit(String str)throws Exception{  
@@ -254,6 +274,7 @@ public class MoreActivity extends Activity implements OnClickListener {
 		 * 从服务器中下载APK 
 		 */  
 		protected void downLoadApk() {  
+			notificationInit();
 		    final ProgressDialog pd;    //进度条对话框  
 		    pd = new  ProgressDialog(this);  
 		    pd.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);  
@@ -272,7 +293,7 @@ public class MoreActivity extends Activity implements OnClickListener {
 		        public void run() {  
 		            try {  
 		                File file = getFileFromServer(geturl, pd);  
-		                sleep(3000);  
+		                sleep(2000);  
 		                installApk(file);  
 		                pd.dismiss(); //结束掉进度条对话框  
 		            } catch (Exception e) {  
@@ -303,22 +324,29 @@ public class MoreActivity extends Activity implements OnClickListener {
 				HttpURLConnection conn =  (HttpURLConnection) url.openConnection();
 				conn.setConnectTimeout(5000);
 				//获取到文件的大小 
-				pd.setMax(conn.getContentLength());
+				fileSize = conn.getContentLength();
+				pd.setMax(fileSize);
 				InputStream is = conn.getInputStream();
-				File file = new File(Environment.getExternalStorageDirectory(), "updata.apk");
+				File file = new File(Environment.getExternalStorageDirectory(), getString(R.string.app_name)+".apk");
 				FileOutputStream fos = new FileOutputStream(file);
 				BufferedInputStream bis = new BufferedInputStream(is);
 				byte[] buffer = new byte[1024];
 				int len ;
-				int total=0;
+				//int total=0;
+				downLoadFileSize = 0;
+				int downloadCount = 0;
 				while((len =bis.read(buffer))!=-1){
 					fos.write(buffer, 0, len);
-					total+= len;
+					downLoadFileSize+= len;
 					//获取当前下载量
-					pd.setProgress(total);
-					//notification.setLatestEventInfo(this, "正在下载新版本", "已下载了"+(int)total*100/conn.getContentLength()+"%", null);  
-                    //nManager.notify(100, notification); 
+					 pd.setProgress(downLoadFileSize);
+					 int tmp = (int) (downLoadFileSize * 100 / fileSize);
+					 if(downloadCount==0||tmp-10>downloadCount){
+					 downloadCount+=10;
+					 sendMsg(NOTIFICATION);
+					}
 				}
+				sendMsg(NOTIFICATION_DOWNLOAD_SUCCESSS);// 通知下载完成
 				fos.close();
 				bis.close();
 				is.close();
@@ -327,5 +355,24 @@ public class MoreActivity extends Activity implements OnClickListener {
 			else{
 				return null;
 			}
+		}
+		
+		 private void sendMsg(int flag) {
+			  Message msg = new Message();
+			  msg.what = flag;
+			  mHandler.sendMessage(msg);
+	     }
+		 
+		 private void notificationInit(){
+			  //通知栏内显示下载进度条
+			  Intent intent=new Intent(this,MoreActivity.class);//点击进度条，进入程序
+			  PendingIntent pIntent=PendingIntent.getActivity(this, 0, intent, 0);
+			  mNotificationManager=(NotificationManager) this.getSystemService(NOTIFICATION_SERVICE);
+			  mNotification=new Notification();
+			  mNotification.icon=R.drawable.ic_launcher;
+			  mNotification.tickerText="开始下载";
+			  mNotification.contentView=new RemoteViews(getPackageName(),R.layout.userinfo_notification);//通知栏中进度布局
+			  mNotification.contentIntent=pIntent;
+			//  mNotificationManager.notify(0,mNotification);
 		}
 }

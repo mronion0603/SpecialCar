@@ -246,7 +246,7 @@ public class InterCityHomeActivity extends Activity implements OnClickListener {
          JSONArray jsonarray = jsonobj.getJSONArray("Data");
          if(jsonarray.length()>0){
         	 if(flag==0){
-        		 Intent intent = new Intent();
+        		Intent intent = new Intent();
  				intent.setClass(InterCityHomeActivity.this, SearchCarpoolActivity.class);
  				intent.putExtra("device", Global.DEVICE);
  				intent.putExtra("startAddress", start);
@@ -254,7 +254,7 @@ public class InterCityHomeActivity extends Activity implements OnClickListener {
  				intent.putExtra("date", requestdate);
  				startActivity(intent);
         	 }else{
-        		 Intent intent = new Intent();
+        		Intent intent = new Intent();
    				intent.setClass(InterCityHomeActivity.this, SearchCharteredCarActivity.class);
    				intent.putExtra("device", Global.DEVICE);
  				intent.putExtra("startAddress", start);
